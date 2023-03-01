@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('group_id');
+            $table->index('group_id','galleries_groups_idx');
+            $table->foreign('group_id','galleries_groups_fk')
+                ->on('groups')
+                ->references('id')
+                ->cascadeOnDelete();
+            $table->string('image',200);
+            $table->string('video',200);
             $table->timestamps();
         });
     }

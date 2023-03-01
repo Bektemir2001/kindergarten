@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('question_id');
+            $table->index('question_id','answers_questions_idx');
+            $table->foreign('question_id','answers_questions_fk')
+                ->on('questions')
+                ->references('id')
+                ->cascadeOnDelete();
+            $table->unsignedBigInteger('resume_id');
+            $table->index('resume_id','answers_resumes_idx');
+            $table->foreign('resume_id','answers_resumes_fk')
+                ->on('resumes')
+                ->references('id')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

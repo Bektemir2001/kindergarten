@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('enrolls', function (Blueprint $table) {
+        Schema::create('children', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_id');
-            $table->index('parent_id','enroll_user_idx');
-            $table->foreign('parent_id','enroll_user_fk')
+            $table->index('parent_id','children_user_idx');
+            $table->foreign('parent_id','children_user_fk')
                 ->on('users')
                 ->references('id')
                 ->cascadeOnDelete();
@@ -26,6 +26,12 @@ return new class extends Migration
             $table->string('med_certificate',200);
             $table->string('photo',200);
             $table->boolean('payment')->default(false);
+            $table->unsignedBigInteger('group_id');
+            $table->index('group_id','children_groups_idx');
+            $table->foreign('group_id','children_groups_fk')
+                ->on('groups')
+                ->references('id')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -35,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enrolls');
+        Schema::dropIfExists('children');
     }
 };

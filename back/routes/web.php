@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',App\Http\Controllers\IndexController::class)->name('index');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/register', [App\Http\Controllers\RegisterController::class, 'form'])->name('user.form');
+
+Route::get('/register', [App\Http\Controllers\RegisterController::class, 'form'])->name('user.register.form');
+
 Route::post('/register', [App\Http\Controllers\RegisterController::class, 'register'])->name('user.register');
+
+Route::get('/login', [App\Http\Controllers\AuthController::class, 'form'])->name('user.auth.form');
+
+Route::post('/login', [App\Http\Controllers\AuthController::class, 'userAuth'])->name('user.auth');
+
+Route::get('/logout', App\Http\Controllers\LogoutController::class)->name('user.logout');

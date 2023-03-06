@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Resume extends Model
 {
     use HasFactory;
+    protected $table = 'resumes';
+    protected $guarded = false;
 }

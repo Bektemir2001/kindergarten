@@ -2,13 +2,14 @@
 
 @section('content')
     <div>
+        @if(session('msg'))
+            <div class="d-flex justify-content-center">
+                <div class="alert alert-success alert-dismissible fade show text-center" style="width:25%;">{{session('msg')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>
+            </div>
+                @endif
         <h1>Main Page</h1>
-        @if(auth()->user())
-            <a href="{{route('user.logout')}}">Sign out</a>
-        @else
-            <a href="{{route('user.auth.form')}}">Sign in</a>
-            <a href="{{route('user.register.form')}}">Sign up</a>
-        @endif
-
     </div>
 @endsection

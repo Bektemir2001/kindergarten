@@ -19,7 +19,7 @@ class RegisterController extends Controller
             'surname'=>'required|string',
             'address'=>'required',
             'phone_number'=>'required',
-            'email'=>'required',
+            'email'=>'required|email|max:255|unique:users,email,',
             'password'=>'required',
             'passport_front'=>'',
             'passport_back'=>''
@@ -50,6 +50,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('index');
+        return redirect()->route('index')->with('msg', 'Successful');
     }
 }

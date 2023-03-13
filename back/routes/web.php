@@ -31,4 +31,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
     Route::get('/', \App\Http\Controllers\Admin\IndexController::class)->name('admin');
+
+    Route::group(['prefix'=>'user'],function (){
+        Route::get('/',[App\Http\Controllers\Admin\UserController::class,'index'])->name('admin.user.index');
+        Route::delete('/{user}', [App\Http\Controllers\Admin\UserController::class,'delete'])->name('admin.user.delete');
+        Route::get('/{user}', [App\Http\Controllers\Admin\UserController::class,'edit'])->name('admin.user.edit');
+        Route::patch('/{user}', [App\Http\Controllers\Admin\UserController::class,'update'])->name('admin.user.update');
+    });
 });
+

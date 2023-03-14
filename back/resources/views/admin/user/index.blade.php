@@ -43,7 +43,7 @@
                                     <div style="float: left;
                                 display: block;
                                 width: 30%;" class="text-center">
-                                        <a href="#"><i class="fas fa-eye"></i></a>
+                                        <a href="{{route('admin.user.show', $user)}}"><i class="fas fa-eye"></i></a>
                                     </div>
                                     <div style="float: left;
                                 display: block;

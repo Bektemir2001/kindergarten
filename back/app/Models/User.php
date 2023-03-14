@@ -41,6 +41,7 @@ class User extends Authenticatable
         'passport_front',
         'amount_child',
         'deleted',
+        'email_verified_at'
     ];
 
     /**

@@ -17,20 +17,7 @@
 </head>
 <body>
 <div>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="float: right">
-        @if(auth()->user())
-            <button onclick="location.href='{{route('user.logout')}}'" type="button" style="float:right">
-                Sign out
-            </button>
-        @else
-            <button onclick="location.href='{{route('user.auth.form')}}'" type="button" style="float:right">
-                Sign in
-            </button>
-            <button onclick="location.href='{{route('user.register.form')}}'" type="button" style="float:right">
-                Sign up
-            </button>
-        @endif
-    </nav>
+
 </div>
     <div id="app">
         <main class="py-4">

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendCodeQueue;
+use App\Mail\SendCode;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -48,8 +52,9 @@ class RegisterController extends Controller
             'passport_back'=>$passport_back
         ]);
 
-        Auth::login($user);
-
-        return redirect()->route('index')->with('msg', 'Successful');
+        $code = random_int(100000, 999999);
+        Mail::to($user->email)->send(new SendCode($code));
+        Session::put('code', $code);
+        return redirect()->route('verification.form', $user->id);
     }
 }

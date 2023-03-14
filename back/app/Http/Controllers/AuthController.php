@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendCode;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -20,8 +23,15 @@ class AuthController extends Controller
             $user = $user[0];
 
             if(Hash::check($request->password, $user->password)){
-                Auth::login($user);
-                return redirect()->route('index');
+                if($user->email_verified_at){
+                    Auth::login($user);
+                    return redirect()->route('index');
+                }
+                $code = random_int(100000, 999999);
+                Mail::to($user->email)->send(new SendCode($code));
+                Session::put('code', $code);
+                return redirect()->route('verification.form', $user->id);
+
             }
             else{
                 return redirect()
@@ -34,4 +44,5 @@ class AuthController extends Controller
             ->back()
             ->with(['errorWithEmail' => 'user not found', 'email' => $request->email]);
     }
+
 }

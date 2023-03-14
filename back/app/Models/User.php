@@ -12,6 +12,18 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ROLE_ADMIN=0;
+    const ROLE_EMPLOYEE=1;
+    const ROLE_USER=2;
+
+    public static function getRoles(){
+        return[
+            self::ROLE_ADMIN => 'Администратор',
+            self::ROLE_EMPLOYEE => 'Сотрудник',
+            self::ROLE_USER => 'Пользователь',
+        ];
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +41,7 @@ class User extends Authenticatable
         'passport_front',
         'amount_child',
         'deleted',
+        'email_verified_at'
     ];
 
     /**

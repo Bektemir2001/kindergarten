@@ -11,7 +11,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('admin/dist/css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('table/jquery.dataTables.min.css')}}">
     <script type="text/javascript" language="javascript" src="{{asset('table/jquery-3.5.1.js')}}"></script>

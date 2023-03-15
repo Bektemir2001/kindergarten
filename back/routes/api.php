@@ -19,4 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/verification/email', [App\Http\Controllers\VerificateController::class, 'verification'])->name('verification');
+<<<<<<< HEAD
 Route::post('/admin/user/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
+=======
+Route::post('/user/updatePassword', [App\Http\Controllers\ResetPasswordController::class, 'updatePassword'])->name('update.password');
+>>>>>>> c23badc2aa52e76dd7af30af3ca0b7c973f05907

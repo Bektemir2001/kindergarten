@@ -46,7 +46,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Login
                                     </button>
-                                    <a href="" class="float-end">Forgot your password?</a>
+                                    <a href="{{route('reset.password.form')}}" class="float-end">Forgot your password?</a>
                                 </div>
                             </div>
                         </form>

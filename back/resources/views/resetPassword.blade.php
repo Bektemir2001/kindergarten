@@ -7,7 +7,7 @@
                     <div class="card-header">{{ __('Reset password') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('user.auth') }}" >
+                        <form method="POST" action="{{ route('reset.password.link') }}" >
                             @csrf
                             <div class="row mb-3">
                                 <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
@@ -30,7 +30,6 @@
                                     <button type="submit" class="btn btn-primary">
                                         Send Password Reset Link
                                     </button>
-                                    <a href="{{route('admin.user.index')}}" class="btn btn-secondary">Send Password Reset Link</a>
                                 </div>
                             </div>
                         </form>
@@ -39,4 +38,5 @@
             </div>
         </div>
     </div>
+
 @endsection

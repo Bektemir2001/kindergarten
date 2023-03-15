@@ -12,42 +12,20 @@ use Illuminate\Queue\SerializesModels;
 class SendResetPasswordLink extends Mailable
 {
     use Queueable, SerializesModels;
-
+    private string $email;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(string $email)
     {
-        //
+        $this->email = $email;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'Send Reset Password Link',
-        );
-    }
+   public function build(){
+       $email = $this->email;
+       return $this->from('bekwebdeveloper@gmail.com', 'Change password!')
+           ->view('emails.sendResetPasswordLink', compact('email'));
+   }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
 }

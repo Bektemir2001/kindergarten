@@ -7,8 +7,11 @@
 
 
 <p>
-    {{"You are receiving this email because we received a password reset request for your account. ".
-    $code}}
+    {{"You are receiving this email because we received a password reset request for your account."}}
+</p>
+
+<p>
+    {{route('change.password.form', $email)}}
 </p>
 
 <p></p>

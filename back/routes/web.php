@@ -27,6 +27,11 @@ Route::get('/user/logout', App\Http\Controllers\LogoutController::class)->name('
 
 Route::get('/verification/form/{user}', [App\Http\Controllers\VerificateController::class, 'form'])->name('verification.form');
 
+Route::get('/user/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'form'])->name('reset.password.form');
+Route::post('/user/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'sendLink'])->name('reset.password.link');
+
+Route::get('/user/resetPassword/{email}', [App\Http\Controllers\ResetPasswordController::class, 'changePassword'])->name('change.password.form');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

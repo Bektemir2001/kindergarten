@@ -33,7 +33,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
-    Route::get('/', \App\Http\Controllers\Admin\IndexController::class)->name('admin');
+    Route::get('/index', \App\Http\Controllers\Admin\IndexController::class)->name('admin');
 
     Route::group(['prefix'=>'user'],function (){
         Route::get('/',[App\Http\Controllers\Admin\UserController::class,'index'])->name('admin.user.index');

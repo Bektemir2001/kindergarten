@@ -19,7 +19,7 @@ class IndexController extends Controller
         }
         $user = auth()->user();
         if($user){
-            if($user->role===0){
+            if($user->role === 0){
                 return redirect()->route('admin');
             }
             return view('index');

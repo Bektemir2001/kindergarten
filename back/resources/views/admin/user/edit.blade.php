@@ -3,7 +3,7 @@
     <div class="content-wrapper">
         <div class="card-header text-center" ><h3>Edit page</h3></div>
             <div class="container">
-                <form action="{{route('admin.user.edit', $user->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('admin.user.update', $user->id)}}" method="POST" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
                     <div class="form-group">

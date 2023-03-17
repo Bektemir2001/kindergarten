@@ -21,8 +21,19 @@ class UserController extends Controller
         return view('admin.user.edit', compact('user'));
     }
 
-    public function create(){
-
+    public function create(Request $request){
+        $user = User::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => $request->role,
+            'passport_back' => "",
+            'passport_front' => ""
+        ]);
+        return response($request);
     }
 
     public function show(User $user){

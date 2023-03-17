@@ -192,10 +192,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-image"></i>
+                        <a href="{{route('admin.group.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-list"></i>
                             <p>
-                                Gallery
+                                Groups
                             </p>
                         </a>
                     </li>

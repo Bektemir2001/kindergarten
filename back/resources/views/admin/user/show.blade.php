@@ -29,21 +29,33 @@
 {{--                            </div>--}}
 {{--                        </li>--}}
                         <li class="list-group-item">
-                            <b>Адрес</b>
+                            <b>Address</b>
                             <div class="">{{$user->address}}</div>
                         </li>
-{{--                        <li class="list-group-item">--}}
-{{--                            <b>Возраст</b>--}}
-{{--                            <div class="">{{$student->user->age}}</div>--}}
-{{--                        </li>--}}
+                        <li class="list-group-item">
+                            <b>Phone number</b>
+                            <div class="">{{$user->phone_number}}</div>
+                        </li>
                         <li class="list-group-item">
                             <b>Email</b>
                             <div class="">{{$user->email}}</div>
                         </li>
-{{--                        <li class="list-group-item">--}}
-{{--                            <b>Текст</b>--}}
-{{--                            <div class="">{{$student->content}}</div>--}}
-{{--                        </li>--}}
+                        <li class="list-group-item">
+                            <b>Role</b>
+                            <div class="">{{$user->role}}</div>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Passport front</b>
+                            <div class="">
+                                <img class="img-fluid img-circle" src="{{asset($user->passport_front)}}" alt="User passport front" style="width:150px; height:150px;">
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Passport back</b>
+                            <div class="">
+                                <img class="img-fluid img-circle" src="{{asset($user->passport_back)}}" alt="User passport back" style="width:150px; height:150px;">
+                            </div>
+                        </li>
                     </ul>
 
 

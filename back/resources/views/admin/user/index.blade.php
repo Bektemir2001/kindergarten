@@ -4,7 +4,7 @@
         <div class="container" style="margin-top: 10px;">
         <button type="button" class="btn btn-primary btn-sm" style="margin-right:85%;" id="addUserBtnId" onclick="showForm()">Add User</button>
         <div class="d-none" id="addUserId">
-            <form id="form" enctype="multipart/form-data">
+            <form id="form" method="POST" action="{{route('admin.user.create')}}" enctype="multipart/form-data">
                 <div class="row mb-3">
                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -102,20 +102,6 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="passport_back" class="col-md-4 col-form-label text-md-end">{{ __('Passport Back') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="passport_back" type="file" class="form-control @error('passport_back') is-invalid @enderror" name="passport_back" value="{{ old('passport_back') }}">
-
-                        @error('passport_back')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row mb-3">
                     <label for="passport_front" class="col-md-4 col-form-label text-md-end">{{ __('Passport Front') }}</label>
 
                     <div class="col-md-6">
@@ -128,8 +114,22 @@
                         @enderror
                     </div>
                 </div>
+
+                <div class="row mb-3">
+                    <label for="passport_back" class="col-md-4 col-form-label text-md-end">{{ __('Passport Back') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="passport_back" type="file" class="form-control @error('passport_back') is-invalid @enderror" name="passport_back" value="{{ old('passport_back') }}">
+
+                        @error('passport_back')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-secondary" style="margin-left: 65%;" onclick="cancelForm()">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" onClick="window.location.reload()">Submit</button>
             </form>
         </div>
         </div>
@@ -210,9 +210,10 @@
                 document.getElementById("addUserId").className = "col-6";
             }
             function cancelForm(){
-                document.getElementById("addUserBtnId").className;
+                document.getElementById("addUserId").className = "d-none";
+                document.getElementById("addUserBtnId").className = "btn btn-primary btn-sm";
             }
-            document.getElementById('form').addEventListener("submit", (event) => {
+            document.getElementById('form').addEventListener("submit", function (event) {
                 event.preventDefault()
                 let url = "{{route('admin.user.create')}}";
                 let name = document.getElementById("name").value;
@@ -222,8 +223,8 @@
                 let email = document.getElementById("email").value;
                 let password = document.getElementById("password").value;
                 let role = document.getElementById("role").value;
-                let passport_back = document.getElementById("passport_back").value;
-                let passport_front = document.getElementById("passport_front").value;
+                let passport_front = document.getElementById("passport_front").files[0];
+                let passport_back = document.getElementById("passport_back").files[0];
                 let data = new FormData();
                 data.append("name", name);
                 data.append("surname", surname);
@@ -232,16 +233,14 @@
                 data.append("email", email);
                 data.append("password", password);
                 data.append("role", role);
-                data.append("passport_back", passport_back);
                 data.append("passport_front", passport_front);
+                data.append("passport_back", passport_back);
                 fetch(url, {
                     method: 'POST',
                     body: data
                 })
                     .then(res => res.json())
-                    .then(body => {
-                        console.log(body)
-                    })
+                    .then(data => console.log(data))
                     .catch(error => console.log(error))
             })
         </script>

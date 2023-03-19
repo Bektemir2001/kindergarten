@@ -39,25 +39,15 @@ class GroupController extends Controller
 
      public function update(UpdateGroupRequest $request, Group $group){
          $data = $request->validated();
-         $image = null;
-         if(array_key_exists('passport_front',$data)){
-             $image = Storage::disk('public')->put('passports', $data['image']);
-             $image = "storage/".$image;
-         }
          DB::beginTransaction();
          $group->update([
              'name' => $data['name'],
              'limit' => $data['limit'],
              'description' => $data['description'],
-             'image' => $image,
+             'image' => $data['image'],
 
          ]);
          DB::commit();
-         $image = null;
-         if(array_key_exists('passport_front',$data)){
-             $image = Storage::disk('public')->put('group_images', $data['image']);
-             $image = "storage/".$image;
          return redirect()->route('admin.group.index')->with('status','Group data is Updated');
      }
-}
 }

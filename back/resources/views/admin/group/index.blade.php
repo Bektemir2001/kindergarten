@@ -146,13 +146,13 @@
                 document.getElementById("addGroupBtnId").className = "btn btn-primary btn-sm";
                 document.getElementById("addGroupId").className = "d-none";
             }
-            document.getElementById('form').addEventListener("submit", (event) => {
+            document.getElementById('form').addEventListener("submit", function (event) {
                 event.preventDefault()
                 let url = "{{route('admin.group.create')}}";
                 let name = document.getElementById("name").value;
                 let limit = document.getElementById("limit").value;
                 let description = document.getElementById("description").value;
-                let image = document.getElementById("image").value;
+                let image = document.getElementById("image").files[0];
                 let data = new FormData();
                 data.append("name", name);
                 data.append("limit", limit);

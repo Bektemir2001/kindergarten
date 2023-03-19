@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -22,18 +24,39 @@ class UserController extends Controller
     }
 
     public function create(Request $request){
+        $data = $request->validate([
+            'name'=>'required|string',
+            'surname'=>'required|string',
+            'address'=>'required',
+            'phone_number'=>'required',
+            'email'=>'required|email|max:255|unique:users,email,',
+            'password'=>'required',
+            'passport_front'=>'',
+            'passport_back'=>''
+        ]);
+        $passport_front = null;
+        $passport_back = null;
+        if($request->hasFile('passport_front')){
+            $passport_front = Storage::disk('public')->put('passports', $data['passport_front']);
+        }
+        if(array_key_exists('passport_back',$data)){
+            $passport_back = Storage::disk('public')->put('passports',$data['passport_back']);
+        }
+
+        $data['password'] = Hash::make($data['password']);
+
         $user = User::create([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'address' => $request->address,
-            'phone_number' => $request->phone_number,
-            'email' => $request->email,
-            'password' => $request->password,
-            'role' => $request->role,
-            'passport_back' => "",
-            'passport_front' => ""
+            'name'=>$data['name'],
+            'surname'=>$data['surname'],
+            'address'=>$data['address'],
+            'phone_number'=>$data['phone_number'],
+            'email'=>$data['email'],
+            'password'=>$data['password'],
+            'passport_front'=>$passport_front,
+            'passport_back'=>$passport_back
         ]);
         return response($request);
+
     }
 
     public function show(User $user){

@@ -44,8 +44,15 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::get('/',[App\Http\Controllers\Admin\UserController::class,'index'])->name('admin.user.index');
         Route::delete('/{user}', [App\Http\Controllers\Admin\UserController::class,'delete'])->name('admin.user.delete');
         Route::get('/edit/{user}', [App\Http\Controllers\Admin\UserController::class,'edit'])->name('admin.user.edit');
-        Route::patch('/{user}', [App\Http\Controllers\Admin\UserController::class,'update'])->name('admin.user.update');
+        Route::patch('/update/{user}', [App\Http\Controllers\Admin\UserController::class,'update'])->name('admin.user.update');
         Route::get('/show/{user}', [App\Http\Controllers\Admin\UserController::class,'show'])->name('admin.user.show');
+    });
+
+    Route::group(['prefix'=>'group'], function (){
+        Route::get('/',[App\Http\Controllers\Admin\GroupController::class,'index'])->name('admin.group.index');
+        Route::get('show/{group}',[App\Http\Controllers\Admin\GroupController::class, 'show'])->name('admin.group.show');
+        Route::get('/edit/{group}', [App\Http\Controllers\Admin\GroupController::class, 'edit'])->name('admin.group.edit');
+        Route::patch('/update/{group}', [App\Http\Controllers\Admin\GroupController::class, 'update'])->name('admin.group.update');
     });
 });
 

@@ -74,7 +74,7 @@ class UserController extends Controller
             'role' => $data['role'],
         ]);
         DB::commit();
-        return redirect()->route('admin.user.index')->with('status','Data is Updated');
+        return redirect()->route('admin.user.index')->with('status','User data is Updated');
     }
 
     public function delete(User $user){

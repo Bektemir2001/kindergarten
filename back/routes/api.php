@@ -19,5 +19,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/verification/email', [App\Http\Controllers\VerificateController::class, 'verification'])->name('verification');
+<<<<<<< HEAD
 Route::post('/user/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
 Route::post('/user/updatePassword', [App\Http\Controllers\ResetPasswordController::class, 'updatePassword'])->name('update.password');
+=======
+
+Route::post('/admin/user/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
+Route::post('/user/updatePassword', [App\Http\Controllers\ResetPasswordController::class, 'updatePassword'])->name('update.password');
+Route::post('/admin/group/create',[App\Http\Controllers\Admin\GroupController::class, 'create'])->name('admin.group.create');
+
+
+Route::post('/admin/user/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
+
+Route::post('/user/updatePassword', [App\Http\Controllers\ResetPasswordController::class, 'updatePassword'])->name('update.password');
+
+>>>>>>> 695662635535c2149ce4c451d23f5cd250ea040f

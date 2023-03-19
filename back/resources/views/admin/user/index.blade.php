@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-secondary" style="margin-left: 65%;" onclick="cancelForm()">Cancel</button>
-                <button type="submit" class="btn btn-primary" onClick="window.location.reload()">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
         </div>

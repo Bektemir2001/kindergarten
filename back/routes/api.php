@@ -23,6 +23,9 @@ Route::post('/verification/email', [App\Http\Controllers\VerificateController::c
 Route::post('/user/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
 Route::post('/user/updatePassword', [App\Http\Controllers\ResetPasswordController::class, 'updatePassword'])->name('update.password');
 
+Route::post('/user/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
+Route::post('/user/updatePassword', [App\Http\Controllers\ResetPasswordController::class, 'updatePassword'])->name('update.password');
+
 
 Route::post('/admin/user/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
 Route::post('/user/updatePassword', [App\Http\Controllers\ResetPasswordController::class, 'updatePassword'])->name('update.password');
@@ -32,4 +35,3 @@ Route::post('/admin/group/create',[App\Http\Controllers\Admin\GroupController::c
 Route::post('/admin/user/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
 
 Route::post('/user/updatePassword', [App\Http\Controllers\ResetPasswordController::class, 'updatePassword'])->name('update.password');
-

@@ -18,14 +18,23 @@ class GroupController extends Controller
     }
 
     public function create(Request $request){
+        $data = $request->validate([
+            'name'=>'required|string',
+            'limit'=>'required',
+            'description'=>'required|string',
+            'image'=>''
+        ]);
+        $image = Storage::disk('public')->put('groupImages', $data['image']);
+        $image = "storage/".$image;
+
         $group = Group::create([
-            'name' => $request->name,
-            'limit' => $request->limit,
-            'description' => $request->description,
-            'image' => $request->image
+            'name' => $data['name'],
+            'limit' => $data['limit'],
+            'description' => $data['description'],
+            'image' => $image
         ]);
 
-        return response($request);
+        return response()->json($group);
 
     }
 
@@ -39,25 +48,32 @@ class GroupController extends Controller
 
      public function update(UpdateGroupRequest $request, Group $group){
          $data = $request->validated();
-         $image = null;
-         if(array_key_exists('passport_front',$data)){
-             $image = Storage::disk('public')->put('passports', $data['image']);
-             $image = "storage/".$image;
-         }
          DB::beginTransaction();
-         $group->update([
-             'name' => $data['name'],
-             'limit' => $data['limit'],
-             'description' => $data['description'],
-             'image' => $image,
-
-         ]);
-         DB::commit();
-         $image = null;
-         if(array_key_exists('passport_front',$data)){
-             $image = Storage::disk('public')->put('group_images', $data['image']);
+         if(array_key_exists('image', $data)){
+             $image = Storage::disk('public')->put('groupImages', $data['image']);
              $image = "storage/".$image;
+            $group->update([
+                'name' => $data['name'],
+                'limit' => $data['limit'],
+                'description' => $data['description'],
+                'image' => $data['image'],
+
+            ]);
+         }
+         else {
+             $group->update([
+                 'name' => $data['name'],
+                 'limit' => $data['limit'],
+                 'description' => $data['description'],
+
+             ]);
+         }
+         DB::commit();
          return redirect()->route('admin.group.index')->with('status','Group data is Updated');
      }
-}
+
+     public function delete(Group $group){
+         $group->delete();
+        return redirect()->route('admin.group.index')->with('status', 'Group is deleted');
+     }
 }

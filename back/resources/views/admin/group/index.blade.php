@@ -51,7 +51,7 @@
                         <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Group Image') }}</label>
 
                         <div class="col-md-6">
-                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}">
+                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required>
 
                             @error('image')
                             <span class="invalid-feedback" role="alert">
@@ -88,22 +88,18 @@
                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
                             Limit
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Description
-                        </th>
                         <th class="sorting text-center" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 25%;">
                             Action
                         </th>
                         {{-- <th width="2px"></th> --}}
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="groupTable">
                     @foreach ($groups as $group)
                         <tr class="odd">
                             <td class="sorting_1">{{$group->id}}</td>
                             <td>{{$group->name}}</td>
                             <td>{{$group->limit}}</td>
-                            <td>{{$group->description}}</td>
                             <td>
                                 <div style="float: left;
                                 display: block;
@@ -118,7 +114,7 @@
                                 <div style="float: left;
                                 display: block;
                                 width: 30%;" class="text-center">
-                                    <form method="POST">
+                                    <form action="{{route('admin.group.delete', $group->id)}}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button title="submit" class="border-0 bg-transparent">
@@ -146,13 +142,13 @@
                 document.getElementById("addGroupBtnId").className = "btn btn-primary btn-sm";
                 document.getElementById("addGroupId").className = "d-none";
             }
-            document.getElementById('form').addEventListener("submit", (event) => {
+            document.getElementById('form').addEventListener("submit", function (event) {
                 event.preventDefault()
                 let url = "{{route('admin.group.create')}}";
                 let name = document.getElementById("name").value;
                 let limit = document.getElementById("limit").value;
                 let description = document.getElementById("description").value;
-                let image = document.getElementById("image").value;
+                let image = document.getElementById("image").files[0];
                 let data = new FormData();
                 data.append("name", name);
                 data.append("limit", limit);
@@ -163,8 +159,24 @@
                     body: data
                 })
                     .then(res => res.json())
-                    .then(body => {
-                        console.log(body)
+                    .then(data => {
+                        cancelForm();
+                        let table = document.getElementById('groupTable');
+                        let i = table.rows.length;
+                        let row = table.insertRow(i);
+                        row.insertCell(0).innerHTML = data.id;
+                        row.insertCell(1).innerHTML = data.name;
+                        row.insertCell(2).innerHTML = data.limit;
+                        row.insertCell(3).innerHTML = `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
+                            `<a href="` + "/admin/group/show/" + data.id + `"><i class="fas fa-eye"></i></a>  </div> ` +
+                        `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
+                        `<a href="` + "/admin/group/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> ` +
+                        `</div> <div style="float: left; display: block; width: 30%;" class="text-center"> ` +
+                            `<form action="` + "/admin/group/delete/" + data.id + `" method="POST"> @method('DELETE') @csrf` +
+                            `<button title="submit" class="border-0 bg-transparent"> ` +
+                            `<i title="submit" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;
+
+
                     })
                     .catch(error => console.log(error))
             })

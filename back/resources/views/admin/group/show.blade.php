@@ -27,9 +27,10 @@
                             </div>
                         </li>
                     </ul>
-
-
                 </div>
+            </div>
+            <div class="modal-footer">
+                <a href="{{route('admin.group.index')}}" class="btn btn-secondary">Cancel</a>
             </div>
         </div>
     </div>

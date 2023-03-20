@@ -32,13 +32,14 @@
                     <div class="col-sm-6">
                         <img class="img-fluid mb-3" src="{{asset($group->image)}}"  alt="image" style="width:200px;height:200px;">
                     </div>
-                    <div class="col-md-6 custom-file" style="left: 35%">
-                        <input type="file" class="custom-file-input form-control" id="exampleInputFile" name="image">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+
+                    <div class="col-md-6">
+                        <input type="file" class="form-control" name="image" id="image" value="{{$group->image}}" >
+
                         @error('image')
                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                         @enderror
                     </div>
                 </div>

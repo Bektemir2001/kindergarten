@@ -50,9 +50,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
 
     Route::group(['prefix'=>'group'], function (){
         Route::get('/',[App\Http\Controllers\Admin\GroupController::class,'index'])->name('admin.group.index');
-        Route::get('show/{group}',[App\Http\Controllers\Admin\GroupController::class, 'show'])->name('admin.group.show');
+        Route::get('/show/{group}',[App\Http\Controllers\Admin\GroupController::class, 'show'])->name('admin.group.show');
         Route::get('/edit/{group}', [App\Http\Controllers\Admin\GroupController::class, 'edit'])->name('admin.group.edit');
         Route::patch('/update/{group}', [App\Http\Controllers\Admin\GroupController::class, 'update'])->name('admin.group.update');
+        Route::delete('/{group}',[App\Http\Controllers\Admin\GroupController::class, 'delete'])->name('admin.group.delete');
     });
 });
 

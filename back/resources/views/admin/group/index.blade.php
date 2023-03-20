@@ -168,11 +168,11 @@
                         row.insertCell(1).innerHTML = data.name;
                         row.insertCell(2).innerHTML = data.limit;
                         row.insertCell(3).innerHTML = `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
-                            `<a href="` + location.host + "/admin/group/show/" + data.id + `"><i class="fas fa-eye"></i></a>  </div> ` +
+                            `<a href="` + "/admin/group/show/" + data.id + `"><i class="fas fa-eye"></i></a>  </div> ` +
                         `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
-                        `<a href="` + location.host + "/admin/group/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> ` +
+                        `<a href="` + "/admin/group/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> ` +
                         `</div> <div style="float: left; display: block; width: 30%;" class="text-center"> ` +
-                            `<form action="` + location.host + "/admin/group/delete/" + data.id + `" method="POST"> @method('DELETE') @csrf` +
+                            `<form action="` + "/admin/group/delete/" + data.id + `" method="POST"> @method('DELETE') @csrf` +
                             `<button title="submit" class="border-0 bg-transparent"> ` +
                             `<i title="submit" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;
 

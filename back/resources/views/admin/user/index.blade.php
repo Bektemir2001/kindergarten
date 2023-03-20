@@ -164,7 +164,7 @@
                             {{-- <th width="2px"></th> --}}
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="userTable">
                         @foreach ($users as $user)
                             <tr class="odd">
                                 <td class="sorting_1">{{$user->id}}</td>
@@ -240,7 +240,24 @@
                     body: data
                 })
                     .then(res => res.json())
-                    .then(data => console.log(data))
+                    .then(data => {
+                        cancelForm();
+                        let table = document.getElementById('userTable');
+                        let i = table.rows.length;
+                        let row = table.insertRow(i);
+                        row.insertCell(0).innerHTML = data.id;
+                        row.insertCell(1).innerHTML = data.name;
+                        row.insertCell(2).innerHTML = data.surname;
+                        row.insertCell(3).innerHTML = data.role;
+                        row.insertCell(4).innerHTML = `<div style="float: left; display: block; width: 30%;" class="text-center">` +
+                            `<a href="`+ "admin/user/show" + data.id + `"><i class="fas fa-eye"></i></a> </div>` +
+                        `<div style="float: left; display: block; width: 30%;" class="text-center">` +
+                            `<a href="`+ "admin/user/edit" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> </div>` +
+                        `<div style="float: left; display: block; width: 30%;" class="text-center">` +
+                            `<form action="`+ "admin/user/delete" + data.id + `" method="POST"> @method("DELETE") @csrf` +
+                                `<button title="submit" class="border-0 bg-transparent">`+
+                                `<i title="submit" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;
+                    })
                     .catch(error => console.log(error))
             })
         </script>

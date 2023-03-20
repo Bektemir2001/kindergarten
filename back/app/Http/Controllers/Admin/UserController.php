@@ -31,6 +31,7 @@ class UserController extends Controller
             'phone_number'=>'required',
             'email'=>'required|email|max:255|unique:users,email,',
             'password'=>'required',
+            'role'=>'',
             'passport_front'=>'',
             'passport_back'=>''
         ]);
@@ -38,9 +39,11 @@ class UserController extends Controller
         $passport_back = null;
         if($request->hasFile('passport_front')){
             $passport_front = Storage::disk('public')->put('passports', $data['passport_front']);
+            $passport_front = "storage/".$passport_front;
         }
         if(array_key_exists('passport_back',$data)){
             $passport_back = Storage::disk('public')->put('passports',$data['passport_back']);
+            $passport_back = "storage/".$passport_back;
         }
 
         $data['password'] = Hash::make($data['password']);
@@ -52,10 +55,11 @@ class UserController extends Controller
             'phone_number'=>$data['phone_number'],
             'email'=>$data['email'],
             'password'=>$data['password'],
+            'role' => $data['role'],
             'passport_front'=>$passport_front,
             'passport_back'=>$passport_back
         ]);
-        return response($request);
+        return response($user);
 
     }
 
@@ -65,13 +69,25 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user){
         $data = $request->validated();
+        $passport_front = null;
+        $passport_back = null;
         DB::beginTransaction();
+        if($request->hasFile('passport_front')){
+            $passport_front = Storage::disk('public')->put('passports', $request['passport_front']);
+            $passport_front = "storage/".$passport_front;
+        }
+        if($request->hasFile('passport_back')){
+            $passport_back = Storage::disk('public')->put('passports',$request['passport_back']);
+            $passport_back = "storage/".$passport_back;
+        }
         $user->update([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'address' => $data['address'],
             'phone_number' => $data['phone_number'],
             'role' => $data['role'],
+            'passport_front' => $passport_front,
+            'passport_back' => $passport_back,
         ]);
         DB::commit();
         return redirect()->route('admin.user.index')->with('status','User data is Updated');

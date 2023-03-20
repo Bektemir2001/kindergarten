@@ -28,7 +28,9 @@ class UpdateUserRequest extends FormRequest
             'surname' => ['string', 'max:50'],
             'address' => ['string', 'max:200'],
             'phone_number' => ['string', 'max:20'],
-            'role' => [],
+            'role' => '',
+            'passport_front' => [],
+            'passport_back' => [],
         ];
 
     }

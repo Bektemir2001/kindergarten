@@ -45,6 +45,20 @@
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInput" class="form-label">Passport Front:</label>
+                        <input type="file" class="form-control col-6" name="passport_front" id="passport_front" value="{{$user->passport_front}}" oninput="this.setCostomValidity('')">
+                        @error('passport_front')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInput" class="form-label">Passport Back:</label>
+                        <input type="file" class="form-control col-6" name="passport_back" id="passport_back" value="{{$user->passport_back}}" oninput="this.setCostomValidity('')">
+                        @error('passport_back')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
 
 
                     <div class="modal-footer">

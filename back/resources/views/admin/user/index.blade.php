@@ -2,7 +2,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="container" style="margin-top: 10px;">
-        <button type="button" class="btn btn-primary btn-sm" style="margin-right:85%;" id="addUserBtnId" onclick="showForm()">Add User</button>
+        <button type="button" class="btn btn-primary" style="margin-right:85%;" id="addUserBtnId" onclick="showForm()">Add User</button>
         <div class="d-none" id="addUserId">
             <form id="form" method="POST" action="{{route('admin.user.create')}}" enctype="multipart/form-data">
                 <div class="row mb-3">
@@ -91,7 +91,7 @@
 
                 <div class="row mb-3">
                     <label for="role" class="col-md-4 col-form-label text-md-end">Role:</label>
-                    <select name="role" class="col-md-4 col-form-label text-md-end" id="role">
+                    <select style="width: 5px !important; min-width: 5px; max-width: 5px;" name="role" id="role">
                         <option value="0">Admin</option>
                         <option value="1">Employee</option>
                         <option value="2">User</option>
@@ -188,7 +188,7 @@
                                         <form action="{{route('admin.user.delete', $user->id)}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button title="submit" class="border-0 bg-transparent">
+                                            <button title="submit" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this user?')">
                                                 <i title="submit" class="fas fa-trash text-danger" role="button"></i>
                                             </button>
                                         </form>

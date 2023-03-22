@@ -18,10 +18,10 @@ services:
         volumes:
             - ./:/var/www
         depends_on:
-            -   db
+            -   mysql
         container_name: kindergarten_app
 
-    db:
+    mysql:
         image: mysql:8.0
         restart: always
         volumes:

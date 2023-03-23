@@ -47,13 +47,13 @@
                         <li class="list-group-item">
                             <b>Passport front</b>
                             <div class="">
-                                <img class="img-fluid img-circle" src="{{asset($user->passport_front)}}" alt="User passport front" style="width:150px; height:150px;">
+                                <img class="img-fluid" src="{{asset($user->passport_front)}}" alt="User passport front" style="width:70%;">
                             </div>
                         </li>
                         <li class="list-group-item">
                             <b>Passport back</b>
                             <div class="">
-                                <img class="img-fluid img-circle" src="{{asset($user->passport_back)}}" alt="User passport back" style="width:150px; height:150px;">
+                                <img class="img-fluid" src="{{asset($user->passport_back)}}" alt="User passport back" style="width:70%;">
                             </div>
                         </li>
                     </ul>

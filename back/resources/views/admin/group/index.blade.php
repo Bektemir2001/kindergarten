@@ -23,7 +23,7 @@
                         <label for="limit" class="col-md-4 col-form-label text-md-end">{{ __('Limit') }}</label>
 
                         <div class="col-md-6">
-                            <input id="limit" type="text" class="form-control @error('limit') is-invalid @enderror" name="limit" value="{{ old('limit') }}" required autocomplete="limit" autofocus>
+                            <input id="limit" type="number" class="form-control @error('limit') is-invalid @enderror" name="limit" value="{{ old('limit') }}" required autocomplete="limit" autofocus>
 
                             @error('limit')
                             <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
                         <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Group Image') }}</label>
 
                         <div class="col-md-6">
-                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required>
+                            <input id="image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required>
 
                             @error('image')
                             <span class="invalid-feedback" role="alert">
@@ -114,7 +114,7 @@
                                 <div style="float: left;
                                 display: block;
                                 width: 30%;" class="text-center">
-                                    <form action="{{route('admin.group.delete', $group->id)}}" method="POST">
+                                    <form onclick="return confirm('Do you really want to delete this group?')" action="{{route('admin.group.delete', $group->id)}}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button title="submit" class="border-0 bg-transparent">
@@ -122,10 +122,7 @@
                                         </button>
                                     </form>
                                 </div>
-
-
                             </td>
-                            {{-- td>rfed</td> --}}
                         </tr>
                     @endforeach
 
@@ -161,6 +158,10 @@
                     .then(res => res.json())
                     .then(data => {
                         cancelForm();
+                        let empty = document.getElementsByClassName('dataTables_empty');
+                        if(empty.length){
+                            empty[0].outerHTML = '';
+                        }
                         let table = document.getElementById('groupTable');
                         let i = table.rows.length;
                         let row = table.insertRow(i);

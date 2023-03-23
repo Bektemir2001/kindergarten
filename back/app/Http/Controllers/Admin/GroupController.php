@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateGroupRequest;
+use App\Models\Gallery;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -74,5 +75,9 @@ class GroupController extends Controller
      public function delete(Group $group){
          $group->delete();
         return redirect()->route('admin.group.index')->with('status', 'Group is deleted');
+     }
+
+     public function addGallery(Group $group){
+         return view('admin.group.addGallery',compact('group'));
      }
 }

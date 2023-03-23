@@ -1,7 +1,7 @@
 @extends('layouts.admin_layout')
 @section('content')
     <div class="content-wrapper">
-        <div class="card-header text-center" ><h3>Edit page</h3></div>
+        <div class="card-header text-center" ><h3>Add data about group {{$group->name}}</h3></div>
         <div class="container">
             <form action="{{route('admin.group.update', $group->id)}}" method="POST" enctype="multipart/form-data">
                 @method('patch')
@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInput" class="form-label">Description:</label>
-                    <textarea type="text" rows="5" class="form-control col-6" name="description" id="description" value="{{$group->description}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')"></textarea>
+                    <input type="text" class="form-control col-6" name="description" id="description" value="{{$group->description}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')">
                     @error('description')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -43,6 +43,17 @@
                         @enderror
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                    <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" name="image" id="image" multiple>
+
+                    @error('image')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                    @enderror
+                </div>
+
                 <div class="modal-footer">
                     <a href="{{route('admin.group.index')}}" class="btn btn-secondary">Cancel</a>
                     <button type="submit" class="btn btn-primary">Update</button>

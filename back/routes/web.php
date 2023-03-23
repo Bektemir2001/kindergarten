@@ -54,6 +54,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::get('/edit/{group}', [App\Http\Controllers\Admin\GroupController::class, 'edit'])->name('admin.group.edit');
         Route::patch('/update/{group}', [App\Http\Controllers\Admin\GroupController::class, 'update'])->name('admin.group.update');
         Route::delete('/{group}',[App\Http\Controllers\Admin\GroupController::class, 'delete'])->name('admin.group.delete');
+
+        Route::get('/add/{group}', [App\Http\Controllers\Admin\GroupController::class, 'addGallery'])->name('admin.group.addGAllery');
     });
 });
 

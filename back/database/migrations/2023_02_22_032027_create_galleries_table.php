@@ -19,6 +19,7 @@ return new class extends Migration
                 ->on('groups')
                 ->references('id')
                 ->cascadeOnDelete();
+            $table->text('text');
             $table->string('image',200);
             $table->string('video',200);
             $table->timestamps();

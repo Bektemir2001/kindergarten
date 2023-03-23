@@ -170,7 +170,15 @@
                                 <td class="sorting_1">{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->surname}}</td>
-                                <td>{{$user->role}}</td>
+                                <td>
+                                    @if($user->role == 0)
+                                        Admin
+                                    @elseif($user->role == 1)
+                                        Employee
+                                    @else
+                                        User
+                                    @endif
+                                </td>
                                 <td>
                                     <div style="float: left;
                                 display: block;

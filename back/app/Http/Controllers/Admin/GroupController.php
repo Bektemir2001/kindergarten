@@ -56,7 +56,7 @@ class GroupController extends Controller
                 'name' => $data['name'],
                 'limit' => $data['limit'],
                 'description' => $data['description'],
-                'image' => $data['image'],
+                'image' => $image,
 
             ]);
          }
@@ -65,7 +65,6 @@ class GroupController extends Controller
                  'name' => $data['name'],
                  'limit' => $data['limit'],
                  'description' => $data['description'],
-
              ]);
          }
          DB::commit();

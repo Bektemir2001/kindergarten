@@ -200,10 +200,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-columns"></i>
+                        <a href="{{route('admin.children.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-child"></i>
                             <p>
-                                Kanban Board
+                                Children
                             </p>
                         </a>
                     </li>

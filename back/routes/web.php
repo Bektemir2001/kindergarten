@@ -55,5 +55,13 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::patch('/update/{group}', [App\Http\Controllers\Admin\GroupController::class, 'update'])->name('admin.group.update');
         Route::delete('/{group}',[App\Http\Controllers\Admin\GroupController::class, 'delete'])->name('admin.group.delete');
     });
+
+    Route::group(['prefix'=>'children'], function (){
+        Route::get('/', [App\Http\Controllers\Admin\ChildrenController::class, 'index'])->name('admin.children.index');
+        Route::get('/edit/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'edit'])->name('admin.children.edit');
+        Route::get('/show/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'show'])->name('admin.children.show');
+        Route::patch('/update/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'update'])->name('admin.children.update');
+        Route::delete('/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'delete'])->name('admin.children.delete');
+    });
 });
 

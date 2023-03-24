@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInput" class="form-label">Role:</label>
-                        <select name="role" class="form-control" id="role">
+                        <select name="role" style="width: 50% !important;"  class="form-control" id="role">
                                 <option value="0">Admin</option>
                                 <option value="1">Employee</option>
                                 <option value="2">User</option>

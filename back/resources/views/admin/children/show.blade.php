@@ -21,11 +21,11 @@
                         </li>
                         <li class="list-group-item">
                             <b>Parent ID:</b>
-                            <div class="">{{$child->parent_id}}</div>
+                            <div class="">{{$child->parent->name}} {{$child->parent->surname}}</div>
                         </li>
                         <li class="list-group-item">
                             <b>Group ID:</b>
-                            <div class="">{{$child->group_id}}</div>
+                            <div class="">{{$child->group->name}}</div>
                         </li>
                         <li class="list-group-item">
                             <b>Child's Photo:</b>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="{{route('admin.children.index')}}" class="btn btn-secondary">Cancel</a>
+                <a href="{{route('admin.children.index')}}" class="btn btn-secondary">Back</a>
             </div>
         </div>
     </div>

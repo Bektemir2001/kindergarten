@@ -155,7 +155,7 @@
                             <td class="sorting_1">{{$child->id}}</td>
                             <td>{{$child->name}}</td>
                             <td>{{$child->surname}}</td>
-                            <td>{{$child->group_id}}</td>
+                            <td>{{$child->group->name}}</td>
                             <td>
                                 <div style="float: left;
                                 display: block;
@@ -236,11 +236,11 @@
                         row.insertCell(2).innerHTML = data.surname;
                         row.insertCell(3).innerHTML = data.group_id;
                         row.insertCell(4).innerHTML = `<div style="float: left; display: block; width: 30%;" class="text-center">` +
-                            `<a href="`+ "admin/children/show" + data.id + `"><i class="fas fa-eye"></i></a> </div>` +
+                            `<a href="`+ "children/show/" + data.id + `"><i class="fas fa-eye"></i></a> </div>` +
                             `<div style="float: left; display: block; width: 30%;" class="text-center">` +
-                            `<a href="`+ "admin/children/edit" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> </div>` +
+                            `<a href="`+ "admin/children/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> </div>` +
                             `<div style="float: left; display: block; width: 30%;" class="text-center">` +
-                            `<form action="`+ "admin/children/delete" + data.id + `" method="POST"> @method("DELETE") @csrf` +
+                            `<form action="`+ "admin/children/delete/" + data.id + `" method="POST"> @method("DELETE") @csrf` +
                             `<button title="delete" class="border-0 bg-transparent">`+
                             `<i title="delete" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;
                     })

@@ -208,6 +208,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{route('')}}" class="nav-link">
+                            <i class="nav-icon fas fa-child"></i>
+                            <p>
+                                Resume
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon far fa-envelope"></i>
                             <p>

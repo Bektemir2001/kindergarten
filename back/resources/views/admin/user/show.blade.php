@@ -58,7 +58,9 @@
                         </li>
                     </ul>
 
-
+                    <div class="modal-footer">
+                        <a href="{{route('admin.children.index')}}" class="btn btn-secondary">Back</a>
+                    </div>
                 </div>
                 <!-- /.card-body -->
             </div>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('role')->default(2);
+            $table->string('role')->default('ROLE_USER'); // ROLE_USER, ROLE_PARENT, ROLE_TEACHER, ROLE_ADMIN
             $table->string('passport_back',200)->nullable();
             $table->string('passport_front',200)->nullable();
             $table->integer('amount_child')->default(0);

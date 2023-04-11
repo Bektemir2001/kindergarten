@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInput" class="form-label">Description:</label>
-                    <textarea type="text" rows="5" class="form-control col-6" name="description" id="description" value="{{$group->description}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')"></textarea>
+                    <input type="text" rows="5" class="form-control col-6" name="description" id="description" value="{{$group->description}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')">
                     @error('description')
                     <p class="text-danger">{{$message}}</p>
                     @enderror

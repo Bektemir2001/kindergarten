@@ -14,15 +14,17 @@ return new class extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('group_id');
+            $table->string('image',200)->nullable();
+            $table->string('video',200)->nullable();
+            $table->timestamps();
+
+
             $table->index('group_id','galleries_groups_idx');
             $table->foreign('group_id','galleries_groups_fk')
                 ->on('groups')
                 ->references('id')
                 ->cascadeOnDelete();
-            $table->text('text');
-            $table->string('image',200);
-            $table->string('video',200);
-            $table->timestamps();
+
         });
     }
 

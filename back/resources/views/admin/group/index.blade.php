@@ -103,17 +103,17 @@
                             <td class="d-flex">
                                 <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
+                                width: 25%;" class="text-center">
                                     <a href="{{route('admin.group.show', $group)}}"><i title="show" class="fas fa-eye"></i></a>
                                 </div>
                                 <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
+                                width: 25%;" class="text-center">
                                     <a href="{{route('admin.group.edit', $group)}}" class="text-success"><i title="edit" class="fas fa-pen"></i></a>
                                 </div>
                                 <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
+                                width: 25%;" class="text-center">
                                     <form onclick="return confirm('Do you really want to delete this group?')" action="{{route('admin.group.delete', $group->id)}}" method="POST">
                                         @method('DELETE')
                                         @csrf
@@ -124,8 +124,8 @@
                                 </div>
                                 <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
-                                    <a href="{{route('admin.group.addGallery', $group)}}" class="text"><i title="add text or photo/video" class="fas fa-photo-video"></i></a>
+                                width: 25%;" class="text-center">
+                                    <a href="{{route('admin.group.Gallery', $group)}}" class="text"><i title="add photo or video" class="fas fa-photo-video"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -174,18 +174,16 @@
                         row.insertCell(1).innerHTML = data.name;
                         row.insertCell(2).innerHTML = data.limit;
                         row.insertCell(3).innerHTML = `<div class="d-flex">` +
-                            `<div style="float: left; display: block; width: 25%;" class="text-center"> ` +
+                            `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
                             `<a href="` + "/admin/group/show/" + data.id + `"><i class="fas fa-eye"></i></a>  </div> ` +
-                            `<div style="float: left; display: block; width: 25%;" class="text-center"> ` +
+                            `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
                             `<a href="` + "/admin/group/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> ` +
-                            `</div> <div style="float: left; display: block; width: 25%;" class="text-center"> ` +
+                            `</div> <div style="float: left; display: block; width: 30%;" class="text-center"> ` +
                             `<form action="` + "/admin/group/delete/" + data.id + `" method="POST"> @method('DELETE') @csrf` +
                             `<button title="submit" class="border-0 bg-transparent"> ` +
-                            `<i title="submit" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`+
-                            `<div style="float: left; display: block; width: 25%;" class="text-center"> ` +
-                            `<a href="` + "/admin/group/addGallery/" + data.id + `"><i class="fas fa-photo-video"></i></a>  </div> </div>`;
-
-
+                            `<i title="delete" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>` +
+                            `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
+                            `<a href="` + "/admin/group/show/" + data.id + `"><i class="fas fa-photo-video"></i></a>  </div> `;
                     })
                     .catch(error => console.log(error))
             })

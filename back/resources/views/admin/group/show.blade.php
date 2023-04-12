@@ -1,6 +1,5 @@
 @extends('layouts.admin_layout')
 @section('content')
-
     <div class="content-wrapper">
         <div class="container mb-4 mt-4">
 

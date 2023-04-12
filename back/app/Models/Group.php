@@ -9,5 +9,9 @@ class Group extends Model
 {
     use HasFactory;
     protected $table = 'groups';
-    protected $guarded = false;
+    protected $guarded = [];
+
+    public function gallery(){
+        return $this->hasMany('App\Models\Gallery');
+    }
 }

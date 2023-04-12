@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInput" class="form-label">Description:</label>
-                    <input type="text" class="form-control col-6" name="description" id="description" value="{{$group->description}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')">
+                    <input type="text" rows="5" class="form-control col-6" name="description" id="description" value="{{$group->description}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')">
                     @error('description')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -43,7 +43,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="modal-footer">
                     <a href="{{route('admin.group.index')}}" class="btn btn-secondary">Cancel</a>
                     <button type="submit" class="btn btn-primary">Update</button>

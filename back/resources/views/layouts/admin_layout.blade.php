@@ -208,10 +208,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('')}}" class="nav-link">
-                            <i class="nav-icon fas fa-child"></i>
+                        <a href="{{route('admin.resume.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-file"></i>
                             <p>
-                                Resume
+                                Resumes
                             </p>
                         </a>
                     </li>

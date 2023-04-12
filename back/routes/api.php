@@ -27,4 +27,9 @@ Route::post('/admin/user/create', [App\Http\Controllers\Admin\UserController::cl
 Route::post('/admin/group/create',[App\Http\Controllers\Admin\GroupController::class, 'create'])->name('admin.group.create');
 
 
+Route::post('/user/updatePassword', [App\Http\Controllers\ResetPasswordController::class, 'updatePassword'])->name('update.password');
+
+Route::post('/admin/children/create', [App\Http\Controllers\Admin\ChildrenController::class, 'create'])->name('admin.children.create');
+
+Route::post('/admin/resume/question/create', [App\Http\Controllers\Admin\QuestionController::class, 'create'])->name('admin.resume.question.create');
 

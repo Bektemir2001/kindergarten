@@ -91,7 +91,7 @@
 
                 <div class="row mb-3">
                     <label for="role" class="col-md-4 col-form-label text-md-end">Role:</label>
-                    <select style="width: 5px !important; min-width: 5px; max-width: 5px;" name="role" id="role">
+                    <select style="width: 49% !important;" name="role" id="role">
                         <option value="0">Admin</option>
                         <option value="1">Employee</option>
                         <option value="2">User</option>
@@ -196,8 +196,8 @@
                                         <form action="{{route('admin.user.delete', $user->id)}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button title="submit" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this user?')">
-                                                <i title="submit" class="fas fa-trash text-danger" role="button"></i>
+                                            <button title="delete" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this user?')">
+                                                <i title="delete" class="fas fa-trash text-danger" role="button"></i>
                                             </button>
                                         </form>
                                     </div>

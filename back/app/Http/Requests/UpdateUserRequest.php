@@ -21,7 +21,6 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        // dd($this);
         $user = User::where('id', $this->id)->get();
         return [
             'name' => ['string', 'max:50'],

@@ -28,7 +28,7 @@ class UpdateGroupRequest extends FormRequest
             'name' => ['string', 'max:50'],
             'limit' => ['integer'],
             'description' => ['string'],
-            'image' => 'file, mimes:jpg,bmp,png,jpeg',
+            'image' => 'mimes:jpg,bmp,png,jpeg',
         ];
     }
 }

@@ -54,6 +54,30 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::get('/edit/{group}', [App\Http\Controllers\Admin\GroupController::class, 'edit'])->name('admin.group.edit');
         Route::patch('/update/{group}', [App\Http\Controllers\Admin\GroupController::class, 'update'])->name('admin.group.update');
         Route::delete('/{group}',[App\Http\Controllers\Admin\GroupController::class, 'delete'])->name('admin.group.delete');
+        Route::get('/Gallery/{group}', [App\Http\Controllers\Admin\GroupController::class, 'Gallery'])->name('admin.group.Gallery');
+        Route::post('/gallery/create/{group}',[App\Http\Controllers\Admin\GroupController::class, 'galleryCreate'])->name('admin.gallery.create');
+    });
+
+    Route::group(['prefix'=>'children'], function (){
+        Route::get('/', [App\Http\Controllers\Admin\ChildrenController::class, 'index'])->name('admin.children.index');
+        Route::get('/edit/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'edit'])->name('admin.children.edit');
+        Route::get('/show/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'show'])->name('admin.children.show');
+        Route::patch('/update/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'update'])->name('admin.children.update');
+        Route::delete('/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'delete'])->name('admin.children.delete');
+    });
+
+    Route::group(['prefix'=>'resume'], function (){
+        Route::get('/', [App\Http\Controllers\Admin\ResumeController::class, 'index'])->name('admin.resume.index');
+        Route::get('/show/{resume}', [App\Http\Controllers\Admin\ResumeController::class, 'show'])->name('admin.resume.show');
+        Route::delete('/{resume}', [App\Http\Controllers\Admin\ResumeController::class, 'delete'])->name('admin.resume.delete');
+    });
+
+    Route::group(['prefix'=>'question'], function (){
+       Route::get('/', [App\Http\Controllers\Admin\QuestionController::class, 'index'])->name('admin.resume.question.index');
+       Route::get('/edit/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'edit'])->name('admin.resume.question.edit');
+       Route::get('/show/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'show'])->name('admin.resume.question.show');
+       Route::patch('/update/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'update'])->name('admin.resume.question.update');
+       Route::delete('/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'delete'])->name('admin.resume.question.delete');
     });
 });
 

@@ -1,6 +1,5 @@
 @extends('layouts.admin_layout')
 @section('content')
-
     <div class="content-wrapper">
         <div class="container mb-4 mt-4">
 
@@ -9,21 +8,21 @@
                 <div class="card-body box-profile">
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
-                            <b>Group name</b>
+                            <b>Group name:</b>
                             <div class="">{{$group->name}}</div>
                         </li>
                         <li class="list-group-item">
-                            <b>Limit</b>
+                            <b>Limit:</b>
                             <div class="">{{$group->limit}}</div>
                         </li>
                         <li class="list-group-item">
-                            <b>Description</b>
+                            <b>Description:</b>
                             <div class="">{{$group->description}}</div>
                         </li>
                         <li class="list-group-item">
-                            <b>Group image</b>
+                            <b>Group image:</b>
                             <div class="">
-                                <img class="img-fluid img-circle" src="{{asset($group->image)}}" alt="User passport front" style="width:150px; height:150px;">
+                                <img class="img-fluid img" src="{{asset($group->image)}}" alt="Groups photo" style="width:70%;">
                             </div>
                         </li>
                     </ul>

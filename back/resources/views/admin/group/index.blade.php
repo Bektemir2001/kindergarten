@@ -2,7 +2,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="container" style="margin-top: 10px;">
-            <button type="button" class="btn btn-primary btn-sm" style="margin-right:85%;" id="addGroupBtnId" onclick="showForm()">Add Group</button>
+            <button type="button" class="btn btn-primary" style="margin-right:85%;" id="addGroupBtnId" onclick="showForm()">Add Group</button>
             <div class="d-none" id="addGroupId">
                 <form id="form" enctype="multipart/form-data">
                     <div class="row mb-3">
@@ -23,7 +23,7 @@
                         <label for="limit" class="col-md-4 col-form-label text-md-end">{{ __('Limit') }}</label>
 
                         <div class="col-md-6">
-                            <input id="limit" type="text" class="form-control @error('limit') is-invalid @enderror" name="limit" value="{{ old('limit') }}" required autocomplete="limit" autofocus>
+                            <input id="limit" type="number" class="form-control @error('limit') is-invalid @enderror" name="limit" value="{{ old('limit') }}" required autocomplete="limit" autofocus>
 
                             @error('limit')
                             <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
                         <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Group Image') }}</label>
 
                         <div class="col-md-6">
-                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required>
+                            <input id="image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required>
 
                             @error('image')
                             <span class="invalid-feedback" role="alert">
@@ -100,32 +100,34 @@
                             <td class="sorting_1">{{$group->id}}</td>
                             <td>{{$group->name}}</td>
                             <td>{{$group->limit}}</td>
-                            <td>
+                            <td class="d-flex">
                                 <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
-                                    <a href="{{route('admin.group.show', $group)}}"><i class="fas fa-eye"></i></a>
+                                width: 25%;" class="text-center">
+                                    <a href="{{route('admin.group.show', $group)}}"><i title="show" class="fas fa-eye"></i></a>
                                 </div>
                                 <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
-                                    <a href="{{route('admin.group.edit', $group)}}" class="text-success"><i class="fas fa-pen"></i></a>
+                                width: 25%;" class="text-center">
+                                    <a href="{{route('admin.group.edit', $group)}}" class="text-success"><i title="edit" class="fas fa-pen"></i></a>
                                 </div>
                                 <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
-                                    <form action="{{route('admin.group.delete', $group->id)}}" method="POST">
+                                width: 25%;" class="text-center">
+                                    <form onclick="return confirm('Do you really want to delete this group?')" action="{{route('admin.group.delete', $group->id)}}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button title="submit" class="border-0 bg-transparent">
-                                            <i title="submit" class="fas fa-trash text-danger" role="button"></i>
+                                            <i title="delete" class="fas fa-trash text-danger" role="button"></i>
                                         </button>
                                     </form>
                                 </div>
-
-
+                                <div style="float: left;
+                                display: block;
+                                width: 25%;" class="text-center">
+                                    <a href="{{route('admin.group.Gallery', $group)}}" class="text"><i title="add photo or video" class="fas fa-photo-video"></i></a>
+                                </div>
                             </td>
-                            {{-- td>rfed</td> --}}
                         </tr>
                     @endforeach
 
@@ -161,22 +163,27 @@
                     .then(res => res.json())
                     .then(data => {
                         cancelForm();
+                        let empty = document.getElementsByClassName('dataTables_empty');
+                        if(empty.length){
+                            empty[0].outerHTML = '';
+                        }
                         let table = document.getElementById('groupTable');
                         let i = table.rows.length;
                         let row = table.insertRow(i);
                         row.insertCell(0).innerHTML = data.id;
                         row.insertCell(1).innerHTML = data.name;
                         row.insertCell(2).innerHTML = data.limit;
-                        row.insertCell(3).innerHTML = `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
+                        row.insertCell(3).innerHTML = `<div class="d-flex">` +
+                            `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
                             `<a href="` + "/admin/group/show/" + data.id + `"><i class="fas fa-eye"></i></a>  </div> ` +
-                        `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
-                        `<a href="` + "/admin/group/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> ` +
-                        `</div> <div style="float: left; display: block; width: 30%;" class="text-center"> ` +
+                            `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
+                            `<a href="` + "/admin/group/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> ` +
+                            `</div> <div style="float: left; display: block; width: 30%;" class="text-center"> ` +
                             `<form action="` + "/admin/group/delete/" + data.id + `" method="POST"> @method('DELETE') @csrf` +
                             `<button title="submit" class="border-0 bg-transparent"> ` +
-                            `<i title="submit" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;
-
-
+                            `<i title="delete" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>` +
+                            `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
+                            `<a href="` + "/admin/group/show/" + data.id + `"><i class="fas fa-photo-video"></i></a>  </div> `;
                     })
                     .catch(error => console.log(error))
             })

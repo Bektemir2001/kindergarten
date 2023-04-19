@@ -19,7 +19,8 @@ class EnrollController extends Controller
 
     public function index(){
         $enroll = Enroll::all();
-        return view('admin.enroll.index', compact('enroll'));
+        $children = Child::all();
+        return view('enroll', compact('enroll', 'children'));
     }
 
     public function create(Request $request){

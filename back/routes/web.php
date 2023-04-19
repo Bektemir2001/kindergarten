@@ -22,6 +22,7 @@ Route::group(['prefix'=>'user'], function (){
     Route::post('/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'sendLink'])->name('reset.password.link');
     Route::get('/resetPassword/{email}', [App\Http\Controllers\ResetPasswordController::class, 'changePassword'])->name('change.password.form');
     Route::post('/enroll/create', [App\Http\Controllers\EnrollController::class, 'create'])->name('enroll.create');
+    Route::get('/enroll', [App\Http\Controllers\EnrollController::class,'index'])->name('enroll.index');
 });
 Route::get('/{user?}',App\Http\Controllers\IndexController::class)->name('index');
 Route::get('/verification/form/{user}', [App\Http\Controllers\VerificateController::class, 'form'])->name('verification.form');
@@ -59,8 +60,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::delete('/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'delete'])->name('admin.children.delete');
     });
     Route::group(['prefix'=>'enroll'], function (){
-        Route::get('/', [App\Http\Controllers\EnrollController::class, 'index'])->name('admin.enroll.index');
-
+        Route::get('/', [App\Http\Controllers\Admin\EnrollController::class. 'index'])->name('admin.enroll.index');
     });
 
     Route::group(['prefix'=>'resume'], function (){

@@ -1,6 +1,16 @@
 @extends('layouts.admin_layout')
 @section('content')
     <link rel="stylesheet" href="{{asset('style/group_gallery_style.css')}}">
+    <div>
+        @if(session('msg'))
+            <div class="d-flex justify-content-center">
+                <div class="alert alert-success alert-dismissible fade show text-center" style="width:25%;">{{session('msg')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>
+            </div>
+        @endif
+    </div>
     <div class="content-wrapper">
         <div class="card-header text-center" ><h3>Gallery of the group "{{$group->name}}"</h3></div>
         <div class="container">
@@ -31,13 +41,13 @@
                     $i = 1;
                 @endphp
                 @foreach($galleries as $gallery)
-                    <div class="column">
+                    <div class="column" >
                     @if($gallery->image==null)
-                            <video width="320" height="240" controls onclick="openModal();currentSlide({{$i}})" class="hover-shadow cursor">
+                            <video width="280" height="200" controls onclick="openModal();currentSlide({{$i}})" class="hover-shadow cursor">
                                 <source src="{{asset($gallery->video)}}" type="video/mp4">.
                             </video>
                     @else
-                            <img src="{{asset($gallery->image)}}" style="width:100%" onclick="openModal();currentSlide({{$i}})" class="hover-shadow cursor">
+                            <img src="{{asset($gallery->image)}}" style="width:280px; height:200px" onclick="openModal();currentSlide({{$i}})" class="hover-shadow cursor">
                     @endif
                     @php
                         $i = $i + 1;
@@ -48,9 +58,15 @@
 
 
             <div id="myModal" class="modal">
-                <span class="close cursor" onclick="closeModal()">&times;</span>
-                <div class="modal-content">
-
+                <div class="modal-content" style="background-color: transparent">
+                    <span class="close cursor" onclick="closeModal()">&times;</span>
+                    <form onclick="return confirm('Do you really want to delete?')" action="{{route('admin.gallery.delete', $gallery->id)}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button title="submit" class="border-0 bg-transparent">
+                            <i title="delete" class="fas fa-trash text-danger" role="button"></i>
+                        </button>
+                    </form>
                     @php
                         $i = 1;
                     @endphp
@@ -58,18 +74,17 @@
                         <div class="mySlides">
                             <div class="numbertext">{{$i}} / {{$group->gallery->count()}}</div>
                             @if($gallery->image==null)
-                                <video style="width:100%" controls >
+                                <video style="height: 100%" controls >
                                     <source src="{{asset($gallery->video)}}" type="video/mp4">.
                                 </video>
                             @else
-                                <img src="{{asset($gallery->image)}}" style="width:100%" >
+                                <img src="{{asset($gallery->image)}}" style="height: 100%">
                             @endif
                             @php
                                 $i = $i + 1;
                             @endphp
                         </div>
                     @endforeach
-
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
@@ -138,6 +153,11 @@
                     captionText.innerHTML = dots[slideIndex-1].alt;
                 }
 
+                let prev = document.getElementsByClassName("prev");
+                let next = document.getElementsByClassName("next");
+
+                prev.addEventListener("keydown", plusSlides(-1));
+                next.addEventListener("keydown", plusSlides(1));
             </script>
 
             {{--        <script>--}}

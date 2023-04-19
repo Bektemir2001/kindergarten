@@ -37,9 +37,9 @@
                     <div class="form-group">
                         <label for="exampleInput" class="form-label">Role:</label>
                         <select name="role" style="width: 50% !important;"  class="form-control" id="role">
-                                <option value="0">Admin</option>
-                                <option value="1">Employee</option>
-                                <option value="2">User</option>
+                                <option value="ROLE_ADMIN">Admin</option>
+                                <option value="ROLE_TEACHER">Employee</option>
+                                <option value="ROLE_USER">User</option>
                         </select>
                         @error('role')
                         <p class="text-danger">{{$message}}</p>

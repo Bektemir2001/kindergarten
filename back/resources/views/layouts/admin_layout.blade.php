@@ -216,6 +216,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{route('admin.enroll.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-tasks"></i>
+                            <p>
+                                Queue
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon far fa-envelope"></i>
                             <p>

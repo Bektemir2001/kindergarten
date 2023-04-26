@@ -15,7 +15,6 @@ class Group extends Model
     public function gallery(){
         return $this->hasMany('App\Models\Gallery');
    }
-    protected $guarded = false;
 
     public function children()
     {

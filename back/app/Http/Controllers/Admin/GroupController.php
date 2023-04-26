@@ -95,8 +95,12 @@ class GroupController extends Controller
 
     public function galleryCreate(Request $request, Group $group)
     {
-        $res = $this->galleryService->store($request, $group);
+        $this->galleryService->store($request, $group);
 
         return redirect()->back();
+    }
+    public function galleryDelete(Gallery $gallery){
+        $gallery->delete();
+        return redirect()->route('admin.group.Gallery');
     }
 }

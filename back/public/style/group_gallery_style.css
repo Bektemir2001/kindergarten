@@ -51,12 +51,20 @@ body {
 .close {
     color: white;
     position: absolute;
-    top: 70px;
-    right: 70px;
+    top: 10px;
+    right: 20px;
     font-size: 35px;
     font-weight: bold;
 }
 
+.fas {
+    color: white;
+    position: absolute;
+    top: 65px;
+    right: 20px;
+    font-size: 25px;
+    font-weight: bold;
+}
 .close:hover,
 .close:focus {
     color: #999;
@@ -66,6 +74,10 @@ body {
 
 .mySlides {
     display: none;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    text-align: center;
 }
 
 .cursor {
@@ -131,7 +143,6 @@ img {
 .demo:hover {
     opacity: 1;
 }
-
 img.hover-shadow {
     transition: 0.3s;
 }

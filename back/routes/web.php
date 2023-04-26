@@ -12,29 +12,22 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::group(['prefix'=>'user'], function (){
+    Route::get('/register', [App\Http\Controllers\RegisterController::class, 'form'])->name('user.register.form');
+    Route::post('/register', [App\Http\Controllers\RegisterController::class, 'register'])->name('user.register');
+    Route::get('/login', [App\Http\Controllers\AuthController::class, 'form'])->name('user.auth.form');
+    Route::post('/login', [App\Http\Controllers\AuthController::class, 'userAuth'])->name('user.auth');
+    Route::get('/logout', App\Http\Controllers\LogoutController::class)->name('user.logout');
+    Route::get('/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'form'])->name('reset.password.form');
+    Route::post('/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'sendLink'])->name('reset.password.link');
+    Route::get('/resetPassword/{email}', [App\Http\Controllers\ResetPasswordController::class, 'changePassword'])->name('change.password.form');
+    Route::post('/enroll/create', [App\Http\Controllers\EnrollController::class, 'create'])->name('enroll.create');
+    Route::get('/enroll', [App\Http\Controllers\EnrollController::class,'index'])->name('enroll.index');
+});
 Route::get('/{user?}',App\Http\Controllers\IndexController::class)->name('index');
-
-Route::get('/user/register', [App\Http\Controllers\RegisterController::class, 'form'])->name('user.register.form');
-
-Route::post('/user/register', [App\Http\Controllers\RegisterController::class, 'register'])->name('user.register');
-
-Route::get('/user/login', [App\Http\Controllers\AuthController::class, 'form'])->name('user.auth.form');
-
-Route::post('/user/login', [App\Http\Controllers\AuthController::class, 'userAuth'])->name('user.auth');
-
-Route::get('/user/logout', App\Http\Controllers\LogoutController::class)->name('user.logout');
-
 Route::get('/verification/form/{user}', [App\Http\Controllers\VerificateController::class, 'form'])->name('verification.form');
 
-Route::get('/user/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'form'])->name('reset.password.form');
-Route::post('/user/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'sendLink'])->name('reset.password.link');
-
-Route::get('/user/resetPassword/{email}', [App\Http\Controllers\ResetPasswordController::class, 'changePassword'])->name('change.password.form');
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
@@ -56,6 +49,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::delete('/{group}',[App\Http\Controllers\Admin\GroupController::class, 'delete'])->name('admin.group.delete');
         Route::get('/Gallery/{group}', [App\Http\Controllers\Admin\GroupController::class, 'Gallery'])->name('admin.group.Gallery');
         Route::post('/gallery/create/{group}',[App\Http\Controllers\Admin\GroupController::class, 'galleryCreate'])->name('admin.gallery.create');
+        Route::delete('/{gallery}',[App\Http\Controllers\Admin\GroupController::class, 'galleryDelete'])->name('admin.gallery.delete');
     });
 
     Route::group(['prefix'=>'children'], function (){
@@ -64,6 +58,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::get('/show/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'show'])->name('admin.children.show');
         Route::patch('/update/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'update'])->name('admin.children.update');
         Route::delete('/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'delete'])->name('admin.children.delete');
+    });
+    Route::group(['prefix'=>'enroll'], function (){
+        Route::get('/', [App\Http\Controllers\Admin\EnrollController::class. 'index'])->name('admin.enroll.index');
     });
 
     Route::group(['prefix'=>'resume'], function (){
@@ -79,5 +76,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
        Route::patch('/update/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'update'])->name('admin.resume.question.update');
        Route::delete('/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'delete'])->name('admin.resume.question.delete');
     });
+
 });
+
+
 

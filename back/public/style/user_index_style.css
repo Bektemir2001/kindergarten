@@ -192,7 +192,7 @@ select {
     position: relative;
     width: 100%;
     min-height: 490px;
-    background-color: grey; }
+    background-color: white; }
 @media (min-width: 768px) {
     .container-main {
         float: right;
@@ -204,11 +204,10 @@ select {
 
 
 
-.
+
 .ag-format-container {
     width: 1142px;
     margin: 0 auto;
-    position: center;
 }
 
 .ag-courses_box {
@@ -225,7 +224,6 @@ select {
 .ag-courses_item {
     -ms-flex-preferred-size: calc(80% - 30px);
     flex-basis: calc(80% - 30px);
-
     margin: 0 15px 30px;
 
     overflow: hidden;
@@ -283,9 +281,28 @@ select {
     -o-transition: color .5s ease;
     transition: color .5s ease
 }
+.ag-courses-item_image {
+    height: 160px;
+    width: 160px;
+
+    font-weight: bold;
+    font-size: 20px;
+    color: #FFF;
+
+    z-index: 1;
+    position: absolute;
+    top: 20px;
+    right: 100px;
+
+    border-radius: 50%;
+
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
 .ag-courses-item_bg_enroll {
-    height: 128px;
-    width: 128px;
+    height: 160px;
+    width: 160px;
     background-color: #f9b234;
 
     z-index: 1;
@@ -300,8 +317,8 @@ select {
     transition: all .5s ease;
 }
 .ag-courses-item_bg_children {
-    height: 128px;
-    width: 128px;
+    height: 160px;
+    width: 160px;
     background-color: #3ecd5e;
 
     z-index: 1;
@@ -315,9 +332,7 @@ select {
     -o-transition: all .5s ease;
     transition: all .5s ease;
 }
-.ag-courses_item:nth-child(2n) .ag-courses-item_bg {
-    background-color: #3ecd5e;
-}
+
 
 
 
@@ -330,6 +345,7 @@ select {
     .ag-courses-item_title {
         font-size: 24px;
     }
+
 }
 
 @media only screen and (max-width: 767px) {
@@ -349,6 +365,13 @@ select {
 
         font-size: 24px;
     }
+    .ag-courses-item_image {
+         min-height: 72px;
+         line-height: 1;
+
+         font-size: 24px;
+     }
+
     .ag-courses-item_link {
         padding: 22px 40px;
     }
@@ -357,5 +380,29 @@ select {
     }
 }
 
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    border-color: #0c84ff;
+}
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+    border-color: #6059bb;
+}
 
 

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('birth_certificate',200);
             $table->string('med_certificate',200);
+            $table->string('med_disability', 200)->nullable();
             $table->string('photo',200);
             $table->boolean('payment')->default(false);
             $table->timestamps();

@@ -24,7 +24,7 @@
                             Surname
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Group
+                            Parent's Name
                         </th>
                         <th class="sorting text-center" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 25%;">
                             Action
@@ -33,27 +33,22 @@
                     </tr>
                     </thead>
                     <tbody id="childTable">
-                    @foreach ($enroll as $enr)
+                    @foreach ($enrolls as $enroll)
                         <tr class="odd">
-                            <td class="sorting_1">{{$enr->id}}</td>
-                            <td>{{$enr->name}}</td>
-                            <td>{{$enr->surname}}</td>
-                            <td>{{$enr->parent->name}}</td>
+                            <td class="sorting_1">{{$enroll->id}}</td>
+                            <td>{{$enroll->name}}</td>
+                            <td>{{$enroll->surname}}</td>
+                            <td>{{$enroll->parent->name}}</td>
                             <td>
                                 <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
-                                    <a href=""><i class="fas fa-eye"></i></a>
+                                width: 50%;" class="text-center">
+                                    <a href="{{route('admin.enroll.show', $enroll)}}" class="text-success"><i class="fas fa-check-circle"></i></a>
                                 </div>
-                                <div style="float: left;
+                                <div style="float: right;
                                 display: block;
-                                width: 30%;" class="text-center">
-                                    <a href="" class="text-success"><i class="fas fa-pen"></i></a>
-                                </div>
-                                <div style="float: left;
-                                display: block;
-                                width: 30%;" class="text-center">
-                                    <form action="" method="POST">
+                                width: 50%;" class="text-center">
+                                    <form action="{{route('admin.enroll.delete', $enroll)}}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button title="delete" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this user?')">

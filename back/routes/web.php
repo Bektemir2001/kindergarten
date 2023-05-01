@@ -60,7 +60,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::delete('/{child}', [App\Http\Controllers\Admin\ChildrenController::class, 'delete'])->name('admin.children.delete');
     });
     Route::group(['prefix'=>'enroll'], function (){
-        Route::get('/', [App\Http\Controllers\Admin\EnrollController::class. 'index'])->name('admin.enroll.index');
+        Route::get('/', [App\Http\Controllers\Admin\EnrollController::class, 'index'])->name('admin.enroll.index');
+        Route::get('/show/{enroll}', [App\Http\Controllers\Admin\EnrollController::class, 'show'])->name('admin.enroll.show');
+        Route::post('/approve/{enroll}', [App\Http\Controllers\Admin\EnrollController::class, 'approve'])->name('admin.enroll.approve');
+        Route::delete('/{enroll}', [App\Http\Controllers\Admin\EnrollController::class, 'delete'])->name('admin.enroll.delete');
     });
 
     Route::group(['prefix'=>'resume'], function (){
@@ -79,5 +82,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
 
 });
 
-
+Route::group(['prefix'=>'employee'], function (){
+    Route::get('/index', App\Http\Controllers\Employee\IndexController::class)->name('employee');
+});
 

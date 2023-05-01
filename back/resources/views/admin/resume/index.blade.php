@@ -2,8 +2,6 @@
 @section('content')
     <div class="content-wrapper">
         <div class="container" style="margin-top: 10px;">
-            <button type="button" class="btn btn-primary" style="margin-right:85%;" id="questions" onclick="window.location.href='{{route('admin.resume.question.index')}}'">Questions</button>
-
             <div class="demo-html" style="width: 70%;display: block; margin-left: auto; margin-right: auto;">
                 <div class="card-header text-center" >
                     <h3>Resumes Table</h3>

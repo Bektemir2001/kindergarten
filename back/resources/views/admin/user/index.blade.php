@@ -92,9 +92,9 @@
                 <div class="row mb-3">
                     <label for="role" class="col-md-4 col-form-label text-md-end">Role:</label>
                     <select style="width: 49% !important;" name="role" id="role">
-                        <option value="0">Admin</option>
-                        <option value="1">Employee</option>
-                        <option value="2">User</option>
+                        <option value="ROLE_ADMIN">Admin</option>
+                        <option value="ROLE_TEACHER">Employee</option>
+                        <option value="ROLE_PARENT">Parent</option>
                     </select>
                     @error('role')
                     <p class="text-danger">{{$message}}</p>
@@ -171,12 +171,12 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->surname}}</td>
                                 <td>
-                                    @if($user->role == 0)
+                                    @if($user->role == 'ROLE_ADMIN')
                                         Admin
-                                    @elseif($user->role == 1)
+                                    @elseif($user->role == 'ROLE_TEACHER')
                                         Employee
                                     @else
-                                        User
+                                        Parent
                                     @endif
                                 </td>
                                 <td>
@@ -219,7 +219,7 @@
             }
             function cancelForm(){
                 document.getElementById("addUserId").className = "d-none";
-                document.getElementById("addUserBtnId").className = "btn btn-primary btn-sm";
+                document.getElementById("addUserBtnId").className = "btn btn-primary";
             }
             document.getElementById('form').addEventListener("submit", function (event) {
                 event.preventDefault()

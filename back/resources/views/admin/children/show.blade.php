@@ -20,6 +20,10 @@
                             <div class="">{{$child->birth_date}}</div>
                         </li>
                         <li class="list-group-item">
+                            <b>Birth Date:</b>
+                            <div class="">{{$child->gender}}</div>
+                        </li>
+                        <li class="list-group-item">
                             <b>Parent:</b>
                             <div class="">{{$child->parent->name}} {{$child->parent->surname}}</div>
                         </li>
@@ -43,6 +47,12 @@
                             <b>Medical Certificate:</b>
                             <div class="">
                                 <img class="img-fluid img" src="{{asset($child->med_certificate)}}" alt="child's medical certificate" style="width:70%;">
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Medical Disability Certificate:</b>
+                            <div class="">
+                                <img class="img-fluid img" src="{{asset($child->med_disability)}}" alt="child's medical disability certificate" style="width:70%;">
                             </div>
                         </li>
                         <li class="list-group-item">

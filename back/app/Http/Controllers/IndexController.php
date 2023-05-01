@@ -22,8 +22,12 @@ class IndexController extends Controller
             if($user->role === 'ROLE_ADMIN'){
                 return redirect()->route('admin');
             }
+            elseif($user->role === 'ROLE_TEACHER'){
+                return redirect()->route('employee');
+            }
             return view('index');
         }
+
         return view('index');
     }
 }

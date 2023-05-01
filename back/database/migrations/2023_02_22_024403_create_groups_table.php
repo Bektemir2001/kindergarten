@@ -17,6 +17,12 @@ return new class extends Migration
             $table->integer('limit');
             $table->text('description');
             $table->string('image',200);
+            $table->unsignedBigInteger('teacher_id');
+            $table->index('teacher_id', 'group_teacher_idx');
+            $table->foreign('teacher_id', 'group_teacher_fk')
+                ->on('users')
+                ->references('id')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

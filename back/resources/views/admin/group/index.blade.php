@@ -141,7 +141,7 @@
                 document.getElementById("addGroupId").className = "col-6";
             }
             function cancelForm(){
-                document.getElementById("addGroupBtnId").className = "btn btn-primary btn-sm";
+                document.getElementById("addGroupBtnId").className = "btn btn-primary";
                 document.getElementById("addGroupId").className = "d-none";
             }
             document.getElementById('form').addEventListener("submit", function (event) {

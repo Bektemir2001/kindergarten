@@ -82,5 +82,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
 
 });
 
-
+Route::group(['prefix'=>'employee'], function (){
+    Route::get('/index', App\Http\Controllers\Employee\IndexController::class)->name('employee');
+});
 

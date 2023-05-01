@@ -46,7 +46,7 @@
 
             <li class="nav-item">
                 <a href="{{route('user.logout')}}" class="nav-link">
-                    <btn class="btn" style="background-color:#5f1dea; color: white">Sign Out</btn>
+                    <btn class="btn btn-sm" style="background-color:#5f1dea; color: white">Sign Out</btn>
                 </a>
             </li>
         </ul>
@@ -72,7 +72,6 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-header">EXAMPLES</li>
                     <li class="nav-item">
                         <a href="{{route('admin.user.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>

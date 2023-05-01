@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateChildrenRequest;
 use App\Models\Child;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +15,9 @@ class ChildrenController extends Controller
 {
     public function index(){
         $children = Child::all();
-        return view('admin.children.index', compact('children'));
+        $parents = User::where('role', 'ROLE_PARENT')->get();
+        $groups = Group::all();
+        return view('admin.children.index', compact('children', 'parents', 'groups'));
     }
 
     public function create(Request $request){
@@ -21,11 +25,13 @@ class ChildrenController extends Controller
             'name' => 'required|string',
             'surname' => 'required|string',
             'birth_date' => 'required',
+            'gender' => '',
             'parent_id' => 'required',
             'group_id' => 'required',
             'photo' => '',
             'birth_certificate' => '',
             'med_certificate' => '',
+            'med_disability' => '',
             'payment' => 'required'
         ]);
 
@@ -35,19 +41,23 @@ class ChildrenController extends Controller
         $birth_cert = "storage/".$birth_cert;
         $med_cert = Storage::disk('public')->put('childImages/medCertificates', $data['med_certificate']);
         $med_cert = "storage/".$med_cert;
+        $med_disability = Storage::disk('public')->put('childImages/medDisabilities', $data['med_disability']);
+        $med_disability = "storage/".$med_disability;
 
         $child = Child::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'birth_date' => $data['birth_date'],
-            'parent_id' => $data['parent_id'],
-            'group_id' => $data['group_id'],
+            'gender' => $data['gender'],
+            'parent_id' => $request->parent_id,
+            'group_id' => $request->group_id,
             'photo' => $photo,
             'birth_certificate' => $birth_cert,
             'med_certificate' => $med_cert,
+            'med_disability' => $med_disability,
             'payment' => $data['payment']
         ]);
-
+        $child->group_id = Group::where('id', $child->group_id)->pluck('name');
         return response($child);
     }
 
@@ -65,6 +75,7 @@ class ChildrenController extends Controller
         $photo = $child->photo;
         $birth_certificate = $child->birth_certificate;
         $med_certificate = $child->med_certificate;
+        $med_disability = $child->med_disability;
         if(array_key_exists('photo', $data)){
             $image = Storage::disk('public')->put('childImages/photos', $data['photo']);
             $photo = "storage/".$image;
@@ -77,6 +88,10 @@ class ChildrenController extends Controller
             $image = Storage::disk('public')->put('childImages/medCertificates', $data['med_certificate']);
             $med_certificate = "storage/".$image;
         }
+        if(array_key_exists('med_disability', $data)){
+            $image = Storage::disk('public')->put('childImages/medDisabilities', $data['med_disability']);
+            $med_disability = "storage/".$image;
+        }
         $child->update([
             'name' => $data['name'],
             'surname' => $data['surname'],
@@ -86,6 +101,7 @@ class ChildrenController extends Controller
             'photo' => $photo,
             'birth_certificate' => $birth_certificate,
             'med_certificate' => $med_certificate,
+            'med_disability' => $med_disability,
             'payment' => $data['payment']
         ]);
         DB::commit();

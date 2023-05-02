@@ -29,6 +29,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('new_template/css/style.css')}}" rel="stylesheet">
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
 </head>
 
 <body>
@@ -84,11 +85,30 @@
                         data-bs-toggle="modal" data-bs-target="#modalMessage">
                     Записаться
                 </button>
+            </a>
+            <a class="navbar-brand" href="#">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+                        data-bs-toggle="modal" data-bs-target="#modalSignIn">
+                     Войти
+                </button>
+            </a>
+            <a class="navbar-brand" href="#">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+                        data-bs-toggle="modal" data-bs-target="#modalSignUp">
+                    Зарегистрироваться
+                </button>
+            </a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+        <div id="app">
+            <main class="py-4">
                 <!-- Modal Message -->
-                <div class="modal fade" id="modalMessage" tabindex="-1" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
+                <div class="modal fade" id="modalMessage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
-                        <div class="modal-content">
+                        <div class="modal-content" style="z-index: 9999">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Message</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -119,13 +139,6 @@
                         </div>
                     </div>
                 </div>
-            </a>
-            <a class="navbar-brand" href="#">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
-                        data-bs-toggle="modal" data-bs-target="#modalSignIn">
-                     Войти
-                </button>
                 <!-- Modal SignIN -->
                 <div class="modal fade" id="modalSignIn" tabindex="-1" aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
@@ -179,13 +192,6 @@
                         </div>
                     </div>
                 </div>
-            </a>
-            <a class="navbar-brand" href="#">
-                <!-- Button trigger modal -->
-                <button type="button btn btn-success" class="btn btn-light border border-success"
-                        data-bs-toggle="modal" data-bs-target="#modalSignUp">
-                    Sign Up
-                </button>
                 <!-- Modal SignUP -->
                 <div class="modal fade" id="modalSignUp" tabindex="-1" aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
@@ -200,77 +206,77 @@
                                 <form method="POST" action="{{ route('user.register') }}" enctype="multipart/form-data">
                                     @csrf
                                     <!-- Name input -->
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="name">Name</label>
-                                        <input type="text" id="name" name="name" placeholder="Name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                        @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                        @enderror
+                                    <div class="field">
+                                        <i class="icon fas fa-user"></i>
+                                        <input type="text" id="name" name="name" placeholder="Name" class="login__input @error('name') is-invalid @enderror" required autocomplete="name">
+                                        @if(session('errorWithName'))
+                                            <p class="text-danger">{{session('errorWithName')}}</p>
+                                            <script>
+                                                document.getElementById('name').value = "{{session('name')}}";
+                                            </script>
+                                        @endif
                                     </div>
-
                                     <!-- Surname input -->
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="surname">Surname</label>
-                                        <input type="text" id="surname" name="surname" placeholder="Surname" class="form-control @error('surname') is-invalid @enderror" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
-                                        @error('surname')
-                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>>
-                                        @enderror
+                                    <div class="field">
+                                        <i class="icon fas fa-user"></i>
+                                        <input type="text" id="surname" name="surname" placeholder="Surname" class="login__input @error('surname') is-invalid @enderror" required autocomplete="surname">
+                                        @if(session('errorWithSurname'))
+                                            <p class="text-danger">{{session('errorWithSurname')}}</p>
+                                            <script>
+                                                document.getElementById('surname').value = "{{session('surname')}}";
+                                            </script>
+                                        @endif
                                     </div>
 
                                     <!-- Home Address input -->
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="address">Home Address</label>
-                                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address">
-
-                                        @error('address')
-                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                        @enderror
+                                    <div class="field">
+                                        <i class="icon fas fa-map-marker-alt"></i>
+                                        <input type="text" id="address" name="address" placeholder="Home address" class="login__input @error('address') is-invalid @enderror" required autocomplete="address">
+                                        @if(session('errorWithAddress'))
+                                            <p class="text-danger">{{session('errorWithAddress')}}</p>
+                                            <script>
+                                                document.getElementById('address').value = "{{session('address')}}";
+                                            </script>
+                                        @endif
                                     </div>
 
                                     <!-- Phone Number input -->
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="phone_number">Phone Number</label>
-                                        <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
-
-                                        @error('phone_number')
-                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                        @enderror
+                                    <div class="field">
+                                        <i class="icon fas fa-phone-alt"></i>
+                                        <input type="text" id="phone_number" name="phone_number" placeholder="Phone number" class="login__input @error('phone_number') is-invalid @enderror" required autocomplete="phone_number">
+                                        @if(session('errorWithPhoneNumber'))
+                                            <p class="text-danger">{{session('errorWithPhoneNumber')}}</p>
+                                            <script>
+                                                document.getElementById('phone_number').value = "{{session('phone_number')}}";
+                                            </script>
+                                        @endif
                                     </div>
-
                                     <!-- Email input -->
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="email">Email address</label>
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                        @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                        @enderror
+                                    <div class="field">
+                                        <i class="icon fas fa-at"></i>
+                                        <input type="email" id="email" name="email" placeholder="Email Address" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
+                                        @if(session('errorWithEmail'))
+                                            <p class="text-danger">{{session('errorWithEmail')}}</p>
+                                            <script>
+                                                document.getElementById('email').value = "{{session('email')}}";
+                                            </script>
+                                        @endif
                                     </div>
 
                                     <!-- Password input -->
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="password">Password</label>
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                        @enderror
+                                    <div class="field">
+                                        <i class="icon fas fa-lock"></i>
+                                        <input type="password" id="password" name="password" placeholder="Password" class="login__input @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                        @if(session('errorWithPassword'))
+                                            <p class="text-danger">{{session('errorWithPassword')}}</p>
+                                            <script>
+                                                document.getElementById('email').value = "{{session('email')}}";
+                                            </script>
+                                        @endif
                                     </div>
 
                                     <!-- Passport front input -->
-                                    <div class="mb-3">
+                                    <div class="field">
                                         <label for="fileF" class="form-label">Passport Front</label>
                                         <input id="passport_front" type="file" class="form-control @error('passport_front') is-invalid @enderror" name="passport_front" value="{{ old('passport_front') }}">
 
@@ -305,12 +311,6 @@
                         </div>
                     </div>
                 </div>
-            </a>
-        </div>
-    </nav>
-    <!-- Navbar End -->
-        <div id="app">
-            <main class="py-4">
                 @yield('content')
             </main>
         </div>
@@ -402,7 +402,7 @@
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>--}}
 <script src="{{asset('new_template/lib/wow/wow.min.js')}}"></script>
 <script src="{{asset('new_template/lib/easing/easing.min.js')}}"></script>
 <script src="{{asset('new_template/lib/waypoints/waypoints.min.js')}}"></script>
@@ -410,6 +410,7 @@
 
 <!-- Template Javascript -->
 <script src="{{asset('new_template/js/main.js')}}"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
 </body>
 
 </html>

@@ -100,7 +100,7 @@
             function cancelForm(){
                 document.getElementById("addQuestionBtnId").className = "btn btn-primary";
                 document.getElementById("addQuestionId").className = "d-none";
-                document.getElementById("question").reset();
+                //document.getElementById("question").reset();
             }
             document.getElementById('form').addEventListener("submit", function (event) {
                 event.preventDefault()
@@ -134,6 +134,8 @@
                             `<i title="submit" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;
                     })
                     .catch(error => console.log(error))
+                document.getElementById("question").value = '';
+                console.log("something")
             })
         </script>
     </div>

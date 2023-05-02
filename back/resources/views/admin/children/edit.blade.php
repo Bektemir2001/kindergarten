@@ -28,6 +28,20 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="exampleInput" class="form-label">Gender:</label>
+                    <div>
+                        <input id="male" type="radio" name="gender" value="Male">
+                        <label for="male">Male</label>
+                    </div>
+                    <div>
+                        <input id="female" type="radio" name="gender" value="Female">
+                        <label for="female">Female</label>
+                    </div>
+                    @error('birth_date')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label for="exampleInput" class="form-label">Parent ID:</label>
                     <input type="number" class="form-control col-6" name="parent_id" id="parent_id" value="{{$child->parent_id}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')">
                     @error('parent_id')
@@ -66,8 +80,19 @@
                 <div class="form-group">
                     <div class="col-md-6">
                         <label for="exampleInput" class="form-label">Medical Certification:</label>
-                        <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" name="med_certification" id="birth_certification">
+                        <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" name="med_certification" id="med_certification">
                         @error('med_certification')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label for="exampleInput" class="form-label">Medical Disability Certification:</label>
+                        <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" name="med_disability" id="med_disability">
+                        @error('med_disability')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

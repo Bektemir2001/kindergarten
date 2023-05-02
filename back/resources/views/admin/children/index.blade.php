@@ -42,10 +42,17 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="parent_id" class="col-md-4 col-form-label text-md-end">{{ __('Parent ID') }}</label>
+                        <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
                         <div class="col-md-6">
-                            <input id="parent_id" type="number" class="form-control @error('parent_id') is-invalid @enderror" name="parent_id" value="{{ old('parent_id') }}" required autocomplete="parent_id" autofocus>
-                            @error('parent_id')
+                            <div>
+                                <input id="male" type="radio" name="gender" value="Male">
+                                <label for="male">Male</label>
+                            </div>
+                            <div>
+                                <input id="female" type="radio" name="gender" value="Female">
+                                <label for="female">Female</label>
+                            </div>
+                            @error('gender')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -54,14 +61,38 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="group_id" class="col-md-4 col-form-label text-md-end">{{ __('Group ID') }}</label>
+                        <label for="parent_id" class="col-md-4 col-form-label text-md-end">{{ __('Parent') }}</label>
                         <div class="col-md-6">
-                            <input id="group_id" type="number" class="form-control @error('group_id') is-invalid @enderror" name="group_id" value="{{ old('group_id') }}" required autocomplete="group_id">
-                            @error('group_id')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
+{{--                            <input id="parent_id" type="number" class="form-control @error('parent_id') is-invalid @enderror" name="parent_id" value="{{ old('parent_id') }}" required autocomplete="parent_id" autofocus>--}}
+{{--                            @error('parent_id')--}}
+{{--                            <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                            @enderror--}}
+                            <select class="form-control col-md-12" name="parent_id" id="parent_id" @error('parent_id') is-invalid @enderror required autocomplete="parent_id">
+                                <option></option>
+                                @foreach($parents as $parent)
+                                    <option value="{{$parent->id}}">{{$parent->name}}  {{$parent->surname}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="group_id" class="col-md-4 col-form-label text-md-end">{{ __('Group') }}</label>
+                        <div class="col-md-6">
+{{--                            <input id="group_id" type="number" class="form-control @error('group_id') is-invalid @enderror" name="group_id" value="{{ old('group_id') }}" required autocomplete="group_id">--}}
+{{--                            @error('group_id')--}}
+{{--                            <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                            @enderror--}}
+                            <select class="form-control col-md-12" name="group_id" id="group_id" @error('group_id') is-invalid @enderror required autocomplete="group_id">
+                                <option></option>
+                                @foreach($groups as $group)
+                                    <option value="{{$group->id}}">{{$group->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -94,6 +125,18 @@
                         <div class="col-md-6">
                             <input id="med_certificate" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('med_certificate') is-invalid @enderror" name="med_certificate" value="{{ old('med_certificate') }}">
                             @error('med_certificate')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="med_disability" class="col-md-4 col-form-label text-md-end">{{ __("Medical Disability Certificate") }}</label>
+                        <div class="col-md-6">
+                            <input id="med_disability" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('med_disability') is-invalid @enderror" name="med_disability" value="{{ old('med_disability') }}">
+                            @error('med_disability')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -205,21 +248,25 @@
                 let name = document.getElementById("name").value;
                 let surname = document.getElementById("surname").value;
                 let birth_date = document.getElementById("birth_date").value;
+                let gender = document.querySelector('input[name="gender"]:checked').value;
                 let parent_id = document.getElementById("parent_id").value;
                 let group_id = document.getElementById("group_id").value;
                 let photo = document.getElementById("photo").files[0];
                 let birth_certificate = document.getElementById("birth_certificate").files[0];
                 let med_certificate = document.getElementById("med_certificate").files[0];
+                let med_disability = document.getElementById("med_disability").files[0];
                 let payment = document.getElementById("payment").value;
                 let data = new FormData();
                 data.append("name", name);
                 data.append("surname", surname);
                 data.append("birth_date", birth_date);
+                data.append("gender", gender);
                 data.append("parent_id", parent_id);
                 data.append("group_id", group_id);
                 data.append("photo", photo);
                 data.append("birth_certificate", birth_certificate);
                 data.append("med_certificate", med_certificate);
+                data.append("med_disability", med_disability);
                 data.append("payment", payment);
                 fetch(url, {
                     method: 'POST',

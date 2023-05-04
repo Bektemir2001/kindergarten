@@ -15,9 +15,11 @@ class EnrollService
             'name' => 'required|string',
             'surname' => 'required|string',
             'birth_date' => 'required',
+            'gender' => '',
             'photo' => '',
             'birth_certificate' => '',
             'med_certificate' => '',
+            'med_disability' => '',
         ]);
 
         $photo = Storage::disk('public')->put('enrollImages/photos', $data['photo']);
@@ -26,6 +28,8 @@ class EnrollService
         $birth_cert = "storage/".$birth_cert;
         $med_cert = Storage::disk('public')->put('enrollImages/medCertificates', $data['med_certificate']);
         $med_cert = "storage/".$med_cert;
+        $med_dis = Storage::disk('public')->put('enrollImages/medDisability', $data['med_disability']);
+        $med_dis = "storage/".$med_dis;
 
         $enroll = Enroll::create([
             'name' => $data['name'],
@@ -35,6 +39,7 @@ class EnrollService
             'photo' => $photo,
             'birth_certificate' => $birth_cert,
             'med_certificate' => $med_cert,
+            'med_disability' => $med_dis,
         ]);
         return back()->with('msg', 'Your enroll request has been successfully sent');
     }

@@ -26,7 +26,7 @@ Route::group(['prefix'=>'user'], function (){
 });
 Route::get('/{user?}',App\Http\Controllers\IndexController::class)->name('index');
 Route::get('/verification/form/{user}', [App\Http\Controllers\VerificateController::class, 'form'])->name('verification.form');
-
+Route::post('/verification/email', [App\Http\Controllers\VerificateController::class, 'verification'])->name('verification');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 

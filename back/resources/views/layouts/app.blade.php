@@ -60,7 +60,9 @@
                         <a href="" class="dropdown-item">Ребенок 2</a>
                     </div>
                 </div>
-                <a href="" class="nav-item nav-link">О нас</a>
+                <div class="nav-item">
+                    <a href="" class="nav-link">О нас</a>
+                </div>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Родителям</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
@@ -68,7 +70,9 @@
                         <a href="" class="dropdown-item">Читаем детям</a>
                     </div>
                 </div>
-                <a href="" class="nav-item nav-link">Услуги</a>
+                <div class="nav-item">
+                    <a href="" class="nav-link">Услуги</a>
+                </div>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Галерея</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
@@ -76,30 +80,49 @@
                         <a href="" class="dropdown-item">Видео</a>
                     </div>
                 </div>
-                <!--                    <a href="index.html" class="nav-item nav-link active">Home</a>-->
-                <a href="" class="nav-item nav-link">Контакты</a>
+                <div class="nav-item">
+                    <a href="" class="nav-link">Контакты</a>
+                </div>
             </div>
-            <a class="navbar-brand" href="#">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
-                        data-bs-toggle="modal" data-bs-target="#modalMessage">
-                    Записаться
-                </button>
-            </a>
-            <a class="navbar-brand" href="#">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
-                        data-bs-toggle="modal" data-bs-target="#modalSignIn">
-                     Войти
-                </button>
-            </a>
-            <a class="navbar-brand" href="#">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
-                        data-bs-toggle="modal" data-bs-target="#modalSignUp">
-                    Зарегистрироваться
-                </button>
-            </a>
+            @if(auth()->user())
+                <div class="navbar-nav mx-auto">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary rounded-pill px-3 d-lg-block"
+                            data-bs-toggle="modal" data-bs-target="#modalEnroll">
+                        Записаться
+                    </button>
+                </div>
+                <div class="navbar-nav mx-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img src="https://w7.pngwing.com/pngs/364/361/png-transparent-account-avatar-profile-user-avatars-icon.png" alt="Avatar" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;">
+                        </a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="right: 0;left: auto;!important;">
+                            <a href="" class="dropdown-item" >Мой профиль</a>
+                            <a class="dropdown-item" onclick="location.href='{{route('user.logout')}}'" type="button">Выйти</a>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="navbar-nav mx-auto">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary rounded-pill px-3 d-lg-block"
+                            data-bs-toggle="modal" data-bs-target="#modalMessage">
+                        Записаться
+                    </button>
+                </div>
+                <div class="navbar-nav mx-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img src="https://w7.pngwing.com/pngs/364/361/png-transparent-account-avatar-profile-user-avatars-icon.png" alt="Avatar" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;">
+                        </a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="right: 0;left: auto;!important;">
+                            <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalSignIn">Войти</a>
+                            <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalSignUp">Зарегистрироваться</a>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </nav>
     <!-- Navbar End -->
@@ -145,7 +168,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Sing In</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Войти</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -155,7 +178,7 @@
                                     <!-- Email input -->
                                     <div class="field">
                                         <i class="icon fas fa-user"></i>
-                                        <input type="email" id="email" name="email" placeholder="Email Address" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
+                                        <input type="email" id="email" name="email" placeholder="Почка(Email)" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
                                         @if(session('errorWithEmail'))
                                             <p class="text-danger">{{session('errorWithEmail')}}</p>
                                             <script>
@@ -165,7 +188,7 @@
                                     </div>
                                     <div class="field">
                                         <i class="icon fas fa-lock"></i>
-                                        <input type="password" id="password" name="password" placeholder="Password" class="login__input @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                        <input type="password" id="password" name="password" placeholder="Пароль" class="login__input @error('password') is-invalid @enderror" required autocomplete="new-password">
                                         @if(session('errorWithPassword'))
                                             <p class="text-danger">{{session('errorWithPassword')}}</p>
                                             <script>
@@ -178,7 +201,7 @@
                                     <!-- 2 column grid layout for inline styling -->
                                     <div class="row">
                                         <!-- Simple link -->
-                                        <a href="{{route('reset.password.form')}}">Forgot password?</a>
+                                        <a href="{{route('reset.password.form')}}">Забыли пароль?</a>
                                     </div>
                                     <!-- Submit button -->
                                     <div class="modal-footer">
@@ -198,7 +221,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Sign up</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Зарегистрироваться</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -208,7 +231,7 @@
                                     <!-- Name input -->
                                     <div class="field">
                                         <i class="icon fas fa-user"></i>
-                                        <input type="text" id="name" name="name" placeholder="Name" class="login__input @error('name') is-invalid @enderror" required autocomplete="name">
+                                        <input type="text" id="name" name="name" placeholder="Имя" class="login__input @error('name') is-invalid @enderror" required autocomplete="name">
                                         @if(session('errorWithName'))
                                             <p class="text-danger">{{session('errorWithName')}}</p>
                                             <script>
@@ -219,7 +242,7 @@
                                     <!-- Surname input -->
                                     <div class="field">
                                         <i class="icon fas fa-user"></i>
-                                        <input type="text" id="surname" name="surname" placeholder="Surname" class="login__input @error('surname') is-invalid @enderror" required autocomplete="surname">
+                                        <input type="text" id="surname" name="surname" placeholder="Фамилия" class="login__input @error('surname') is-invalid @enderror" required autocomplete="surname">
                                         @if(session('errorWithSurname'))
                                             <p class="text-danger">{{session('errorWithSurname')}}</p>
                                             <script>
@@ -231,7 +254,7 @@
                                     <!-- Home Address input -->
                                     <div class="field">
                                         <i class="icon fas fa-map-marker-alt"></i>
-                                        <input type="text" id="address" name="address" placeholder="Home address" class="login__input @error('address') is-invalid @enderror" required autocomplete="address">
+                                        <input type="text" id="address" name="address" placeholder="Домашний адрес" class="login__input @error('address') is-invalid @enderror" required autocomplete="address">
                                         @if(session('errorWithAddress'))
                                             <p class="text-danger">{{session('errorWithAddress')}}</p>
                                             <script>
@@ -243,7 +266,7 @@
                                     <!-- Phone Number input -->
                                     <div class="field">
                                         <i class="icon fas fa-phone-alt"></i>
-                                        <input type="text" id="phone_number" name="phone_number" placeholder="Phone number" class="login__input @error('phone_number') is-invalid @enderror" required autocomplete="phone_number">
+                                        <input type="text" id="phone_number" name="phone_number" placeholder="Телефонный номер" class="login__input @error('phone_number') is-invalid @enderror" required autocomplete="phone_number">
                                         @if(session('errorWithPhoneNumber'))
                                             <p class="text-danger">{{session('errorWithPhoneNumber')}}</p>
                                             <script>
@@ -266,7 +289,7 @@
                                     <!-- Password input -->
                                     <div class="field">
                                         <i class="icon fas fa-lock"></i>
-                                        <input type="password" id="password" name="password" placeholder="Password" class="login__input @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                        <input type="password" id="password" name="password" placeholder="Пароль" class="login__input @error('password') is-invalid @enderror" required autocomplete="new-password">
                                         @if(session('errorWithPassword'))
                                             <p class="text-danger">{{session('errorWithPassword')}}</p>
                                             <script>
@@ -277,7 +300,7 @@
 
                                     <!-- Passport front input -->
                                     <div class="field">
-                                        <label for="fileF" class="form-label">Passport Front</label>
+                                        <label for="fileF" class="form-label">Лицевая сторона паспорта</label>
                                         <input id="passport_front" type="file" class="form-control @error('passport_front') is-invalid @enderror" name="passport_front" value="{{ old('passport_front') }}">
 
                                         @error('passport_front')
@@ -289,7 +312,7 @@
 
                                     <!-- Passport back input -->
                                     <div class="mb-3">
-                                        <label for="fileB" class="form-label">Passport Back</label>
+                                        <label for="fileB" class="form-label">Обратная сторона паспорта</label>
                                         <input id="passport_back" type="file" class="form-control @error('passport_back') is-invalid @enderror" name="passport_back" value="{{ old('passport_back') }}">
 
                                         @error('passport_back')
@@ -306,6 +329,136 @@
                                         <button type="submit" class="btn btn-success btn-block">Register</button>
                                     </div>
 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Enroll -->
+                <div class="modal fade"  id="modalEnroll" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Записать ребенка</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form id="form" method="POST" action="{{route('enroll.create')}}" enctype="multipart/form-data">
+                                    @csrf
+                                    <!-- Name input -->
+                                    <div class="field">
+                                        <i class="icon fas fa-user"></i>
+                                        <input type="text" id="name" name="name" placeholder="Имя ребенка" class="login__input @error('name') is-invalid @enderror" required autocomplete="name">
+                                        @if(session('errorWithName'))
+                                            <p class="text-danger">{{session('errorWithName')}}</p>
+                                            <script>
+                                                document.getElementById('name').value = "{{session('name')}}";
+                                            </script>
+                                        @endif
+                                    </div>
+                                    <!-- Surname input -->
+                                    <div class="field" >
+                                        <i class="icon fas fa-user"></i>
+                                        <input type="text" id="surname" name="surname" placeholder="Фамилия ребенка" class="login__input @error('surname') is-invalid @enderror" required autocomplete="surname">
+                                        @if(session('errorWithSurname'))
+                                            <p class="text-danger">{{session('errorWithSurname')}}</p>
+                                            <script>
+                                                document.getElementById('surname').value = "{{session('surname')}}";
+                                            </script>
+                                        @endif
+                                    </div>
+                                    <!-- Birth date input -->
+                                    <div class="form-outline mb-2" style="padding: 10px">
+                                        <label for="birth_date" class="form-label" style="font-weight: 700;">{{ __('Дата рождения') }}</label>
+                                        <div class="col-md-6 ">
+                                            <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required autofocus oninvalid="this.setCustomValidity('Please fill in the field')" oninput="this.setCustomValidity('')">
+                                            @error('birth_date')
+                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!-- Gender input -->
+                                    <div class="form-outline mb-2" style="padding: 10px">
+                                        <label for="gender" class="form-label" style="font-weight: 700;">{{ __('Пол ребенка') }}</label>
+                                        <div class="col-md-6">
+                                            <div class="radioDiv">
+                                                <input type="radio" name="gender" id="option-1" value="Male">
+                                                <input type="radio" name="gender" id="option-2" value="Female">
+                                                <label for="option-1" class="option option-1">
+                                                    <div class="dot"></div>
+                                                    <span>Мальчик</span>
+                                                </label>
+                                                <label for="option-2" class="option option-2">
+                                                    <div class="dot"></div>
+                                                    <span>Девочка</span>
+                                                </label>
+                                                @error('gender')
+                                                <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Photo input -->
+                                    <div class="form-outline mb-2" style="padding: 10px">
+                                        <label for="photo" class="form-label" style="font-weight: 700;">{{ __("Фото ребенка") }}</label>
+                                        <div class="col-md-6">
+                                            <input id="photo" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" required autofocus oninvalid="this.setCustomValidity('Please select a file')" oninput="this.setCustomValidity('')">
+                                            @error('photo')
+                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!-- Birth certificate input -->
+                                    <div class="form-outline mb-2" style="padding: 10px">
+                                        <label for="birth_certificate" class="form-label" style="font-weight: 700;">{{ __("Свидетельство о рождении") }}</label>
+                                        <div class="col-md-6">
+                                            <input id="birth_certificate" type="file"  class="form-control @error('birth_certificate') is-invalid @enderror" name="birth_certificate" value="{{ old('birth_certificate') }}" required autofocus oninvalid="this.setCustomValidity('Please select a file')" oninput="this.setCustomValidity('')">
+                                            @error('birth_certificate')
+                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!-- Med certificate input -->
+                                    <div class="form-outline mb-2" style="padding: 10px">
+                                        <label for="med_certificate" class="form-label" style="font-weight: 700;">{{ __("Справка о состоянии здоровья") }}</label>
+                                        <div class="col-md-6">
+                                            <input id="med_certificate" type="file" class="form-control @error('med_certificate') is-invalid @enderror" name="med_certificate" value="{{ old('med_certificate') }}" required autofocus oninvalid="this.setCustomValidity('Please select a file')" oninput="this.setCustomValidity('')">
+                                            @error('med_certificate')
+                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!-- Med disability input -->
+                                    <div class="form-outline mb-2" style="padding: 10px">
+                                        <label for="med_disability" class="form-label" style="font-weight: 700;">{{ __("Медицинская справка об инвалидности") }}</label>
+                                        <div class="col-md-6">
+                                            <input id="med_disability" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('med_disability') is-invalid @enderror" name="med_disability" value="{{ old('med_disability') }}">
+                                            @error('med_disability')
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        <!-- Submit button -->
+                                        <button type="submit" class="btn btn-success btn-block">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -412,501 +565,4 @@
 <script src="{{asset('new_template/js/main.js')}}"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
 </body>
-
 </html>
-
-{{--<!doctype html>--}}
-{{--<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">--}}
-{{--<head>--}}
-{{--    <meta charset="utf-8">--}}
-{{--    <meta name="viewport" content="width=device-width, initial-scale=1">--}}
-
-{{--    <!-- CSRF Token -->--}}
-{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
-
-{{--    <title>{{ config('app.name', 'Kindergarten Aruu') }}</title>--}}
-
-{{--    <!-- Fonts -->--}}
-{{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
-{{--    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">--}}
-{{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
-{{--    <link rel="stylesheet" href="{{asset('style/user_index_style.css')}}">--}}
-{{--    <!-- Scripts -->--}}
-{{--</head>--}}
-{{--<body>--}}
-{{--<nav class="navbar navbar-expand-lg navbar-light bg-light" >--}}
-{{--    <div class="container-fluid">--}}
-{{--        <a class="navbar-brand" href="#">--}}
-{{--            <img src="" alt="Logo" width="30" height="24" class="d-inline-block align-text-center" />--}}
-{{--            Aruu--}}
-{{--        </a>--}}
-{{--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"--}}
-{{--                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"--}}
-{{--                aria-label="Toggle navigation">--}}
-{{--            <span class="navbar-toggler-icon"></span>--}}
-{{--        </button>--}}
-{{--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-{{--            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">--}}
-{{--                <li class="nav-item dropdown">--}}
-{{--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"--}}
-{{--                       aria-expanded="false">--}}
-{{--                        Мои Дети--}}
-{{--                    </a>--}}
-{{--                    <ul class="dropdown-menu">--}}
-{{--                        <li><a class="dropdown-item" href="#">ребёнок 1</a></li>--}}
-
-{{--                        <li><a class="dropdown-item" href="#">ребёнок 2</a></li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" aria-current="page" href="#">O нас</a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item dropdown">--}}
-{{--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"--}}
-{{--                       aria-expanded="false">--}}
-{{--                        Родителям--}}
-{{--                    </a>--}}
-{{--                    <ul class="dropdown-menu">--}}
-{{--                        <li><a class="dropdown-item" href="#">1. Часто задаваемые вопросы</a></li>--}}
-
-{{--                        <li><a class="dropdown-item" href="#">2. Читаем детям</a></li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="#">Услуги</a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item dropdown">--}}
-{{--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"--}}
-{{--                       aria-expanded="false">--}}
-{{--                        Галерея--}}
-{{--                    </a>--}}
-{{--                    <ul class="dropdown-menu">--}}
-{{--                        <li><a class="dropdown-item" href="#">1. Фото</a></li>--}}
-
-{{--                        <li><a class="dropdown-item" href="#">2. Видео</a></li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="#">Контакты</a>--}}
-{{--                </li>--}}
-{{--                <div class="ch">--}}
-{{--                    @if(auth()->user())--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="navbar-brand" href="{{route('enroll.index')}}">--}}
-{{--                                <!-- Button trigger modal -->--}}
-{{--                                <button type="button btn btn-success" class="btn btn-light border border-success">--}}
-{{--                                    Записаться--}}
-{{--                                </button>--}}
-{{--                                <!-- Modal Enroll -->--}}
-{{--                                <div class="modal fade"  id="modalEnroll" tabindex="-1" aria-labelledby="exampleModalLabel"--}}
-{{--                                     aria-hidden="true">--}}
-{{--                                    <div class="modal-dialog" >--}}
-{{--                                        <div class="modal-content" style="width: 700px; height: 100%">--}}
-{{--                                            <div class="modal-header">--}}
-{{--                                                <h5 class="modal-title" id="exampleModalLabel">Enroll a child</h5>--}}
-{{--                                                <button type="button" class="btn-close" data-bs-dismiss="modal"--}}
-{{--                                                        aria-label="Close"></button>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="modal-body">--}}
-
-{{--                                                <form id="form" method="POST" action="{{route('enroll.create')}}" enctype="multipart/form-data">--}}
-{{--                                                    @csrf--}}
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label for="name" class="form-label">{{ __('Name') }}</label>--}}
-{{--                                                        <div class="col-md-6">--}}
-{{--                                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus oninvalid="this.setCustomValidity('Please fill in the field')" oninput="this.setCustomValidity('')">--}}
-{{--                                                            @error('name')--}}
-{{--                                                            <span class="invalid-feedback" role="alert">--}}
-{{--                                                                <strong>{{ $message }}</strong>--}}
-{{--                                                            </span>--}}
-{{--                                                            @enderror--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label for="surname" class="form-label">{{ __('Surname') }}</label>--}}
-{{--                                                        <div class="col-md-6">--}}
-{{--                                                            <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autofocus oninvalid="this.setCustomValidity('Please fill in the field')" oninput="this.setCustomValidity('')">--}}
-{{--                                                            @error('surname')--}}
-{{--                                                            <span class="invalid-feedback" role="alert">--}}
-{{--                                                                <strong>{{ $message }}</strong>--}}
-{{--                                                            </span>--}}
-{{--                                                            @enderror--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label for="birth_date" class="form-label">{{ __('Birth Date') }}</label>--}}
-{{--                                                        <div class="col-md-6">--}}
-{{--                                                            <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required autofocus oninvalid="this.setCustomValidity('Please fill in the field')" oninput="this.setCustomValidity('')">--}}
-{{--                                                            @error('birth_date')--}}
-{{--                                                            <span class="invalid-feedback" role="alert">--}}
-{{--                                                                <strong>{{ $message }}</strong>--}}
-{{--                                                            </span>--}}
-{{--                                                            @enderror--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label for="photo" class="form-label">{{ __("Child's Photo") }}</label>--}}
-{{--                                                        <div class="col-md-6">--}}
-{{--                                                            <input id="photo" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" required autofocus oninvalid="this.setCustomValidity('Please select a file')" oninput="this.setCustomValidity('')">--}}
-{{--                                                            @error('photo')--}}
-{{--                                                            <span class="invalid-feedback" role="alert">--}}
-{{--                                                                <strong>{{ $message }}</strong>--}}
-{{--                                                            </span>--}}
-{{--                                                            @enderror--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label for="birth_certificate" class="form-label">{{ __("Birth Certificate") }}</label>--}}
-{{--                                                        <div class="col-md-6">--}}
-{{--                                                            <input id="birth_certificate" type="file"  class="form-control @error('birth_certificate') is-invalid @enderror" name="birth_certificate" value="{{ old('birth_certificate') }}" required autofocus oninvalid="this.setCustomValidity('Please select a file')" oninput="this.setCustomValidity('')">--}}
-{{--                                                            @error('birth_certificate')--}}
-{{--                                                            <span class="invalid-feedback" role="alert">--}}
-{{--                                                                <strong>{{ $message }}</strong>--}}
-{{--                                                            </span>--}}
-{{--                                                            @enderror--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label for="med_certificate" class="form-label">{{ __("Medical Certificate") }}</label>--}}
-{{--                                                        <div class="col-md-6">--}}
-{{--                                                            <input id="med_certificate" type="file" class="form-control @error('med_certificate') is-invalid @enderror" name="med_certificate" value="{{ old('med_certificate') }}" required autofocus oninvalid="this.setCustomValidity('Please select a file')" oninput="this.setCustomValidity('')">--}}
-{{--                                                            @error('med_certificate')--}}
-{{--                                                            <span class="invalid-feedback" role="alert">--}}
-{{--                                                                <strong>{{ $message }}</strong>--}}
-{{--                                                            </span>--}}
-{{--                                                            @enderror--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <div class="modal-footer">--}}
-{{--                                                        <button type="button" class="btn btn-secondary"--}}
-{{--                                                                data-bs-dismiss="modal">Close</button>--}}
-{{--                                                        <!-- Submit button -->--}}
-{{--                                                        <button type="submit" class="btn btn-success btn-block">Submit</button>--}}
-{{--                                                    </div>--}}
-{{--                                                </form>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="navbar-brand" href="#">--}}
-{{--                                <!-- Button trigger modal -->--}}
-{{--                                <button onclick="location.href='{{route('user.logout')}}'" type="button" class="btn btn-light border border-primary">--}}
-{{--                                    Sign out--}}
-{{--                                </button>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    @else--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="navbar-brand" href="#">--}}
-{{--                                <!-- Button trigger modal -->--}}
-{{--                                <button type="button btn btn-success" class="btn btn-light border border-success"--}}
-{{--                                        data-bs-toggle="modal" data-bs-target="#modalMessage">--}}
-{{--                                    Записаться--}}
-{{--                                </button>--}}
-{{--                                <!-- Modal Message -->--}}
-{{--                                <div class="modal fade" id="modalMessage" tabindex="-1" aria-labelledby="exampleModalLabel"--}}
-{{--                                     aria-hidden="true">--}}
-{{--                                    <div class="modal-dialog">--}}
-{{--                                        <div class="modal-content">--}}
-{{--                                            <div class="modal-header">--}}
-{{--                                                <h5 class="modal-title" id="exampleModalLabel">Message</h5>--}}
-{{--                                                <button type="button" class="btn-close" data-bs-dismiss="modal"--}}
-{{--                                                        aria-label="Close"></button>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="modal-body">--}}
-{{--                                                <form>--}}
-{{--                                                    <!-- Email input -->--}}
-{{--                                                    <div class="form-outline mb-3">--}}
-{{--                                                        <label class="form-label" for="email">Without registration, you cannot enroll a child.</label>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="form-outline mb-3">--}}
-{{--                                                        <label class="form-label" for="email">If you have an account, sing in, if not, sign up.</label>--}}
-{{--                                                    </div>--}}
-{{--                                                    <!-- Submit button -->--}}
-{{--                                                    <div class="modal-footer">--}}
-{{--                                                        <button type="button btn-primary" class="btn btn-light border border-primary"--}}
-{{--                                                                data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalSignIn">--}}
-{{--                                                            Sign In--}}
-{{--                                                        </button>--}}
-{{--                                                        <button type="button btn btn-success" class="btn btn-light border border-success"--}}
-{{--                                                                data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modalSignUp">--}}
-{{--                                                            Sign Up--}}
-{{--                                                        </button>--}}
-{{--                                                    </div>--}}
-{{--                                                </form>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="navbar-brand" href="#">--}}
-{{--                                <!-- Button trigger modal -->--}}
-{{--                                <button type="button btn-primary" class="btn btn-light border border-primary"--}}
-{{--                                        data-bs-toggle="modal" data-bs-target="#modalSignIn">--}}
-{{--                                    Sign In--}}
-{{--                                </button>--}}
-{{--                                <!-- Modal SignIN -->--}}
-{{--                                <div class="modal fade" id="modalSignIn" tabindex="-1" aria-labelledby="exampleModalLabel"--}}
-{{--                                     aria-hidden="true">--}}
-{{--                                    <div class="modal-dialog">--}}
-{{--                                        <div class="modal-content">--}}
-{{--                                            <div class="modal-header">--}}
-{{--                                                <h5 class="modal-title" id="exampleModalLabel">Sing In</h5>--}}
-{{--                                                <button type="button" class="btn-close" data-bs-dismiss="modal"--}}
-{{--                                                        aria-label="Close"></button>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="modal-body">--}}
-{{--                                                <form method="POST" action="{{ route('user.auth') }}" >--}}
-{{--                                                    @csrf--}}
-{{--                                                    <!-- Email input -->--}}
-{{--                                                    <div class="form-outline mb-3">--}}
-{{--                                                        <label class="form-label" for="email">Email address</label>--}}
-{{--                                                        <input type="email" id="email" name="email" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror" required autocomplete="email">--}}
-{{--                                                        @if(session('errorWithEmail'))--}}
-{{--                                                            <p class="text-danger">{{session('errorWithEmail')}}</p>--}}
-{{--                                                            <script>--}}
-{{--                                                                document.getElementById('email').value = "{{session('email')}}";--}}
-{{--                                                            </script>--}}
-{{--                                                        @endif--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <!-- Password input -->--}}
-{{--                                                    <div class="form-outline">--}}
-{{--                                                        <label class="form-label" for="password">Password</label>--}}
-{{--                                                        <input type="password" id="password" name="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" required autocomplete="new-password">--}}
-{{--                                                        @if(session('errorWithPassword'))--}}
-{{--                                                            <p class="text-danger">{{session('errorWithPassword')}}</p>--}}
-{{--                                                            <script>--}}
-{{--                                                                document.getElementById('email').value = "{{session('email')}}";--}}
-{{--                                                            </script>--}}
-{{--                                                        @endif--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <!-- 2 column grid layout for inline styling -->--}}
-{{--                                                    <div class="row">--}}
-{{--                                                        <!-- Simple link -->--}}
-{{--                                                        <a href="{{route('reset.password.form')}}">Forgot password?</a>--}}
-{{--                                                    </div>--}}
-{{--                                                    <!-- Submit button -->--}}
-{{--                                                    <div class="modal-footer">--}}
-{{--                                                        <button type="button" class="btn btn-secondary"--}}
-{{--                                                                data-bs-dismiss="modal">Close</button>--}}
-{{--                                                        <!-- <button type="button" class="btn btn-primary">Sign in</button> -->--}}
-{{--                                                        <button type="submit" class="btn btn-primary">Sign in</button>--}}
-{{--                                                    </div>--}}
-{{--                                                </form>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="navbar-brand" href="#">--}}
-{{--                                <!-- Button trigger modal -->--}}
-{{--                                <button type="button btn btn-success" class="btn btn-light border border-success"--}}
-{{--                                        data-bs-toggle="modal" data-bs-target="#modalSignUp">--}}
-{{--                                    Sign Up--}}
-{{--                                </button>--}}
-{{--                                <!-- Modal SignUP -->--}}
-{{--                                <div class="modal fade" id="modalSignUp" tabindex="-1" aria-labelledby="exampleModalLabel"--}}
-{{--                                     aria-hidden="true">--}}
-{{--                                    <div class="modal-dialog">--}}
-{{--                                        <div class="modal-content">--}}
-{{--                                            <div class="modal-header">--}}
-{{--                                                <h5 class="modal-title" id="exampleModalLabel">Sign up</h5>--}}
-{{--                                                <button type="button" class="btn-close" data-bs-dismiss="modal"--}}
-{{--                                                        aria-label="Close"></button>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="modal-body">--}}
-{{--                                                <form method="POST" action="{{ route('user.register') }}" enctype="multipart/form-data">--}}
-{{--                                                    @csrf--}}
-{{--                                                    <!-- Name input -->--}}
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label class="form-label" for="name">Name</label>--}}
-{{--                                                        <input type="text" id="name" name="name" placeholder="Name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required autocomplete="name" autofocus>--}}
-{{--                                                        @error('name')--}}
-{{--                                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <!-- Surname input -->--}}
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label class="form-label" for="surname">Surname</label>--}}
-{{--                                                        <input type="text" id="surname" name="surname" placeholder="Surname" class="form-control @error('surname') is-invalid @enderror" value="{{ old('surname') }}" required autocomplete="surname" autofocus>--}}
-{{--                                                        @error('surname')--}}
-{{--                                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <!-- Home Address input -->--}}
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label class="form-label" for="address">Home Address</label>--}}
-{{--                                                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address">--}}
-
-{{--                                                        @error('address')--}}
-{{--                                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <!-- Phone Number input -->--}}
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label class="form-label" for="phone_number">Phone Number</label>--}}
-{{--                                                        <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>--}}
-
-{{--                                                        @error('phone_number')--}}
-{{--                                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <!-- Email input -->--}}
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label class="form-label" for="email">Email address</label>--}}
-{{--                                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">--}}
-
-{{--                                                        @error('email')--}}
-{{--                                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <!-- Password input -->--}}
-{{--                                                    <div class="form-outline mb-2">--}}
-{{--                                                        <label class="form-label" for="password">Password</label>--}}
-{{--                                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">--}}
-
-{{--                                                        @error('password')--}}
-{{--                                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <!-- Passport front input -->--}}
-{{--                                                    <div class="mb-3">--}}
-{{--                                                        <label for="fileF" class="form-label">Passport Front</label>--}}
-{{--                                                        <input id="passport_front" type="file" class="form-control @error('passport_front') is-invalid @enderror" name="passport_front" value="{{ old('passport_front') }}">--}}
-
-{{--                                                        @error('passport_front')--}}
-{{--                                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <!-- Passport back input -->--}}
-{{--                                                    <div class="mb-3">--}}
-{{--                                                        <label for="fileB" class="form-label">Passport Back</label>--}}
-{{--                                                        <input id="passport_back" type="file" class="form-control @error('passport_back') is-invalid @enderror" name="passport_back" value="{{ old('passport_back') }}">--}}
-
-{{--                                                        @error('passport_back')--}}
-{{--                                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                                        @enderror--}}
-{{--                                                    </div>--}}
-
-{{--                                                    <div class="modal-footer">--}}
-{{--                                                        <button type="button" class="btn btn-secondary"--}}
-{{--                                                                data-bs-dismiss="modal">Close</button>--}}
-{{--                                                        <!-- Submit button -->--}}
-{{--                                                        <button type="submit" class="btn btn-success btn-block">Register</button>--}}
-{{--                                                    </div>--}}
-
-{{--                                                </form>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-
-{{--                    @endif--}}
-{{--                </div>--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</nav>--}}
-{{--<div>--}}
-
-{{--</div>--}}
-{{--    <div id="app">--}}
-{{--        <main class="py-4">--}}
-{{--            @yield('content')--}}
-{{--        </main>--}}
-{{--    </div>--}}
-{{--<div class="container">--}}
-{{--    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">--}}
-{{--        <div class="col-md-4 d-flex justify-content-start align-items-center">--}}
-{{--            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">--}}
-{{--                <img class="bi" width="30" height="24" src="./img/logo.jpg" alt="">--}}
-{{--                <use xlink:href="#"></use>--}}
-{{--            </a>--}}
-{{--            <span class="mb-3 mb-md-0 text-muted">© 2023 Aruu</span>--}}
-{{--        </div>--}}
-
-{{--        <ul class="nav col-md-4 p-3 justify-content-end align-items-center list-unstyled d-flex">--}}
-{{--            <li class="ms-3 p-2"><a class="text-muted" href="#">--}}
-{{--                        <span class="mb-3 mb-md-0 text-muted">--}}
-{{--                            Кыргызстан, г. Бишкек ул. Ахунбаева 12/3--}}
-{{--                        </span>--}}
-{{--                    <use xlink:href="#whatsapp"></use>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-{{--            <li class="ms-3 p-2"><a class="text-muted" href="#"><img width="24" height="24" src="./img/location.svg"--}}
-{{--                                                                     alt="">--}}
-{{--                    <use xlink:href="#whatsapp"></use>--}}
-{{--                </a></li>--}}
-{{--            <li class="ms-3 p-2"><a class="text-muted" href="#"><img width="24" height="24" src="./img/whatsapp.svg"--}}
-{{--                                                                     alt="">--}}
-{{--                    <use xlink:href="#whatsapp"></use>--}}
-{{--                </a></li>--}}
-{{--            <li class="ms-3 p-2"><a class="text-muted" href="#"><img width="24" height="24"--}}
-{{--                                                                     src="./img/instagram.svg" alt="">--}}
-{{--                    <use xlink:href="#instagram"></use>--}}
-{{--                </a></li>--}}
-{{--            <li class="ms-3 p-2"><a class="text-muted" href="#"><img width="24" height="24" src="./img/facebook.svg"--}}
-{{--                                                                     alt="">--}}
-{{--                    <use xlink:href="#facebook"></use>--}}
-{{--                </a></li>--}}
-{{--        </ul>--}}
-{{--    </footer>--}}
-{{--</div>--}}
-{{--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>--}}
-{{--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>--}}
-{{--<script>--}}
-{{--    window.onscroll = function() {myFunction()};--}}
-
-{{--    let navbar = document.getElementById("navbar");--}}
-{{--    let sticky = navbar.offsetTop;--}}
-
-{{--    function myFunction() {--}}
-{{--        if (window.pageYOffset >= sticky) {--}}
-{{--            navbar.classList.add("sticky")--}}
-{{--        } else {--}}
-{{--            navbar.classList.remove("sticky");--}}
-{{--        }--}}
-{{--    }--}}
-{{--</script>--}}
-{{--</body>--}}
-{{--</html>--}}

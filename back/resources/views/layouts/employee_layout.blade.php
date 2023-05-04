@@ -48,7 +48,7 @@
                 <ul class="nav navbar-nav float-right">
                     <li class="nav-item">
                         <a href="{{route('user.logout')}}" class="nav-link">
-                            <btn class="btn" style="background-color:#5f1dea; color: white">Sign Out</btn>
+                            <btn class="btn" style="background-color:#5f1dea; color: white">Выйти</btn>
                         </a>
                     </li>
                 </ul>
@@ -62,23 +62,23 @@
 </div>
 
 <div class="main-menu menu-fixed menu-dark">
-    <div class="main-menu-content"><a class="navigation-brand d-none d-md-block d-lg-block d-xl-block" href="{{route('index')}}"><img class="brand-logo" alt="Aruu logo" src="{{asset('dist/img/logo_aruu.jpg')}}"/></a>
+    <div class="main-menu-content"><a class="navigation-brand d-none d-md-block d-lg-block d-xl-block" href="{{route('index')}}"><img class="brand-logo" style="border-radius: 10px;" alt="Aruu logo" src="{{asset('dist/img/logo_aruu.jpg')}}"/></a>
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="active"><a href="#"><i class="icon-grid"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+            <li class="active"><a href="{{route('index')}}"><i class="icon-grid"></i><span class="menu-title" data-i18n="">Главная</span></a>
             </li>
-            <li class=" nav-item "><a href="#"><i class="cil-group"></i><span class="menu-title" data-i18n="">Buy ICO</span></a>
+            <li class=" nav-item "><a href="{{route('employee.group.index')}}"><i class="cil-group"></i><span class="menu-title" data-i18n="">Моя группа</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><i class="icon-wallet"></i><span class="menu-title" data-i18n="">Wallet</span></a>
+            <li class=" nav-item"><a href="#"><i class="icon-wallet"></i><span class="menu-title" data-i18n="">Оплата</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><i class="icon-shuffle"></i><span class="menu-title" data-i18n="">Transactions</span></a>
+            <li class=" nav-item"><a href="#"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">Посещение</span></a>
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-support"></i><span class="menu-title" data-i18n="">FAQ</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">Account</span></a>
+            <li class=" nav-item"><a href="#"><i class="icon-user"></i><span class="menu-title" data-i18n="">Аккаунт</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#">Profile</a>
+                    <li><a class="menu-item" href="{{route('employee.profile')}}">Профиль</a>
                     </li>
-                    <li><a class="menu-item" href="#">Sign Out</a>
+                    <li><a class="menu-item" href="{{route('user.logout')}}">Выйти</a>
                     </li>
                 </ul>
             </li>

@@ -21,4 +21,9 @@ class Group extends Model
         return $this->hasMany('App\Models\Child');
     }
 
+    public function teacher()
+    {
+        return $this->belongsTo('App\Models\User', 'teacher_id');
+    }
+
 }

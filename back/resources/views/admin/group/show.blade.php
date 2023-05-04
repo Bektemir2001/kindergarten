@@ -12,6 +12,10 @@
                             <div class="">{{$group->name}}</div>
                         </li>
                         <li class="list-group-item">
+                            <b>Teacher's name:</b>
+                            <div class="">{{$group->teacher->name}} {{$group->teacher->surname}}</div>
+                        </li>
+                        <li class="list-group-item">
                             <b>Limit:</b>
                             <div class="">{{$group->limit}}</div>
                         </li>

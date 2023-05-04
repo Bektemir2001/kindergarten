@@ -22,11 +22,11 @@ return new class extends Migration
             $table->string('name',50);
             $table->string('surname',50);
             $table->date('birth_date');
+            $table->string('gender')->nullable(); //MALE, FEMALE
             $table->string('birth_certificate',200);
             $table->string('med_certificate',200);
             $table->string('med_disability', 200)->nullable();
             $table->string('photo',200);
-            $table->boolean('payment')->default(false);
             $table->timestamps();
         });
     }

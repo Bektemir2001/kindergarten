@@ -114,6 +114,6 @@ class GroupController extends Controller
     }
     public function galleryDelete(Gallery $gallery){
         $gallery->delete();
-        return redirect()->route('admin.group.Gallery');
+        return redirect()->back();
     }
 }

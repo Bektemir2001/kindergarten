@@ -18,7 +18,6 @@ class AuthController extends Controller
 
     public function userAuth(Request $request){
         $user = User::where('email', $request->email)->get();
-
         if(count($user)){
             $user = $user[0];
 

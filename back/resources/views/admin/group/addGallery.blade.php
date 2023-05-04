@@ -60,18 +60,18 @@
             <div id="myModal" class="modal">
                 <div class="modal-content" style="background-color: transparent">
                     <span class="close cursor" onclick="closeModal()">&times;</span>
-                    <form onclick="return confirm('Do you really want to delete?')" action="{{route('admin.gallery.delete', $gallery->id)}}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button title="submit" class="border-0 bg-transparent">
-                            <i title="delete" class="fas fa-trash text-danger" role="button"></i>
-                        </button>
-                    </form>
                     @php
                         $i = 1;
                     @endphp
                     @foreach($galleries as $gallery)
                         <div class="mySlides">
+                            <form onclick="return confirm('Do you really want to delete?')" action="{{route('admin.gallery.delete', $gallery->id)}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button title="submit" class="border-0 bg-transparent">
+                                    <i title="delete" class="fas fa-trash text-danger" role="button"></i>
+                                </button>
+                            </form>
                             <div class="numbertext">{{$i}} / {{$group->gallery->count()}}</div>
                             @if($gallery->image==null)
                                 <video style="height: 100%" controls >

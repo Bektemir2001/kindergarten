@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\User\StoreRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Gallery;
 use App\Models\Group;
+use App\Models\User;
 use App\Services\Admin\GalleryService;
 use App\Services\Admin\UserService;
 use Illuminate\Http\Request;
@@ -25,12 +26,21 @@ class GroupController extends Controller
     }
     public function index(){
         $groups = Group::all();
-        return view('admin.group.index', compact('groups'));
+//        $teachers = User::where('role', 'ROLE_TEACHER')->get();
+        $teachers = DB::table('users')
+            ->leftJoin('groups', 'groups.teacher_id', '=', 'users.id')
+            ->where('users.role',  'ROLE_TEACHER')
+            ->select('users.name as name', 'users.surname as surname',
+                'users.id as id', 'groups.teacher_id')
+            ->where('teacher_id', '=', null)
+            ->get();
+        return view('admin.group.index', compact('groups', 'teachers'));
     }
 
     public function create(Request $request){
         $data = $request->validate([
             'name'=>'required|string',
+            'teacher_id' => 'required',
             'limit'=>'required',
             'description'=>'required|string',
             'image'=>''
@@ -40,6 +50,7 @@ class GroupController extends Controller
 
         $group = Group::create([
             'name' => $data['name'],
+            'teacher_id' => $request->teacher_id,
             'limit' => $data['limit'],
             'description' => $data['description'],
             'image' => $image
@@ -65,6 +76,7 @@ class GroupController extends Controller
             $image = "storage/".$image;
             $group->update([
                 'name' => $data['name'],
+                'teacher_id' => $data['teacher_id'],
                 'limit' => $data['limit'],
                 'description' => $data['description'],
                 'image' => $image,
@@ -74,6 +86,7 @@ class GroupController extends Controller
         else {
             $group->update([
                 'name' => $data['name'],
+                'teacher_id' => $data['teacher_id'],
                 'limit' => $data['limit'],
                 'description' => $data['description'],
             ]);

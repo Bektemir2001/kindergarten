@@ -42,18 +42,20 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="exampleInput" class="form-label">Parent ID:</label>
-                    <input type="number" class="form-control col-6" name="parent_id" id="parent_id" value="{{$child->parent_id}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')">
-                    @error('parent_id')
-                    <p class="text-danger">{{$message}}</p>
-                    @enderror
+                    <label for="exampleInput" class="form-label">Parent:</label>
+                    <select class="form-control col-md-12" name="parent_id" id="parent_id" @error('parent_id') is-invalid @enderror required autocomplete="parent_id">
+                        @foreach($parents as $parent)
+                            <option value="{{$parent->id}}" {{$parent->id === $child->parent_id ? "selected" : ""}}>{{$parent->name}}  {{$parent->surname}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInput" class="form-label">Group ID:</label>
-                    <input type="number" class="form-control col-6" name="group_id" id="group_id" value="{{$child->group_id}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')">
-                    @error('group_id')
-                    <p class="text-danger">{{$message}}</p>
-                    @enderror
+                    <label for="exampleInput" class="form-label">Group:</label>
+                    <select class="form-control col-md-12" name="group_id" id="group_id" @error('group_id') is-invalid @enderror required autocomplete="group_id">
+                        @foreach($groups as $group)
+                            <option value="{{$group->id}}" {{$group->id === $child->group_id ? "selected" : ""}}>{{$group->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <div class="col-md-6">

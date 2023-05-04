@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Child');
     }
+
+    public function group()
+    {
+        return $this->hasOne('App\Models\Group');
+    }
 }

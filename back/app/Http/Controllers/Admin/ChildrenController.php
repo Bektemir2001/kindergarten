@@ -62,7 +62,9 @@ class ChildrenController extends Controller
     }
 
     public function edit(Child $child){
-        return view('admin.children.edit', compact('child'));
+        $parents = User::where('role', 'ROLE_PARENT')->get();
+        $groups = Group::all();
+        return view('admin.children.edit', compact('child', 'parents', 'groups'));
     }
 
     public function show(Child $child){

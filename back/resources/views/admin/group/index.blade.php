@@ -20,6 +20,19 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label for="teacher" class="col-md-4 col-form-label text-md-end">{{ __('Teacher') }}</label>
+
+                        <div class="col-md-6">
+                            <select class="form-control col-md-12" name="teacher_id" id="teacher_id" @error('teacher_id') is-invalid @enderror required autocomplete="teacher_id">
+                            <option></option>
+                            @foreach($teachers as $teacher)
+                                    <option value="{{$teacher->id}}">{{$teacher->name}} {{$teacher->surname}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
                         <label for="limit" class="col-md-4 col-form-label text-md-end">{{ __('Limit') }}</label>
 
                         <div class="col-md-6">
@@ -148,11 +161,13 @@
                 event.preventDefault()
                 let url = "{{route('admin.group.create')}}";
                 let name = document.getElementById("name").value;
+                let teacher = document.getElementById("teacher_id").value;
                 let limit = document.getElementById("limit").value;
                 let description = document.getElementById("description").value;
                 let image = document.getElementById("image").files[0];
                 let data = new FormData();
                 data.append("name", name);
+                data.append("teacher_id", teacher);
                 data.append("limit", limit);
                 data.append("description", description);
                 data.append("image", image);

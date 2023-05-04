@@ -84,5 +84,13 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
 
 Route::group(['prefix'=>'employee'], function (){
     Route::get('/index', App\Http\Controllers\Employee\IndexController::class)->name('employee');
+
+    Route::group(['prefix'=>'profile'], function (){
+        Route::get('/index', [App\Http\Controllers\Employee\ProfileController::class, 'index'])->name('employee.profile');
+    });
+
+    Route::group(['prefix'=>'group'], function (){
+        Route::get('/', [App\Http\Controllers\Employee\GroupController::class, 'index'])->name('employee.group.index');
+    });
 });
 

@@ -53,13 +53,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav mx-auto">
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Мои дети</a>
-                    <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
-                        <a href="" class="dropdown-item">Ребенок 1</a>
-                        <a href="" class="dropdown-item">Ребенок 2</a>
-                    </div>
-                </div>
+                @if(auth()->user())
+                    @if(auth()->user()->role === 'ROLE_PARENT')
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Мои дети</a>
+                            <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                                @foreach($children as $child)
+                                    <a href="" class="dropdown-item">{{$child->name}}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                @endif
+
                 <div class="nav-item">
                     <a href="" class="nav-link">О нас</a>
                 </div>
@@ -133,7 +139,6 @@
                     <div class="modal-dialog">
                         <div class="modal-content" style="z-index: 9999">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -141,18 +146,15 @@
                                 <form>
                                     <!-- Email input -->
                                     <div class="form-outline mb-3">
-                                        <label class="form-label" for="email">Without registration, you cannot enroll a child.</label>
-                                    </div>
-                                    <div class="form-outline mb-3">
-                                        <label class="form-label" for="email">If you have an account, sing in, if not, sign up.</label>
+                                        <label class="form-label" for="email">Без регистрации вы не сможете записать ребенка. Если у вас есть учетная запись, войдите, если нет, зарегистрируйтесь.</label>
                                     </div>
                                     <!-- Submit button -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+                                        <button type="button" class="btn btn-primary btn-block"
                                                 data-bs-toggle="modal" data-bs-target="#modalSignIn">
                                             Войти
                                         </button>
-                                        <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+                                        <button type="button" class="btn btn-primary btn-block"
                                                 data-bs-toggle="modal" data-bs-target="#modalSignUp">
                                             Зарегистрироваться
                                         </button>
@@ -178,7 +180,7 @@
                                     <!-- Email input -->
                                     <div class="field">
                                         <i class="icon fas fa-user"></i>
-                                        <input type="email" id="email" name="email" placeholder="Почка(Email)" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
+                                        <input type="email" id="email" name="email" placeholder="Почта(Email)" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
                                         @if(session('errorWithEmail'))
                                             <p class="text-danger">{{session('errorWithEmail')}}</p>
                                             <script>
@@ -205,10 +207,10 @@
                                     </div>
                                     <!-- Submit button -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary rounded-pill px-3 d-none d-lg-block"
-                                                data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary "
+                                                data-bs-dismiss="modal">Закрыть</button>
                                         <!-- <button type="button" class="btn btn-primary">Sign in</button> -->
-                                        <button type="submit" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Sign in</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Войти</button>
                                     </div>
                                 </form>
                             </div>
@@ -324,9 +326,9 @@
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+                                                data-bs-dismiss="modal">Закрыть</button>
                                         <!-- Submit button -->
-                                        <button type="submit" class="btn btn-success btn-block">Register</button>
+                                        <button type="submit" class="btn btn-success btn-block">Далее</button>
                                     </div>
 
                                 </form>
@@ -445,7 +447,7 @@
                                     <div class="form-outline mb-2" style="padding: 10px">
                                         <label for="med_disability" class="form-label" style="font-weight: 700;">{{ __("Медицинская справка об инвалидности") }}</label>
                                         <div class="col-md-6">
-                                            <input id="med_disability" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('med_disability') is-invalid @enderror" name="med_disability" value="{{ old('med_disability') }}">
+                                            <input id="med_disability" type="file" class="form-control @error('med_disability') is-invalid @enderror" name="med_disability" value="{{ old('med_disability') }}">
                                             @error('med_disability')
                                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -455,9 +457,9 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+                                                data-bs-dismiss="modal">Закрыть</button>
                                         <!-- Submit button -->
-                                        <button type="submit" class="btn btn-success btn-block">Submit</button>
+                                        <button type="submit" class="btn btn-success btn-block">Записать</button>
                                     </div>
                                 </form>
                             </div>

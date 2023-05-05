@@ -48,7 +48,7 @@
                 <ul class="nav navbar-nav float-right">
                     <li class="nav-item">
                         <a href="{{route('user.logout')}}" class="nav-link">
-                            <btn class="btn" style="background-color:#5f1dea; color: white">Выйти</btn>
+                            <btn class="btn btn-outline-primary" style="background-color:#5f1dea; color: white">Выйти</btn>
                         </a>
                     </li>
                 </ul>
@@ -76,7 +76,7 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-user"></i><span class="menu-title" data-i18n="">Аккаунт</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="{{route('employee.profile')}}">Профиль</a>
+                    <li><a class="menu-item" href="{{route('employee.profile', auth()->user()->id)}}">Профиль</a>
                     </li>
                     <li><a class="menu-item" href="{{route('user.logout')}}">Выйти</a>
                     </li>

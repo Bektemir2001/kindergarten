@@ -198,7 +198,7 @@
                             `<button title="submit" class="border-0 bg-transparent"> ` +
                             `<i title="delete" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>` +
                             `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
-                            `<a href="` + "/admin/group/show/" + data.id + `"><i class="fas fa-photo-video"></i></a>  </div> `;
+                            `<a href="` + "/admin/group/Gallery/" + data.id + `"><i class="fas fa-photo-video"></i></a>  </div> `;
                     })
                     .catch(error => console.log(error))
             })

@@ -175,8 +175,10 @@
                                         Admin
                                     @elseif($user->role == 'ROLE_TEACHER')
                                         Employee
-                                    @else
+                                    @elseif($user->role == 'ROLE_PARENT')
                                         Parent
+                                    @else
+                                        User
                                     @endif
                                 </td>
                                 <td>

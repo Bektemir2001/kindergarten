@@ -19,6 +19,7 @@ return new class extends Migration
                 ->on('questions')
                 ->references('id')
                 ->cascadeOnDelete();
+            $table->text('answers')->nullable();
             $table->unsignedBigInteger('resume_id');
             $table->index('resume_id','answers_resumes_idx');
             $table->foreign('resume_id','answers_resumes_fk')

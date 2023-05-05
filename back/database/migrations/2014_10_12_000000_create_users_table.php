@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('address', 200);
             $table->string('phone_number', 20);
             $table->string('email')->unique();
+            $table->string('profile_photo', 200)->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->default('ROLE_USER'); // ROLE_USER, ROLE_PARENT, ROLE_TEACHER, ROLE_ADMIN

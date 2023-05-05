@@ -176,6 +176,18 @@ img {
     vertical-align: middle;
     border-style: none;
 }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+}
+
 /* About Me 
 ---------------------*/
 .about-text h3 {

@@ -69,7 +69,7 @@
                                 @method('DELETE')
                                 @csrf
                                 <button title="submit" class="border-0 bg-transparent">
-                                    <i title="delete" class="fas fa-trash text-danger" role="button"></i>
+                                    <i title="delete" class="fas fa-trash text-danger" role="button" style="color: white; position: absolute; top: 65px; right: 20px; font-size: 20px; font-weight: bold;"></i>
                                 </button>
                             </form>
                             <div class="numbertext">{{$i}} / {{$group->gallery->count()}}</div>

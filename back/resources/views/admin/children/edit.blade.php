@@ -71,7 +71,7 @@
                 <div class="form-group">
                     <div class="col-md-6">
                         <label for="exampleInput" class="form-label">Birth Certification:</label>
-                        <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" name="birth_certification" id="birth_certification">
+                        <input type="file" class="form-control" name="birth_certification" id="birth_certification">
                         @error('birth_certification')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -82,7 +82,7 @@
                 <div class="form-group">
                     <div class="col-md-6">
                         <label for="exampleInput" class="form-label">Medical Certification:</label>
-                        <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" name="med_certification" id="med_certification">
+                        <input type="file" class="form-control" name="med_certification" id="med_certification">
                         @error('med_certification')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -93,7 +93,7 @@
                 <div class="form-group">
                     <div class="col-md-6">
                         <label for="exampleInput" class="form-label">Medical Disability Certification:</label>
-                        <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" name="med_disability" id="med_disability">
+                        <input type="file" class="form-control" name="med_disability" id="med_disability">
                         @error('med_disability')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

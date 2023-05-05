@@ -83,14 +83,16 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
 });
 
 Route::group(['prefix'=>'employee'], function (){
-    Route::get('/index', App\Http\Controllers\Employee\IndexController::class)->name('employee');
+    Route::get('/index/{user}', App\Http\Controllers\Employee\IndexController::class)->name('employee');
 
     Route::group(['prefix'=>'profile'], function (){
-        Route::get('/index', [App\Http\Controllers\Employee\ProfileController::class, 'index'])->name('employee.profile');
+        Route::get('/index/{user}', [App\Http\Controllers\Employee\ProfileController::class, 'index'])->name('employee.profile');
+        Route::patch('/update/{user}', [App\Http\Controllers\Employee\ProfileController::class, 'update'])->name('employee.profile.update');
     });
 
     Route::group(['prefix'=>'group'], function (){
         Route::get('/', [App\Http\Controllers\Employee\GroupController::class, 'index'])->name('employee.group.index');
+        Route::get('/show', [App\Http\Controllers\Employee\GroupController::class, 'show'])->name('employee.group.show');
     });
 });
 

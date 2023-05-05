@@ -30,6 +30,9 @@ class IndexController extends Controller
                 $children = Child::where('parent_id', $user->id)->get();
                 return view('index', compact('children'));
             }
+//            elseif($user->role === 'ROLE_TEACHER'){
+//                return redirect()->route('employee');
+//            }
             return view('index');
         }
 

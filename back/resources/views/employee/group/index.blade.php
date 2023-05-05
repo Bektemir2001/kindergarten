@@ -3,8 +3,8 @@
 @section('content')
     <div class="content-wrapper">
         <div class="content-wrapper">
-            <div class="content-header row">
-                    <div class="btn-group float-md-right"><a class="btn white" style="background-color: #5f1dea; border-radius: 2rem; " href="#">ДОБАВИТЬ РЕБЕНКА</a></div>
+            <div class="content-header">
+                <button type="submit" class="btn-gradient-primary">Добавить ребенка</button>
             </div>
             <br>
             <div class="position-relative table-responsive">
@@ -37,14 +37,16 @@
                     </tr>
                     </thead>
                     <tbody id="TableId">
-                    <tr class="">
-                        <td class="">John Doe</td>
-                        <td class="">2018/01/01</td>
-                        <td class="">Guest</td>
-                        <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-info round">Редактировать</a></td>
-                        <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-success round">Посмотреть</a></td>
-                        <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-danger round">Удалить</a></td>
-                    </tr>
+                    @foreach($children as $child)
+                        <tr class="">
+                            <td class="">{{$child->name}} {{$child->surname}}</td>
+                            <td class="">{{$child->birth_date}}</td>
+                            <td class="">{{$child->parent_name}} {{$child->parent_surname}}</td>
+                            <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-info round">Редактировать</a></td>
+                            <td class="py-1 px-1"><a href="{{route('employee.group.show')}}" class="mb-0 btn-sm btn btn-outline-success round">Посмотреть</a></td>
+                            <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-danger round">Удалить</a></td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

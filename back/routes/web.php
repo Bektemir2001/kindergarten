@@ -28,6 +28,7 @@ Route::get('/{user?}',App\Http\Controllers\IndexController::class)->name('index'
 Route::get('/verification/form/{user}', [App\Http\Controllers\VerificateController::class, 'form'])->name('verification.form');
 Route::post('/verification/email', [App\Http\Controllers\VerificateController::class, 'verification'])->name('verification');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/main/gallery', [App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
@@ -78,6 +79,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
        Route::get('/show/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'show'])->name('admin.resume.question.show');
        Route::patch('/update/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'update'])->name('admin.resume.question.update');
        Route::delete('/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'delete'])->name('admin.resume.question.delete');
+    });
+
+    Route::group(['prefix'=>'mainGallery'], function (){
+        Route::get('/', [App\Http\Controllers\Admin\MainGalleryController::class, 'index'])->name('admin.mainGallery.index');
+        Route::post('/create', [App\Http\Controllers\Admin\MainGalleryController::class, 'create'])->name('admin.mainGallery.create');
+        Route::delete('/{gallery}', [App\Http\Controllers\Admin\MainGalleryController::class, 'delete'])->name('admin.mainGallery.delete');
     });
 
 });

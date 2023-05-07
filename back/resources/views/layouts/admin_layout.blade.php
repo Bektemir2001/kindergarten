@@ -135,6 +135,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.mainGallery.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-photo-video"></i>
+                            <p>
+                                Main gallery
+                            </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

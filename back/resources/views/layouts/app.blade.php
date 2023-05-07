@@ -33,6 +33,7 @@
 </head>
 
 <body>
+
 <div class="container-xxl bg-white p-0">
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -99,10 +100,17 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img src="https://w7.pngwing.com/pngs/364/361/png-transparent-account-avatar-profile-user-avatars-icon.png" alt="Avatar" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;">
                         </a>
+                        @if(auth()->user()->role==='ROLE_TEACHER')
                         <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="right: 0;left: auto;!important;">
-                            <a href="" class="dropdown-item" >Мой профиль</a>
+                            <a href="{{route('employee', auth()->user()->id)}}" class="dropdown-item" >Мой кабинет</a>
                             <a class="dropdown-item" onclick="location.href='{{route('user.logout')}}'" type="button">Выйти</a>
                         </div>
+                        @else
+                            <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="right: 0;left: auto;!important;">
+                                <a href="" class="dropdown-item" >Мой профиль</a>
+                                <a class="dropdown-item" onclick="location.href='{{route('user.logout')}}'" type="button">Выйти</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             @else

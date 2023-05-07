@@ -92,7 +92,10 @@ Route::group(['prefix'=>'employee'], function (){
 
     Route::group(['prefix'=>'group'], function (){
         Route::get('/', [App\Http\Controllers\Employee\GroupController::class, 'index'])->name('employee.group.index');
-        Route::get('/show', [App\Http\Controllers\Employee\GroupController::class, 'show'])->name('employee.group.show');
+        Route::get('/show/{child}', [App\Http\Controllers\Employee\GroupController::class, 'show'])->name('employee.group.show');
+        Route::get('/edit/{child}', [App\Http\Controllers\Employee\GroupController::class, 'edit'])->name('employee.group.edit');
+        Route::patch('/update/{child}', [App\Http\Controllers\Employee\GroupController::class, 'update'])->name('employee.group.update');
+        Route::delete('/{child}', [App\Http\Controllers\Employee\GroupController::class, 'delete'])->name('employee.group.delete');
     });
 });
 

@@ -48,7 +48,7 @@
                 <ul class="nav navbar-nav float-right">
                     <li class="nav-item">
                         <a href="{{route('user.logout')}}" class="nav-link">
-                            <btn class="btn btn-outline-primary" style="background-color:#5f1dea; color: white">Выйти</btn>
+                            <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">Выйти</btn>
                         </a>
                     </li>
                 </ul>

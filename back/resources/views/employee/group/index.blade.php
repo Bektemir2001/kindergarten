@@ -4,7 +4,7 @@
     <div class="content-wrapper">
         <div class="content-wrapper">
             <div class="content-header">
-                <button type="submit" class="btn-gradient-primary">Добавить ребенка</button>
+                <button type="submit" class="btn btn-gradient-primary">Добавить ребенка</button>
             </div>
             <br>
             <div class="position-relative table-responsive">
@@ -42,9 +42,17 @@
                             <td class="">{{$child->name}} {{$child->surname}}</td>
                             <td class="">{{$child->birth_date}}</td>
                             <td class="">{{$child->parent_name}} {{$child->parent_surname}}</td>
-                            <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-info round">Редактировать</a></td>
-                            <td class="py-1 px-1"><a href="{{route('employee.group.show')}}" class="mb-0 btn-sm btn btn-outline-success round">Посмотреть</a></td>
-                            <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-danger round">Удалить</a></td>
+                            <td class="py-1 px-1"><a href="{{route('employee.group.edit', $child->id)}}" class="mb-0 btn-sm btn btn-outline-info round">Редактировать</a></td>
+                            <td class="py-1 px-1"><a href="{{route('employee.group.show', $child->id)}}" class="mb-0 btn-sm btn btn-outline-success round">Посмотреть</a></td>
+                            <td class="py-1 px-1">
+                                <form action="{{route('employee.group.delete', $child->id)}}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button title="delete" class="border-0 bg-transparent" onclick="return confirm('Вы уверены, что хотите удалить данные этого ребенка?')">
+                                        <a href="" class="mb-0 btn-sm btn btn-outline-danger round">Удалить</a>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

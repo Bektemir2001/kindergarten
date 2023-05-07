@@ -509,11 +509,11 @@ select.form-control {
   -o-transition: 0.5s;
   -moz-transition: 0.5s;
   transition: 0.5s;
-  background-image: -webkit-gradient(linear, left top, right top, from(#ff4137), color-stop(51%, #fdc800), to(#ff4137));
-  background-image: -webkit-linear-gradient(left, #ff4137 0%, #fdc800 51%, #ff4137 100%);
-  background-image: -moz-linear-gradient(left, #ff4137 0%, #fdc800 51%, #ff4137 100%);
-  background-image: -o-linear-gradient(left, #ff4137 0%, #fdc800 51%, #ff4137 100%);
-  background-image: linear-gradient(to right, #ff4137 0%, #fdc800 51%, #ff4137 100%);
+  background-image: -webkit-gradient(linear, left top, right top, from(#00b300), color-stop(51%, #006600), to(#00b300));
+  background-image: -webkit-linear-gradient(left, #00b300 0%, #006600 51%, #00b300 100%);
+  background-image: -moz-linear-gradient(left, #00b300 0%, #006600 51%, #00b300 100%);
+  background-image: -o-linear-gradient(left, #00b300 0%, #006600 51%, #00b300 100%);
+  background-image: linear-gradient(to right, #00b300 0%, #006600 51%, #00b300 100%);
   background-position: left center;
   -webkit-background-size: 200% auto;
   background-size: 200% auto;
@@ -2556,3 +2556,70 @@ a:hover {
     -moz-transform: rotate(360deg);
     -o-transform: rotate(360deg);
     transform: rotate(360deg); } }
+
+.radioDiv{
+    display: inline-flex;
+    height: 40px;
+    width: 230px;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+}
+.radioDiv .option{
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid lightgrey;
+    transition: all 0.3s ease;
+}
+.radioDiv .option .dot{
+    height: 20px;
+    width: 20px;
+    background: #d9d9d9;
+    border-radius: 50%;
+    position: relative;
+}
+.radioDiv .option .dot::before{
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: #5f16eb;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+}
+input[type="radio"]{
+    display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2{
+    border-color: #5f16eb;
+    background: #5f16eb;
+}
+#option-1:checked:checked ~ .option-1 .dot,
+#option-2:checked:checked ~ .option-2 .dot{
+    background: #fff;
+}
+#option-1:checked:checked ~ .option-1 .dot::before,
+#option-2:checked:checked ~ .option-2 .dot::before{
+    opacity: 1;
+    transform: scale(1);
+}
+.wrapper .option span{
+    font-size: 20px;
+    color: #808080;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span{
+    color: #fff;
+}

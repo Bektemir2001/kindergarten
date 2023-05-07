@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-md-2 col-12">
-                                <img src="{{asset($children->photo)}}" class="rounded-circle height-100 img-fluid" alt="Card image" />
+                                <img src="{{asset($children->photo)}}" class="img-fluid" alt="Card image" />
                             </div>
                             <div class="col-md-10 col-12">
                                 <hr/>
@@ -60,15 +60,34 @@
                                         <p>{{$children->group_name}}</p>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Свидетельство о рождении</p></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img class="img-fluid" src="{{asset($children->birth_certificate)}}">                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Медицинская справка</p></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img class="img-fluid" src="{{asset($children->med_certificate)}}">                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Справка об инвалидности</p></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img class="img-fluid" src="{{asset($children->med_disability)}}">                                    </div>
+                                </div>
                             </div>
-{{--                                    <div class="col-6">--}}
-{{--                                        <img class="img-fluid" src="{{asset($user->passport_front)}}">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col-6">--}}
-{{--                                        <img class="img-fluid" src="{{asset($user->passport_back)}}">--}}
-{{--                                    </div>--}}
                                     <div class="col-12 text-right">
-                                        <button type="submit" class="btn-gradient-primary my-1">Назад</button>
+                                        <a href="{{route('employee.group.index')}}">
+                                        <button type="submit" class="btn btn-gradient-primary my-1">Назад</button>
+                                        </a>
                                     </div>
                             </div>
                         </div>

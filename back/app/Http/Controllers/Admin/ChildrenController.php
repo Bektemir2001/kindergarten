@@ -41,7 +41,7 @@ class ChildrenController extends Controller
         $birth_cert = "storage/".$birth_cert;
         $med_cert = Storage::disk('public')->put('childImages/medCertificates', $data['med_certificate']);
         $med_cert = "storage/".$med_cert;
-        $med_disability = Storage::disk('public')->put('childImages/medDisabilities', $data['med_disability']);
+        $med_disability = Storage::disk('public')->put('childImages/meDisabilities', $data['med_disability']);
         $med_disability = "storage/".$med_disability;
 
         $child = Child::create([
@@ -91,7 +91,7 @@ class ChildrenController extends Controller
             $med_certificate = "storage/".$image;
         }
         if(array_key_exists('med_disability', $data)){
-            $image = Storage::disk('public')->put('childImages/medDisabilities', $data['med_disability']);
+            $image = Storage::disk('public')->put('childImages/meDisabilities', $data['med_disability']);
             $med_disability = "storage/".$image;
         }
         $child->update([

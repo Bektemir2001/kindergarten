@@ -25,9 +25,6 @@ class IndexController extends Controller
             if($user->role === 'ROLE_ADMIN'){
                 return redirect()->route('admin');
             }
-            elseif($user->role === 'ROLE_TEACHER'){
-                return redirect()->route('employee');
-            }
             elseif($user->role === 'ROLE_PARENT'){
                 $children = Child::where('parent_id', $user->id)->get();
                 return view('index', compact('children'));

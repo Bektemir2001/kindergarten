@@ -22,10 +22,7 @@ class IndexController extends Controller
         $user = auth()->user();
         $galleries = MainGallery::all();
         if($user){
-            if($user->role === 'ROLE_ADMIN'){
-                return redirect()->route('admin');
-            }
-            elseif($user->role === 'ROLE_PARENT'){
+            if($user->role === 'ROLE_ADMIN' or $user->role === 'ROLE_TEACTER' or $user->role === 'ROLE_PARENT' or $user->role === 'ROLE_USER'){
                 $children = Child::where('parent_id', $user->id)->get();
                 return view('index', compact('children'));
             }

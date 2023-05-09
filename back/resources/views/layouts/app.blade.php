@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{asset('new_template/img/aruu%20logo1.png')}}" rel="icon">
+{{--    <link href="{{asset('new_template/img/aruu%20logo1.png')}}" rel="icon">--}}
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +47,12 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
         <a href="" class="navbar-brand">
-            <h1 class="m-0 text-primary"><img src="{{asset('new_template/img/aruu%20logo1.png')}}" style="height: 100px; width: 100px" alt=""><img src="{{asset('new_template/img/aruu%20logo2.png')}}" style="height: 100px; width: 100px"></h1>
+            <h1 class="m-0 text-primary">
+                <a href="{{route('index')}}">
+                    <img src="{{asset('new_template/img/aruu%20logo1.png')}}" style="height: 100px; width: 100px" alt="">
+                    <img src="{{asset('new_template/img/aruu%20logo2.png')}}" style="height: 100px; width: 100px">
+                </a>
+            </h1>
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -55,7 +60,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav mx-auto">
                 @if(auth()->user())
-                    @if(auth()->user()->role === 'ROLE_PARENT')
+                    @if(auth()->user()->role === 'ROLE_ADMIN' or auth()->user()->role === 'ROLE_TEACHER' or auth()->user()->role === 'ROLE_PARENT')
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Мои дети</a>
                             <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
@@ -100,17 +105,16 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img src="https://w7.pngwing.com/pngs/364/361/png-transparent-account-avatar-profile-user-avatars-icon.png" alt="Avatar" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;">
                         </a>
-                        @if(auth()->user()->role==='ROLE_TEACHER')
                         <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="right: 0;left: auto;!important;">
-                            <a href="{{route('employee', auth()->user()->id)}}" class="dropdown-item" >Мой кабинет</a>
+                            @if(auth()->user()->role === 'ROLE_ADMIN')
+                                <a href="{{route('admin')}}" class="dropdown-item" >Мой кабинет</a>
+                            @elseif(auth()->user()->role==='ROLE_TEACHER')
+                                <a href="{{route('employee', auth()->user()->id)}}" class="dropdown-item" >Мой кабинет</a>
+                            @else
+                                <a href="" class="dropdown-item" >Мой профиль</a>
+                            @endif
                             <a class="dropdown-item" onclick="location.href='{{route('user.logout')}}'" type="button">Выйти</a>
                         </div>
-                        @else
-                            <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="right: 0;left: auto;!important;">
-                                <a href="" class="dropdown-item" >Мой профиль</a>
-                                <a class="dropdown-item" onclick="location.href='{{route('user.logout')}}'" type="button">Выйти</a>
-                            </div>
-                        @endif
                     </div>
                 </div>
             @else
@@ -566,7 +570,9 @@
 <script src="{{asset('new_template/lib/easing/easing.min.js')}}"></script>
 <script src="{{asset('new_template/lib/waypoints/waypoints.min.js')}}"></script>
 <script src="{{asset('new_template/lib/owlcarousel/owl.carousel.min.js')}}"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
 <!-- Template Javascript -->
 <script src="{{asset('new_template/js/main.js')}}"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}

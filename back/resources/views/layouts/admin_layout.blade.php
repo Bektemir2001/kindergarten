@@ -143,6 +143,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.attendance.index')}}" class="nav-link">
+                            <i class="nav-icon far fa-check-square"></i>
+                            <p>
+                                Attendance
+                            </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

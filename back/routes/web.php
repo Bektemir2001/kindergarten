@@ -87,6 +87,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::delete('/{gallery}', [App\Http\Controllers\Admin\MainGalleryController::class, 'delete'])->name('admin.mainGallery.delete');
     });
 
+    Route::group(['prefix'=>'attendance'], function (){
+        Route::get('/', [App\Http\Controllers\Admin\AttendanceContoller::class, 'index'])->name('admin.attendance.index');
+    });
 });
 
 Route::group(['prefix'=>'employee'], function (){
@@ -103,6 +106,10 @@ Route::group(['prefix'=>'employee'], function (){
         Route::get('/edit/{child}', [App\Http\Controllers\Employee\GroupController::class, 'edit'])->name('employee.group.edit');
         Route::patch('/update/{child}', [App\Http\Controllers\Employee\GroupController::class, 'update'])->name('employee.group.update');
         Route::delete('/{child}', [App\Http\Controllers\Employee\GroupController::class, 'delete'])->name('employee.group.delete');
+    });
+
+    Route::group(['prefix'=>'attendance'], function (){
+        Route::get('/', [App\Http\Controllers\Employee\AttendanceController::class, 'index'])->name('employee.attendance.index');
     });
 });
 

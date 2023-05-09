@@ -98,6 +98,7 @@ class ChildrenController extends Controller
             'name' => $data['name'],
             'surname' => $data['surname'],
             'birth_date' => $data['birth_date'],
+            'gender' => $data['gender'],
             'parent_id' => $data['parent_id'],
             'group_id' => $data['group_id'],
             'photo' => $photo,

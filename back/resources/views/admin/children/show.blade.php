@@ -20,7 +20,7 @@
                             <div class="">{{$child->birth_date}}</div>
                         </li>
                         <li class="list-group-item">
-                            <b>Birth Date:</b>
+                            <b>Gender:</b>
                             <div class="">{{$child->gender}}</div>
                         </li>
                         <li class="list-group-item">

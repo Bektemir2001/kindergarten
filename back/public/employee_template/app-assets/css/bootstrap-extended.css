@@ -2623,3 +2623,13 @@ input[type="radio"]{
 #option-2:checked:checked ~ .option-2 span{
     color: #fff;
 }
+.field {
+    padding: 20px 10px;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    top: 30px;
+    color: #5f1dea;
+}

@@ -22,6 +22,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('employee_template/app-assets/css/pages/timeline.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('employee_template/app-assets/css/pages/dashboard-ico.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('employee_template/app-assets/css/free.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
@@ -64,7 +66,7 @@
 <div class="main-menu menu-fixed menu-dark">
     <div class="main-menu-content"><a class="navigation-brand d-none d-md-block d-lg-block d-xl-block" href="{{route('index')}}"><img class="brand-logo" style="border-radius: 10px;" alt="Aruu logo" src="{{asset('dist/img/logo_aruu.jpg')}}"/></a>
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="active"><a href="{{route('index')}}"><i class="icon-grid"></i><span class="menu-title" data-i18n="">Главная</span></a>
+            <li class="active"><a href="{{route('employee', auth()->user()->id)}}"><i class="icon-grid"></i><span class="menu-title" data-i18n="">Главная</span></a>
             </li>
             <li class=" nav-item "><a href="{{route('employee.group.index')}}"><i class="cil-group"></i><span class="menu-title" data-i18n="">Моя группа</span></a>
             </li>

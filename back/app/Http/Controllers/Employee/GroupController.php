@@ -84,15 +84,56 @@ class GroupController extends Controller
             'birth_certificate' => $birth_certificate,
             'med_certificate' => $med_certificate,
             'med_disability' => $med_disability,
-            'payment' => $data['payment']
+            'payment' => false
         ]);
         DB::commit();
         return redirect()->route('employee.group.index')->with('status','Данные ребенка были обновлены.');
     }
 
+    public function create(Request $request){
+        $data = $request->validate([
+            'name' => 'required|string',
+            'surname' => 'required|string',
+            'birth_date' => 'required',
+            'gender' => '',
+            'parent_id' => 'required',
+            'group_id' => 'required',
+            'photo' => '',
+            'birth_certificate' => '',
+            'med_certificate' => '',
+            'med_disability' => '',
+            'payment' => 'required'
+        ]);
+
+        $photo = Storage::disk('public')->put('childImages/photos', $data['photo']);
+        $photo = "storage/".$photo;
+        $birth_cert = Storage::disk('public')->put('childImages/birthCertificates', $data['birth_certificate']);
+        $birth_cert = "storage/".$birth_cert;
+        $med_cert = Storage::disk('public')->put('childImages/medCertificates', $data['med_certificate']);
+        $med_cert = "storage/".$med_cert;
+        $med_disability = Storage::disk('public')->put('childImages/meDisabilities', $data['med_disability']);
+        $med_disability = "storage/".$med_disability;
+
+        $child = Child::create([
+            'name' => $data['name'],
+            'surname' => $data['surname'],
+            'birth_date' => $data['birth_date'],
+            'gender' => $data['gender'],
+            'parent_id' => $request->parent_id,
+            'group_id' => $request->group_id,
+            'photo' => $photo,
+            'birth_certificate' => $birth_cert,
+            'med_certificate' => $med_cert,
+            'med_disability' => $med_disability,
+            'payment' => $data['payment']
+        ]);
+        $child->group_id = Group::where('id', $child->group_id)->pluck('name');
+        return response($child);
+    }
+
     public function delete(Child $child){
         $child->delete();
-        return redirect()->route('employee.group.index')->with('status','Данные ребенка были удалены.');
+        return back()->with('status','Данные ребенка были удалены.');
     }
 
 }

@@ -26,6 +26,7 @@ class UpdateGroupRequest extends FormRequest
     {
         return [
             'name' => ['string', 'max:50'],
+            'teacher_id' => '',
             'limit' => ['integer'],
             'description' => ['string'],
             'image' => 'mimes:jpg,bmp,png,jpeg',

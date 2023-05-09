@@ -106,3 +106,5 @@ Route::group(['prefix'=>'employee'], function (){
     });
 });
 
+//Route::auth();
+

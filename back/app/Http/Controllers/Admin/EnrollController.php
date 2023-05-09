@@ -40,9 +40,10 @@ class EnrollController
         DB::beginTransaction();
         $parent = User::where('id', $enroll['parent_id'])->get();
         $parent = $parent[0];
-        $parent->update([
-            'role'=>"ROLE_PARENT"
-        ]);
+        if ($parent->role === 'ROLE_USER')
+            $parent->update([
+                'role'=>"ROLE_PARENT"
+            ]);
         DB::commit();
         $enroll->delete();
         return redirect()->route('admin.enroll.index')->with('status', 'Enrolling was approved.');

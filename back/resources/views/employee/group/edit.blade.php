@@ -69,7 +69,7 @@
                                             <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Имя Родителя</p></label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <select class="form-control">
+                                            <select class="form-control" name="parent_id" id="parent_id">
                                                 @foreach($parents as $parent)
                                                     <option value="{{$parent->id}}" {{$parent->id === $children->parent_id ? "selected" : ""}}>{{$parent->name}}  {{$parent->surname}}</option>
                                                 @endforeach
@@ -82,7 +82,7 @@
                                             <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Название Группы</p></label>
                                         </div>
                                         <div class="col-lg-6" >
-                                            <select class="form-control">
+                                            <select class="form-control" name="group_id" id="group_id">
                                                     <option value="{{$children->group_id}}">{{$children->group_name}}</option>
                                             </select>
                                         </div>

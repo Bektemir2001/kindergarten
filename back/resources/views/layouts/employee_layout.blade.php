@@ -72,7 +72,7 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-wallet"></i><span class="menu-title" data-i18n="">Оплата</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">Посещение</span></a>
+            <li class=" nav-item"><a href="{{route('employee.attendance.index')}}"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">Посещение</span></a>
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-support"></i><span class="menu-title" data-i18n="">FAQ</span></a>
             </li>

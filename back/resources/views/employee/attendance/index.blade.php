@@ -70,16 +70,32 @@
             transform: rotate(45deg);
         }
     </style>
+
     <div class="content-wrapper">
-        <div class="content-wrapper">
+        @if (session('status'))
+            <div class="alert alert-dismissible white" style="background-color: #9b73f2">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session('status') }}
+            </div>
+        @endif
+        <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addChildBtnId" onclick="showForm()">Отметить детей</button>
+        <div class="d-none" id="attendance">
             <div class="position-relative table-responsive">
+                <label for="birth_date" class="col-md-4 col-form-label text-md-end">{{ __('Birth Date') }}</label>
+                <div class="col-md-6">
+                    <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{date('Y-m-d')}}" required autocomplete="date">
+                    @error('date')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                    @enderror
+                </div>
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
                             <div class="d-inline" style="font-size: 20px">Ф.И.О</div>
                         </th>
-
                         <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:1%">
                             <div class="d-inline"></div>
                         </th>
@@ -87,21 +103,28 @@
                             <div class="d-inline" style="font-size: 20px">Функции</div>
                         </th>
                         <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:1%">
-                            <div class="d-inline"></div>
                         </th>
                     </tr>
                     <tr class="table-sm">
-                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchByName(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" placeholder="Поиск" value="" oninput="searchByName(this.value)"></th>
+                        <td class="py-1 px-1"></td>
+                        <td class="py-1 px-3">
+                            <label class="container">
+                                <input type="checkbox" onclick="selectAll(this)">
+                                <div class="checkmark"></div>
+                            </label>
+                        </td>
+                        <td class="py-1 px-1">
                     </tr>
                     </thead>
                     <tbody id="TableId">
                     @foreach($children as $child)
-                        <tr class="">
+                        <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}">
                             <td class="" style="font-size:20px">{{$child->name}} {{$child->surname}}</td>
                             <td class="py-1 px-1"></td>
                             <td class="py-1 px-3">
                                 <label class="container">
-                                    <input type="checkbox" >
+                                    <input type="checkbox" onclick="selectChild({{$child->id}}, this)" id="{{'check'.$child->id}}">
                                     <div class="checkmark"></div>
                                 </label>
                             </td>
@@ -112,8 +135,105 @@
                     </tbody>
                 </table>
             </div>
+            <div style="text-align: right">
+                <button type="button" class="btn btn-gradient-primary" onclick="cancelForm()">Отмена</button>
+                <button type="button" class="btn btn-gradient-primary" onclick="sendData()">Сохранить</button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="position-relative table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
+                        <div class="d-inline" style="font-size: 15px">Ф.И.О</div>
+                    </th>
+                    @foreach($attendance as $at)
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer">
+                            <div class="d-inline" style="font-size: 15px">{{\Carbon\Carbon::parse($at->date)->format('m/d')}}</div>
+                        </th>
+                    @endforeach
+                </tr>
+                <tr class="table-sm">
+                    <th class=""><input class="form-control form-control-sm" value="" oninput="searchByName(this.value)"></th>
+                    @foreach($attendance as $at)
+                        <th class="">
+                            <label class="container" style="right: 7px;">
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                            </label>
+                        </th>
+                    @endforeach
+                </tr>
+                </thead>
+                <tbody id="TableId">
+                @foreach($children as $child)
+                    <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}">
+                        <td class="" style="font-size:20px">{{$child->name}} {{$child->surname}}</td>
+                        @foreach($attendance as $at)
+                            @php
+                                $data = json_decode($at->children, true);
+                            @endphp
+                            @if($data[$child->id])
+                                <td class="py-1 px-2">
+                                    <label class="container">
+                                        <input type="checkbox" checked="checked" disabled>
+                                        <div class="checkmark"></div>
+                                    </label>
+                                </td>
+                            @else
+                                <td class="py-1 px-2">
+                                    <label class="container">
+                                        <input type="checkbox" disabled>
+                                        <div class="checkmark"></div>
+                                    </label>
+                                </td>
+                            @endif
+
+                        @endforeach
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <br>
+            <form method="POST" action="{{ route('employee.attendance.archive') }}" >
+                @csrf
+                <input id="date" type="month" class="form-control @error('date') is-invalid @enderror" name="date" value="{{date('Y-m')}}" required autocomplete="date" hidden="">
+                @error('date')
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+                <div style="text-align: right">
+                    <button type="submit" class="btn btn-gradient-primary" >Архив</button>
+                </div>
+            </form>
+
         </div>
         <script>
+            function showForm(){
+                document.getElementById("addChildBtnId").className = "d-none";
+                document.getElementById("attendance").className = "";
+            }
+            function cancelForm(){
+                document.getElementById("addChildBtnId").className = "btn btn-gradient-primary";
+                document.getElementById("attendance").className = "d-none";
+            }
+            let all_children = {};
+            let group_id = 0;
+            let rows = document.getElementById('TableId').rows;
+            let n = rows.length;
+            for(let i = 0; i < n; i++)
+            {
+                all_children[rows[i].dataset.child] = false;
+                group_id = rows[i].dataset.group_id;
+            }
+            console.log(all_children);
             function searchByName(value){
                 let table = document.getElementById('TableId');
                 let rows = table.rows;
@@ -127,84 +247,43 @@
                     }
                 }
             }
-            function searchByBD(value){
-                let table = document.getElementById('TableId');
-                let rows = table.rows;
-                let n = rows.length;
-                for(let i = 0; i < n; i++){
-                    if(rows[i].cells[1].innerHTML.indexOf(value) === -1){
-                        rows[i].className = 'd-none';
-                    }
-                    else{
-                        rows[i].className = '';
-                    }
-                }
+
+            function selectChild(id, value){
+                all_children[id] = value.checked;
+                console.log(all_children);
             }
-            function searchByParent(value){
-                let table = document.getElementById('TableId');
-                let rows = table.rows;
-                let n = rows.length;
-                for(let i = 0; i < n; i++){
-                    if(rows[i].cells[2].innerHTML.indexOf(value) === -1){
-                        rows[i].className = 'd-none';
-                    }
-                    else{
-                        rows[i].className = '';
-                    }
-                }
+            function selectAll(value)
+            {
+                Object.keys(all_children).forEach(key => {
+                    selectChild(key, value)
+                    document.getElementById('check'+key).checked = value.checked;
+                });
             }
 
-            document.getElementById('form').addEventListener("submit", function (event) {
-                event.preventDefault()
-                let url = "{{route('admin.children.create')}}";
-                let name = document.getElementById("name").value;
-                let surname = document.getElementById("surname").value;
-                let birth_date = document.getElementById("birth_date").value;
-                let gender = document.querySelector('input[name="gender"]:checked').value;
-                let parent_id = document.getElementById("parent_id").value;
-                let group_id = document.getElementById("group_id").value;
-                let photo = document.getElementById("photo").files[0];
-                let birth_certificate = document.getElementById("birth_certificate").files[0];
-                let med_certificate = document.getElementById("med_certificate").files[0];
-                let med_disability = document.getElementById("med_disability").files[0];
-                let payment = document.getElementById("payment").value;
+            function sendData(){
+                let date = document.getElementById('date').value;
+                let url = "{{route('employee.attendance.create')}}";
                 let data = new FormData();
-                data.append("name", name);
-                data.append("surname", surname);
-                data.append("birth_date", birth_date);
-                data.append("gender", gender);
-                data.append("parent_id", parent_id);
                 data.append("group_id", group_id);
-                data.append("photo", photo);
-                data.append("birth_certificate", birth_certificate);
-                data.append("med_certificate", med_certificate);
-                data.append("med_disability", med_disability);
-                data.append("payment", payment);
+                data.append("date", date);
+                data.append("children", JSON.stringify(all_children));
                 fetch(url, {
-                    method: 'POST',
-                    body: data
+                    method:"POST",
+                    headers: {
+                        'X-CSRF-TOKEN': "{{csrf_token()}}"
+                    },
+                    body:data,
                 })
-                    .then(res => res.json())
+                    .then(response => response.json())
                     .then(data => {
-                        cancelForm();
-                        let table = document.getElementById('childTable');
-                        let i = table.rows.length;
-                        let row = table.insertRow(i);
-                        row.insertCell(0).innerHTML = data.id;
-                        row.insertCell(1).innerHTML = data.name;
-                        row.insertCell(2).innerHTML = data.surname;
-                        row.insertCell(3).innerHTML = data.group_id;
-                        row.insertCell(4).innerHTML = `<div style="float: left; display: block; width: 30%;" class="text-center">` +
-                            `<a href="`+ "children/show/" + data.id + `"><i class="fas fa-eye"></i></a> </div>` +
-                            `<div style="float: left; display: block; width: 30%;" class="text-center">` +
-                            `<a href="`+ "admin/children/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> </div>` +
-                            `<div style="float: left; display: block; width: 30%;" class="text-center">` +
-                            `<form action="`+ "admin/children/delete/" + data.id + `" method="POST"> @method("DELETE") @csrf` +
-                            `<button title="delete" class="border-0 bg-transparent">`+
-                            `<i title="delete" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;
+                        console.log(data);
+                        alert("Вы успешно отметили детей")
+                        location.reload();
                     })
-                    .catch(error => console.log(error))
-            })
+                    .catch(error => {
+                        alert('Вы уже отметили этот день, пожалуйста выберите правильную дату');
+                    });
+            }
         </script>
     </div>
 @endsection

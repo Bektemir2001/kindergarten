@@ -1,6 +1,12 @@
 @extends('layouts.admin_layout')
 @section('content')
     <div class="content-wrapper">
+        @if (session('status'))
+            <div class="alert alert-dismissible white" style="background-color: #9b73f2">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="container" style="margin-top: 10px;">
             <button type="button" class="btn btn-primary" style="margin-right:85%;" id="addGroupBtnId" onclick="showForm()">Add Group</button>
             <div class="d-none" id="addGroupId">

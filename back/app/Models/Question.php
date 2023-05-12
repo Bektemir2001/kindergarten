@@ -10,4 +10,8 @@ class Question extends Model
     use HasFactory;
     protected $table = 'questions';
     protected $guarded = false;
+
+    public function answer(){
+        return $this->belongsTo('App\Models\Answer');
+    }
 }

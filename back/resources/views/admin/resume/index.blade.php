@@ -40,15 +40,15 @@
                                     <div style="float: left;
                                 display: block;
                                 width: 30%;" class="text-center">
-                                        <a href="{{route('admin.user.show', $user)}}"><i class="fas fa-eye"></i></a>
+                                        <a href="{{route('admin.resume.show', $resume->id)}}"><i class="fas fa-eye"></i></a>
                                     </div>
                                     <div style="float: left;
                                 display: block;
                                 width: 30%;" class="text-center">
-                                        <form action="{{route('admin.user.delete', $user->id)}}" method="POST">
+                                        <form action="{{route('admin.resume.delete', $resume->id)}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button title="delete" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this user?')">
+                                            <button title="delete" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this resume?')">
                                                 <i title="delete" class="fas fa-trash text-danger" role="button"></i>
                                             </button>
                                         </form>

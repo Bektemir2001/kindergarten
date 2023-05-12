@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('group_id');
             $table->string('image',200)->nullable();
             $table->string('video',200)->nullable();
+            $table->text('info')->nullable();
             $table->timestamps();
 
 

@@ -35,6 +35,7 @@ class EnrollService
             'name' => $data['name'],
             'surname' => $data['surname'],
             'birth_date' => $data['birth_date'],
+            'gender' => $data['gender'],
             'parent_id' => auth()->user()->id,
             'photo' => $photo,
             'birth_certificate' => $birth_cert,

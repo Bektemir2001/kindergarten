@@ -45,8 +45,8 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">
-                <a href="{{route('user.logout')}}" class="nav-link">
-                    <btn class="btn btn-sm" style="background-color:#5f1dea; color: white">Sign Out</btn>
+                <a href="{{route('index')}}" class="nav-link">
+                    <btn class="btn btn-sm" style="background-color:#5f1dea; color: white">Back</btn>
                 </a>
             </li>
         </ul>
@@ -66,7 +66,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="info text-center">
-                    <a href="#" class="d-block">{{auth()->user()->name}} {{auth()->user()->surname}}</a>
+                    <a href="{{route('admin.profile', auth()->user()->id)}}" class="d-block">{{auth()->user()->name}} {{auth()->user()->surname}}</a>
                 </div>
             </div>
             <!-- Sidebar Menu -->
@@ -132,6 +132,22 @@
                             <i class="nav-icon fas fa-money-check-alt"></i>
                             <p>
                                 Payment
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.mainGallery.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-photo-video"></i>
+                            <p>
+                                Main gallery
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.attendance.index')}}" class="nav-link">
+                            <i class="nav-icon far fa-check-square"></i>
+                            <p>
+                                Attendance
                             </p>
                         </a>
                     </li>

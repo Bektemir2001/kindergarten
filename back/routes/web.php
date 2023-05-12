@@ -28,6 +28,13 @@ Route::get('/{user?}',App\Http\Controllers\IndexController::class)->name('index'
 Route::get('/verification/form/{user}', [App\Http\Controllers\VerificateController::class, 'form'])->name('verification.form');
 Route::post('/verification/email', [App\Http\Controllers\VerificateController::class, 'verification'])->name('verification');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/main/gallery', [App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
+
+Route::get('/main/vacancy', [App\Http\Controllers\User\VacancyController::class, 'index'])->name('vacancy');
+Route::post('/main/vacancy/save', [App\Http\Controllers\User\VacancyController::class, 'save'])->name('vacancy.save');
+
+Route::get('/main/profile/{user}', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
+Route::patch('/main/profile/update/{user}', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
@@ -80,17 +87,45 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
        Route::delete('/{question}', [App\Http\Controllers\Admin\QuestionController::class, 'delete'])->name('admin.resume.question.delete');
     });
 
+    Route::group(['prefix'=>'mainGallery'], function (){
+        Route::get('/', [App\Http\Controllers\Admin\MainGalleryController::class, 'index'])->name('admin.mainGallery.index');
+        Route::post('/create', [App\Http\Controllers\Admin\MainGalleryController::class, 'create'])->name('admin.mainGallery.create');
+        Route::delete('/{gallery}', [App\Http\Controllers\Admin\MainGalleryController::class, 'delete'])->name('admin.mainGallery.delete');
+    });
+
+    Route::group(['prefix'=>'attendance'], function (){
+        Route::get('/', [App\Http\Controllers\Admin\AttendanceContoller::class, 'index'])->name('admin.attendance.index');
+    });
+
+    Route::group(['prefix' => 'profile'], function (){
+        Route::get('/{user}', [App\Http\Controllers\Admin\ProfileController::class, 'index'])->name('admin.profile');
+        Route::patch('/update/{user}', [App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('admin.profile.update');
+    });
 });
 
 Route::group(['prefix'=>'employee'], function (){
-    Route::get('/index', App\Http\Controllers\Employee\IndexController::class)->name('employee');
+    Route::get('/index/{user}', App\Http\Controllers\Employee\IndexController::class)->name('employee');
 
     Route::group(['prefix'=>'profile'], function (){
-        Route::get('/index', [App\Http\Controllers\Employee\ProfileController::class, 'index'])->name('employee.profile');
+        Route::get('/index/{user}', [App\Http\Controllers\Employee\ProfileController::class, 'index'])->name('employee.profile');
+        Route::patch('/update/{user}', [App\Http\Controllers\Employee\ProfileController::class, 'update'])->name('employee.profile.update');
     });
 
     Route::group(['prefix'=>'group'], function (){
         Route::get('/', [App\Http\Controllers\Employee\GroupController::class, 'index'])->name('employee.group.index');
+        Route::get('/show/{child}', [App\Http\Controllers\Employee\GroupController::class, 'show'])->name('employee.group.show');
+        Route::get('/edit/{child}', [App\Http\Controllers\Employee\GroupController::class, 'edit'])->name('employee.group.edit');
+        Route::patch('/update/{child}', [App\Http\Controllers\Employee\GroupController::class, 'update'])->name('employee.group.update');
+        Route::delete('/{child}', [App\Http\Controllers\Employee\GroupController::class, 'delete'])->name('employee.group.delete');
+    });
+
+    Route::group(['prefix'=>'attendance'], function (){
+        Route::get('/', [App\Http\Controllers\Employee\AttendanceController::class, 'index'])->name('employee.attendance.index');
+        Route::post('/create', [App\Http\Controllers\Employee\AttendanceController::class, 'create'])->name('employee.attendance.create');
+        Route::post('/archive', [App\Http\Controllers\Employee\AttendanceController::class, 'showArchive'])->name('employee.attendance.archive');
+
     });
 });
+
+//Route::auth();
 

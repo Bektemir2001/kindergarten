@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{asset('new_template/img/aruu%20logo1.png')}}" rel="icon">
+{{--    <link href="{{asset('new_template/img/aruu%20logo1.png')}}" rel="icon">--}}
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
 </head>
 
 <body>
+
 <div class="container-xxl bg-white p-0">
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -46,20 +47,31 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
         <a href="" class="navbar-brand">
-            <h1 class="m-0 text-primary"><img src="{{asset('new_template/img/aruu%20logo1.png')}}" style="height: 100px; width: 100px" alt=""><img src="{{asset('new_template/img/aruu%20logo2.png')}}" style="height: 100px; width: 100px"></h1>
+            <h1 class="m-0 text-primary">
+                <a href="{{route('index')}}">
+                    <img src="{{asset('new_template/img/aruu%20logo1.png')}}" style="height: 100px; width: 100px" alt="">
+                    <img src="{{asset('new_template/img/aruu%20logo2.png')}}" style="height: 100px; width: 100px">
+                </a>
+            </h1>
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav mx-auto">
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Мои дети</a>
-                    <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
-                        <a href="" class="dropdown-item">Ребенок 1</a>
-                        <a href="" class="dropdown-item">Ребенок 2</a>
-                    </div>
-                </div>
+                @if(auth()->user())
+                    @if(auth()->user()->role === 'ROLE_ADMIN' or auth()->user()->role === 'ROLE_TEACHER' or auth()->user()->role === 'ROLE_PARENT')
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Мои дети</a>
+                            <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                                @foreach($children as $child)
+                                    <a href="" class="dropdown-item">{{$child->name}}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                @endif
+
                 <div class="nav-item">
                     <a href="" class="nav-link">О нас</a>
                 </div>
@@ -74,14 +86,13 @@
                     <a href="" class="nav-link">Услуги</a>
                 </div>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Галерея</a>
-                    <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
-                        <a href="" class="dropdown-item">Фото</a>
-                        <a href="" class="dropdown-item">Видео</a>
-                    </div>
+                    <a href="{{route('gallery')}}" class="nav-link">Галерея</a>
                 </div>
                 <div class="nav-item">
                     <a href="" class="nav-link">Контакты</a>
+                </div>
+                <div class="nav-item">
+                    <a href="{{route('vacancy')}}" class="nav-link">Вакансии</a>
                 </div>
             </div>
             @if(auth()->user())
@@ -98,7 +109,13 @@
                             <img src="https://w7.pngwing.com/pngs/364/361/png-transparent-account-avatar-profile-user-avatars-icon.png" alt="Avatar" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;">
                         </a>
                         <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="right: 0;left: auto;!important;">
-                            <a href="" class="dropdown-item" >Мой профиль</a>
+                            @if(auth()->user()->role === 'ROLE_ADMIN')
+                                <a href="{{route('admin')}}" class="dropdown-item" >Мой кабинет</a>
+                            @elseif(auth()->user()->role==='ROLE_TEACHER')
+                                <a href="{{route('employee', auth()->user()->id)}}" class="dropdown-item" >Мой кабинет</a>
+                            @else
+                                <a href="{{route('profile', auth()->user()->id)}}" class="dropdown-item" >Мой профиль</a>
+                            @endif
                             <a class="dropdown-item" onclick="location.href='{{route('user.logout')}}'" type="button">Выйти</a>
                         </div>
                     </div>
@@ -133,7 +150,6 @@
                     <div class="modal-dialog">
                         <div class="modal-content" style="z-index: 9999">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -141,18 +157,15 @@
                                 <form>
                                     <!-- Email input -->
                                     <div class="form-outline mb-3">
-                                        <label class="form-label" for="email">Without registration, you cannot enroll a child.</label>
-                                    </div>
-                                    <div class="form-outline mb-3">
-                                        <label class="form-label" for="email">If you have an account, sing in, if not, sign up.</label>
+                                        <label class="form-label" for="email">Без регистрации вы не сможете записать ребенка. Если у вас есть учетная запись, войдите, если нет, зарегистрируйтесь.</label>
                                     </div>
                                     <!-- Submit button -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+                                        <button type="button" class="btn btn-primary btn-block"
                                                 data-bs-toggle="modal" data-bs-target="#modalSignIn">
                                             Войти
                                         </button>
-                                        <button type="button" class="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+                                        <button type="button" class="btn btn-primary btn-block"
                                                 data-bs-toggle="modal" data-bs-target="#modalSignUp">
                                             Зарегистрироваться
                                         </button>
@@ -178,7 +191,7 @@
                                     <!-- Email input -->
                                     <div class="field">
                                         <i class="icon fas fa-user"></i>
-                                        <input type="email" id="email" name="email" placeholder="Почка(Email)" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
+                                        <input type="email" id="email" name="email" placeholder="Почта(Email)" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
                                         @if(session('errorWithEmail'))
                                             <p class="text-danger">{{session('errorWithEmail')}}</p>
                                             <script>
@@ -205,10 +218,10 @@
                                     </div>
                                     <!-- Submit button -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary rounded-pill px-3 d-none d-lg-block"
-                                                data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary "
+                                                data-bs-dismiss="modal">Закрыть</button>
                                         <!-- <button type="button" class="btn btn-primary">Sign in</button> -->
-                                        <button type="submit" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Sign in</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Войти</button>
                                     </div>
                                 </form>
                             </div>
@@ -311,7 +324,7 @@
                                     </div>
 
                                     <!-- Passport back input -->
-                                    <div class="mb-3">
+                                    <div class="field">
                                         <label for="fileB" class="form-label">Обратная сторона паспорта</label>
                                         <input id="passport_back" type="file" class="form-control @error('passport_back') is-invalid @enderror" name="passport_back" value="{{ old('passport_back') }}">
 
@@ -324,9 +337,9 @@
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+                                                data-bs-dismiss="modal">Закрыть</button>
                                         <!-- Submit button -->
-                                        <button type="submit" class="btn btn-success btn-block">Register</button>
+                                        <button type="submit" class="btn btn-success btn-block">Далее</button>
                                     </div>
 
                                 </form>
@@ -445,7 +458,7 @@
                                     <div class="form-outline mb-2" style="padding: 10px">
                                         <label for="med_disability" class="form-label" style="font-weight: 700;">{{ __("Медицинская справка об инвалидности") }}</label>
                                         <div class="col-md-6">
-                                            <input id="med_disability" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('med_disability') is-invalid @enderror" name="med_disability" value="{{ old('med_disability') }}">
+                                            <input id="med_disability" type="file" class="form-control @error('med_disability') is-invalid @enderror" name="med_disability" value="{{ old('med_disability') }}">
                                             @error('med_disability')
                                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -455,9 +468,9 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+                                                data-bs-dismiss="modal">Закрыть</button>
                                         <!-- Submit button -->
-                                        <button type="submit" class="btn btn-success btn-block">Submit</button>
+                                        <button type="submit" class="btn btn-success btn-block">Записать</button>
                                     </div>
                                 </form>
                             </div>
@@ -560,7 +573,9 @@
 <script src="{{asset('new_template/lib/easing/easing.min.js')}}"></script>
 <script src="{{asset('new_template/lib/waypoints/waypoints.min.js')}}"></script>
 <script src="{{asset('new_template/lib/owlcarousel/owl.carousel.min.js')}}"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
 <!-- Template Javascript -->
 <script src="{{asset('new_template/js/main.js')}}"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}

@@ -14,6 +14,17 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="exampleInput" class="form-label">Teacher:</label>
+                    <select class="form-control col-6" name="teacher_id" id="teacher_id" @error('teacher_id') is-invalid @enderror required autocomplete="teacher_id">
+                        <option></option>
+                        @foreach($teachers as $teacher)
+                            <option value="{{$teacher->id}}" {{$teacher->id === $group->teacher_id ? "selected" : ""}}>{{$teacher->name}} {{$teacher->surname}}</option>
+                        @endforeach
+                    </select>                    @error('name')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label for="exampleInput" class="form-label">Limit:</label>
                     <input type="number" class="form-control col-6" name="limit" id="limit" value="{{$group->limit}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')">
                     @error('limit')

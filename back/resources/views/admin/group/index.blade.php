@@ -1,6 +1,12 @@
 @extends('layouts.admin_layout')
 @section('content')
     <div class="content-wrapper">
+        @if (session('status'))
+            <div class="alert alert-dismissible white" style="background-color: #9b73f2">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="container" style="margin-top: 10px;">
             <button type="button" class="btn btn-primary" style="margin-right:85%;" id="addGroupBtnId" onclick="showForm()">Add Group</button>
             <div class="d-none" id="addGroupId">
@@ -198,7 +204,7 @@
                             `<button title="submit" class="border-0 bg-transparent"> ` +
                             `<i title="delete" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>` +
                             `<div style="float: left; display: block; width: 30%;" class="text-center"> ` +
-                            `<a href="` + "/admin/group/show/" + data.id + `"><i class="fas fa-photo-video"></i></a>  </div> `;
+                            `<a href="` + "/admin/group/Gallery/" + data.id + `"><i class="fas fa-photo-video"></i></a>  </div> `;
                     })
                     .catch(error => console.log(error))
             })

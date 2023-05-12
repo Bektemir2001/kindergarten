@@ -3,10 +3,155 @@
 @section('content')
     <div class="content-wrapper">
         <div class="content-wrapper">
-            <div class="content-header row">
-                    <div class="btn-group float-md-right"><a class="btn white" style="background-color: #5f1dea; border-radius: 2rem; " href="#">ДОБАВИТЬ РЕБЕНКА</a></div>
+            <div class="content-header">
+                <button type="submit" class="btn btn-gradient-primary" data-toggle="modal" data-target="#exampleModal">Добавить ребенка</button>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center text-bold-400">
+                            <h5 class="modal-title" id="exampleModalLabel">Добавить нового ребенка</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form" action="{{route('employee.group.create')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                                <div class="row">
+                                                    <div class="">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Имя</p></label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" class="form-control" id="name" name="name" value="" required="" autofocus="">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Фамилия</p></label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" class="form-control" id="surname" name="surname" value="" required="" autofocus="">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">День Рождения</p></label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="date" class="form-control" id="birth_date" name="birth_date" value="" required="" autofocus="">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Пол</p></label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="radioDiv">
+                                                                    <input type="radio" name="gender" id="option-1" value="Male">
+                                                                    <input type="radio" name="gender" id="option-2" value="Female">
+                                                                    <label for="option-1" class="option option-1">
+                                                                        <div class="dot"></div>
+                                                                        <span>Мальчик</span>
+                                                                    </label>
+                                                                    <label for="option-2" class="option option-2">
+                                                                        <div class="dot"></div>
+                                                                        <span>Девочка</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Имя Родителя</p></label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <select class="form-control" name="parent_id" id="parent_id">
+                                                                    <option></option>
+                                                                    @foreach($parents as $parent)
+                                                                    <option value="{{$parent->id}}">{{$parent->name}} {{$parent->surname}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Название Группы</p></label>
+                                                            </div>
+                                                            <div class="col-lg-6" >
+                                                                <select class="form-control" name="group_id" id="group_id">
+                                                                    @foreach($groups as $group)
+                                                                        <option value="{{$group->id}}">{{$group->name}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Фото ребенка</p></label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="file" class="form-control" id="photo" name="photo" value=""  autofocus="">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Свидетельство о рождении</p></label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="file" class="form-control" id="birth_certificate" name="birth_certificate" value=""  autofocus="">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Медицинская справка</p></label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="file" class="form-control" id="med_certificate" name="med_certificate" value=""  autofocus="">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Справка об инвалидности</p></label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="file" class="form-control" id="med_disability" name="med_disability" value=""  autofocus="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <div class="modal-footer">
+                                    <div class="col-12 text-right">
+                                        <button id="cancelBtn" class="btn btn-gradient-primary my-1" data-dismiss="modal">Закрыть</button>
+                                        <button type="submit" class="btn btn-gradient-secondary my-1 ">Добавить</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <br>
+            @if (session('status'))
+                <div class="alert alert-dismissible white" style="background-color: #9b73f2">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="position-relative table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -36,19 +181,28 @@
                         <th class=""><input class="form-control form-control-sm" value="" oninput="searchByParent(this.value)"></th>
                     </tr>
                     </thead>
-                    <tbody id="TableId">
-                    <tr class="">
-                        <td class="">John Doe</td>
-                        <td class="">2018/01/01</td>
-                        <td class="">Guest</td>
-                        <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-info round">Редактировать</a></td>
-                        <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-success round">Посмотреть</a></td>
-                        <td class="py-1 px-1"><a href="#" class="mb-0 btn-sm btn btn-outline-danger round">Удалить</a></td>
-                    </tr>
+                    <tbody id="groupTableId">
+                    @foreach($children as $child)
+                        <tr class="">
+                            <td class="">{{$child->name}} {{$child->surname}}</td>
+                            <td class="">{{$child->birth_date}}</td>
+                            <td class="">{{$child->parent_name}} {{$child->parent_surname}}</td>
+                            <td class="py-1 px-1"><a href="{{route('employee.group.edit', $child->id)}}" class="mb-0 btn-sm btn btn-outline-info round">Редактировать</a></td>
+                            <td class="py-1 px-1"><a href="{{route('employee.group.show', $child->id)}}" class="mb-0 btn-sm btn btn-outline-success round">Посмотреть</a></td>
+                            <td class="py-1 px-1">
+                                <form action="{{route('employee.group.delete', $child->id)}}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" title="delete" class="mb-0 btn-sm btn btn-outline-danger round" onclick="alert('Вы уверены, что хотите удалить данные этого ребенка?')">
+                                        Удалить
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
-        </div>
         </div>
     <script>
         function searchByName(value){
@@ -90,6 +244,56 @@
                 }
             }
         }
+
+        document.getElementById('form').addEventListener("submit", function (event) {
+            event.preventDefault()
+            document.getElementById('cancelBtn').click();
+            let url = "{{route('employee.group.create')}}";
+            let name = document.getElementById("name").value;
+            let surname = document.getElementById("surname").value;
+            let birth_date = document.getElementById("birth_date").value;
+            let gender = document.querySelector('input[name="gender"]:checked').value;
+            let parent_id = document.getElementById("parent_id").value;
+            let group_id = document.getElementById("group_id").value;
+            let photo = document.getElementById("photo").files[0];
+            let birth_certificate = document.getElementById("birth_certificate").files[0];
+            let med_certificate = document.getElementById("med_certificate").files[0];
+            let med_disability = document.getElementById("med_disability").files[0];
+            let data = new FormData();
+            data.append("name", name);
+            data.append("surname", surname);
+            data.append("birth_date", birth_date);
+            data.append("gender", gender);
+            data.append("parent_id", parent_id);
+            data.append("group_id", group_id);
+            data.append("photo", photo);
+            data.append("birth_certificate", birth_certificate);
+            data.append("med_certificate", med_certificate);
+            data.append("med_disability", med_disability);
+            fetch(url, {
+                method: 'POST',
+                body: data
+            })
+                .then(res => res.json())
+                .then(data => {
+                    let table = document.getElementById('groupTableId');
+                    let i = table.rows.length;
+                    let row = table.insertRow(i);
+                    row.insertCell(0).innerHTML = data.name +" "+ data.surname;
+                    row.insertCell(1).innerHTML = data.birth_date;
+                    row.insertCell(2).innerHTML = data.parent_id;
+                    row.insertCell(3).innerHTML = `<a href="employee/group/edit/${data.id}" class="mb-0 btn-sm btn btn-outline-info round">Редактировать</a>`;
+                    row.insertCell(4).innerHTML = `<a href="employee/group/show/${data.id}" class="mb-0 btn-sm btn btn-outline-success round">Посмотреть</a>`;
+                    row.insertCell(5).innerHTML = `<form action="employee/group/delete/${data.id}}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" title="delete" class="mb-0 btn-sm btn btn-outline-danger round" onclick="alert('Вы уверены, что хотите удалить данные этого ребенка?')">
+                        Удалить
+                    </button>
+                </form>`;
+                })
+                .catch(error => console.log(error))
+        })
     </script>
     </div>
 @endsection

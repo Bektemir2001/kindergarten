@@ -65,7 +65,8 @@ class GroupController extends Controller
     }
 
     public function edit(Group $group){
-        return view('admin.group.edit',compact('group'));
+        $teachers = User::where('role', 'ROLE_TEACHER')->get();
+        return view('admin.group.edit',compact('group', 'teachers'));
     }
 
     public function update(UpdateGroupRequest $request, Group $group){
@@ -114,6 +115,6 @@ class GroupController extends Controller
     }
     public function galleryDelete(Gallery $gallery){
         $gallery->delete();
-        return redirect()->back();
+        return redirect()->route('admin.group.Gallery');
     }
 }

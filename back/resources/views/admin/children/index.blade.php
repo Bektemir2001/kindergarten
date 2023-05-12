@@ -226,6 +226,7 @@
                             </td>
                             {{-- td>rfed</td> --}}
                         </tr>
+
                     @endforeach
 
                     </tbody>

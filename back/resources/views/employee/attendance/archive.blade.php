@@ -78,73 +78,31 @@
                 {{ session('status') }}
             </div>
         @endif
-        <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addChildBtnId" onclick="showForm()">Отметить детей</button>
-        <div class="d-none" id="attendance">
-            <div class="position-relative table-responsive">
-                <label for="birth_date" class="col-md-4 col-form-label text-md-end">{{ __('Birth Date') }}</label>
-                <div class="col-md-6">
-                    <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{date('Y-m-d')}}" required autocomplete="date">
-                    @error('date')
-                    <span class="invalid-feedback" role="alert">
+        <div class="position-relative">
+            <form method="POST" action="{{route('employee.attendance.archive')}}">
+                @csrf
+                <div class="position-relative table-responsive"><h4>Выберите месяц</h4></div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <input id="date" type="month" class="@error('date') is-invalid @enderror" name="date" value="{{date('Y-m')}}" style="margin: 20px 20px;" required autocomplete="date">
+                        @error('date')
+                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                    @enderror
+                        @enderror
+                    </div>
+                    <div class="col-sm-2" style="flex: 50%; padding: 10px;width: 300px;">
+                        <button type="submit" class="btn btn-gradient-primary" style="margin-right:85%;">Показать</button>
+                    </div>
                 </div>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
-                            <div class="d-inline" style="font-size: 20px">Ф.И.О</div>
-                        </th>
-                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:1%">
-                            <div class="d-inline"></div>
-                        </th>
-                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:1%">
-                            <div class="d-inline" style="font-size: 20px">Функции</div>
-                        </th>
-                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:1%">
-                        </th>
-                    </tr>
-                    <tr class="table-sm">
-                        <th class=""><input class="form-control form-control-sm" placeholder="Поиск" value="" oninput="searchByName(this.value)"></th>
-                        <td class="py-1 px-1"></td>
-                        <td class="py-1 px-3">
-                            <label class="container">
-                                <input type="checkbox" onclick="selectAll(this)">
-                                <div class="checkmark"></div>
-                            </label>
-                        </td>
-                        <td class="py-1 px-1">
-                    </tr>
-                    </thead>
-                    <tbody id="TableId">
-                    @foreach($children as $child)
-                        <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}">
-                            <td class="" style="font-size:20px">{{$child->name}} {{$child->surname}}</td>
-                            <td class="py-1 px-1"></td>
-                            <td class="py-1 px-3">
-                                <label class="container">
-                                    <input type="checkbox" onclick="selectChild({{$child->id}}, this)" id="{{'check'.$child->id}}">
-                                    <div class="checkmark"></div>
-                                </label>
-                            </td>
-                            <td class="py-1 px-1">
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div style="text-align: right">
-                <button type="button" class="btn btn-gradient-primary" onclick="cancelForm()">Отмена</button>
-                <button type="button" class="btn btn-gradient-primary" onclick="sendData()">Сохранить</button>
-            </div>
+            </form>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
+            <br>
+            <br>
+            <br>
+            <br>
         <div class="position-relative table-responsive">
+            <h4>Посещаемость детей за месяц {{\Carbon\Carbon::parse($attendance[0]->date)->format('F')}}</h4>
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -176,45 +134,43 @@
                         @foreach($attendance as $at)
                             @php
                                 $data = json_decode($at->children, true);
-                            @endphp
-                            @if($data[$child->id])
-                                <td class="py-1 px-2">
-                                    <label class="container">
-                                        <input type="checkbox" checked="checked" disabled>
-                                        <div class="checkmark"></div>
-                                    </label>
-                                </td>
+//                            @endphp
+                            @if(array_key_exists($child->id, $data))
+                                @if($data[$child->id])
+                                    <td class="py-1 px-2">
+                                        <label class="container">
+                                            <input type="checkbox" checked="checked" disabled>
+                                            <div class="checkmark"></div>
+                                        </label>
+                                    </td>
+                                @else
+                                    <td class="py-1 px-2">
+                                        <label class="container">
+                                            <input type="checkbox" disabled>
+                                            <div class="checkmark"></div>
+                                        </label>
+                                    </td>
+                                @endif
                             @else
-                                <td class="py-1 px-2">
-                                    <label class="container">
-                                        <input type="checkbox" disabled>
-                                        <div class="checkmark"></div>
-                                    </label>
-                                </td>
+                                <td class="py-1 px-2"><label class="container"></label></td>
                             @endif
+
 
                         @endforeach
                     </tr>
                 @endforeach
+
                 </tbody>
             </table>
-            <br>
-            <br>
-            <br>
-            <form method="POST" action="{{ route('employee.attendance.archive') }}" >
-                @csrf
-                <input id="date" type="month" class="form-control @error('date') is-invalid @enderror" name="date" value="{{date('Y-m')}}" required autocomplete="date" hidden="">
-                @error('date')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-                <div style="text-align: right">
-                    <button type="submit" class="btn btn-gradient-primary" >Архив</button>
-                </div>
-            </form>
-
         </div>
+        <br>
+        <br>
+        <br>
+            <div style="text-align: right">
+                <a href="{{route('employee.attendance.index')}}">
+                    <button type="button" class="btn btn-gradient-primary" >Назад</button>
+                </a>
+            </div>
         <script>
             function showForm(){
                 document.getElementById("addChildBtnId").className = "d-none";

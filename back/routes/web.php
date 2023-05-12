@@ -121,6 +121,9 @@ Route::group(['prefix'=>'employee'], function (){
 
     Route::group(['prefix'=>'attendance'], function (){
         Route::get('/', [App\Http\Controllers\Employee\AttendanceController::class, 'index'])->name('employee.attendance.index');
+        Route::post('/create', [App\Http\Controllers\Employee\AttendanceController::class, 'create'])->name('employee.attendance.create');
+        Route::post('/archive', [App\Http\Controllers\Employee\AttendanceController::class, 'showArchive'])->name('employee.attendance.archive');
+
     });
 });
 

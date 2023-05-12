@@ -66,7 +66,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="info text-center">
-                    <a href="#" class="d-block">{{auth()->user()->name}} {{auth()->user()->surname}}</a>
+                    <a href="{{route('admin.profile', auth()->user()->id)}}" class="d-block">{{auth()->user()->name}} {{auth()->user()->surname}}</a>
                 </div>
             </div>
             <!-- Sidebar Menu -->

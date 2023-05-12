@@ -115,9 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 text-right">
-                                    <a href="{{route('employee.group.index')}}">
-                                        <button class="btn btn-gradient-primary my-1">Назад</button>
-                                    </a>
+                                    <a href="{{route('employee.group.index')}}" class="btn btn-gradient-primary my-1">Назад</a>
                                     <button type="submit" class="btn btn-gradient-secondary my-1">Сохранить</button>
                                 </div>
                             </div>

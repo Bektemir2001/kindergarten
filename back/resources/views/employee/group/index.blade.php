@@ -146,6 +146,12 @@
                 </div>
             </div>
             <br>
+            @if (session('status'))
+                <div class="alert alert-dismissible white" style="background-color: #9b73f2">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="position-relative table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -270,21 +276,6 @@
             })
                 .then(res => res.json())
                 .then(data => {
-                    {{--let table = document.getElementById('childTable');--}}
-                    {{--let i = table.rows.length;--}}
-                    {{--let row = table.insertRow(i);--}}
-                    {{--row.insertCell(0).innerHTML = data.id;--}}
-                    {{--row.insertCell(1).innerHTML = data.name;--}}
-                    {{--row.insertCell(2).innerHTML = data.surname;--}}
-                    {{--row.insertCell(3).innerHTML = data.group_id;--}}
-                    {{--row.insertCell(4).innerHTML = `<div style="float: left; display: block; width: 30%;" class="text-center">` +--}}
-                    {{--    `<a href="`+ "children/show/" + data.id + `"><i class="fas fa-eye"></i></a> </div>` +--}}
-                    {{--    `<div style="float: left; display: block; width: 30%;" class="text-center">` +--}}
-                    {{--    `<a href="`+ "admin/children/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> </div>` +--}}
-                    {{--    `<div style="float: left; display: block; width: 30%;" class="text-center">` +--}}
-                    {{--    `<form action="`+ "admin/children/delete/" + data.id + `" method="POST"> @method("DELETE") @csrf` +--}}
-                    {{--    `<button title="delete" class="border-0 bg-transparent">`+--}}
-                    {{--    `<i title="delete" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;--}}
                     let table = document.getElementById('groupTableId');
                     let i = table.rows.length;
                     let row = table.insertRow(i);

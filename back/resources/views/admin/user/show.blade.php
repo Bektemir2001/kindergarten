@@ -7,9 +7,9 @@
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
-{{--                    <div class="text-center">--}}
-{{--                        <img class="img-fluid img-circle" src="{{asset($student->user->image)}}" alt="User profile picture" style="width:150px; height:150px;">--}}
-{{--                    </div>--}}
+                    <div class="text-center">
+                        <img class="img-fluid" src="{{asset($user->profile_photo)}}" alt="User profile picture" style="width:150px; height:150px;">
+                    </div>
 
                     <h3 class="profile-username text-center">{{$user->name}} {{$user->surname}}</h3>
 
@@ -59,7 +59,7 @@
                     </ul>
 
                     <div class="modal-footer">
-                        <a href="{{route('admin.children.index')}}" class="btn btn-secondary">Back</a>
+                        <a href="{{route('admin.user.index')}}" class="btn btn-secondary">Back</a>
                     </div>
                 </div>
                 <!-- /.card-body -->

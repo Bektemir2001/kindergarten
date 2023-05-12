@@ -21,6 +21,13 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="exampleInput" class="form-label">Profile photo:</label>
+                        <input type="file" class="form-control col-6" accept="image/png, image/gif, image/jpeg" name="profile_photo" id="profile_photo">
+                        @error('profile_photo')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInput" class="form-label">Address:</label>
                         <input type="text" class="form-control col-6" name="address" id="address" value="{{$user->address}}" required autofocus oninvalid="this.setCostomValidity('пожалуйста, заполните это поле')" oninput="this.setCostomValidity('')">
                         @error('address')

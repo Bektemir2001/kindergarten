@@ -10,13 +10,18 @@
                     {{ session('status') }}
                 </div>
             @endif
+            <form class=" row" action="{{route('employee.profile.update', $user->id)}}" method="POST" enctype="multipart/form-data">
+                    @method('patch')
+                    @csrf
             <section class="card">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-md-2 col-12">
-                                    <img src="#" class="rounded-circle height-100" alt="Card image" />
+                                    <img src="{{asset($user->profile_photo)}}" class="img-fluid" alt="Card image" />
+                                    <br><br>
+                                    <input type="file" class="form-control" id="profile_photo" name="profile_photo" value="" autofocus="">
                                 </div>
                                 <div class="col-md-10 col-12">
                                     <div class="row">
@@ -30,9 +35,7 @@
                                         </div>
                                     </div>
                                     <hr/>
-                                    <form class="form-horizontal form-user-profile row mt-2" action="{{route('employee.profile.update', $user->id)}}" method="POST" enctype="multipart/form-data">
-                                        @method('patch')
-                                        @csrf
+                                    <div class="row">
                                         <div class="col-6">
                                             <fieldset class="form-label-group">
                                                 <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}" required="" autofocus="">
@@ -64,7 +67,6 @@
                                             </fieldset>
                                         </div>
                                         <div class="col-6">
-
                                         </div>
                                         <div class="col-6">
                                             <img class="img-fluid" src="{{asset($user->passport_front)}}">
@@ -87,13 +89,14 @@
                                         <div class="col-12 text-right">
                                             <button type="submit" class="btn-gradient-primary my-1" data-bs-toggle="modal" data-bs-target="#modalUpdate">Сохранить изменения</button>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+                </form>
         </div>
     </div>
 @endsection

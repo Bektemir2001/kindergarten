@@ -28,6 +28,7 @@ class UpdateUserRequest extends FormRequest
             'address' => ['string', 'max:200'],
             'phone_number' => ['string', 'max:20'],
             'role' => '',
+            'profile_photo'=>'',
             'passport_front' => 'mimes:jpg,bmp,png,jpeg',
             'passport_back' => 'mimes:jpg,bmp,png,jpeg',
         ];

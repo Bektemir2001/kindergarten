@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('med_disability', 200)->nullable();
             $table->string('photo',200);
             $table->boolean('payment')->default(false);
+            $table->integer('deleted')->default(0);
             $table->unsignedBigInteger('group_id');
             $table->index('group_id','children_groups_idx');
             $table->foreign('group_id','children_groups_fk')

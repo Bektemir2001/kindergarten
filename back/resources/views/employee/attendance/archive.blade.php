@@ -79,117 +79,119 @@
             </div>
         @endif
         <div class="position-relative">
-            <form method="POST" action="{{route('employee.attendance.archive')}}">
-                @csrf
-                <div class="position-relative table-responsive"><h4>Выберите месяц</h4></div>
-                <div class="row">
-                    <div class="col-sm-2">
-                        <input id="date" type="month" class="@error('date') is-invalid @enderror" name="date" value="{{date('Y-m')}}" style="margin: 20px 20px;" required autocomplete="date">
-                        @error('date')
-                        <span class="invalid-feedback" role="alert">
+            <div class="row">
+                <div class="col">
+                    <form method="POST" action="{{route('employee.attendance.archive')}}">
+                        @csrf
+                        <div class="position-relative table-responsive" style="margin-top: 20px;"><h4>Выберите месяц для просмотра:</h4></div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <input id="date" type="month" class="@error('date') is-invalid @enderror" name="date" value="{{date('Y-m')}}" style="margin: 20px 20px;" required autocomplete="date">
+                                @error('date')
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                        @enderror
-                    </div>
-                    <div class="col-sm-2" style="flex: 50%; padding: 10px;width: 300px;">
-                        <button type="submit" class="btn btn-gradient-primary" style="margin-right:85%;">Показать</button>
-                    </div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-2" style="flex: 50%; padding: 10px;width: 300px;">
+                                <button type="submit" class="btn btn-gradient-primary" style="margin-right:85%;">Показать</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div class="col">
+                    <form method="POST" action="{{route('employee.attendance.archiveEdit')}}">
+                        @csrf
+                        <div class="position-relative table-responsive" style="margin-top: 20px;"><h4>Выберите дату для редактирования:</h4></div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <input id="date" type="date" class="@error('date') is-invalid @enderror" name="date" value="" style="margin: 20px 20px;" required autocomplete="date">
+                                @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-2" style="flex: 50%; padding: 10px;width: 300px;">
+                                <button type="submit" class="btn btn-gradient-primary" style="margin-right:85%;">Редактировать</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
         </div>
             <br>
             <br>
             <br>
             <br>
-        <div class="position-relative table-responsive">
-            <h4>Посещаемость детей за месяц {{\Carbon\Carbon::parse($attendance[0]->date)->format('F')}}</h4>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
-                        <div class="d-inline" style="font-size: 15px">Ф.И.О</div>
-                    </th>
-                    @foreach($attendance as $at)
-                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer">
-                            <div class="d-inline" style="font-size: 15px">{{\Carbon\Carbon::parse($at->date)->format('m/d')}}</div>
-                        </th>
-                    @endforeach
-                </tr>
-                <tr class="table-sm">
-                    <th class=""><input class="form-control form-control-sm" value="" oninput="searchByName(this.value)"></th>
-                    @foreach($attendance as $at)
-                        <th class="">
-                            <label class="container" style="right: 7px;">
-                                <input type="checkbox">
-                                <div class="checkmark"></div>
-                            </label>
-                        </th>
-                    @endforeach
-                </tr>
-                </thead>
-                <tbody id="TableId">
-                @foreach($children as $child)
-                    <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}">
-                        <td class="" style="font-size:20px">{{$child->name}} {{$child->surname}}</td>
-                        @foreach($attendance as $at)
-                            @php
-                                $data = json_decode($at->children, true);
-//                            @endphp
-                            @if(array_key_exists($child->id, $data))
-                                @if($data[$child->id])
-                                    <td class="py-1 px-2">
-                                        <label class="container">
-                                            <input type="checkbox" checked="checked" disabled>
-                                            <div class="checkmark"></div>
-                                        </label>
-                                    </td>
-                                @else
-                                    <td class="py-1 px-2">
-                                        <label class="container">
-                                            <input type="checkbox" disabled>
-                                            <div class="checkmark"></div>
-                                        </label>
-                                    </td>
-                                @endif
-                            @else
-                                <td class="py-1 px-2"><label class="container"></label></td>
-                            @endif
-
-
+            @if($attendance != null)
+                <div class="position-relative table-responsive">
+                    <h4>Посещаемость детей за месяц {{\Carbon\Carbon::parse($attendance[0]->date)->format('F')}}</h4>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
+                                <div class="d-inline" style="font-size: 15px">Ф.И.О</div>
+                            </th>
+                            @foreach($attendance as $at)
+                                <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer">
+                                    <div class="d-inline" style="font-size: 15px">{{\Carbon\Carbon::parse($at->date)->format('m/d')}}</div>
+                                </th>
+                            @endforeach
+                        </tr>
+                        <tr class="table-sm">
+                            <th class=""><input class="form-control form-control-sm" value="" oninput="searchByName(this.value)"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="TableId">
+                        @foreach($children as $child)
+                            <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}">
+                                <td class="" style="font-size:20px">{{$child->name}} {{$child->surname}}</td>
+                                @foreach($attendance as $at)
+                                    @php
+                                        $data = json_decode($at->children, true);
+        //                            @endphp
+                                    @if(array_key_exists($child->id, $data))
+                                        @if($data[$child->id])
+                                            <td class="py-1 px-2">
+                                                <label class="container">
+                                                    <input type="checkbox" checked="checked" disabled>
+                                                    <div class="checkmark"></div>
+                                                </label>
+                                            </td>
+                                        @else
+                                            <td class="py-1 px-2">
+                                                <label class="container">
+                                                    <input type="checkbox" disabled>
+                                                    <div class="checkmark"></div>
+                                                </label>
+                                            </td>
+                                        @endif
+                                    @else
+                                        <td class="py-1 px-2"><label class="container"></label></td>
+                                    @endif
+                                @endforeach
+                            </tr>
                         @endforeach
-                    </tr>
-                @endforeach
 
-                </tbody>
-            </table>
-        </div>
+                        </tbody>
+                    </table>
+                </div>
+
+            @elseif($attendance === null)
+                <alert>Выбранном вами месяце нету данных, пожалуйста выберите другую дату</alert>
+            @endif
         <br>
         <br>
         <br>
-            <div style="text-align: right">
+            <div style="text-align: right;">
                 <a href="{{route('employee.attendance.index')}}">
                     <button type="button" class="btn btn-gradient-primary" >Назад</button>
                 </a>
             </div>
+
+
         <script>
-            function showForm(){
-                document.getElementById("addChildBtnId").className = "d-none";
-                document.getElementById("attendance").className = "";
-            }
-            function cancelForm(){
-                document.getElementById("addChildBtnId").className = "btn btn-gradient-primary";
-                document.getElementById("attendance").className = "d-none";
-            }
-            let all_children = {};
-            let group_id = 0;
-            let rows = document.getElementById('TableId').rows;
-            let n = rows.length;
-            for(let i = 0; i < n; i++)
-            {
-                all_children[rows[i].dataset.child] = false;
-                group_id = rows[i].dataset.group_id;
-            }
-            console.log(all_children);
             function searchByName(value){
                 let table = document.getElementById('TableId');
                 let rows = table.rows;
@@ -202,43 +204,6 @@
                         rows[i].className = '';
                     }
                 }
-            }
-
-            function selectChild(id, value){
-                all_children[id] = value.checked;
-                console.log(all_children);
-            }
-            function selectAll(value)
-            {
-                Object.keys(all_children).forEach(key => {
-                    selectChild(key, value)
-                    document.getElementById('check'+key).checked = value.checked;
-                });
-            }
-
-            function sendData(){
-                let date = document.getElementById('date').value;
-                let url = "{{route('employee.attendance.create')}}";
-                let data = new FormData();
-                data.append("group_id", group_id);
-                data.append("date", date);
-                data.append("children", JSON.stringify(all_children));
-                fetch(url, {
-                    method:"POST",
-                    headers: {
-                        'X-CSRF-TOKEN': "{{csrf_token()}}"
-                    },
-                    body:data,
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        alert("Вы успешно отметили детей")
-                        location.reload();
-                    })
-                    .catch(error => {
-                        alert('Вы уже отметили этот день, пожалуйста выберите правильную дату');
-                    });
             }
         </script>
     </div>

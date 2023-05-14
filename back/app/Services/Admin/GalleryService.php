@@ -18,6 +18,9 @@ class GalleryService
 {
     public function store(Request $request, Group $group)
     {
+        $data = $request->validate([
+            'info' => ''
+        ]);
         if($request->has('images')){
             foreach ($request->file('images') as $image) {
                 $imageName = Storage::disk('public')->put('group_gallery', $image);
@@ -26,7 +29,8 @@ class GalleryService
                 Gallery::create([
                     'group_id'=>$group->id,
                     'image'=>$imageName,
-                    'video'=>null
+                    'video'=>null,
+                    'info'=>$data['info']
                 ]);
             }
         }
@@ -37,7 +41,8 @@ class GalleryService
                 Gallery::create([
                     'group_id'=>$group->id,
                     'image'=>null,
-                    'video'=>$videoName
+                    'video'=>$videoName,
+                    'info' => ''
                 ]);
             }
         }

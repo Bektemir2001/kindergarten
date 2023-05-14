@@ -29,12 +29,35 @@
 
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Add news to gallery:</label>
+                    <div class="col-md-6">
+                        <textarea
+                            id="info"
+                            name="info"
+                            rows="5"
+                            cols="58"
+                            placeholder="Write a new information..."></textarea>
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <a href="{{route('admin.group.index')}}" class="btn btn-secondary">Cancel</a>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
+
+            <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                    <ul class="list-group list-group-unbordered mb-3">
+                        @foreach($galleries as $gallery)
+                        <li class="list-group-item">
+                            <small>{{$gallery->created_at}}</small>
+                            <h5 class="">{{$gallery->info}}</h5>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
 
             <div class="row">
                 @php

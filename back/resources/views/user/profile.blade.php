@@ -26,7 +26,7 @@
                                             type="file"
                                             id="profile_photo"
                                             name="profile_photo"
-                                            class="account-file-input"
+                                            class="account-file-input form-control"
                                         />
                                     </label>
                                     <p class="text-muted mb-0">Обновите фотографию профиля. Можно загрузить JPG, GIF or PNG.</p>
@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-auto">
-                                    <button type="submit" class="btn btn-primary ms-auto">Save changes</button>
+                                    <button type="submit" class="btn btn-primary ms-auto">Сохранить изменения</button>
                                 </div>
                         </div>
                         </form>

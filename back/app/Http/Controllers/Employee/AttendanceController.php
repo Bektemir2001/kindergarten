@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Employee\UpdateArchiveRequest;
 use App\Models\Attendance;
 use App\Models\Child;
 use App\Models\Group;
@@ -17,7 +18,7 @@ class AttendanceController extends Controller
             ->leftJoin('children', 'children.group_id', '=', 'groups.id')
             ->leftJoin('users', 'users.id', '=', 'children.parent_id')
             ->where('groups.teacher_id', auth()->user()->id)
-            ->select('children.id', 'children.name', 'children.surname', 'children.birth_date', 'groups.id as group_id')
+            ->select('children.id', 'children.name', 'children.surname', 'children.birth_date', 'children.deleted', 'groups.id as group_id')
             ->get();
         $group_id = Group::where('teacher_id', auth()->user()->id)
             ->select('id')
@@ -69,6 +70,47 @@ class AttendanceController extends Controller
             ->whereMonth('date', $month)
             ->select('date', 'children')
             ->get();
+        if(!($attendance && $attendance->count())){
+            $attendance = null;
+            return view('employee.attendance.archive', compact('children', 'attendance'));
+        }
         return view('employee.attendance.archive', compact('children', 'attendance'));
+    }
+
+    public function editArchive(Request $request){
+        $data = $request->validate([
+            'date' => 'required',
+        ]);
+        $children = DB::table('groups')
+            ->leftJoin('children', 'children.group_id', '=', 'groups.id')
+            ->leftJoin('users', 'users.id', '=', 'children.parent_id')
+            ->where('groups.teacher_id', auth()->user()->id)
+            ->select('children.id', 'children.name', 'children.surname', 'children.birth_date', 'groups.id as group_id')
+            ->get();
+        $group_id = Group::where('teacher_id', auth()->user()->id)
+            ->select('id')
+            ->get();
+        $attendance = Attendance::where('group_id', $group_id[0]->id)
+            ->where('date', $data['date'])
+            ->select('group_id','date', 'children')
+            ->get();
+        return view('employee.attendance.archiveEdit', compact('children', 'attendance'));
+    }
+
+    public function updateArchive(UpdateArchiveRequest $request){
+        $data = $request->validated();
+        $id = DB::table('attendances')
+            ->where('group_id', $data['group_id'])
+            ->where('date', $data['date'])
+            ->get();
+        $attendance = Attendance::findOrFail($id[0]->id);
+        DB::beginTransaction();
+        $attendance->update([
+            'group_id' => $data['group_id'],
+            'date' => $data['date'],
+            'children' => $data['children']
+        ]);
+        DB::commit();
+        return response(['status'=>'Вы успешно отметили детей']);
     }
 }

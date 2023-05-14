@@ -112,7 +112,8 @@ Route::group(['prefix'=>'employee'], function (){
         Route::get('/', [App\Http\Controllers\Employee\AttendanceController::class, 'index'])->name('employee.attendance.index');
         Route::post('/create', [App\Http\Controllers\Employee\AttendanceController::class, 'create'])->name('employee.attendance.create');
         Route::post('/archive', [App\Http\Controllers\Employee\AttendanceController::class, 'showArchive'])->name('employee.attendance.archive');
-
+        Route::post('/archive/edit', [App\Http\Controllers\Employee\AttendanceController::class, 'editArchive'])->name('employee.attendance.archiveEdit');
+        Route::post('/archive/update', [App\Http\Controllers\Employee\AttendanceController::class, 'updateArchive'])->name('employee.attendance.archiveUpdate');
     });
 });
 

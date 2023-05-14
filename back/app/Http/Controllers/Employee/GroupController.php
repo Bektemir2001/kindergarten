@@ -132,8 +132,12 @@ class GroupController extends Controller
     }
 
     public function delete(Child $child){
-        $child->delete();
-        return back()->with('status','Данные ребенка были удалены.');
+         DB::beginTransaction();
+        $child->update([
+            'deleted' => 1
+        ]);
+         DB::commit();
+        return back()->with('status','Ребенок был удален из группы');
     }
 
 }

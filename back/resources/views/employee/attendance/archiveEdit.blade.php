@@ -78,12 +78,11 @@
                 {{ session('status') }}
             </div>
         @endif
-        <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addChildBtnId" onclick="showForm()">Отметить детей</button>
-        <div class="d-none" id="attendance">
+        <div id="attendance">
+            <h4>Посещаемость детей за <span style="color: red">{{\Carbon\Carbon::parse($attendance[0]->date)->format('d F')}}</span></h4>
             <div class="position-relative table-responsive">
-                <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('Дата') }}</label>
                 <div class="col-md-6">
-                    <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{date('Y-m-d')}}" required autocomplete="date">
+                    <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{$attendance[0]->date}}" required autocomplete="date" hidden="">
                     @error('date')
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -119,90 +118,43 @@
                     </thead>
                     <tbody id="TableId">
                     @foreach($children as $child)
-                        @if($child->deleted === 0)
-                            <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}">
-                                <td class="" style="font-size:20px">{{$child->name}} {{$child->surname}}</td>
-                                <td class="py-1 px-1"></td>
-                                <td class="py-1 px-3">
-                                    <label class="container">
-                                        <input type="checkbox" onclick="selectChild({{$child->id}}, this)" id="{{'check'.$child->id}}">
-                                        <div class="checkmark"></div>
-                                    </label>
-                                </td>
-                                <td class="py-1 px-1">
-                                </td>
-                            </tr>
-                        @endif
+                        <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}">
+                            <td class="" style="font-size:20px">{{$child->name}} {{$child->surname}}</td>
+                            <td class="py-1 px-1"></td>
+                            @foreach($attendance as $at)
+                                @php
+                                    $data = json_decode($at->children, true);
+                                @endphp
+                                @if(array_key_exists($child->id, $data))
+                                    @if($data[$child->id])
+                                        <script>
+                                            selectChild({{$child->id}}, true)
+                                        </script>
+                                        <td class="py-1 px-3">
+                                            <label class="container">
+                                                <input type="checkbox" checked="checked" onclick="selectChild({{$child->id}}, this)" id="{{'check'.$child->id}}">
+                                                <div class="checkmark"></div>
+                                            </label>
+                                        </td>
+                                    @else
+                                        <td class="py-1 px-3">
+                                            <label class="container">
+                                                <input type="checkbox" onclick="selectChild({{$child->id}}, this)" id="{{'check'.$child->id}}">
+                                                <div class="checkmark"></div>
+                                            </label>
+                                        </td>
+                                    @endif
+                                @else
+                                    <td class="py-1 px-2"><label class="container"></label></td>
+                                @endif
+                            @endforeach
+                            <td class="py-1 px-1">
+                            </td>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-            <div style="text-align: right">
-                <button type="button" class="btn btn-gradient-primary" onclick="cancelForm()">Отмена</button>
-                <button type="button" class="btn btn-gradient-primary" onclick="sendData()">Сохранить</button>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="position-relative table-responsive">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
-                        <div class="d-inline" style="font-size: 15px">Ф.И.О</div>
-                    </th>
-                    @foreach($attendance as $at)
-                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer">
-                            <div class="d-inline" style="font-size: 15px">{{\Carbon\Carbon::parse($at->date)->format('m/d')}}</div>
-                        </th>
-                    @endforeach
-                </tr>
-                <tr class="table-sm">
-                    <th class=""><input class="form-control form-control-sm" value="" oninput="searchByName(this.value)"></th>
-                </tr>
-                </thead>
-                <tbody id="TableId">
-                @foreach($children as $child)
-                    <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}">
-                        <td class="" style="font-size:20px">{{$child->name}} {{$child->surname}}</td>
-                        @foreach($attendance as $at)
-                            @php
-                                $data = json_decode($at->children, true);
-                            @endphp
-                            @if(array_key_exists($child->id, $data))
-                                @if($data[$child->id])
-                                    <td class="py-1 px-2">
-                                        <label class="container">
-                                            <input type="checkbox" checked="checked" disabled>
-                                            <div class="checkmark"></div>
-                                        </label>
-                                    </td>
-                                @else
-                                    <td class="py-1 px-2">
-                                        <label class="container">
-                                            <input type="checkbox" disabled>
-                                            <div class="checkmark"></div>
-                                        </label>
-                                    </td>
-                                @endif
-                            @else
-                                <td class="py-1 px-2">
-                                    <label class="container">
-                                    </label>
-                                </td>
-                            @endif
-
-
-                        @endforeach
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-            <br>
-            <br>
-            <br>
             <form method="POST" action="{{ route('employee.attendance.archive') }}" >
                 @csrf
                 <input id="date" type="month" class="form-control @error('date') is-invalid @enderror" name="date" value="{{date('Y-m')}}" required autocomplete="date" hidden="">
@@ -212,20 +164,15 @@
                                     </span>
                 @enderror
                 <div style="text-align: right">
-                    <button type="submit" class="btn btn-gradient-primary" >Архив</button>
+                    <button type="submit" class="btn btn-gradient-primary" >Назад</button>
+
+                    <button type="button" class="btn btn-gradient-primary" onclick="sendData()">Сохранить</button>
                 </div>
             </form>
-
         </div>
+        <br>
+        <br>
         <script>
-            function showForm(){
-                document.getElementById("addChildBtnId").className = "d-none";
-                document.getElementById("attendance").className = "";
-            }
-            function cancelForm(){
-                document.getElementById("addChildBtnId").className = "btn btn-gradient-primary";
-                document.getElementById("attendance").className = "d-none";
-            }
             let all_children = {};
             let group_id = 0;
             let rows = document.getElementById('TableId').rows;
@@ -235,7 +182,7 @@
                 all_children[rows[i].dataset.child] = false;
                 group_id = rows[i].dataset.group_id;
             }
-            console.log(all_children);
+            console.log(all_children)
             function searchByName(value){
                 let table = document.getElementById('TableId');
                 let rows = table.rows;
@@ -249,7 +196,6 @@
                     }
                 }
             }
-
             function selectChild(id, value){
                 all_children[id] = value.checked;
                 console.log(all_children);
@@ -264,7 +210,7 @@
 
             function sendData(){
                 let date = document.getElementById('date').value;
-                let url = "{{route('employee.attendance.create')}}";
+                let url = "{{route('employee.attendance.archiveUpdate')}}";
                 let data = new FormData();
                 data.append("group_id", group_id);
                 data.append("date", date);
@@ -279,11 +225,11 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
-                        alert("Вы успешно отметили детей")
+                        alert("Вы успешно отредактировали")
                         location.reload();
                     })
                     .catch(error => {
-                        alert('Вы уже отметили этот день, пожалуйста выберите правильную дату');
+                        alert(error);
                     });
             }
         </script>

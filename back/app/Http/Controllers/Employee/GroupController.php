@@ -21,7 +21,9 @@ class GroupController extends Controller
              ->select('children.id', 'children.name', 'children.surname', 'children.birth_date',
              'children.gender', 'users.name as parent_name', 'users.surname as parent_surname')
              ->get();
-         return view('employee.group.index', compact('children'));
+         $parents = User::where('role', 'ROLE_PARENT')->get();
+         $groups = Group::where('teacher_id', auth()->user()->id)->get();
+         return view('employee.group.index', compact('children', 'parents', 'groups'));
      }
 
      public function show(int $child){
@@ -102,7 +104,7 @@ class GroupController extends Controller
             'birth_certificate' => '',
             'med_certificate' => '',
             'med_disability' => '',
-            'payment' => 'required'
+            'payment' => ''
         ]);
 
         $photo = Storage::disk('public')->put('childImages/photos', $data['photo']);
@@ -125,9 +127,8 @@ class GroupController extends Controller
             'birth_certificate' => $birth_cert,
             'med_certificate' => $med_cert,
             'med_disability' => $med_disability,
-            'payment' => $data['payment']
+            'payment' => false
         ]);
-        $child->group_id = Group::where('id', $child->group_id)->pluck('name');
         return response($child);
     }
 

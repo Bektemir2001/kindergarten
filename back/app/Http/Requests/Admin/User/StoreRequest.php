@@ -29,6 +29,7 @@ class StoreRequest extends FormRequest
             'email'=>'required|email|max:255|unique:users,email,',
             'password'=>'required',
             'role'=>'',
+            'profile_photo' => '',
             'passport_front'=>'',
             'passport_back'=>''
         ];

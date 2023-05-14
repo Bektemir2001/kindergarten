@@ -28,8 +28,9 @@ class UpdateProfileRequest extends FormRequest
             'surname' => ['string', 'max:50'],
             'address' => ['string', 'max:200'],
             'phone_number' => ['string', 'max:20'],
-            'passport_front' => 'mimes:jpg,bmp,png,jpeg',
-            'passport_back' => 'mimes:jpg,bmp,png,jpeg',
+            'profile_photo' => '',
+            'passport_front' => '',
+            'passport_back' => '',
         ];
     }
 }

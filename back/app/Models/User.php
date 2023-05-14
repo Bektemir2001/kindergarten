@@ -35,6 +35,7 @@ class User extends Authenticatable
         'address',
         'phone_number',
         'email',
+        'profile_photo',
         'password',
         'role',
         'passport_back',

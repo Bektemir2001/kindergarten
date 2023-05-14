@@ -6,7 +6,6 @@
             <div class="content-header">
                 <button type="submit" class="btn btn-gradient-primary" data-toggle="modal" data-target="#exampleModal">Добавить ребенка</button>
             </div>
-            <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -17,7 +16,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="" method="POST" enctype="multipart/form-data">
+                            <form id="form" action="{{route('employee.group.create')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                     <div class="card-content">
                                         <div class="card-body">
@@ -75,20 +74,24 @@
                                                                 <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Имя Родителя</p></label>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <select class="form-control">
-                                                                    <option>
-                                                                    </option>
+                                                                <select class="form-control" name="parent_id" id="parent_id">
+                                                                    <option></option>
+                                                                    @foreach($parents as $parent)
+                                                                    <option value="{{$parent->id}}">{{$parent->name}} {{$parent->surname}}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <br>
-                                                        <div class="row" hidden="">
+                                                        <div class="row">
                                                             <div class="col-md-4">
                                                                 <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Название Группы</p></label>
                                                             </div>
                                                             <div class="col-lg-6" >
-                                                                <select class="form-control">
-                                                                    <option></option>
+                                                                <select class="form-control" name="group_id" id="group_id">
+                                                                    @foreach($groups as $group)
+                                                                        <option value="{{$group->id}}">{{$group->name}}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -131,20 +134,24 @@
                                                 </div>
                                             </div>
                                         </div>
+                                <div class="modal-footer">
+                                    <div class="col-12 text-right">
+                                        <button id="cancelBtn" class="btn btn-gradient-primary my-1" data-dismiss="modal">Закрыть</button>
+                                        <button type="submit" class="btn btn-gradient-secondary my-1 ">Добавить</button>
+                                    </div>
+                                </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="col-12 text-right">
-                                <a href="#">
-                                    <button class="btn btn-gradient-primary my-1" data-dismiss="modal">Закрыть</button>
-                                </a>
-                                <button type="submit" class="btn btn-gradient-secondary my-1">Добавить</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <br>
+            @if (session('status'))
+                <div class="alert alert-dismissible white" style="background-color: #9b73f2">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="position-relative table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -174,7 +181,7 @@
                         <th class=""><input class="form-control form-control-sm" value="" oninput="searchByParent(this.value)"></th>
                     </tr>
                     </thead>
-                    <tbody id="TableId">
+                    <tbody id="groupTableId">
                     @foreach($children as $child)
                         <tr class="">
                             <td class="">{{$child->name}} {{$child->surname}}</td>
@@ -240,7 +247,8 @@
 
         document.getElementById('form').addEventListener("submit", function (event) {
             event.preventDefault()
-            let url = "{{route('admin.children.create')}}";
+            document.getElementById('cancelBtn').click();
+            let url = "{{route('employee.group.create')}}";
             let name = document.getElementById("name").value;
             let surname = document.getElementById("surname").value;
             let birth_date = document.getElementById("birth_date").value;
@@ -251,7 +259,6 @@
             let birth_certificate = document.getElementById("birth_certificate").files[0];
             let med_certificate = document.getElementById("med_certificate").files[0];
             let med_disability = document.getElementById("med_disability").files[0];
-            let payment = document.getElementById("payment").value;
             let data = new FormData();
             data.append("name", name);
             data.append("surname", surname);
@@ -263,29 +270,27 @@
             data.append("birth_certificate", birth_certificate);
             data.append("med_certificate", med_certificate);
             data.append("med_disability", med_disability);
-            data.append("payment", payment);
             fetch(url, {
                 method: 'POST',
                 body: data
             })
                 .then(res => res.json())
                 .then(data => {
-                    cancelForm();
-                    let table = document.getElementById('childTable');
+                    let table = document.getElementById('groupTableId');
                     let i = table.rows.length;
                     let row = table.insertRow(i);
-                    row.insertCell(0).innerHTML = data.id;
-                    row.insertCell(1).innerHTML = data.name;
-                    row.insertCell(2).innerHTML = data.surname;
-                    row.insertCell(3).innerHTML = data.group_id;
-                    row.insertCell(4).innerHTML = `<div style="float: left; display: block; width: 30%;" class="text-center">` +
-                        `<a href="`+ "children/show/" + data.id + `"><i class="fas fa-eye"></i></a> </div>` +
-                        `<div style="float: left; display: block; width: 30%;" class="text-center">` +
-                        `<a href="`+ "admin/children/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> </div>` +
-                        `<div style="float: left; display: block; width: 30%;" class="text-center">` +
-                        `<form action="`+ "admin/children/delete/" + data.id + `" method="POST"> @method("DELETE") @csrf` +
-                        `<button title="delete" class="border-0 bg-transparent">`+
-                        `<i title="delete" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;
+                    row.insertCell(0).innerHTML = data.name +" "+ data.surname;
+                    row.insertCell(1).innerHTML = data.birth_date;
+                    row.insertCell(2).innerHTML = data.parent_id;
+                    row.insertCell(3).innerHTML = `<a href="employee/group/edit/${data.id}" class="mb-0 btn-sm btn btn-outline-info round">Редактировать</a>`;
+                    row.insertCell(4).innerHTML = `<a href="employee/group/show/${data.id}" class="mb-0 btn-sm btn btn-outline-success round">Посмотреть</a>`;
+                    row.insertCell(5).innerHTML = `<form action="employee/group/delete/${data.id}}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" title="delete" class="mb-0 btn-sm btn btn-outline-danger round" onclick="alert('Вы уверены, что хотите удалить данные этого ребенка?')">
+                        Удалить
+                    </button>
+                </form>`;
                 })
                 .catch(error => console.log(error))
         })

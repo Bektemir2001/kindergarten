@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Employee;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Employee\UpdateProfileRequest;
@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
     public function index(User $user){
-        $group = DB::table('groups')
-            ->where('groups.teacher_id', $user->id)
-            ->select('groups.name as group_name')
-            ->first();
-        return view('employee.profile', compact('user', 'group'));
+        return view('user.profile', compact('user'));
     }
 
     public function update(UpdateProfileRequest $request, User $user){
@@ -37,7 +33,6 @@ class ProfileController extends Controller
             $profile_photo = Storage::disk('public')->put('profile', $data['profile_photo']);
             $profile_photo = "storage/".$profile_photo;
         }
-
         $user->update([
             'name' => $data['name'],
             'surname' => $data['surname'],
@@ -48,8 +43,7 @@ class ProfileController extends Controller
             'passport_front' => $passport_front
         ]);
         DB::commit();
-        return redirect('employee/profile/index/'.$user->id)->with('status','Ваши данные были обновлены');
+        return redirect('/main/profile/'.$user->id)->with('status','Ваши данные были обновлены');
     }
-
 
 }

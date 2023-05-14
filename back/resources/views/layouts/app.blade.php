@@ -91,6 +91,9 @@
                 <div class="nav-item">
                     <a href="" class="nav-link">Контакты</a>
                 </div>
+                <div class="nav-item">
+                    <a href="{{route('vacancy')}}" class="nav-link">Вакансии</a>
+                </div>
             </div>
             @if(auth()->user())
                 <div class="navbar-nav mx-auto">
@@ -111,7 +114,7 @@
                             @elseif(auth()->user()->role==='ROLE_TEACHER')
                                 <a href="{{route('employee', auth()->user()->id)}}" class="dropdown-item" >Мой кабинет</a>
                             @else
-                                <a href="" class="dropdown-item" >Мой профиль</a>
+                                <a href="{{route('profile', auth()->user()->id)}}" class="dropdown-item" >Мой профиль</a>
                             @endif
                             <a class="dropdown-item" onclick="location.href='{{route('user.logout')}}'" type="button">Выйти</a>
                         </div>
@@ -321,7 +324,7 @@
                                     </div>
 
                                     <!-- Passport back input -->
-                                    <div class="mb-3">
+                                    <div class="field">
                                         <label for="fileB" class="form-label">Обратная сторона паспорта</label>
                                         <input id="passport_back" type="file" class="form-control @error('passport_back') is-invalid @enderror" name="passport_back" value="{{ old('passport_back') }}">
 

@@ -33,7 +33,7 @@ class HomeController extends Controller
         $user = auth()->user();
         $children = null;
         if($user){
-           if($user->role === 'ROLE_ADMIN' or $user->role === 'ROLE_TEACTER' or $user->role === 'ROLE_PARENT'){
+           if($user->role === 'ROLE_ADMIN' or $user->role === 'ROLE_TEACHER' or $user->role === 'ROLE_PARENT'){
                 $children = Child::where('parent_id', $user->id)->get();
                 return view('gallery', compact('children', 'galleries'));
             }

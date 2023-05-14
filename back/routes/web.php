@@ -30,6 +30,12 @@ Route::post('/verification/email', [App\Http\Controllers\VerificateController::c
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/main/gallery', [App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
 
+Route::get('/main/vacancy', [App\Http\Controllers\User\VacancyController::class, 'index'])->name('vacancy');
+Route::post('/main/vacancy/save', [App\Http\Controllers\User\VacancyController::class, 'save'])->name('vacancy.save');
+
+Route::get('/main/profile/{user}', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
+Route::patch('/main/profile/update/{user}', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');
+
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
     Route::get('/index', \App\Http\Controllers\Admin\IndexController::class)->name('admin');
@@ -89,6 +95,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
 
     Route::group(['prefix'=>'attendance'], function (){
         Route::get('/', [App\Http\Controllers\Admin\AttendanceContoller::class, 'index'])->name('admin.attendance.index');
+    });
+
+    Route::group(['prefix' => 'profile'], function (){
+        Route::get('/{user}', [App\Http\Controllers\Admin\ProfileController::class, 'index'])->name('admin.profile');
+        Route::patch('/update/{user}', [App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('admin.profile.update');
     });
 });
 

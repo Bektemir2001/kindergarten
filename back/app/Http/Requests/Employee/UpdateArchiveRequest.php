@@ -23,8 +23,8 @@ class UpdateArchiveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'group_id' => 'required',
-            'date' => 'required',
+            'group_id' => '',
+            'date' => '',
             'children' => 'required'
         ];
     }

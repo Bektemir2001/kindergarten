@@ -49,15 +49,15 @@
                 </ul>
                 <ul class="nav navbar-nav float-right">
                     <li class="nav-item">
-                        <a href="{{route('user.logout')}}" class="nav-link">
-                            <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">Выйти</btn>
+                        <a href="{{route('index')}}" class="nav-link">
+                            <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">Назад</btn>
                         </a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav float-right">
                     <li class="nav-item">
-                        <a href="{{route('index')}}" class="nav-link">
-                            <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">Назад</btn>
+                        <a href="{{route('user.logout')}}" class="nav-link">
+                            <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">Выйти</btn>
                         </a>
                     </li>
                 </ul>

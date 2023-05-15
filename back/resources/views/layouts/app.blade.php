@@ -485,54 +485,29 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Get In Touch</h3>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    <h3 class="text-white mb-4">Контакты</h3>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>ул. Орозбекова 120, Кадамжай, Кыргызстан</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+996 770 10 30 10</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>kindergartenaruu@gmail.com</p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-whatsapp"></i></a>
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Quick Links</h3>
-                    <a class="btn btn-link text-white-50" href="">About Us</a>
-                    <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                    <a class="btn btn-link text-white-50" href="">Our Services</a>
-                    <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                    <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    <h3 class="text-white mb-4">Ссылки</h3>
+                    <a class="btn btn-link text-white-50" href="">О нас</a>
+                    <a class="btn btn-link text-white-50" href="">Контакты</a>
+                    <a class="btn btn-link text-white-50" href="">Услуги</a>
+                    <a class="btn btn-link text-white-50" href="{{route('vacancy')}}">Вакансии</a>
+                    <a class="btn btn-link text-white-50" href="{{route('gallery')}}">Галерея</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Photo Gallery</h3>
-                    <div class="row g-2 pt-2">
-                        <div class="col-4">
-                            <img class="img-fluid rounded bg-light p-1" src="{{asset('new_template/img/classes-1.jpg')}}" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded bg-light p-1" src="{{asset('new_template/img/classes-2.jpg')}}" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded bg-light p-1" src="{{asset('new_template/img/classes-3.jpg')}}" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded bg-light p-1" src="{{asset('new_template/img/classes-4.jpg')}}" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded bg-light p-1" src="{{asset('new_template/img/classes-5.jpg')}}" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded bg-light p-1" src="{{asset('new_template/img/classes-6.jpg')}}" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Newsletter</h3>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    <div class="embed-responsive-21by9">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1525.4065374147297!2d71.7189939!3d40.124168999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bbedf2e5dc890f%3A0x54b20d73a0a38c62!2z0JTQtdGC0YHQutC40Lkg0YHQsNC0INCQ0YDRg9GD!5e0!3m2!1sru!2skg!4v1684086382078!5m2!1sru!2skg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
                     </div>
                 </div>
             </div>
@@ -541,19 +516,10 @@
             <div class="copyright">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+                        &copy; <a class="border-bottom" href="#">Kindergarten Aruu</a>, All Right Reserved.
 
                         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                         <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
-                        </div>
                     </div>
                 </div>
             </div>

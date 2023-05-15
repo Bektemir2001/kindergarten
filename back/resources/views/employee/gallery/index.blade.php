@@ -4,45 +4,61 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
     <div class="container">
+        @if (session('status'))
+            <div class="alert alert-dismissible white" style="background-color: #9b73f2">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session('status') }}
+            </div>
+        @endif
         <button type="button" class="btn btn-gradient-primary m-3" id="addGalleryBtn" onclick="showChildInfo()">Добавить</button>
         <div class="d-none" id="addGallery">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{route('employee.gallery.create', $galleries[0]->group_id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="files" class="col-md-4 col-form-label text-md-end">Add image to gallery:</label>
+                    <label for="files" class="col-md-4 col-form-label text-md-end">Добавить изображение в галерею:</label>
                     <div class="col-md-6">
                         <input id="image" type="file" class="form-control" accept="image/*" name="images[]"multiple>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Add video to gallery:</label>
+                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Добавить видео в галерею:</label>
                     <div class="col-md-6">
                         <input id="video" type="file" class="form-control" accept="video/*" name="videos[]" multiple>
 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Add news to gallery:</label>
+                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Добавить текст в галерею:</label>
                     <div class="col-md-6">
                         <textarea
                             id="info"
                             name="info"
                             rows="5"
                             cols="58"
-                            placeholder="Write a new information..."></textarea>
+                            placeholder="Напишите новую информацию..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="{{route('admin.group.index')}}" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-gradient-primary ms-auto float-end mx-3 rounded-pill"
+                            onclick="hideChildInfo()">Закрыть
+                    </button>
+                    <button type="submit" class="btn btn-gradient-primary m-3">Сохранить</button>
                 </div>
             </form>
         </div>
         <div class="card-body">
             @php $index = 0; @endphp
             @foreach($created_at_dates as $created_at_date)
-                <div class="card-header rounded-top"
-                     style="background-color: #cdb9f8; color: #000000">{{ Carbon::parse($created_at_date)->format('d/m/Y')}}</div>
+                <div class="card-header rounded-top" style="background-color: #cdb9f8; color: #000000">
+                    <form onclick="return confirm('Do you really want to delete?')" action="{{route('employee.gallery.delete', $created_at_date)}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        {{ Carbon::parse($created_at_date)->format('d/m/Y')}}
+                        <button title="submit" class="border-0 bg-transparent">
+                            <i title="delete" class="fas fa-trash text-danger" role="button" style="font-size: 20px; font-weight: bold;"></i>
+                        </button>
+                    </form>
+                </div>
                 <div class="card-body" style="background-color: #eee8fd; display: flex; align-items: center; justify-content: center">
                     @php $j = 0; @endphp
                     <div id="carouselExampleIndicators{{$index}}" class="carousel slide" data-ride="carousel">
@@ -117,7 +133,7 @@
 
         function hideChildInfo() {
             document.getElementById("addGallery").className = "d-none";
-            document.getElementById("addGalleryBtn").className = "btn btn-primary m-3";
+            document.getElementById("addGalleryBtn").className = "btn btn-gradient-primary m-3";
         }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

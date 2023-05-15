@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gallery;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -36,4 +38,44 @@ class GalleryController extends Controller
         return view('employee.gallery.index', compact('galleries', 'created_at_dates',  'count'));
     }
 
+    public function create(Request $request, Group $group){
+        $data = $request->validate([
+            'info' => ''
+        ]);
+        if($request->has('images')){
+            foreach ($request->file('images') as $image) {
+                $imageName = Storage::disk('public')->put('group_gallery', $image);
+                $imageName = "storage/".$imageName;
+
+                Gallery::create([
+                    'group_id'=>$group->id,
+                    'image'=>$imageName,
+                    'video'=>null,
+                    'info'=>$data['info']
+                ]);
+            }
+        }
+        if($request->has('videos')){
+            foreach ($request->file('videos') as $video) {
+                $videoName = Storage::disk('public')->put('group_gallery', $video);
+                $videoName = "storage/".$videoName;
+                Gallery::create([
+                    'group_id'=>$group->id,
+                    'image'=>null,
+                    'video'=>$videoName,
+                    'info' => $data['info']
+                ]);
+            }
+        }
+        return redirect()->back()->with('status', 'Успешно');;
+    }
+
+    public function delete($date){
+        $galleries = Gallery::where('created_at', $date)
+            ->get();
+        foreach ($galleries as $gallery){
+            $gallery->delete();
+        }
+        return redirect()->back()->with('status', 'Успешно удалено');
+    }
 }

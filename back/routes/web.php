@@ -39,7 +39,7 @@ Route::patch('/main/profile/update/{user}', [App\Http\Controllers\User\ProfileCo
 Route::get('/main/children/{child}', [App\Http\Controllers\User\ChildrenController::class, 'index'])->name('children');
 Route::patch('/main/children/update/{child}', [App\Http\Controllers\User\ChildrenController::class, 'update'])->name('children.update');
 
-Route::get('/main/payment', [App\Http\Controllers\User\PaymentController::class, 'index'])->name('payment');
+Route::post('/main/payment', [App\Http\Controllers\User\PaymentController::class, 'index'])->name('payment');
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
@@ -135,6 +135,9 @@ Route::group(['prefix'=>'employee'], function (){
 
     Route::group(['prefix'=>'gallery'], function (){
        Route::get('/', [App\Http\Controllers\Employee\GalleryController::class, 'index'])->name('employee.gallery.index');
+       Route::post('/create/{group}', [App\Http\Controllers\Employee\GalleryController::class, 'create'])->name('employee.gallery.create');
+       Route::delete('/{date}', [App\Http\Controllers\Employee\GalleryController::class, 'delete'])->name('employee.gallery.delete');
+
     });
 });
 

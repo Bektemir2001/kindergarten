@@ -84,7 +84,7 @@ class ChildrenController extends Controller
         }
         if(array_key_exists('birth_certificate', $data)){
             $image = Storage::disk('public')->put('childImages/birthCertificates', $data['birth_certificate']);
-            $med_certificate = "storage/".$image;
+            $birth_certificate = "storage/".$image;
         }
         if(array_key_exists('med_certificate', $data)){
             $image = Storage::disk('public')->put('childImages/medCertificates', $data['med_certificate']);

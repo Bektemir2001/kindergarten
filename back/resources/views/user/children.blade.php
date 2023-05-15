@@ -3,9 +3,12 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
     <div class="container">
-        <button type="button" class="btn btn-primary m-3" id="childInfoBtn" onclick="showChildInfo()">Данные моего
-            ребенка
+        <button type="button" class="btn btn-primary rounded-pill m-3" id="childInfoBtn" onclick="showChildInfo()">
+            Данные моего ребенка
         </button>
+        <a class="btn btn-primary rounded-pill m-3" id="paymentBtn" onclick="" href="{{route('payment')}}">
+            Оплата
+        </a>
         <div class="d-none" id="childInfo">
             <div class="row">
                 <div class="col-md-12">

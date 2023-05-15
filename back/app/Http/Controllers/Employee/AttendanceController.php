@@ -25,6 +25,7 @@ class AttendanceController extends Controller
             ->get();
         $attendance = Attendance::where('group_id', $group_id[0]->id)
             ->whereBetween('date', [date('Y-m-01'), date('Y-m-31')])
+            ->orderBy('date', 'asc')
             ->select('date', 'children')
             ->get();
         return view('employee.attendance.index', compact('children', 'attendance'));
@@ -68,6 +69,7 @@ class AttendanceController extends Controller
         $attendance = Attendance::where('group_id', $group_id[0]->id)
             ->whereYear('date', $year)
             ->whereMonth('date', $month)
+            ->orderBy('date', 'asc')
             ->select('date', 'children')
             ->get();
         if(!($attendance && $attendance->count())){
@@ -92,22 +94,27 @@ class AttendanceController extends Controller
             ->get();
         $attendance = Attendance::where('group_id', $group_id[0]->id)
             ->where('date', $data['date'])
-            ->select('group_id','date', 'children')
+            ->orderBy('date', 'asc')
+            ->select('id','group_id','date', 'children')
             ->get();
+        $attendance_array = json_decode($attendance[0]->children, true);
+        $i = 0;
+        foreach ($children as $child)
+        {
+            if(array_key_exists($child->id, $attendance_array))
+                $child->attendance = $attendance_array[$child->id];
+            else{
+                unset($children[$i]);
+            }
+            $i++;
+        }
         return view('employee.attendance.archiveEdit', compact('children', 'attendance'));
     }
 
-    public function updateArchive(UpdateArchiveRequest $request){
+    public function updateArchive(UpdateArchiveRequest $request, Attendance $attendance){
         $data = $request->validated();
-        $id = DB::table('attendances')
-            ->where('group_id', $data['group_id'])
-            ->where('date', $data['date'])
-            ->get();
-        $attendance = Attendance::findOrFail($id[0]->id);
         DB::beginTransaction();
         $attendance->update([
-            'group_id' => $data['group_id'],
-            'date' => $data['date'],
             'children' => $data['children']
         ]);
         DB::commit();

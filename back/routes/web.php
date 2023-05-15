@@ -100,6 +100,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
 
     Route::group(['prefix'=>'attendance'], function (){
         Route::get('/', [App\Http\Controllers\Admin\AttendanceContoller::class, 'index'])->name('admin.attendance.index');
+        Route::post('/show', [App\Http\Controllers\Admin\AttendanceContoller::class, 'show'])->name('admin.attendance.show');
     });
 
     Route::group(['prefix' => 'profile'], function (){
@@ -129,7 +130,7 @@ Route::group(['prefix'=>'employee'], function (){
         Route::post('/create', [App\Http\Controllers\Employee\AttendanceController::class, 'create'])->name('employee.attendance.create');
         Route::post('/archive', [App\Http\Controllers\Employee\AttendanceController::class, 'showArchive'])->name('employee.attendance.archive');
         Route::post('/archive/edit', [App\Http\Controllers\Employee\AttendanceController::class, 'editArchive'])->name('employee.attendance.archiveEdit');
-        Route::post('/archive/update', [App\Http\Controllers\Employee\AttendanceController::class, 'updateArchive'])->name('employee.attendance.archiveUpdate');
+        Route::post('/archive/update/{attendance}', [App\Http\Controllers\Employee\AttendanceController::class, 'updateArchive'])->name('employee.attendance.archiveUpdate');
     });
 });
 

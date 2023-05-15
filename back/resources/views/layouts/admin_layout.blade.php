@@ -43,10 +43,14 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-
             <li class="nav-item">
                 <a href="{{route('index')}}" class="nav-link">
-                    <btn class="btn btn-sm" style="background-color:#5f1dea; color: white">Back</btn>
+                    <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">Back</btn>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('user.logout')}}" class="nav-link">
+                    <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">Sign out</btn>
                 </a>
             </li>
         </ul>

@@ -118,36 +118,15 @@
                     </thead>
                     <tbody id="TableId">
                     @foreach($children as $child)
-                        <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}">
+                        <tr class="" data-child="{{$child->id}}" data-group_id="{{$child->group_id}}" data-attendance="{{$child->attendance}}">
                             <td class="" style="font-size:20px">{{$child->name}} {{$child->surname}}</td>
                             <td class="py-1 px-1"></td>
-                            @foreach($attendance as $at)
-                                @php
-                                    $data = json_decode($at->children, true);
-                                @endphp
-                                @if(array_key_exists($child->id, $data))
-                                    @if($data[$child->id])
-                                        <script>
-                                            selectChild({{$child->id}}, true)
-                                        </script>
-                                        <td class="py-1 px-3">
-                                            <label class="container">
-                                                <input type="checkbox" checked="checked" onclick="selectChild({{$child->id}}, this)" id="{{'check'.$child->id}}">
-                                                <div class="checkmark"></div>
-                                            </label>
-                                        </td>
-                                    @else
-                                        <td class="py-1 px-3">
-                                            <label class="container">
-                                                <input type="checkbox" onclick="selectChild({{$child->id}}, this)" id="{{'check'.$child->id}}">
-                                                <div class="checkmark"></div>
-                                            </label>
-                                        </td>
-                                    @endif
-                                @else
-                                    <td class="py-1 px-2"><label class="container"></label></td>
-                                @endif
-                            @endforeach
+                            <td class="py-1 px-3">
+                                <label class="container">
+                                    <input type="checkbox" {{$child->attendance ? "checked" : ''}} onclick="selectChild({{$child->id}}, this)" id="{{'check'.$child->id}}">
+                                    <div class="checkmark"></div>
+                                </label>
+                            </td>
                             <td class="py-1 px-1">
                             </td>
                         </tr>
@@ -179,7 +158,7 @@
             let n = rows.length;
             for(let i = 0; i < n; i++)
             {
-                all_children[rows[i].dataset.child] = false;
+                all_children[rows[i].dataset.child] = rows[i].dataset.attendance ? true : false;
                 group_id = rows[i].dataset.group_id;
             }
             console.log(all_children)
@@ -210,7 +189,7 @@
 
             function sendData(){
                 let date = document.getElementById('date').value;
-                let url = "{{route('employee.attendance.archiveUpdate')}}";
+                let url = "{{route('employee.attendance.archiveUpdate', $attendance[0]->id)}}";
                 let data = new FormData();
                 data.append("group_id", group_id);
                 data.append("date", date);

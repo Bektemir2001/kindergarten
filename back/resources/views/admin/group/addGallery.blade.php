@@ -51,7 +51,7 @@
                     <ul class="list-group list-group-unbordered mb-3">
                         @foreach($galleries as $gallery)
                         <li class="list-group-item">
-                            <small>{{$gallery->created_at}}</small>
+                            <small>{{ Carbon\Carbon::parse($gallery->created_at)->format('d/m/Y')}}</small>
                             <h5 class="">{{$gallery->info}}</h5>
                         </li>
                         @endforeach

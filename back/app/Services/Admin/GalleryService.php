@@ -42,7 +42,7 @@ class GalleryService
                     'group_id'=>$group->id,
                     'image'=>null,
                     'video'=>$videoName,
-                    'info' => ''
+                    'info' => $data['info']
                 ]);
             }
         }

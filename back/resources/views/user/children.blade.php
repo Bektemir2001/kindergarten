@@ -112,35 +112,74 @@
             </div>
         </div>
 
-        <div class="card">
-            <h5 class="card-header text-center">Моменты из детского сада</h5>
-            <div class="card-body">
-                @foreach($galleries as $gallery)
-                    @if($gallery->video === null)
-                        <div class="card-header rounded-top"
-                             style="background-color: #cdb9f8; color: #000000">{{ Carbon::parse($gallery->created_at)->format('d/m/Y')}}</div>
-                        <div class="card-body"
-                             style="background-color: #eee8fd; display: flex; align-items: center; justify-content: center">
-                            <a href="{{asset($gallery->image)}}" data-lightbox="photos"><img class="img-fluid" src="{{asset($gallery->image)}}"></a>
+        <div class="card-body">
+            @php $index = 0; @endphp
+            @foreach($created_at_dates as $created_at_date)
+                <div class="card-header rounded-top"
+                     style="background-color: #cdb9f8; color: #000000">{{ Carbon::parse($created_at_date)->format('d/m/Y')}}</div>
+                <div class="card-body" style="background-color: #eee8fd; display: flex; align-items: center; justify-content: center">
+                    @php $j = 0; @endphp
+                    <div id="carouselExampleIndicators{{$index}}" class="carousel slide" data-ride="carousel">
+                        @if($count[$index] > 1)
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                @for($i =1 ; $i < $count[$index]; $i++)
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}"></li>
+                                @endfor
+                            </ol>
+                        @endif
+                        <div class="carousel-inner" style="max-width: 500px; overflow: hidden">
+                            @foreach($galleries as $gallery)
+                                @if($created_at_date === $gallery->created_at)
+                                    @if($gallery->video === null)
+                                        @if($j === 0)
+                                            <div class="carousel-item active">
+                                                <img class="d-block w-100" src="{{asset($gallery->image)}}" >
+                                            </div>
+                                            @php $j++; @endphp
+                                        @else
+                                            <div class="carousel-item">
+                                                <img class="d-block w-100" src="{{asset($gallery->image)}}" alt="Second slide">
+                                            </div>
+                                        @endif
+                                    @else
+                                        @if($j === 0)
+                                            <div class="carousel-item active">
+                                                <video class="d-block w-100" controls >
+                                                    <source src="{{asset($gallery->video)}}">.
+                                                </video>
+                                            </div>
+                                            @php $j++; @endphp
+                                        @else
+                                            <div class="carousel-item">
+                                                <video class="d-block w-100" controls >
+                                                    <source src="{{asset($gallery->video)}}">.
+                                                </video>
+                                            </div>
+                                        @endif
+                                    @endif
+                                    @php $text = $gallery->info @endphp
+                                @endif
+                            @endforeach
                         </div>
-                        <div class="card-body rounded-bottom" style="background-color: #eee8fd">
-                            <h6>{{$gallery->info}}</h6>
-                        </div>
-                        <br>
-                    @else
-                        <div class="card-header rounded-top"
-                             style="background-color: #cdb9f8; color: #000000">{{ Carbon::parse($gallery->created_at)->format('d/m/Y')}}</div>
-                        <div class="card-body embed-responsive embed-responsive-21by9"
-                             style="background-color: #eee8fd; display: flex; align-items: center; justify-content: center">
-                            <iframe class="embed-responsive-item" src="{{asset($gallery->video)}}"></iframe>
-                        </div>
-                        <div class="card-body rounded-bottom" style="background-color: #eee8fd">
-                            <h6>{{$gallery->info}}</h6>
-                        </div>
-                        <br>
-                    @endif
-                @endforeach
-            </div>
+                        @if($count[$index] > 1)
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators{{$index}}" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators{{$index}}" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+                <div class="card-body rounded-bottom" style="background-color: #eee8fd">
+                    <h6>{{$text}}</h6>
+                </div>
+                <br>
+                @php $index++; $text = ""; @endphp
+            @endforeach
         </div>
     </div>
     <script>

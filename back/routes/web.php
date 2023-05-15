@@ -130,6 +130,10 @@ Route::group(['prefix'=>'employee'], function (){
         Route::post('/archive/edit', [App\Http\Controllers\Employee\AttendanceController::class, 'editArchive'])->name('employee.attendance.archiveEdit');
         Route::post('/archive/update/{attendance}', [App\Http\Controllers\Employee\AttendanceController::class, 'updateArchive'])->name('employee.attendance.archiveUpdate');
     });
+
+    Route::group(['prefix'=>'gallery'], function (){
+       Route::get('/', [App\Http\Controllers\Employee\GalleryController::class, 'index'])->name('employee.gallery.index');
+    });
 });
 
 //Route::auth();

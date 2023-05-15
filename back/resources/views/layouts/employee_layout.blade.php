@@ -81,7 +81,7 @@
             </li>
             <li class=" nav-item"><a href="{{route('employee.attendance.index')}}"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">Посещение</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><i class="icon-support"></i><span class="menu-title" data-i18n="">FAQ</span></a>
+            <li class=" nav-item"><a href="{{route('employee.gallery.index')}}"><i class="fas fa-photo-video"></i><span class="menu-title" data-i18n="">Галерея</span></a>
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-user"></i><span class="menu-title" data-i18n="">Аккаунт</span></a>
                 <ul class="menu-content">

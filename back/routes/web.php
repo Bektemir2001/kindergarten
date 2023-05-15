@@ -36,6 +36,9 @@ Route::post('/main/vacancy/save', [App\Http\Controllers\User\VacancyController::
 Route::get('/main/profile/{user}', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
 Route::patch('/main/profile/update/{user}', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');
 
+Route::get('/main/children/{child}', [App\Http\Controllers\User\ChildrenController::class, 'index'])->name('children');
+Route::patch('/main/children/update/{child}', [App\Http\Controllers\User\ChildrenController::class, 'update'])->name('children.update');
+
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
     Route::get('/index', \App\Http\Controllers\Admin\IndexController::class)->name('admin');

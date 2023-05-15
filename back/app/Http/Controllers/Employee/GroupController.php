@@ -21,7 +21,7 @@ class GroupController extends Controller
              ->select('children.id', 'children.name', 'children.surname', 'children.birth_date',
              'children.gender', 'users.name as parent_name', 'users.surname as parent_surname')
              ->get();
-         $parents = User::where('role', 'ROLE_PARENT')->get();
+         $parents = User::all();
          $groups = Group::where('teacher_id', auth()->user()->id)->get();
          return view('employee.group.index', compact('children', 'parents', 'groups'));
      }
@@ -66,7 +66,7 @@ class GroupController extends Controller
         }
         if(array_key_exists('birth_certificate', $data)){
             $image = Storage::disk('public')->put('childImages/birthCertificates', $data['birth_certificate']);
-            $med_certificate = "storage/".$image;
+            $birth_certificate = "storage/".$image;
         }
         if(array_key_exists('med_certificate', $data)){
             $image = Storage::disk('public')->put('childImages/medCertificates', $data['med_certificate']);

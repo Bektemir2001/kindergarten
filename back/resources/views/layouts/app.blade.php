@@ -65,7 +65,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Мои дети</a>
                             <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
                                 @foreach($children as $child)
-                                    <a href="" class="dropdown-item">{{$child->name}}</a>
+                                    <a href="{{route('children', $child->id)}}" class="dropdown-item">{{$child->name}} {{$child->surname}}</a>
                                 @endforeach
                             </div>
                         </div>

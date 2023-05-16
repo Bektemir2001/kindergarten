@@ -69,6 +69,6 @@ class PaymentController extends Controller
             'payment_amount' => $data['payment_amount']
         ]);
 
-        return redirect()->route('index')->with('status', 'Оплата прошла успешно');
+        return redirect()->route('index')->with('status', 'Оплата ');
     }
 }

@@ -109,6 +109,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::get('/{user}', [App\Http\Controllers\Admin\ProfileController::class, 'index'])->name('admin.profile');
         Route::patch('/update/{user}', [App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('admin.profile.update');
     });
+
+    Route::group(['prefix' => 'payment'], function (){
+        Route::get('/index', [App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('admin.payment.index');
+        Route::post('/create', [App\Http\Controllers\Admin\PaymentController::class, 'create'])->name('admin.payment.create');
+    });
 });
 
 Route::group(['prefix'=>'employee'], function (){
@@ -140,6 +145,11 @@ Route::group(['prefix'=>'employee'], function (){
        Route::post('/create/{group}', [App\Http\Controllers\Employee\GalleryController::class, 'create'])->name('employee.gallery.create');
        Route::delete('/{date}', [App\Http\Controllers\Employee\GalleryController::class, 'delete'])->name('employee.gallery.delete');
 
+    });
+
+    Route::group(['prefix' => 'payment'], function (){
+        Route::get('/index', [App\Http\Controllers\Employee\PaymentController::class, 'index'])->name('employee.payment.index');
+        Route::post('/create', [App\Http\Controllers\Employee\PaymentController::class, 'create'])->name('employee.payment.create');
     });
 });
 

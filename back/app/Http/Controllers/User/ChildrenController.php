@@ -19,23 +19,31 @@ class ChildrenController extends Controller
             ->select('galleries.id', 'galleries.image', 'galleries.video', 'galleries.info', 'galleries.created_at', 'galleries.group_id')
             ->orderBy('galleries.created_at','desc')
             ->get();
-        $created_at_dates = DB::table('galleries')
-            ->where('group_id', $galleries[0]->group_id)
-            ->distinct()
-            ->orderBy('created_at', 'desc')
-            ->pluck('created_at');
-        $count = [];
-        $index = 0;
-        foreach ($created_at_dates as $created_at_date){
-            $i = 0;
-            foreach ($galleries as $gallery){
-                if ($created_at_date === $gallery->created_at){
-                    $i++;
+        if($galleries && $galleries->count()){
+            $created_at_dates = DB::table('galleries')
+                ->where('group_id', $galleries[0]->group_id)
+                ->distinct()
+                ->orderBy('created_at', 'desc')
+                ->pluck('created_at');
+            $count = [];
+            $index = 0;
+            foreach ($created_at_dates as $created_at_date){
+                $i = 0;
+                foreach ($galleries as $gallery){
+                    if ($created_at_date === $gallery->created_at){
+                        $i++;
+                    }
                 }
+                $count[$index] = $i;
+                $index++;
             }
-            $count[$index] = $i;
-            $index++;
         }
+        else{
+            $galleries = null;
+            $created_at_dates = null;
+            $count = null;
+        }
+
         $user = auth()->user();
         $children = null;
         if($user){

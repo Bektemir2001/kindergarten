@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mb-4">
-                        <h5 class="card-header">Ваш профиль</h5>
+                        <h5 class="card-header">@lang('lang.user_profile')</h5>
                         <form id="form" method="POST" action="{{route('profile.update', auth()->user()->id)}}" onsubmit="" enctype="multipart/form-data">
                             @method('patch')
                             @csrf
@@ -29,7 +29,7 @@
                                             class="account-file-input form-control"
                                         />
                                     </label>
-                                    <p class="text-muted mb-0">Обновите фотографию профиля. Можно загрузить JPG, GIF or PNG.</p>
+                                    <p class="text-muted mb-0">@lang('lang.profile_photo_msg')</p>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                         <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
-                                        <label for="name"  class="form-label">Имя</label>
+                                        <label for="name"  class="form-label">@lang('lang.name')</label>
                                         <input
                                             class="form-control"
                                             type="text"
@@ -48,11 +48,11 @@
                                         />
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="surname" class="form-label">Фамилия</label>
+                                        <label for="surname" class="form-label">@lang('lang.surname')</label>
                                         <input class="form-control" type="text" name="surname" id="surname" value="{{$user->surname}}" />
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="email" class="form-label">Электронный адрес</label>
+                                        <label for="email" class="form-label">@lang('lang.email')</label>
                                         <input
                                             class="form-control"
                                             type="text"
@@ -63,7 +63,7 @@
                                         />
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label class="form-label" for="phone_number">Номер телефона</label>
+                                        <label class="form-label" for="phone_number">@lang('lang.phone_number')</label>
                                         <div class="input-group input-group-merge">
                                             <input
                                                 type="text"
@@ -76,16 +76,16 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="address" class="form-label">Адрес</label>
+                                        <label for="address" class="form-label">@lang('lang.address')</label>
                                         <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{$user->address}}"/>
                                     </div>
                                     <div class="mb-3 col-md-6"></div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="passport_front" class="form-label">Лицевая сторона паспорта</label>
+                                        <label for="passport_front" class="form-label">@lang('lang.passport_front')</label>
                                         <input type="file" class="form-control" id="passport_front" name="passport_front" placeholder="" value=""/>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="address" class="form-label">Обратная сторона паспорта</label>
+                                        <label for="address" class="form-label">@lang('lang.passport_back')</label>
                                         <input type="file" class="form-control" id="passport_back" name="passport_back" placeholder="" value=""/>
                                     </div>
                                     <div class="mb-3 col-md-6">
@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-auto">
-                                    <button type="submit" class="btn btn-primary ms-auto">Сохранить изменения</button>
+                                    <button type="submit" class="btn btn-primary ms-auto">@lang('lang.save_btn')</button>
                                 </div>
                         </div>
                         </form>

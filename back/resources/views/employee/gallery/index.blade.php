@@ -10,39 +10,39 @@
                 {{ session('status') }}
             </div>
         @endif
-        <button type="button" class="btn btn-gradient-primary m-3" id="addGalleryBtn" onclick="showChildInfo()">Добавить</button>
+        <button type="button" class="btn btn-gradient-primary m-3" id="addGalleryBtn" onclick="showChildInfo()">@lang('lang.add_btn')</button>
         <div class="d-none" id="addGallery">
             <form action="{{route('employee.gallery.create', $galleries[0]->group_id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="files" class="col-md-4 col-form-label text-md-end">Добавить изображение в галерею:</label>
+                    <label for="files" class="col-md-4 col-form-label text-md-end">@lang('lang.add_image'):</label>
                     <div class="col-md-6">
                         <input id="image" type="file" class="form-control" accept="image/*" name="images[]"multiple>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Добавить видео в галерею:</label>
+                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">@lang('lang.add_video'):</label>
                     <div class="col-md-6">
                         <input id="video" type="file" class="form-control" accept="video/*" name="videos[]" multiple>
 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Добавить текст в галерею:</label>
+                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">@lang('lang.add_info'):</label>
                     <div class="col-md-6">
                         <textarea
                             id="info"
                             name="info"
                             rows="5"
                             cols="58"
-                            placeholder="Напишите новую информацию..."></textarea>
+                            placeholder="@lang('lang.add_info_plh')"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-gradient-primary ms-auto float-end mx-3 rounded-pill"
-                            onclick="hideChildInfo()">Закрыть
+                            onclick="hideChildInfo()">@lang('lang.close_btn')
                     </button>
-                    <button type="submit" class="btn btn-gradient-primary m-3">Сохранить</button>
+                    <button type="submit" class="btn btn-gradient-primary m-3">@lang('lang.saveBtn')</button>
                 </div>
             </form>
         </div>

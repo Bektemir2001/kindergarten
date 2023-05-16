@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Localization\LocalizationService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,36 +13,83 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::group(['prefix'=>'user'], function (){
-    Route::get('/register', [App\Http\Controllers\RegisterController::class, 'form'])->name('user.register.form');
-    Route::post('/register', [App\Http\Controllers\RegisterController::class, 'register'])->name('user.register');
-    Route::get('/login', [App\Http\Controllers\AuthController::class, 'form'])->name('user.auth.form');
-    Route::post('/login', [App\Http\Controllers\AuthController::class, 'userAuth'])->name('user.auth');
-    Route::get('/logout', App\Http\Controllers\LogoutController::class)->name('user.logout');
-    Route::get('/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'form'])->name('reset.password.form');
-    Route::post('/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'sendLink'])->name('reset.password.link');
-    Route::get('/resetPassword/{email}', [App\Http\Controllers\ResetPasswordController::class, 'changePassword'])->name('change.password.form');
-    Route::post('/enroll/create', [App\Http\Controllers\EnrollController::class, 'create'])->name('enroll.create');
-    Route::get('/enroll', [App\Http\Controllers\EnrollController::class,'index'])->name('enroll.index');
-});
-Route::get('/{user?}',App\Http\Controllers\IndexController::class)->name('index');
-Route::get('/verification/form/{user}', [App\Http\Controllers\VerificateController::class, 'form'])->name('verification.form');
-Route::post('/verification/email', [App\Http\Controllers\VerificateController::class, 'verification'])->name('verification');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/main/gallery', [App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
+Route::group(
+    [
+        'prefix' => LocalizationService::locale(),
+        'middleware' => 'setLocale'
+    ],
+    function(){
+        Route::group(['prefix'=>'user'], function (){
+            Route::get('/register', [App\Http\Controllers\RegisterController::class, 'form'])->name('user.register.form');
+            Route::post('/register', [App\Http\Controllers\RegisterController::class, 'register'])->name('user.register');
+            Route::get('/login', [App\Http\Controllers\AuthController::class, 'form'])->name('user.auth.form');
+            Route::post('/login', [App\Http\Controllers\AuthController::class, 'userAuth'])->name('user.auth');
+            Route::get('/logout', App\Http\Controllers\LogoutController::class)->name('user.logout');
+            Route::get('/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'form'])->name('reset.password.form');
+            Route::post('/resetPassword', [App\Http\Controllers\ResetPasswordController::class, 'sendLink'])->name('reset.password.link');
+            Route::get('/resetPassword/{email}', [App\Http\Controllers\ResetPasswordController::class, 'changePassword'])->name('change.password.form');
+            Route::post('/enroll/create', [App\Http\Controllers\EnrollController::class, 'create'])->name('enroll.create');
+            Route::get('/enroll', [App\Http\Controllers\EnrollController::class,'index'])->name('enroll.index');
+        });
+        Route::get('/{user?}',App\Http\Controllers\IndexController::class)->name('index');
+        Route::get('/verification/form/{user}', [App\Http\Controllers\VerificateController::class, 'form'])->name('verification.form');
+        Route::post('/verification/email', [App\Http\Controllers\VerificateController::class, 'verification'])->name('verification');
 
-Route::get('/main/vacancy', [App\Http\Controllers\User\VacancyController::class, 'index'])->name('vacancy');
-Route::post('/main/vacancy/save', [App\Http\Controllers\User\VacancyController::class, 'save'])->name('vacancy.save');
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::get('/main/gallery', [App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
 
-Route::get('/main/profile/{user}', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
-Route::patch('/main/profile/update/{user}', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');
+        Route::get('main/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 
-Route::get('/main/children/{child}', [App\Http\Controllers\User\ChildrenController::class, 'index'])->name('children');
-Route::patch('/main/children/update/{child}', [App\Http\Controllers\User\ChildrenController::class, 'update'])->name('children.update');
+        Route::get('/main/vacancy', [App\Http\Controllers\User\VacancyController::class, 'index'])->name('vacancy');
+        Route::post('/main/vacancy/save', [App\Http\Controllers\User\VacancyController::class, 'save'])->name('vacancy.save');
+
+        Route::get('/main/profile/{user}', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
+        Route::patch('/main/profile/update/{user}', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');
+
+        Route::get('/main/children/{child}', [App\Http\Controllers\User\ChildrenController::class, 'index'])->name('children');
+        Route::patch('/main/children/update/{child}', [App\Http\Controllers\User\ChildrenController::class, 'update'])->name('children.update');
+
+        Route::post('/main/payment', [App\Http\Controllers\User\PaymentController::class, 'index'])->name('payment');
+
+        Route::group(['prefix'=>'employee'], function (){
+            Route::get('/index/{user}', App\Http\Controllers\Employee\IndexController::class)->name('employee');
+
+            Route::group(['prefix'=>'profile'], function (){
+                Route::get('/index/{user}', [App\Http\Controllers\Employee\ProfileController::class, 'index'])->name('employee.profile');
+                Route::patch('/update/{user}', [App\Http\Controllers\Employee\ProfileController::class, 'update'])->name('employee.profile.update');
+            });
+
+            Route::group(['prefix'=>'group'], function (){
+                Route::get('/', [App\Http\Controllers\Employee\GroupController::class, 'index'])->name('employee.group.index');
+                Route::get('/show/{child}', [App\Http\Controllers\Employee\GroupController::class, 'show'])->name('employee.group.show');
+                Route::get('/edit/{child}', [App\Http\Controllers\Employee\GroupController::class, 'edit'])->name('employee.group.edit');
+                Route::patch('/update/{child}', [App\Http\Controllers\Employee\GroupController::class, 'update'])->name('employee.group.update');
+                Route::delete('/{child}', [App\Http\Controllers\Employee\GroupController::class, 'delete'])->name('employee.group.delete');
+            });
+
+            Route::group(['prefix'=>'attendance'], function (){
+                Route::get('/', [App\Http\Controllers\Employee\AttendanceController::class, 'index'])->name('employee.attendance.index');
+                Route::post('/create', [App\Http\Controllers\Employee\AttendanceController::class, 'create'])->name('employee.attendance.create');
+                Route::post('/archive', [App\Http\Controllers\Employee\AttendanceController::class, 'showArchive'])->name('employee.attendance.archive');
+                Route::post('/archive/edit', [App\Http\Controllers\Employee\AttendanceController::class, 'editArchive'])->name('employee.attendance.archiveEdit');
+                Route::post('/archive/update/{attendance}', [App\Http\Controllers\Employee\AttendanceController::class, 'updateArchive'])->name('employee.attendance.archiveUpdate');
+            });
+
+            Route::group(['prefix'=>'gallery'], function (){
+                Route::get('/', [App\Http\Controllers\Employee\GalleryController::class, 'index'])->name('employee.gallery.index');
+                Route::post('/create/{group}', [App\Http\Controllers\Employee\GalleryController::class, 'create'])->name('employee.gallery.create');
+                Route::delete('/{date}', [App\Http\Controllers\Employee\GalleryController::class, 'delete'])->name('employee.gallery.delete');
+
+            });
+        });
+
+    });
+
 
 Route::get('/main/payment/{child}', [App\Http\Controllers\User\PaymentController::class, 'index'])->name('payment');
 Route::post('/main/payment/form', [App\Http\Controllers\User\PaymentController::class, 'form'])->name('payment.form');
 Route::post('/main/payment/create', [App\Http\Controllers\User\PaymentController::class, 'create'])->name('payment.create');
+
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){

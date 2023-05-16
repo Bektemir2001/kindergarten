@@ -11,7 +11,7 @@
 {{--            </div>--}}
             <div class="row photos">
                 @foreach($galleries as $gallery)
-                    <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="{{asset($gallery->image)}}" data-lightbox="photos"><img class="img-fluid"  src="{{asset($gallery->image)}}"></a></div>
+                    <div class="col-sm-6 col-md-4 col-lg-3 item py-4" style="max-height: 250px; overflow: hidden"><a href="{{asset($gallery->image)}}" data-lightbox="photos"><img class="img-fluid"  src="{{asset($gallery->image)}}"></a></div>
                 @endforeach
             </div>
         </div>

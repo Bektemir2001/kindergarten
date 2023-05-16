@@ -2881,13 +2881,17 @@ input[type="button"].btn-block {
   -moz-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear; }
   @media screen and (prefers-reduced-motion: reduce) {
-    .fade {
-      -webkit-transition: none;
-      -o-transition: none;
-      -moz-transition: none;
-      transition: none; } }
-  .fade:not(.show) {
-    opacity: 0; }
+      .fade {
+          -webkit-transition: none;
+          -o-transition: none;
+          -moz-transition: none;
+          transition: none;
+      }
+
+      .fade:not(.show) {
+          opacity: 1;
+      }
+  }
 
 .collapse:not(.show) {
   display: none; }

@@ -42,7 +42,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="{{route('admin.group.index')}}" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
 

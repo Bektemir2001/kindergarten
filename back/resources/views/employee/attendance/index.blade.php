@@ -78,7 +78,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addChildBtnId" onclick="showForm()">Отметить детей</button>
+        <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addChildBtnId" onclick="showForm()">@lang('lang.mark_children')</button>
         <div class="d-none" id="attendance">
             <div class="position-relative table-responsive">
                 <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('Дата') }}</label>
@@ -100,7 +100,7 @@
                             <div class="d-inline"></div>
                         </th>
                         <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:1%">
-                            <div class="d-inline" style="font-size: 20px">Функции</div>
+                            <div class="d-inline" style="font-size: 20px">@lang('lang.func')</div>
                         </th>
                         <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:1%">
                         </th>
@@ -138,8 +138,8 @@
                 </table>
             </div>
             <div style="text-align: right">
-                <button type="button" class="btn btn-gradient-primary" onclick="cancelForm()">Отмена</button>
-                <button type="button" class="btn btn-gradient-primary" onclick="sendData()">Сохранить</button>
+                <button type="button" class="btn btn-gradient-primary" onclick="cancelForm()">@lang('lang.cancel')</button>
+                <button type="button" class="btn btn-gradient-primary" onclick="sendData()">@lang('lang.saveBtn')</button>
             </div>
         </div>
         <br>

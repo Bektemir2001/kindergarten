@@ -148,12 +148,17 @@ else{
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@lang('lang.for_parents')</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+
+                        <a href="" class="dropdown-item">@lang('lang.parents_question')</a>
+                        <a href="{{route('literature')}}" class="dropdown-item">@lang('lang.parents_reading')</a>
+
                         <a href="{{route('faq')}}" class="dropdown-item">@lang('lang.parents_question')</a>
                         <a href="" class="dropdown-item">@lang('lang.parents_reading')</a>
+
                     </div>
                 </div>
                 <div class="nav-item">
-                    <a href="" class="nav-link">@lang('lang.conditions')</a>
+                    <a href="{{route('condition')}}" class="nav-link">@lang('lang.conditions')</a>
                 </div>
                 <div class="nav-item dropdown">
                     <a href="{{route('gallery')}}" class="nav-link">Галерея</a>

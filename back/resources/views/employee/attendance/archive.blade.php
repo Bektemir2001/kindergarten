@@ -83,7 +83,7 @@
                 <div class="col">
                     <form method="POST" action="{{route('employee.attendance.archive')}}">
                         @csrf
-                        <div class="position-relative table-responsive" style="margin-top: 20px;"><h4>Выберите месяц для просмотра:</h4></div>
+                        <div class="position-relative table-responsive" style="margin-top: 20px;"><h4>@lang('lang.select_month_to_view'):</h4></div>
                         <div class="row">
                             <div class="col-sm-3">
                                 <input id="date" type="month" class="@error('date') is-invalid @enderror" name="date" value="{{date('Y-m')}}" style="margin: 20px 20px;" required autocomplete="date">
@@ -94,7 +94,7 @@
                                 @enderror
                             </div>
                             <div class="col-sm-2" style="flex: 50%; padding: 10px;width: 300px;">
-                                <button type="submit" class="btn btn-gradient-primary" style="margin-right:85%;">Показать</button>
+                                <button type="submit" class="btn btn-gradient-primary" style="margin-right:85%;">@lang('lang.show_btn')</button>
                             </div>
                         </div>
                     </form>
@@ -102,7 +102,7 @@
                 <div class="col">
                     <form method="POST" action="{{route('employee.attendance.archiveEdit')}}">
                         @csrf
-                        <div class="position-relative table-responsive" style="margin-top: 20px;"><h4>Выберите дату для редактирования:</h4></div>
+                        <div class="position-relative table-responsive" style="margin-top: 20px;"><h4>@lang('lang.select_month_to_edit'):</h4></div>
                         <div class="row">
                             <div class="col-sm-3">
                                 <input id="date" type="date" class="@error('date') is-invalid @enderror" name="date" value="" style="margin: 20px 20px;" required autocomplete="date">
@@ -113,7 +113,7 @@
                                 @enderror
                             </div>
                             <div class="col-sm-2" style="flex: 50%; padding: 10px;width: 300px;">
-                                <button type="submit" class="btn btn-gradient-primary" style="margin-right:85%;">Редактировать</button>
+                                <button type="submit" class="btn btn-gradient-primary" style="margin-right:85%;">@lang('lang.edit_btn')</button>
                             </div>
                         </div>
                     </form>
@@ -126,7 +126,7 @@
             <br>
             @if($attendance != null)
                 <div class="position-relative table-responsive">
-                    <h4>Посещаемость детей за месяц {{\Carbon\Carbon::parse($attendance[0]->date)->format('F')}}</h4>
+                    <h4>@lang('attendance_per_month') {{\Carbon\Carbon::parse($attendance[0]->date)->format('F')}}</h4>
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -179,14 +179,14 @@
                 </div>
 
             @elseif($attendance === null)
-                <alert>Выбранном вами месяце нету данных, пожалуйста выберите другую дату</alert>
+                <alert>@lang('lang.no_data')</alert>
             @endif
         <br>
         <br>
         <br>
             <div style="text-align: right;">
                 <a href="{{route('employee.attendance.index')}}">
-                    <button type="button" class="btn btn-gradient-primary" >Назад</button>
+                    <button type="button" class="btn btn-gradient-primary" >@lang('lang.back_btn')</button>
                 </a>
             </div>
 

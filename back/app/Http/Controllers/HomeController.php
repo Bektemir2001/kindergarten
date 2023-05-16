@@ -55,6 +55,15 @@ class HomeController extends Controller
         return view('user.contact');
     }
 
+
+    public function literature(){
+        return view('user.literature');
+    }
+
+    public function condition(){
+        return view('user.condition');
+    }
+
     public function faq(){
         $user = auth()->user();
         $children = null;

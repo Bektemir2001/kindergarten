@@ -79,7 +79,7 @@
             </div>
         @endif
         <div id="attendance">
-            <h4>Посещаемость детей за <span style="color: red">{{\Carbon\Carbon::parse($attendance[0]->date)->format('d F')}}</span></h4>
+            <h4>@lang('lang.attendance_per_month') <span style="color: red">{{\Carbon\Carbon::parse($attendance[0]->date)->format('d F')}}</span></h4>
             <div class="position-relative table-responsive">
                 <div class="col-md-6">
                     <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{$attendance[0]->date}}" required autocomplete="date" hidden="">
@@ -99,7 +99,7 @@
                             <div class="d-inline"></div>
                         </th>
                         <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:1%">
-                            <div class="d-inline" style="font-size: 20px">Функции</div>
+                            <div class="d-inline" style="font-size: 20px">@lang('lang.func')</div>
                         </th>
                         <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:1%">
                         </th>
@@ -143,9 +143,9 @@
                                     </span>
                 @enderror
                 <div style="text-align: right">
-                    <button type="submit" class="btn btn-gradient-primary" >Назад</button>
+                    <button type="submit" class="btn btn-gradient-primary" >@lang('lang.back_btn')</button>
 
-                    <button type="button" class="btn btn-gradient-primary" onclick="sendData()">Сохранить</button>
+                    <button type="button" class="btn btn-gradient-primary" onclick="sendData()">@lang('lang.saveBtn')</button>
                 </div>
             </form>
         </div>

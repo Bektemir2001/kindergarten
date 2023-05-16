@@ -45,4 +45,12 @@ class HomeController extends Controller
     public function contact(){
         return view('user.contact');
     }
+
+    public function literature(){
+        return view('user.literature');
+    }
+
+    public function condition(){
+        return view('user.condition');
+    }
 }

@@ -49,12 +49,12 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addPaymentBtnId" onclick="showForm()">Добавить платеж</button>
+            <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addPaymentBtnId" onclick="showForm()">@lang('lang.add_payment')</button>
             <div class="d-none" id="addPaymentId">
                 <form method="POST" action="{{route('employee.payment.create')}}">
                     @csrf
                     <div class="row mb-3">
-                        <label for="child_id"><p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Полное имя ребенка: </p></label>
+                        <label for="child_id"><p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.full_name_child'): </p></label>
                         <div class="col-md-6">
                             <select class="form-control col-md-12" name="child_id" id="child_id" @error('child_id') is-invalid @enderror required autocomplete="child_id">
                                 <option></option>
@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="date_from"><p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">С : </p></label>
+                        <label for="date_from"><p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.from') : </p></label>
                         <div class="col-md-6">
                             <input id="date_from" type="date" class="form-control @error('date_from') is-invalid @enderror" name="date_from"  required autocomplete="date_from">
                             @error('date_from')
@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="date_to"><p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">До : </p></label>
+                        <label for="date_to"><p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.to') : </p></label>
                         <div class="col-md-6">
                             <input id="date_to" type="date" class="form-control @error('date_to') is-invalid @enderror" name="date_to"  required autocomplete="date_to">
                             @error('date_to')
@@ -90,7 +90,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="payment_amount"><p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Сумма платежа : </p></label>
+                        <label for="payment_amount"><p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.payment_amount') : </p></label>
                         <div class="col-md-6">
                             <input id="payment_amount" type="number" class="form-control @error('payment_amount') is-invalid @enderror" name="payment_amount" value="" required autocomplete="payment_amount" autofocus>
                             @error('payment_amount')
@@ -104,8 +104,8 @@
 
 
 
-                    <button type="submit" class="btn btn-secondary" style="margin-left: 65%;" onclick="cancelForm()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-secondary" style="margin-left: 65%;" onclick="cancelForm()">@lang('lang.cancel')</button>
+                    <button type="submit" class="btn btn-primary">@lang('lang.save_btn')</button>
                 </form>
             </div>
             <br><br><br>
@@ -124,7 +124,7 @@
                             <thead>
                             <tr>
                                 <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
-                                    <div class="d-inline" style="font-size: 15px">Full name</div>
+                                    <div class="d-inline" style="font-size: 15px">@lang('lang.full_name_child')</div>
                                 </th>
                                 @for($i = 1; $i <= $range; $i++)
                                     <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer">

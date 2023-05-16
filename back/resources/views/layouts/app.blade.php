@@ -148,7 +148,7 @@ else{
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@lang('lang.for_parents')</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
-                        <a href="" class="dropdown-item">@lang('lang.parents_question')</a>
+                        <a href="{{route('faq')}}" class="dropdown-item">@lang('lang.parents_question')</a>
                         <a href="" class="dropdown-item">@lang('lang.parents_reading')</a>
                     </div>
                 </div>
@@ -585,9 +585,11 @@ else{
                     <a class="btn btn-link text-white-50" href="{{route('gallery')}}">Галерея</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="embed-responsive-21by9">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1525.4065374147297!2d71.7189939!3d40.124168999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bbedf2e5dc890f%3A0x54b20d73a0a38c62!2z0JTQtdGC0YHQutC40Lkg0YHQsNC0INCQ0YDRg9GD!5e0!3m2!1sru!2skg!4v1684086382078!5m2!1sru!2skg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+                    <div class="position-relative h-100">
+                        <iframe class="position-relative rounded w-100 h-100"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1525.4065374147297!2d71.7189939!3d40.124168999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bbedf2e5dc890f%3A0x54b20d73a0a38c62!2z0JTQtdGC0YHQutC40Lkg0YHQsNC0INCQ0YDRg9GD!5e0!3m2!1sru!2skg!4v1684086382078!5m2!1sru!2skg"
+                                frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
+                                tabindex="0"></iframe>
                     </div>
                 </div>
             </div>

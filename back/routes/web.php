@@ -39,6 +39,7 @@ Route::group(
         Route::get('/main/gallery', [App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
 
         Route::get('main/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+        Route::get('main/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
 
         Route::get('/main/vacancy', [App\Http\Controllers\User\VacancyController::class, 'index'])->name('vacancy');
         Route::post('/main/vacancy/save', [App\Http\Controllers\User\VacancyController::class, 'save'])->name('vacancy.save');

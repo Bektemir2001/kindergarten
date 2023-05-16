@@ -62,6 +62,7 @@ class HomeController extends Controller
 
     public function condition(){
         return view('user.condition');
+    }
 
     public function faq(){
         $user = auth()->user();

@@ -4,20 +4,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
     <div class="container">
 
-        <button type="button" class="btn btn-primary rounded-pill m-3" id="childInfoBtn" onclick="showChildInfo()">
-            @lang('lang.child_info_btn')
-        </button>
-        <button type="button" class="btn btn-primary rounded-pill m-3" id="paymentBtn" onclick="showPayment()">
-            @lang('lang.payment_btn')
-        </button>
-
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-primary rounded-pill m-3" id="childInfoBtn" onclick="showChildInfo()">
-                Данные моего ребенка
+                @lang('lang.child_info_btn')
             </button>
             <a href="{{route('payment', $child->id)}}">
                 <button type="button" class="btn btn-primary rounded-pill m-3"  id="paymentBtn" >
-                    Оплата
+                    @lang('lang.payment_btn')
                 </button>
             </a>
         </div>

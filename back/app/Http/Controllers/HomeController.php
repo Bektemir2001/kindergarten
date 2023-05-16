@@ -43,8 +43,18 @@ class HomeController extends Controller
     }
 
     public function contact(){
+        $user = auth()->user();
+        $children = null;
+        if($user){
+            if($user->role === 'ROLE_ADMIN' or $user->role === 'ROLE_TEACHER' or $user->role === 'ROLE_PARENT'){
+                $children = Child::where('parent_id', $user->id)->get();
+                return view('user.contact', compact('children'));
+            }
+            return view('user.contact');
+        }
         return view('user.contact');
     }
+
 
     public function literature(){
         return view('user.literature');
@@ -52,5 +62,17 @@ class HomeController extends Controller
 
     public function condition(){
         return view('user.condition');
+
+    public function faq(){
+        $user = auth()->user();
+        $children = null;
+        if($user){
+            if($user->role === 'ROLE_ADMIN' or $user->role === 'ROLE_TEACHER' or $user->role === 'ROLE_PARENT'){
+                $children = Child::where('parent_id', $user->id)->get();
+                return view('user.faq', compact('children'));
+            }
+            return view('user.faq');
+        }
+        return view('user.faq');
     }
 }

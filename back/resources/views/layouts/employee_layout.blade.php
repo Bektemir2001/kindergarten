@@ -1,3 +1,24 @@
+<?php
+$l = request()->segment(1, '');
+$lang = url()->current();
+$k = Route::current()->uri;
+
+$langru = "";
+$langkg = "";
+if($l == "ru"){
+    $langru = $lang;
+    $langkg = str_replace("/ru", "", $lang);
+}
+else if($l == ""){
+    $langru = $lang.'/ru';
+    $langkg = $lang;
+}
+else{
+    $langru = str_replace($k, "ru/".$k, $lang);
+    $langkg = $lang;
+}
+
+?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
@@ -31,6 +52,59 @@
     <!-- END Custom CSS-->
 </head>
 <body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
+<style>
+
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: relative;
+        background-color: #f9f9f9;
+        width: 140px;
+    }
+
+    .dropbtnru
+    {
+        background: url('http://icons.iconarchive.com/icons/custom-icon-design/flag-3/16/Russia-Flag-icon.png') no-repeat left center;
+        padding-left: 25px;
+        width: auto;
+    }
+    .dropbtnkg
+    {
+        background: url('https://icons.iconarchive.com/icons/famfamfam/flag/16/kg-icon.png') no-repeat left center;
+        padding-left: 25px;
+        width: auto;
+    }
+
+    .dropbtnkg::after {
+        /*background: rgba(0, 0, 0, 0) url("https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-16.png") no-repeat scroll center center;*/
+        content: "";
+        height: 16px;
+        position: absolute;
+        right: 0;
+        top: 7px;
+        width: 16px;
+    }
+
+
+
+
+    .dropdown-content a:first-child
+    {
+        background: url('http://icons.iconarchive.com/icons/custom-icon-design/flag-3/16/Russia-Flag-icon.png') no-repeat left center;
+    }
+
+    .dropdown-content a:last-child
+    {
+        background: url('https://icons.iconarchive.com/icons/famfamfam/flag/16/kg-icon.png') no-repeat left center;
+    }
+
+    /* Links inside the dropdown */
+
+    /* Change color of dropdown links on hover */
+
+    /*# sourceMappingURL=style.css.map */
+</style>
 
 <!-- fixed-top-->
 <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-light navbar-bg-color">
@@ -48,16 +122,38 @@
                     <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu">         </i></a></li>
                 </ul>
                 <ul class="nav navbar-nav float-right">
+                    <div class="navbar-nav">
+{{--                        <div class="dropdown">--}}
+{{--                            <a href="#" class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">--}}
+{{--                                <i class="bi-globe" style="font-size: 25px; color: #5f1dea"></i>--}}
+{{--                            </a>--}}
+{{--                            <ul class="dropdown-menu" style="padding:10px; right: 0; left: auto;!important;">--}}
+{{--                                <li class="dropbtnru"><a href="{{ $langru }}" class="dropdown-item">Русский</a></li>--}}
+{{--                                <li class="dropbtnkg"><a href="{{ $langkg }}" class="dropdown-item">Кыргызча</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi-globe" style="font-size: 25px; color: #5f1dea"></i>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="padding: 10px">
+                                <li class="dropbtnru"><a href="{{ $langru }}" class="dropdown-item">Русский</a></li>
+                                <li class="dropbtnkg"><a href="{{ $langkg }}" class="dropdown-item">Кыргызча</a></li>                            </div>
+                        </div>
+                    </div>
+                </ul>
+                <ul class="nav navbar-nav float-right">
                     <li class="nav-item">
                         <a href="{{route('index')}}" class="nav-link">
-                            <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">Назад</btn>
+                            <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">@lang('lang.back_btn')</btn>
                         </a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav float-right">
                     <li class="nav-item">
                         <a href="{{route('user.logout')}}" class="nav-link">
-                            <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">Выйти</btn>
+                            <btn class="btn btn-outline-primary" style="border-color:#5f1dea; background-color:#5f1dea; color: white">@lang('lang.log_out')</btn>
                         </a>
                     </li>
                 </ul>
@@ -73,21 +169,21 @@
 <div class="main-menu menu-fixed menu-dark">
     <div class="main-menu-content"><a class="navigation-brand d-none d-md-block d-lg-block d-xl-block" href="{{route('index')}}"><img class="brand-logo" style="border-radius: 10px;" alt="Aruu logo" src="{{asset('dist/img/logo_aruu.jpg')}}"/></a>
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="active"><a href="{{route('employee', auth()->user()->id)}}"><i class="icon-grid"></i><span class="menu-title" data-i18n="">Главная</span></a>
+            <li class="active"><a href="{{route('employee', auth()->user()->id)}}"><i class="icon-grid"></i><span class="menu-title" data-i18n="">@lang('lang.emp_main')</span></a>
             </li>
-            <li class=" nav-item "><a href="{{route('employee.group.index')}}"><i class="cil-group"></i><span class="menu-title" data-i18n="">Моя группа</span></a>
+            <li class=" nav-item "><a href="{{route('employee.group.index')}}"><i class="cil-group"></i><span class="menu-title" data-i18n="">@lang('lang.emp_group')</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><i class="icon-wallet"></i><span class="menu-title" data-i18n="">Оплата</span></a>
+            <li class=" nav-item"><a href="#"><i class="icon-wallet"></i><span class="menu-title" data-i18n="">@lang('lang.emp_payment')</span></a>
             </li>
-            <li class=" nav-item"><a href="{{route('employee.attendance.index')}}"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">Посещение</span></a>
+            <li class=" nav-item"><a href="{{route('employee.attendance.index')}}"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">@lang('lang.emp_attendance')</span></a>
             </li>
             <li class=" nav-item"><a href="{{route('employee.gallery.index')}}"><i class="fas fa-photo-video"></i><span class="menu-title" data-i18n="">Галерея</span></a>
             </li>
             <li class=" nav-item"><a href="#"><i class="icon-user"></i><span class="menu-title" data-i18n="">Аккаунт</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="{{route('employee.profile', auth()->user()->id)}}">Профиль</a>
+                    <li><a class="menu-item" href="{{route('employee.profile', auth()->user()->id)}}">@lang('lang.user_profile')</a>
                     </li>
-                    <li><a class="menu-item" href="{{route('user.logout')}}">Выйти</a>
+                    <li><a class="menu-item" href="{{route('user.logout')}}">@lang('lang.log_out')</a>
                     </li>
                 </ul>
             </li>

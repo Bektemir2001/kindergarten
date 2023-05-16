@@ -41,4 +41,8 @@ class HomeController extends Controller
         }
         return view('gallery', compact('galleries'));
     }
+
+    public function contact(){
+        return view('user.contact');
+    }
 }

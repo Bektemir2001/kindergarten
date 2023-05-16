@@ -4,16 +4,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
     <div class="container">
         <button type="button" class="btn btn-primary rounded-pill m-3" id="childInfoBtn" onclick="showChildInfo()">
-            Данные моего ребенка
+            @lang('lang.child_info_btn')
         </button>
         <button type="button" class="btn btn-primary rounded-pill m-3" id="paymentBtn" onclick="showPayment()">
-            Оплата
+            @lang('lang.payment_btn')
         </button>
         <div class="d-none" id="childInfo">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mb-4">
-                        <h5 class="card-header">Анкета вашего ребенка</h5>
+                        <h5 class="card-header">@lang('lang.child_info')</h5>
                         <form id="form" action="{{route('children.update', $child->id)}}" method="post"
                               enctype="multipart/form-data">
                             @method('patch')
@@ -37,8 +37,7 @@
                                                 class="account-file-input form-control"
                                             />
                                         </label>
-                                        <p class="text-muted mb-0">Обновить фотографию профиля. Можно загрузить JPG, GIF
-                                            or PNG.</p>
+                                        <p class="text-muted mb-0">@lang('lang.profile_photo_msg')</p>
                                     </div>
                                 </div>
                             </div>
@@ -46,38 +45,44 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
-                                        <h6 for="name" class="form-label"><b>Имя:</b></h6>
+                                        <h6 for="name" class="form-label"><b>@lang('lang.child_name'):</b></h6>
                                         <div class="text-secondary">{{$child->name}}</div>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <h6 for="surname" class="form-label"><b>Фамилия:</b></h6>
+                                        <h6 for="surname" class="form-label"><b>@lang('lang.child_surname'):</b></h6>
                                         <div class="text-secondary">{{$child->surname}}</div>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <h6 for="email" class="form-label"><b>День рождения:</b></h6>
+                                        <h6 for="email" class="form-label"><b>@lang('lang.child_birth_date'):</b></h6>
                                         <div class="text-secondary">{{$child->birth_date}}</div>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <h6 class="form-label" for="phone_number"><b>Название группы:</b></h6>
+                                        <h6 class="form-label" for="phone_number"><b>@lang('lang.child_group'):</b></h6>
                                         <div class="text-secondary">{{$child->group->name}}</div>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <h6 for="address" class="form-label"><b>Имя родителя:</b></h6>
+                                        <h6 for="address" class="form-label"><b>@lang('lang.child_parent'):</b></h6>
                                         <div
                                             class="text-secondary">{{$child->parent->name}} {{$child->parent->surname}}</div>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <h6 for="address" class="form-label"><b>Пол:</b></h6>
-                                        <div class="text-secondary">{{$child->gender}}</div>
+                                        <h6 for="address" class="form-label"><b>@lang('lang.child_gender'):</b></h6>
+                                        <div class="text-secondary">
+                                            @if($child->gender === 'Male')
+                                                @lang('lang.gender_male')
+                                            @else
+                                                @lang('lang.gender_female')
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <h6 for="birth_certificate" class="form-label"><b>Свидетельство о рождении:</b>
+                                        <h6 for="birth_certificate" class="form-label"><b>@lang('lang.child_birth_cert'):</b>
                                         </h6>
                                         <input type="file" class="form-control" id="birth_certificate"
                                                name="birth_certificate" placeholder="" value="">
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <h6 for="med_certificate" class="form-label"><b>Медицинская справка</b></h6>
+                                        <h6 for="med_certificate" class="form-label"><b>@lang('lang.child_med_cert'):</b></h6>
                                         <input type="file" class="form-control" id="med_certificate"
                                                name="med_certificate">
                                     </div>
@@ -89,8 +94,7 @@
                                     </div>
                                     @if($child->med_disability != null)
                                         <div class="mb-3 col-md-6">
-                                            <h6 for="med_disability" class="form-label"><b>Медицинская справка о
-                                                    инвалидности:</b></h6>
+                                            <h6 for="med_disability" class="form-label"><b>@lang('lang.child_med_dis'):</b></h6>
                                             <input type="file" class="form-control" id="med_disability"
                                                    name="med_disability" placeholder="" value="">
                                         </div>
@@ -101,11 +105,10 @@
                                     @endif
                                 </div>
                                 <div class="mt-auto">
-                                    <button type="submit" class="btn btn-primary ms-auto float-end rounded-pill">Сохранить
-                                        изменения
+                                    <button type="submit" class="btn btn-primary ms-auto float-end rounded-pill">@lang('lang.save_btn')
                                     </button>
                                     <button type="button" class="btn btn-secondary ms-auto float-end mx-3 rounded-pill"
-                                            onclick="hideChildInfo()">Закрыть
+                                            onclick="hideChildInfo()">@lang('lang.hide_btn')
                                     </button>
                                 </div>
                             </div>

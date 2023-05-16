@@ -19,7 +19,7 @@
                                     <hr/>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Имя</p></label>
+                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_name')</p></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" id="name" name="name" value="{{$children->name}}" required="" autofocus="">
@@ -28,7 +28,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Фамилия</p></label>
+                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_surname')</p></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" id="surname" name="surname" value="{{$children->surname}}" required="" autofocus="">
@@ -37,7 +37,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">День Рождения</p></label>
+                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_birth_date')</p></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{$children->birth_date}}" required="" autofocus="">
@@ -46,7 +46,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Пол</p></label>
+                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_gender')</p></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="radioDiv">
@@ -54,11 +54,11 @@
                                                 <input type="radio" name="gender" id="option-2" value="Female" {{ $children->gender == 'Female' ? 'checked' : ''}}>
                                                 <label for="option-1" class="option option-1">
                                                     <div class="dot"></div>
-                                                    <span>Мальчик</span>
+                                                    <span>@lang('lang.gender_male')</span>
                                                 </label>
                                                 <label for="option-2" class="option option-2">
                                                     <div class="dot"></div>
-                                                    <span>Девочка</span>
+                                                    <span>@lang('lang.gender_female')</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -66,7 +66,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Имя Родителя</p></label>
+                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_parent')</p></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <select class="form-control" name="parent_id" id="parent_id">
@@ -79,7 +79,7 @@
                                     <br>
                                     <div class="row" hidden="">
                                         <div class="col-md-3">
-                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Название Группы</p></label>
+                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_group')</p></label>
                                         </div>
                                         <div class="col-lg-6" >
                                             <select class="form-control" name="group_id" id="group_id">
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Свидетельство о рождении</p></label>
+                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_birth_cert')</p></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="file" class="form-control" id="birth_certificate" name="birth_certificate" value=""  autofocus="">
@@ -98,7 +98,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Медицинская справка</p></label>
+                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_med_cert')</p></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="file" class="form-control" id="med_certificate" name="med_certificate" value=""  autofocus="">
@@ -107,7 +107,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Справка об инвалидности</p></label>
+                                            <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_med_dis')</p></label>
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="file" class="form-control" id="med_disability" name="med_disability" value=""  autofocus="">
@@ -115,8 +115,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 text-right">
-                                    <a href="{{route('employee.group.index')}}" class="btn btn-gradient-primary my-1">Назад</a>
-                                    <button type="submit" class="btn btn-gradient-secondary my-1">Сохранить</button>
+                                    <a href="{{route('employee.group.index')}}" class="btn btn-gradient-primary my-1">@lang('lang.back_btn')</a>
+                                    <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.saveBtn')</button>
                                 </div>
                             </div>
                         </div>

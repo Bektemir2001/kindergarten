@@ -14,7 +14,7 @@
                                 <hr/>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Имя</p></label>
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_name')</p></label>
                                     </div>
                                     <div class="col-md-3">
                                         <p>{{$children->name}}</p>
@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Фамилия</p></label>
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_surname')</p></label>
                                     </div>
                                     <div class="col-md-3">
                                         <p>{{$children->surname}}</p>
@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">День Рождения</p></label>
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_birth_date')</p></label>
                                     </div>
                                     <div class="col-md-3">
                                         <p>{{$children->birth_date}}</p>
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Пол</p></label>
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_gender')</p></label>
                                     </div>
                                     <div class="col-md-3">
                                         <p>{{$children->gender}}</p>
@@ -46,15 +46,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Имя Родителя</p></label>
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_parent')</p></label>
                                     </div>
                                     <div class="col-md-3">
                                         <p>{{$children->parent_name}} {{$children->parent_surname}}</p>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row" hidden="">
                                     <div class="col-md-3">
-                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Название Группы</p></label>
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_group')</p></label>
                                     </div>
                                     <div class="col-md-3">
                                         <p>{{$children->group_name}}</p>
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Свидетельство о рождении</p></label>
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_birth_cert')</p></label>
                                     </div>
                                     <div class="col-lg-6">
                                         <img class="img-fluid" src="{{asset($children->birth_certificate)}}">                                    </div>
@@ -70,7 +70,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Медицинская справка</p></label>
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_med_cert')</p></label>
                                     </div>
                                     <div class="col-lg-6">
                                         <img class="img-fluid" src="{{asset($children->med_certificate)}}">                                    </div>
@@ -78,7 +78,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">Справка об инвалидности</p></label>
+                                        <label> <p class="text-bold-700 text-uppercase mb-0 violet" style="color: #5f1dea">@lang('lang.child_med_dis')</p></label>
                                     </div>
                                     <div class="col-lg-6">
                                         <img class="img-fluid" src="{{asset($children->med_disability)}}">                                    </div>
@@ -86,7 +86,7 @@
                             </div>
                                     <div class="col-12 text-right">
                                         <a href="{{route('employee.group.index')}}">
-                                        <button type="submit" class="btn btn-gradient-primary my-1">Назад</button>
+                                        <button type="submit" class="btn btn-gradient-primary my-1">@lang('lang.back_btn')</button>
                                         </a>
                                     </div>
                             </div>

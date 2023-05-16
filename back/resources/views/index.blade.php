@@ -20,8 +20,8 @@
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-2 text-white animated slideInDown mb-4">Лучший детский сад для вашего ребенка</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Мы предлагаем обучение в небольших группах, что позволяет нам найти индивидуальный подход к каждому ученику, сделать акцент на конкретных талантах.</p>
+                                <h1 class="display-2 text-white animated slideInDown mb-4">@lang('lang.slider_main1')</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">@lang('lang.slider_msg1')</p>
                             </div>
                         </div>
                     </div>
@@ -33,8 +33,8 @@
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-2 text-white animated slideInDown mb-4">Сделайте светлое будущее для своего ребенка</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Счастье и комфорт Ваших детей – наши приоритеты! Мы сами показываем ученикам пример заботы о других, а также учим их быть отзывчивыми и уважать чувства своих друзей.</p>
+                                <h1 class="display-2 text-white animated slideInDown mb-4">@lang('lang.slider_main2')</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">@lang('lang.slider_msg2')</p>
                             </div>
                         </div>
                     </div>
@@ -49,8 +49,8 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h1 class="mb-3">Наши преимущества</h1>
-                <p>Пребывание в частном детском саду гарантирует безопасность ребенка, создает все условия для  продуктивного развития в спокойной и дружественной атмосфере без стрессов и негативного давления.</p>
+                <h1 class="mb-3">@lang('lang.pros_main')</h1>
+                <p>@lang('lang.pros_main_msg')</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -61,8 +61,8 @@
                             <span class="bg-primary"></span>
                         </div>
                         <div class="facility-text bg-primary">
-                            <h3 class="text-primary mb-3">Парковка</h3>
-                            <p class="mb-0">Удобная парковка для наших родителей.</p>
+                            <h3 class="text-primary mb-3">@lang('lang.pros_parking')</h3>
+                            <p class="mb-0">@lang('lang.pros_parking_msg')</p>
                         </div>
                     </div>
                 </div>
@@ -74,8 +74,8 @@
                             <span class="bg-success"></span>
                         </div>
                         <div class="facility-text bg-success">
-                            <h3 class="text-success mb-3">Площадка</h3>
-                            <p class="mb-0">Безопасная площадка для наших воспитанников.</p>
+                            <h3 class="text-success mb-3">@lang('lang.pros_playground')</h3>
+                            <p class="mb-0">@lang('lang.pros_playground_msg')</p>
                         </div>
                     </div>
                 </div>
@@ -87,8 +87,8 @@
                             <span class="bg-warning"></span>
                         </div>
                         <div class="facility-text bg-warning">
-                            <h3 class="text-warning mb-3">Здоровое питание</h3>
-                            <p class="mb-0">Наше меню – сбалансированное, богатое витаминами и разнообразное</p>
+                            <h3 class="text-warning mb-3">@lang('lang.pros_food')</h3>
+                            <p class="mb-0">@lang('lang.pros_food_msg')</p>
                         </div>
                     </div>
                 </div>
@@ -100,8 +100,8 @@
                             <span class="bg-info"></span>
                         </div>
                         <div class="facility-text bg-info">
-                            <h3 class="text-info mb-3">Образование</h3>
-                            <p class="mb-0">Большое разнообразие творческих и развивающих занятий для детей любого возраста.</p>
+                            <h3 class="text-info mb-3">@lang('lang.pros_edu')</h3>
+                            <p class="mb-0">@lang('lang.pros_edu_msg')</p>
                         </div>
                     </div>
                 </div>
@@ -116,8 +116,8 @@
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-4">Родители на работе, ребенок в безопасности</h1>
-                    <p class="mb-4">Здесь малыши учатся читать, писать без ошибок, считать и рисовать. Мы также учим детей работать в команде и поддерживать друг друга. Спортивные игры и другие мероприятия помогают им развиваться физически и социально. Мы создаем безопасную, комфортную и уютную атмосферу для ваших детей, чтобы они могли чувствовать себя как дома.</p>
+                    <h1 class="mb-4">@lang('lang.info_main')</h1>
+                    <p class="mb-4">@lang('lang.info_msg')</p>
                     <div class="row g-4 align-items-center">
                         <div class="col-sm-6">
                             <a class="btn btn-primary rounded-pill py-3 px-5" href="" hidden="">Read More</a>
@@ -127,7 +127,7 @@
                                 <img class="rounded-circle flex-shrink-0" src="{{asset('new_template/img/photo_2023-05-14_22-58-44.jpg')}}" alt="" style="width: 45px; height: 45px;">
                                 <div class="ms-3">
                                     <h6 class="text-primary mb-1">Калыскан Шамшиева</h6>
-                                    <small>CEO & Основатель</small>
+                                    <small>@lang('lang.ceo')</small>
                                 </div>
                             </div>
                         </div>
@@ -164,10 +164,9 @@
                     </div>
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                         <div class="h-100 d-flex flex-column justify-content-center p-5">
-                            <h1 class="mb-4">Мы нанимаем</h1>
-                            <p class="mb-4">Хотите стать частью нашей дружной команды, нажмите кнопку ниже и оставьте свое резюме.
-                            </p>
-                            <a class="btn btn-primary py-3 px-5" href="{{route('vacancy')}}">Откликнуться<i class="fa fa-arrow-right ms-2"></i></a>
+                            <h1 class="mb-4">@lang('lang.hiring_main')</h1>
+                            <p class="mb-4">@lang('lang.hiring_msg')</p>
+                            <a class="btn btn-primary py-3 px-5" href="{{route('vacancy')}}">@lang('lang.hiring_btn')<i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>
                 </div>
@@ -181,8 +180,8 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h1 class="mb-3">Почему Аруу?</h1>
-                <p>В общении с детьми мы используем технологию коучинга, опираясь на сильные стороны каждого. Мы моделируем ситуацию успеха, потому что поддержка в обучении важнее критики.</p>
+                <h1 class="mb-3">@lang('lang.reason_main')</h1>
+                <p>@lang('lang.reason_msg')</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -191,33 +190,33 @@
                             <img class="img-fluid rounded-circle" src="{{asset('new_template/img/classes-1.jpg')}}" alt="">
                         </div>
                         <div class="bg-light rounded p-4 pt-5 mt-n5">
-                            <a class="d-block text-center h3 mt-3 mb-4" href="">Искусство и рисование</a>
+                            <a class="d-block text-center h3 mt-3 mb-4" href="">@lang('lang.reason1')</a>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle flex-shrink-0" src="{{asset('new_template/img/photo_2023-05-14_22-58-44.jpg')}}" alt="" style="width: 45px; height: 45px;">
                                     <div class="ms-3">
                                         <h6 class="text-primary mb-1">Каныкей Каратаева</h6>
-                                        <small>Учитель</small>
+                                        <small>@lang('lang.teacher')</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="row g-1">
                                 <div class="col-4">
                                     <div class="border-top border-3 border-primary pt-2">
-                                        <h6 class="text-primary mb-1">Возраст:</h6>
-                                        <small>3-5 лет</small>
+                                        <h6 class="text-primary mb-1">@lang('lang.age_range')</h6>
+                                        <small>3-5 @lang('lang.age')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-success pt-2">
-                                        <h6 class="text-success mb-1">Время:</h6>
-                                        <small>9-10 утра</small>
+                                        <h6 class="text-success mb-1">@lang('lang.time'):</h6>
+                                        <small>9-10 @lang('lang.time_morning')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-warning pt-2">
-                                        <h6 class="text-warning mb-1">Место:</h6>
-                                        <small>12 детей</small>
+                                        <h6 class="text-warning mb-1">@lang('lang.capacity'):</h6>
+                                        <small>12 @lang('lang.capacity_info')</small>
                                     </div>
                                 </div>
                             </div>
@@ -230,33 +229,33 @@
                             <img class="img-fluid rounded-circle" src="{{asset('new_template/img/photo_2023-05-14_22-19-37.jpg')}}" alt="">
                         </div>
                         <div class="bg-light rounded p-4 pt-5 mt-n5">
-                            <a class="d-block text-center h3 mt-3 mb-4" href="">Мелкая моторика</a>
+                            <a class="d-block text-center h3 mt-3 mb-4" href="">@lang('lang.reason2')</a>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle flex-shrink-0" src="{{asset('new_template/img/photo_2023-05-14_22-58-44.jpg')}}" alt="" style="width: 45px; height: 45px;">
                                     <div class="ms-3">
                                         <h6 class="text-primary mb-1">Калыскан Шамшиева</h6>
-                                        <small>Учитель</small>
+                                        <small>@lang('lang.teacher')</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="row g-1">
                                 <div class="col-4">
                                     <div class="border-top border-3 border-primary pt-2">
-                                        <h6 class="text-primary mb-1">Возраст:</h6>
-                                        <small>3-7 лет</small>
+                                        <h6 class="text-primary mb-1">@lang('lang.age_range')</h6>
+                                        <small>3-7 @lang('lang.age')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-success pt-2">
-                                        <h6 class="text-success mb-1">Время:</h6>
-                                        <small>10-11 утра</small>
+                                        <h6 class="text-success mb-1">@lang('lang.time')</h6>
+                                        <small>10-11 @lang('lang.time_morning')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-warning pt-2">
-                                        <h6 class="text-warning mb-1">Место:</h6>
-                                        <small>10 детей</small>
+                                        <h6 class="text-warning mb-1">@lang('lang.capacity')</h6>
+                                        <small>10 @lang('lang.capacity_info')</small>
                                     </div>
                                 </div>
                             </div>
@@ -269,33 +268,33 @@
                             <img class="img-fluid rounded-circle" src="{{asset('new_template/img/photo_2023-05-14_23-22-07.jpg')}}" alt="">
                         </div>
                         <div class="bg-light rounded p-4 pt-5 mt-n5">
-                            <a class="d-block text-center h3 mt-3 mb-4" href="">Спорт и танцы</a>
+                            <a class="d-block text-center h3 mt-3 mb-4" href="">@lang('lang.reason3')</a>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle flex-shrink-0" src="{{asset('new_template/img/photo_2023-05-14_22-58-44.jpg')}}" alt="" style="width: 45px; height: 45px;">
                                     <div class="ms-3">
                                         <h6 class="text-primary mb-1">Сымбат Султангазиева</h6>
-                                        <small>Учитель</small>
+                                        <small>@lang('lang.teacher')</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="row g-1">
                                 <div class="col-4">
                                     <div class="border-top border-3 border-primary pt-2">
-                                        <h6 class="text-primary mb-1">Возраст:</h6>
-                                        <small>2-7 лет</small>
+                                        <h6 class="text-primary mb-1">@lang('lang.age_range'):</h6>
+                                        <small>2-7 @lang('lang.age')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-success pt-2">
-                                        <h6 class="text-success mb-1">Время:</h6>
-                                        <small>12-13 дня</small>
+                                        <h6 class="text-success mb-1">@lang('lang.time')</h6>
+                                        <small>12-13 @lang('lang.time_day')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-warning pt-2">
-                                        <h6 class="text-warning mb-1">Место:</h6>
-                                        <small>12 детей</small>
+                                        <h6 class="text-warning mb-1">@lang('lang.capacity')</h6>
+                                        <small>12 @lang('lang.capacity_info')</small>
                                     </div>
                                 </div>
                             </div>
@@ -308,33 +307,33 @@
                             <img class="img-fluid rounded-circle" src="{{asset('new_template/img/photo_2023-05-14_22-19-34.jpg')}}" alt="">
                         </div>
                         <div class="bg-light rounded p-4 pt-5 mt-n5">
-                            <a class="d-block text-center h3 mt-3 mb-4" href="">Английский язык</a>
+                            <a class="d-block text-center h3 mt-3 mb-4" href="">@lang('lang.reason4')</a>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle flex-shrink-0" src="{{asset('new_template/img/photo_2023-05-14_22-58-44.jpg')}}" alt="" style="width: 45px; height: 45px;">
                                     <div class="ms-3">
                                         <h6 class="text-primary mb-1">Бектемир Кумарбай уулу</h6>
-                                        <small>Учитель</small>
+                                        <small>@lang('lang.teacher')</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="row g-1">
                                 <div class="col-4">
                                     <div class="border-top border-3 border-primary pt-2">
-                                        <h6 class="text-primary mb-1">Возраст:</h6>
-                                        <small>3-5 лет</small>
+                                        <h6 class="text-primary mb-1">@lang('lang.age_range')</h6>
+                                        <small>3-5 @lang('lang.age')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-success pt-2">
-                                        <h6 class="text-success mb-1">Время:</h6>
-                                        <small>9-10 утра</small>
+                                        <h6 class="text-success mb-1">@lang('lang.time')</h6>
+                                        <small>9-10 @lang('lang.time_morning')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-warning pt-2">
-                                        <h6 class="text-warning mb-1">Место:</h6>
-                                        <small>12 детей</small>
+                                        <h6 class="text-warning mb-1">@lang('lang.capacity')</h6>
+                                        <small>12 @lang('lang.capacity_info')</small>
                                     </div>
                                 </div>
                             </div>
@@ -347,33 +346,33 @@
                             <img class="img-fluid rounded-circle" src="{{asset('new_template/img/photo_2023-05-14_22-19-32.jpg')}}" alt="">
                         </div>
                         <div class="bg-light rounded p-4 pt-5 mt-n5">
-                            <a class="d-block text-center h3 mt-3 mb-4" href="">Ментальная арифметика</a>
+                            <a class="d-block text-center h3 mt-3 mb-4" href="">@lang('lang.reason5')</a>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle flex-shrink-0" src="{{asset('new_template/img/photo_2023-05-14_22-58-44.jpg')}}" alt="" style="width: 45px; height: 45px;">
                                     <div class="ms-3">
                                         <h6 class="text-primary mb-1">Эмирлан Нурлан уулу</h6>
-                                        <small>Учитель</small>
+                                        <small>@lang('lang.teacher')</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="row g-1">
                                 <div class="col-4">
                                     <div class="border-top border-3 border-primary pt-2">
-                                        <h6 class="text-primary mb-1">Возраст:</h6>
-                                        <small>3-5 лет</small>
+                                        <h6 class="text-primary mb-1">@lang('lang.age_range')</h6>
+                                        <small>3-5 @lang('lang.age')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-success pt-2">
-                                        <h6 class="text-success mb-1">Время:</h6>
-                                        <small>9-10 утра</small>
+                                        <h6 class="text-success mb-1">@lang('lang.time')</h6>
+                                        <small>9-10 @lang('lang.time_morning')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-warning pt-2">
-                                        <h6 class="text-warning mb-1">Место:</h6>
-                                        <small>12 детей</small>
+                                        <h6 class="text-warning mb-1">@lang('lang.capacity')</h6>
+                                        <small>12 @lang('lang.capacity_info')</small>
                                     </div>
                                 </div>
                             </div>
@@ -386,33 +385,33 @@
                             <img class="img-fluid rounded-circle" src="{{asset('new_template/img/classes-6.jpg')}}" alt="">
                         </div>
                         <div class="bg-light rounded p-4 pt-5 mt-n5">
-                            <a class="d-block text-center h3 mt-3 mb-4" href="">Общая образование</a>
+                            <a class="d-block text-center h3 mt-3 mb-4" href="">@lang('lang.reason6')</a>
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle flex-shrink-0" src="{{asset('new_template/img/photo_2023-05-14_22-58-44.jpg')}}" alt="" style="width: 45px; height: 45px;">
                                     <div class="ms-3">
                                         <h6 class="text-primary mb-1">Сымбат Султангазиева</h6>
-                                        <small>Учитель</small>
+                                        <small>@lang('lang.teacher')</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="row g-1">
                                 <div class="col-4">
                                     <div class="border-top border-3 border-primary pt-2">
-                                        <h6 class="text-primary mb-1">Возраст:</h6>
-                                        <small>3-5 лет</small>
+                                        <h6 class="text-primary mb-1">@lang('lang.age_range')</h6>
+                                        <small>3-5 @lang('lang.age')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-success pt-2">
-                                        <h6 class="text-success mb-1">Время:</h6>
-                                        <small>9-10 утра</small>
+                                        <h6 class="text-success mb-1">@lang('lang.time')</h6>
+                                        <small>9-10 @lang('lang.time_morning')</small>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="border-top border-3 border-warning pt-2">
-                                        <h6 class="text-warning mb-1">Место:</h6>
-                                        <small>12 детей</small>
+                                        <h6 class="text-warning mb-1">@lang('lang.capacity')</h6>
+                                        <small>12 @lang('lang.capacity_info')</small>
                                     </div>
                                 </div>
                             </div>
@@ -428,8 +427,8 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h1 class="mb-3">Наша дружная команда</h1>
-                <p>Весь персонал детского сада Аруу проходит психологические тренинги. Мы знаем, как взаимодействовать с детьми разного возраста в любой ситуации.</p>
+                <h1 class="mb-3">@lang('lang.team')</h1>
+                <p>@lang('lang.team_msg')</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -437,7 +436,7 @@
                         <img class="img-fluid rounded-circle w-75" src="{{asset('new_template/img/team-1.jpg')}}" alt="">
                         <div class="team-text">
                             <h6>Каныкей Каратаева</h6>
-                            <p>Техничка</p>
+                            <p>@lang('lang.team1')</p>
                             <div class="d-flex align-items-center">
                                 <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -451,7 +450,7 @@
                         <img class="img-fluid rounded-circle w-75" src="{{asset('new_template/img/team-2.jpg')}}" alt="">
                         <div class="team-text">
                             <h6>Бектемир Кумарбай уулу</h6>
-                            <p>Охранник</p>
+                            <p>@lang('lang.team2')</p>
                             <div class="d-flex align-items-center">
                                 <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -465,7 +464,7 @@
                         <img class="img-fluid rounded-circle w-75" src="{{asset('new_template/img/team-3.jpg')}}" alt="">
                         <div class="team-text">
                             <h6>Сымбат Султангазиева</h6>
-                            <p>Повар</p>
+                            <p>@lang('lang.team3')</p>
                             <div class="d-flex align-items-center">
                                 <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-twitter"></i></a>

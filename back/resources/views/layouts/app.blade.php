@@ -1,3 +1,24 @@
+<?php
+$l = request()->segment(1, '');
+$lang = url()->current();
+$k = Route::current()->uri;
+
+$langru = "";
+$langkg = "";
+if($l == "ru"){
+    $langru = $lang;
+    $langkg = str_replace("/ru", "", $lang);
+}
+else if($l == ""){
+    $langru = $lang.'/ru';
+    $langkg = $lang;
+}
+else{
+    $langru = str_replace($k, "ru/".$k, $lang);
+    $langkg = $lang;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,12 +54,64 @@
 </head>
 
 <body>
+<style>
 
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: relative;
+        background-color: #f9f9f9;
+        width: 140px;
+    }
+
+    .dropbtnru
+    {
+        background: url('http://icons.iconarchive.com/icons/custom-icon-design/flag-3/16/Russia-Flag-icon.png') no-repeat left center;
+        padding-left: 25px;
+        width: auto;
+    }
+    .dropbtnkg
+    {
+        background: url('https://icons.iconarchive.com/icons/famfamfam/flag/16/kg-icon.png') no-repeat left center;
+        padding-left: 25px;
+        width: auto;
+    }
+
+    .dropbtnkg::after {
+        /*background: rgba(0, 0, 0, 0) url("https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-16.png") no-repeat scroll center center;*/
+        content: "";
+        height: 16px;
+        position: absolute;
+        right: 0;
+        top: 7px;
+        width: 16px;
+    }
+
+
+
+
+    .dropdown-content a:first-child
+    {
+        background: url('http://icons.iconarchive.com/icons/custom-icon-design/flag-3/16/Russia-Flag-icon.png') no-repeat left center;
+    }
+
+    .dropdown-content a:last-child
+    {
+        background: url('https://icons.iconarchive.com/icons/famfamfam/flag/16/kg-icon.png') no-repeat left center;
+    }
+
+    /* Links inside the dropdown */
+
+    /* Change color of dropdown links on hover */
+
+    /*# sourceMappingURL=style.css.map */
+</style>
 <div class="container-xxl bg-white p-0">
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">@lang('lang.loading_msg')</span>
         </div>
     </div>
     <!-- Spinner End -->
@@ -62,7 +135,7 @@
                 @if(auth()->user())
                     @if(auth()->user()->role === 'ROLE_ADMIN' or auth()->user()->role === 'ROLE_TEACHER' or auth()->user()->role === 'ROLE_PARENT')
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Мои дети</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@lang('lang.my_children')</a>
                             <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
                                 @foreach($children as $child)
                                     <a href="{{route('children', $child->id)}}" class="dropdown-item">{{$child->name}} {{$child->surname}}</a>
@@ -72,27 +145,24 @@
                     @endif
                 @endif
 
-                <div class="nav-item">
-                    <a href="" class="nav-link">О нас</a>
-                </div>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Родителям</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@lang('lang.for_parents')</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
-                        <a href="" class="dropdown-item">Часто задаваемые вопросы</a>
-                        <a href="" class="dropdown-item">Читаем детям</a>
+                        <a href="" class="dropdown-item">@lang('lang.parents_question')</a>
+                        <a href="" class="dropdown-item">@lang('lang.parents_reading')</a>
                     </div>
                 </div>
                 <div class="nav-item">
-                    <a href="" class="nav-link">Услуги</a>
+                    <a href="" class="nav-link">@lang('lang.conditions')</a>
                 </div>
                 <div class="nav-item dropdown">
                     <a href="{{route('gallery')}}" class="nav-link">Галерея</a>
                 </div>
                 <div class="nav-item">
-                    <a href="" class="nav-link">Контакты</a>
+                    <a href="{{route('contact')}}" class="nav-link">@lang('lang.contact')</a>
                 </div>
                 <div class="nav-item">
-                    <a href="{{route('vacancy')}}" class="nav-link">Вакансии</a>
+                    <a href="{{route('vacancy')}}" class="nav-link">@lang('lang.vacancy')</a>
                 </div>
             </div>
             @if(auth()->user())
@@ -100,7 +170,7 @@
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary rounded-pill px-3 d-lg-block"
                             data-bs-toggle="modal" data-bs-target="#modalEnroll">
-                        Записаться
+                        @lang('lang.enroll')
                     </button>
                 </div>
                 <div class="navbar-nav mx-auto">
@@ -110,13 +180,13 @@
                         </a>
                         <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="right: 0;left: auto;!important;">
                             @if(auth()->user()->role === 'ROLE_ADMIN')
-                                <a href="{{route('admin')}}" class="dropdown-item" >Мой кабинет</a>
+                                <a href="{{route('admin')}}" class="dropdown-item" >@lang('lang.emp_page')</a>
                             @elseif(auth()->user()->role==='ROLE_TEACHER')
-                                <a href="{{route('employee', auth()->user()->id)}}" class="dropdown-item" >Мой кабинет</a>
+                                <a href="{{route('employee', auth()->user()->id)}}" class="dropdown-item" >@lang('lang.emp_page')</a>
                             @else
-                                <a href="{{route('profile', auth()->user()->id)}}" class="dropdown-item" >Мой профиль</a>
+                                <a href="{{route('profile', auth()->user()->id)}}" class="dropdown-item" >@lang('lang.user_profile')</a>
                             @endif
-                            <a class="dropdown-item" onclick="location.href='{{route('user.logout')}}'" type="button">Выйти</a>
+                            <a class="dropdown-item" onclick="location.href='{{route('user.logout')}}'" type="button">@lang('lang.log_out')</a>
                         </div>
                     </div>
                 </div>
@@ -125,7 +195,7 @@
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary rounded-pill px-3 d-lg-block"
                             data-bs-toggle="modal" data-bs-target="#modalMessage">
-                        Записаться
+                        @lang('lang.enroll')
                     </button>
                 </div>
                 <div class="navbar-nav mx-auto">
@@ -134,12 +204,23 @@
                             <img src="https://w7.pngwing.com/pngs/364/361/png-transparent-account-avatar-profile-user-avatars-icon.png" alt="Avatar" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;">
                         </a>
                         <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="right: 0;left: auto;!important;">
-                            <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalSignIn">Войти</a>
-                            <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalSignUp">Зарегистрироваться</a>
+                            <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalSignIn">@lang('lang.log_in')</a>
+                            <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalSignUp">@lang('lang.sign_up')</a>
                         </div>
                     </div>
                 </div>
             @endif
+            <div class="navbar-nav mx-auto">
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="bi-globe" style="font-size: 25px; color: #5f1dea"></i>
+                    </a>
+                    <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0" style="padding:10px; right: 0; left: auto;!important;">
+                        <div class="dropbtnru"><a href="{{ $langru }}" class="dropdown-item">Русский</a></div>
+                        <div class="dropbtnkg"><a href="{{ $langkg }}" class="dropdown-item">Кыргызча</a></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -157,17 +238,17 @@
                                 <form>
                                     <!-- Email input -->
                                     <div class="form-outline mb-3">
-                                        <label class="form-label" for="email">Без регистрации вы не сможете записать ребенка. Если у вас есть учетная запись, войдите, если нет, зарегистрируйтесь.</label>
+                                        <label class="form-label" for="email">@lang('lang.not_user_msg')</label>
                                     </div>
                                     <!-- Submit button -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary btn-block"
                                                 data-bs-toggle="modal" data-bs-target="#modalSignIn">
-                                            Войти
+                                            @lang('lang.log_in')
                                         </button>
                                         <button type="button" class="btn btn-primary btn-block"
                                                 data-bs-toggle="modal" data-bs-target="#modalSignUp">
-                                            Зарегистрироваться
+                                            @lang('lang.sign_up')
                                         </button>
                                     </div>
                                 </form>
@@ -181,7 +262,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Войти</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">@lang('lang.log_in')</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -191,7 +272,7 @@
                                     <!-- Email input -->
                                     <div class="field">
                                         <i class="icon fas fa-user"></i>
-                                        <input type="email" id="email" name="email" placeholder="Почта(Email)" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
+                                        <input type="email" id="email" name="email" placeholder="@lang('lang.email')" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
                                         @if(session('errorWithEmail'))
                                             <p class="text-danger">{{session('errorWithEmail')}}</p>
                                             <script>
@@ -201,7 +282,7 @@
                                     </div>
                                     <div class="field">
                                         <i class="icon fas fa-lock"></i>
-                                        <input type="password" id="password" name="password" placeholder="Пароль" class="login__input @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                        <input type="password" id="password" name="password" placeholder="@lang('lang.password')" class="login__input @error('password') is-invalid @enderror" required autocomplete="new-password">
                                         @if(session('errorWithPassword'))
                                             <p class="text-danger">{{session('errorWithPassword')}}</p>
                                             <script>
@@ -214,14 +295,14 @@
                                     <!-- 2 column grid layout for inline styling -->
                                     <div class="row">
                                         <!-- Simple link -->
-                                        <a href="{{route('reset.password.form')}}">Забыли пароль?</a>
+                                        <a href="{{route('reset.password.form')}}">@lang('lang.forgotten_password')</a>
                                     </div>
                                     <!-- Submit button -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary "
-                                                data-bs-dismiss="modal">Закрыть</button>
+                                                data-bs-dismiss="modal">@lang('lang.close_btn')</button>
                                         <!-- <button type="button" class="btn btn-primary">Sign in</button> -->
-                                        <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                                        <button type="submit" class="btn btn-primary btn-block">@lang('lang.log_in')</button>
                                     </div>
                                 </form>
                             </div>
@@ -234,7 +315,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Зарегистрироваться</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">@lang('lang.sign_up')</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -244,7 +325,7 @@
                                     <!-- Name input -->
                                     <div class="field">
                                         <i class="icon fas fa-user"></i>
-                                        <input type="text" id="name" name="name" placeholder="Имя" class="login__input @error('name') is-invalid @enderror" required autocomplete="name">
+                                        <input type="text" id="name" name="name" placeholder="@lang('lang.name')" class="login__input @error('name') is-invalid @enderror" required autocomplete="name">
                                         @if(session('errorWithName'))
                                             <p class="text-danger">{{session('errorWithName')}}</p>
                                             <script>
@@ -255,7 +336,7 @@
                                     <!-- Surname input -->
                                     <div class="field">
                                         <i class="icon fas fa-user"></i>
-                                        <input type="text" id="surname" name="surname" placeholder="Фамилия" class="login__input @error('surname') is-invalid @enderror" required autocomplete="surname">
+                                        <input type="text" id="surname" name="surname" placeholder="@lang('lang.surname')" class="login__input @error('surname') is-invalid @enderror" required autocomplete="surname">
                                         @if(session('errorWithSurname'))
                                             <p class="text-danger">{{session('errorWithSurname')}}</p>
                                             <script>
@@ -267,7 +348,7 @@
                                     <!-- Home Address input -->
                                     <div class="field">
                                         <i class="icon fas fa-map-marker-alt"></i>
-                                        <input type="text" id="address" name="address" placeholder="Домашний адрес" class="login__input @error('address') is-invalid @enderror" required autocomplete="address">
+                                        <input type="text" id="address" name="address" placeholder="@lang('lang.address')" class="login__input @error('address') is-invalid @enderror" required autocomplete="address">
                                         @if(session('errorWithAddress'))
                                             <p class="text-danger">{{session('errorWithAddress')}}</p>
                                             <script>
@@ -279,7 +360,7 @@
                                     <!-- Phone Number input -->
                                     <div class="field">
                                         <i class="icon fas fa-phone-alt"></i>
-                                        <input type="text" id="phone_number" name="phone_number" placeholder="Телефонный номер" class="login__input @error('phone_number') is-invalid @enderror" required autocomplete="phone_number">
+                                        <input type="text" id="phone_number" name="phone_number" placeholder="@lang('lang.phone_number')" class="login__input @error('phone_number') is-invalid @enderror" required autocomplete="phone_number">
                                         @if(session('errorWithPhoneNumber'))
                                             <p class="text-danger">{{session('errorWithPhoneNumber')}}</p>
                                             <script>
@@ -290,7 +371,7 @@
                                     <!-- Email input -->
                                     <div class="field">
                                         <i class="icon fas fa-at"></i>
-                                        <input type="email" id="email" name="email" placeholder="Email Address" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
+                                        <input type="email" id="email" name="email" placeholder="@lang('lang.email')" class="login__input @error('email') is-invalid @enderror" required autocomplete="email">
                                         @if(session('errorWithEmail'))
                                             <p class="text-danger">{{session('errorWithEmail')}}</p>
                                             <script>
@@ -302,7 +383,7 @@
                                     <!-- Password input -->
                                     <div class="field">
                                         <i class="icon fas fa-lock"></i>
-                                        <input type="password" id="password" name="password" placeholder="Пароль" class="login__input @error('password') is-invalid @enderror" required autocomplete="new-password">
+                                        <input type="password" id="password" name="password" placeholder="@lang('lang.password')" class="login__input @error('password') is-invalid @enderror" required autocomplete="new-password">
                                         @if(session('errorWithPassword'))
                                             <p class="text-danger">{{session('errorWithPassword')}}</p>
                                             <script>
@@ -313,7 +394,7 @@
 
                                     <!-- Passport front input -->
                                     <div class="field">
-                                        <label for="fileF" class="form-label">Лицевая сторона паспорта</label>
+                                        <label for="fileF" class="form-label">@lang('lang.passport_front')</label>
                                         <input id="passport_front" type="file" class="form-control @error('passport_front') is-invalid @enderror" name="passport_front" value="{{ old('passport_front') }}">
 
                                         @error('passport_front')
@@ -325,7 +406,7 @@
 
                                     <!-- Passport back input -->
                                     <div class="field">
-                                        <label for="fileB" class="form-label">Обратная сторона паспорта</label>
+                                        <label for="fileB" class="form-label">@lang('lang.passport_back')</label>
                                         <input id="passport_back" type="file" class="form-control @error('passport_back') is-invalid @enderror" name="passport_back" value="{{ old('passport_back') }}">
 
                                         @error('passport_back')
@@ -337,9 +418,9 @@
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Закрыть</button>
+                                                data-bs-dismiss="modal">@lang('lang.close_btn')</button>
                                         <!-- Submit button -->
-                                        <button type="submit" class="btn btn-success btn-block">Далее</button>
+                                        <button type="submit" class="btn btn-success btn-block">@lang('lang.next_btn')</button>
                                     </div>
 
                                 </form>
@@ -353,7 +434,7 @@
                     <div class="modal-dialog" >
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Записать ребенка</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">@lang('lang.enroll_child')</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -364,7 +445,7 @@
                                     <!-- Name input -->
                                     <div class="field">
                                         <i class="icon fas fa-user"></i>
-                                        <input type="text" id="name" name="name" placeholder="Имя ребенка" class="login__input @error('name') is-invalid @enderror" required autocomplete="name">
+                                        <input type="text" id="name" name="name" placeholder="@lang('lang.child_name')" class="login__input @error('name') is-invalid @enderror" required autocomplete="name">
                                         @if(session('errorWithName'))
                                             <p class="text-danger">{{session('errorWithName')}}</p>
                                             <script>
@@ -375,7 +456,7 @@
                                     <!-- Surname input -->
                                     <div class="field" >
                                         <i class="icon fas fa-user"></i>
-                                        <input type="text" id="surname" name="surname" placeholder="Фамилия ребенка" class="login__input @error('surname') is-invalid @enderror" required autocomplete="surname">
+                                        <input type="text" id="surname" name="surname" placeholder="@lang('lang.child_surname')" class="login__input @error('surname') is-invalid @enderror" required autocomplete="surname">
                                         @if(session('errorWithSurname'))
                                             <p class="text-danger">{{session('errorWithSurname')}}</p>
                                             <script>
@@ -385,7 +466,7 @@
                                     </div>
                                     <!-- Birth date input -->
                                     <div class="form-outline mb-2" style="padding: 10px">
-                                        <label for="birth_date" class="form-label" style="font-weight: 700;">{{ __('Дата рождения') }}</label>
+                                        <label for="birth_date" class="form-label" style="font-weight: 700;">@lang('lang.child_birth_date')</label>
                                         <div class="col-md-6 ">
                                             <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required autofocus oninvalid="this.setCustomValidity('Please fill in the field')" oninput="this.setCustomValidity('')">
                                             @error('birth_date')
@@ -397,18 +478,18 @@
                                     </div>
                                     <!-- Gender input -->
                                     <div class="form-outline mb-2" style="padding: 10px">
-                                        <label for="gender" class="form-label" style="font-weight: 700;">{{ __('Пол ребенка') }}</label>
+                                        <label for="gender" class="form-label" style="font-weight: 700;">@lang('lang.child_gender')</label>
                                         <div class="col-md-6">
                                             <div class="radioDiv">
                                                 <input type="radio" name="gender" id="option-1" value="Male">
                                                 <input type="radio" name="gender" id="option-2" value="Female">
                                                 <label for="option-1" class="option option-1">
                                                     <div class="dot"></div>
-                                                    <span>Мальчик</span>
+                                                    <span>@lang('lang.gender_male')</span>
                                                 </label>
                                                 <label for="option-2" class="option option-2">
                                                     <div class="dot"></div>
-                                                    <span>Девочка</span>
+                                                    <span>@lang('lang.gender_female')</span>
                                                 </label>
                                                 @error('gender')
                                                 <span class="invalid-feedback" role="alert">
@@ -420,7 +501,7 @@
                                     </div>
                                     <!-- Photo input -->
                                     <div class="form-outline mb-2" style="padding: 10px">
-                                        <label for="photo" class="form-label" style="font-weight: 700;">{{ __("Фото ребенка") }}</label>
+                                        <label for="photo" class="form-label" style="font-weight: 700;">@lang('lang.child_photo')</label>
                                         <div class="col-md-6">
                                             <input id="photo" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" required autofocus oninvalid="this.setCustomValidity('Please select a file')" oninput="this.setCustomValidity('')">
                                             @error('photo')
@@ -432,7 +513,7 @@
                                     </div>
                                     <!-- Birth certificate input -->
                                     <div class="form-outline mb-2" style="padding: 10px">
-                                        <label for="birth_certificate" class="form-label" style="font-weight: 700;">{{ __("Свидетельство о рождении") }}</label>
+                                        <label for="birth_certificate" class="form-label" style="font-weight: 700;">@lang('lang.child_birth_cert')</label>
                                         <div class="col-md-6">
                                             <input id="birth_certificate" type="file"  class="form-control @error('birth_certificate') is-invalid @enderror" name="birth_certificate" value="{{ old('birth_certificate') }}" required autofocus oninvalid="this.setCustomValidity('Please select a file')" oninput="this.setCustomValidity('')">
                                             @error('birth_certificate')
@@ -444,7 +525,7 @@
                                     </div>
                                     <!-- Med certificate input -->
                                     <div class="form-outline mb-2" style="padding: 10px">
-                                        <label for="med_certificate" class="form-label" style="font-weight: 700;">{{ __("Справка о состоянии здоровья") }}</label>
+                                        <label for="med_certificate" class="form-label" style="font-weight: 700;">@lang('lang.child_med_cert')</label>
                                         <div class="col-md-6">
                                             <input id="med_certificate" type="file" class="form-control @error('med_certificate') is-invalid @enderror" name="med_certificate" value="{{ old('med_certificate') }}" required autofocus oninvalid="this.setCustomValidity('Please select a file')" oninput="this.setCustomValidity('')">
                                             @error('med_certificate')
@@ -456,7 +537,7 @@
                                     </div>
                                     <!-- Med disability input -->
                                     <div class="form-outline mb-2" style="padding: 10px">
-                                        <label for="med_disability" class="form-label" style="font-weight: 700;">{{ __("Медицинская справка об инвалидности") }}</label>
+                                        <label for="med_disability" class="form-label" style="font-weight: 700;">@lang('lang.child_med_dis')</label>
                                         <div class="col-md-6">
                                             <input id="med_disability" type="file" class="form-control @error('med_disability') is-invalid @enderror" name="med_disability" value="{{ old('med_disability') }}">
                                             @error('med_disability')
@@ -468,9 +549,9 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Закрыть</button>
+                                                data-bs-dismiss="modal">@lang('lang.close_btn')</button>
                                         <!-- Submit button -->
-                                        <button type="submit" class="btn btn-success btn-block">Записать</button>
+                                        <button type="submit" class="btn btn-success btn-block">@lang('lang.to_enroll')</button>
                                     </div>
                                 </form>
                             </div>
@@ -485,8 +566,8 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Контакты</h3>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>ул. Орозбекова 120, Кадамжай, Кыргызстан</p>
+                    <h3 class="text-white mb-4">@lang('lang.contact')</h3>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>@lang('lang.ftr_address')</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+996 770 10 30 10</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>kindergartenaruu@gmail.com</p>
                     <div class="d-flex pt-2">
@@ -497,11 +578,10 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Ссылки</h3>
-                    <a class="btn btn-link text-white-50" href="">О нас</a>
-                    <a class="btn btn-link text-white-50" href="">Контакты</a>
-                    <a class="btn btn-link text-white-50" href="">Услуги</a>
-                    <a class="btn btn-link text-white-50" href="{{route('vacancy')}}">Вакансии</a>
+                    <h3 class="text-white mb-4">@lang('lang.ftr_link')</h3>
+                    <a class="btn btn-link text-white-50" href="">@lang('lang.contact')</a>
+                    <a class="btn btn-link text-white-50" href="">@lang('lang.conditions')</a>
+                    <a class="btn btn-link text-white-50" href="{{route('vacancy')}}">@lang('lang.vacancy')</a>
                     <a class="btn btn-link text-white-50" href="{{route('gallery')}}">Галерея</a>
                 </div>
                 <div class="col-lg-3 col-md-6">

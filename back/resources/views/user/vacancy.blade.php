@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="wow fadeIn" data-wow-delay="0.1s">
                     <div class="h-100 d-flex flex-column justify-content-center p-5">
-                        <h3 class="team-text text-center">Хотите с нами работать? Пожалуйста заполните нашу анкету.</h3>
+                        <h3 class="team-text text-center">@lang('lang.vac_msg')</h3>
                         <br>
                             <div class="row g-3">
                                 <div class="col-sm-6">
@@ -17,7 +17,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control border-0" id="phone_numberId" name="phone_number" placeholder="Your Email">
-                                        <label for="phone_number">Номер телефона</label>
+                                        <label for="phone_number">@lang('lang.phone_number')</label>
                                     </div>
                                 </div>
                                 <div id="answersElement">
@@ -26,7 +26,7 @@
                                             <div class=""><p class="text-purple">{{$question->question}}</p></div>
                                             <div class="form-floating">
                                                 <textarea class="form-control border-0" data-question="{{$question->id}}" placeholder="Leave a message here" id="answers" name="answers" style="height: 100px" ></textarea>
-                                                <label for="answers">Ваш ответ</label>
+                                                <label for="answers">@lang('lang.vac_reply')</label>
                                             </div>
                                         </div>
                                         <br>
@@ -36,7 +36,7 @@
                                 <div class="col-sm-6">
                                     <div class="field">
                                         <div class="team-text">
-                                            <h4 class="">Загрузите свое резюме:</h4>
+                                            <h4 class="">@lang('lang.vac_cv'):</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="button" onclick="saveResume()">Отправить</button>
+                                    <button class="btn btn-primary w-100 py-3" type="button" onclick="saveResume()">@lang('lang.send_btn')</button>
                                 </div>
                             </div>
                     </div>

@@ -26,11 +26,11 @@
                                 <div class="col-md-10 col-12">
                                     <div class="row">
                                         <div class="col-12 col-md-4">
-                                            <p class="text-bold-700 text-uppercase mb-0">Должность</p>
-                                            <p class="mb-0">Воспитательница</p>
+                                            <p class="text-bold-700 text-uppercase mb-0">@lang('lang.emp_position')</p>
+                                            <p class="mb-0">@lang('lang.emp_position_info')</p>
                                         </div>
                                         <div class="col-12 col-md-4">
-                                            <p class="text-bold-700 text-uppercase mb-0">Название Группы</p>
+                                            <p class="text-bold-700 text-uppercase mb-0">@lang('lang.emp_group_name')</p>
                                             <p class="mb-0">{{$group->group_name}}</p>
                                         </div>
                                     </div>
@@ -39,31 +39,31 @@
                                         <div class="col-6">
                                             <fieldset class="form-label-group">
                                                 <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}" required="" autofocus="">
-                                                <label for="first-name">Имя</label>
+                                                <label for="first-name">@lang('lang.name')</label>
                                             </fieldset>
                                         </div>
                                         <div class="col-6">
                                             <fieldset class="form-label-group">
                                                 <input type="text" class="form-control" id="surname" name="surname" value="{{$user->surname}}" required="" autofocus="">
-                                                <label for="surname">Фамилия</label>
+                                                <label for="surname">@lang('lang.surname')</label>
                                             </fieldset>
                                         </div>
                                         <div class="col-6">
                                             <fieldset class="form-label-group">
                                                 <input type="text" class="form-control" id="address" name="address" value="{{$user->address}}" required="" autofocus="">
-                                                <label for="address">Домашний адрес</label>
+                                                <label for="address">@lang('lang.address')</label>
                                             </fieldset>
                                         </div>
                                         <div class="col-6">
                                             <fieldset class="form-label-group">
                                                 <input type="text" class="form-control" id="email" name="email" value="{{$user->email}}" required="" autofocus="">
-                                                <label for="email">Email</label>
+                                                <label for="email">@lang('lang.email')</label>
                                             </fieldset>
                                         </div>
                                         <div class="col-6">
                                             <fieldset class="form-label-group">
                                                 <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{$user->phone_number}}" required="" autofocus="">
-                                                <label for="email-address">Телефон номер</label>
+                                                <label for="email-address">@lang('lang.phone_number')</label>
                                             </fieldset>
                                         </div>
                                         <div class="col-6">
@@ -77,17 +77,17 @@
                                         <div class="col-6">
                                             <fieldset class="form-label-group">
                                                 <input type="file" class="form-control" id="passport_front" name="passport_front" value="" autofocus="">
-                                                <label for="passport_front">Лицевая сторона паспорта</label>
+                                                <label for="passport_front">@lang('lang.passport_front')</label>
                                             </fieldset>
                                         </div>
                                         <div class="col-6">
                                             <fieldset class="form-label-group">
                                                 <input type="file" class="form-control" id="passport_front" name="passport_back" value="" autofocus="">
-                                                <label for="passport_back">Обратная сторона паспорта</label>
+                                                <label for="passport_back">@lang('lang.passport_back')</label>
                                             </fieldset>
                                         </div>
                                         <div class="col-12 text-right">
-                                            <button type="submit" class="btn-gradient-primary my-1" data-bs-toggle="modal" data-bs-target="#modalUpdate">Сохранить изменения</button>
+                                            <button type="submit" class="btn-gradient-primary my-1" data-bs-toggle="modal" data-bs-target="#modalUpdate">@lang('lang.save_btn')</button>
                                         </div>
                                     </div>
                                 </div>

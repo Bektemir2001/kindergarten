@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mb-4">
-                        <h5 class="card-header">Оплата</h5>
+                        <h5 class="card-header">@lang('lang.emp_payment')</h5>
                         <div class="card-body">
                             <h6>Пожалуйста проверьте нижеприведенные данные.</h6>
                             <br>

@@ -2,12 +2,12 @@
 
 @section('content')
     <div>
-        @if(session('message'))
-            <div class="d-flex justify-content-center">
-                <div class="alert alert-success alert-dismissible fade show text-center" style="width:25%;">{{session('msg')}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    </button>
-                </div>
+        @if (session('status'))
+            <div class="alert alert-success text-center alert-dismissible fade show" style="max-height: 200px; max-width: 700px" role="alert">
+                {{ session('status') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         @endif
     </div>

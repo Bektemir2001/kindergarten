@@ -3,12 +3,16 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
     <div class="container">
-        <button type="button" class="btn btn-primary rounded-pill m-3" id="childInfoBtn" onclick="showChildInfo()">
-            Данные моего ребенка
-        </button>
-        <button type="button" class="btn btn-primary rounded-pill m-3" id="paymentBtn" onclick="showPayment()">
-            Оплата
-        </button>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary rounded-pill m-3" id="childInfoBtn" onclick="showChildInfo()">
+                Данные моего ребенка
+            </button>
+            <a href="{{route('payment', $child->id)}}">
+                <button type="button" class="btn btn-primary rounded-pill m-3"  id="paymentBtn" >
+                    Оплата
+                </button>
+            </a>
+        </div>
         <div class="d-none" id="childInfo">
             <div class="row">
                 <div class="col-md-12">
@@ -114,43 +118,6 @@
                 </div>
             </div>
         </div>
-        <div class="d-none" id="payment">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <h5 class="card-header">Оплата</h5>
-                            <div class="card-body">
-                                <h6>С какого числа до какого числа вы хотите совершить оплату? Стоимость будет рассчитана в соответствии с выбранными вами датами</h6>
-                                <br>
-                                    <form id="form" action="{{route('payment')}}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="field" hidden="">
-                                            <i class="icon fas fa-user"></i>
-                                            <input type="text" id="child_id" value="{{$child->id}}" name="child_id" placeholder="child_id" class="login__input @error('child_id') is-invalid @enderror" required autocomplete="child_id">
-                                        </div>
-                                        <div class="row">
-                                            <div class="mb-3 col-md-6">
-                                                <p for="date_from" class="form-label"><b>С какого числа:</b></p>
-                                                <input id="date_from" type="date" class="form-control @error('date_from') is-invalid @enderror" name="date_from" value="{{ old('date_from') }}" required autofocus oninvalid="this.setCustomValidity('Please fill in the field')" oninput="this.setCustomValidity('')">
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <p for="date_to" class="form-label"><b>До какой:</b></p>
-                                                <input id="date_to" type="date" class="form-control @error('date_to') is-invalid @enderror" name="date_to" value="{{ old('date_to') }}" required autofocus oninvalid="this.setCustomValidity('Please fill in the field')" oninput="this.setCustomValidity('')">
-                                            </div>
-                                        </div>
-                                        <div class="mt-auto">
-                                            <button type="submit" class="btn btn-primary ms-auto float-end rounded-pill">Далее
-                                            </button>
-                                            <button type="button" class="btn btn-secondary ms-auto float-end mx-3 rounded-pill"
-                                                    onclick="hidePayment()">Закрыть
-                                            </button>
-                                        </div>
-                                    </form>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card-body">
             @php $index = 0; @endphp
             @foreach($created_at_dates as $created_at_date)
@@ -230,15 +197,6 @@
         function hideChildInfo() {
             document.getElementById("childInfo").className = "d-none";
             document.getElementById("childInfoBtn").className = "btn btn-primary rounded-pill m-3";
-        }
-        function showPayment() {
-            document.getElementById("payment").className = "container-xxl flex-grow-1 container-p-y";
-            document.getElementById("paymentBtn").className = "d-none";
-        }
-
-        function hidePayment() {
-            document.getElementById("payment").className = "d-none";
-            document.getElementById("paymentBtn").className = "btn btn-primary rounded-pill m-3";
         }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

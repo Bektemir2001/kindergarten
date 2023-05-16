@@ -39,7 +39,9 @@ Route::patch('/main/profile/update/{user}', [App\Http\Controllers\User\ProfileCo
 Route::get('/main/children/{child}', [App\Http\Controllers\User\ChildrenController::class, 'index'])->name('children');
 Route::patch('/main/children/update/{child}', [App\Http\Controllers\User\ChildrenController::class, 'update'])->name('children.update');
 
-Route::post('/main/payment', [App\Http\Controllers\User\PaymentController::class, 'index'])->name('payment');
+Route::get('/main/payment/{child}', [App\Http\Controllers\User\PaymentController::class, 'index'])->name('payment');
+Route::post('/main/payment/form', [App\Http\Controllers\User\PaymentController::class, 'form'])->name('payment.form');
+Route::post('/main/payment/create', [App\Http\Controllers\User\PaymentController::class, 'create'])->name('payment.create');
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){

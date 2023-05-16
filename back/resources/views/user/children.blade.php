@@ -3,12 +3,25 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
     <div class="container">
+
         <button type="button" class="btn btn-primary rounded-pill m-3" id="childInfoBtn" onclick="showChildInfo()">
             @lang('lang.child_info_btn')
         </button>
         <button type="button" class="btn btn-primary rounded-pill m-3" id="paymentBtn" onclick="showPayment()">
             @lang('lang.payment_btn')
         </button>
+
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary rounded-pill m-3" id="childInfoBtn" onclick="showChildInfo()">
+                Данные моего ребенка
+            </button>
+            <a href="{{route('payment', $child->id)}}">
+                <button type="button" class="btn btn-primary rounded-pill m-3"  id="paymentBtn" >
+                    Оплата
+                </button>
+            </a>
+        </div>
+
         <div class="d-none" id="childInfo">
             <div class="row">
                 <div class="col-md-12">
@@ -117,111 +130,80 @@
                 </div>
             </div>
         </div>
-        <div class="d-none" id="payment">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <h5 class="card-header">Оплата</h5>
-                            <div class="card-body">
-                                <h6>С какого числа до какого числа вы хотите совершить оплату? Стоимость будет рассчитана в соответствии с выбранными вами датами</h6>
-                                <br>
-                                    <form id="form" action="{{route('payment')}}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="field" hidden="">
-                                            <i class="icon fas fa-user"></i>
-                                            <input type="text" id="child_id" value="{{$child->id}}" name="child_id" placeholder="child_id" class="login__input @error('child_id') is-invalid @enderror" required autocomplete="child_id">
-                                        </div>
-                                        <div class="row">
-                                            <div class="mb-3 col-md-6">
-                                                <p for="date_from" class="form-label"><b>С какого числа:</b></p>
-                                                <input id="date_from" type="date" class="form-control @error('date_from') is-invalid @enderror" name="date_from" value="{{ old('date_from') }}" required autofocus oninvalid="this.setCustomValidity('Please fill in the field')" oninput="this.setCustomValidity('')">
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <p for="date_to" class="form-label"><b>До какой:</b></p>
-                                                <input id="date_to" type="date" class="form-control @error('date_to') is-invalid @enderror" name="date_to" value="{{ old('date_to') }}" required autofocus oninvalid="this.setCustomValidity('Please fill in the field')" oninput="this.setCustomValidity('')">
-                                            </div>
-                                        </div>
-                                        <div class="mt-auto">
-                                            <button type="submit" class="btn btn-primary ms-auto float-end rounded-pill">Далее
-                                            </button>
-                                            <button type="button" class="btn btn-secondary ms-auto float-end mx-3 rounded-pill"
-                                                    onclick="hidePayment()">Закрыть
-                                            </button>
-                                        </div>
-                                    </form>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card-body">
-            @php $index = 0; @endphp
-            @foreach($created_at_dates as $created_at_date)
-                <div class="card-header rounded-top"
-                     style="background-color: #cdb9f8; color: #000000">{{ Carbon::parse($created_at_date)->format('d/m/Y')}}</div>
-                <div class="card-body" style="background-color: #eee8fd; display: flex; align-items: center; justify-content: center">
-                    @php $j = 0; @endphp
-                    <div id="carouselExampleIndicators{{$index}}" class="carousel slide" data-ride="carousel">
-                        @if($count[$index] > 1)
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                @for($i =1 ; $i < $count[$index]; $i++)
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}"></li>
-                                @endfor
-                            </ol>
-                        @endif
-                        <div class="carousel-inner" style="max-width: 500px; overflow: hidden">
-                            @foreach($galleries as $gallery)
-                                @if($created_at_date === $gallery->created_at)
-                                    @if($gallery->video === null)
-                                        @if($j === 0)
-                                            <div class="carousel-item active">
-                                                <img class="d-block w-100" src="{{asset($gallery->image)}}" >
-                                            </div>
-                                            @php $j++; @endphp
+            @if($galleries != null)
+                @php $index = 0; @endphp
+                @foreach($created_at_dates as $created_at_date)
+                    <div class="card-header rounded-top"
+                         style="background-color: #cdb9f8; color: #000000">{{ Carbon::parse($created_at_date)->format('d/m/Y')}}</div>
+                    <div class="card-body" style="background-color: #eee8fd; display: flex; align-items: center; justify-content: center">
+                        @php $j = 0; @endphp
+                        <div id="carouselExampleIndicators{{$index}}" class="carousel slide" data-ride="carousel">
+                            @if($count[$index] > 1)
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    @for($i =1 ; $i < $count[$index]; $i++)
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}"></li>
+                                    @endfor
+                                </ol>
+                            @endif
+                            <div class="carousel-inner" style="max-width: 500px; overflow: hidden">
+                                @foreach($galleries as $gallery)
+                                    @if($created_at_date === $gallery->created_at)
+                                        @if($gallery->video === null)
+                                            @if($j === 0)
+                                                <div class="carousel-item active">
+                                                    <img class="d-block w-100" src="{{asset($gallery->image)}}" >
+                                                </div>
+                                                @php $j++; @endphp
+                                            @else
+                                                <div class="carousel-item">
+                                                    <img class="d-block w-100" src="{{asset($gallery->image)}}" alt="Second slide">
+                                                </div>
+                                            @endif
                                         @else
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="{{asset($gallery->image)}}" alt="Second slide">
-                                            </div>
+                                            @if($j === 0)
+                                                <div class="carousel-item active">
+                                                    <video class="d-block w-100" controls >
+                                                        <source src="{{asset($gallery->video)}}">.
+                                                    </video>
+                                                </div>
+                                                @php $j++; @endphp
+                                            @else
+                                                <div class="carousel-item">
+                                                    <video class="d-block w-100" controls >
+                                                        <source src="{{asset($gallery->video)}}">.
+                                                    </video>
+                                                </div>
+                                            @endif
                                         @endif
-                                    @else
-                                        @if($j === 0)
-                                            <div class="carousel-item active">
-                                                <video class="d-block w-100" controls >
-                                                    <source src="{{asset($gallery->video)}}">.
-                                                </video>
-                                            </div>
-                                            @php $j++; @endphp
-                                        @else
-                                            <div class="carousel-item">
-                                                <video class="d-block w-100" controls >
-                                                    <source src="{{asset($gallery->video)}}">.
-                                                </video>
-                                            </div>
-                                        @endif
+                                        @php $text = $gallery->info @endphp
                                     @endif
-                                    @php $text = $gallery->info @endphp
-                                @endif
-                            @endforeach
+                                @endforeach
+                            </div>
+                            @if($count[$index] > 1)
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators{{$index}}" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators{{$index}}" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            @endif
                         </div>
-                        @if($count[$index] > 1)
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators{{$index}}" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators{{$index}}" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        @endif
                     </div>
+                    <div class="card-body rounded-bottom" style="background-color: #eee8fd">
+                        <h6>{{$text}}</h6>
+                    </div>
+                    <br>
+                    @php $index++; $text = ""; @endphp
+                @endforeach
+            @else
+                <div class="card-body" style="background-color: #eee8fd; display: flex; align-items: center; justify-content: center">
+                    <h3>В галерею еще не добавлено ни одного поста</h3>
                 </div>
-                <div class="card-body rounded-bottom" style="background-color: #eee8fd">
-                    <h6>{{$text}}</h6>
-                </div>
-                <br>
-                @php $index++; $text = ""; @endphp
-            @endforeach
+            @endif
         </div>
     </div>
     <script>
@@ -233,15 +215,6 @@
         function hideChildInfo() {
             document.getElementById("childInfo").className = "d-none";
             document.getElementById("childInfoBtn").className = "btn btn-primary rounded-pill m-3";
-        }
-        function showPayment() {
-            document.getElementById("payment").className = "container-xxl flex-grow-1 container-p-y";
-            document.getElementById("paymentBtn").className = "d-none";
-        }
-
-        function hidePayment() {
-            document.getElementById("payment").className = "d-none";
-            document.getElementById("paymentBtn").className = "btn btn-primary rounded-pill m-3";
         }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

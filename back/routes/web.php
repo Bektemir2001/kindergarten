@@ -86,6 +86,11 @@ Route::group(
     });
 
 
+Route::get('/main/payment/{child}', [App\Http\Controllers\User\PaymentController::class, 'index'])->name('payment');
+Route::post('/main/payment/form', [App\Http\Controllers\User\PaymentController::class, 'form'])->name('payment.form');
+Route::post('/main/payment/create', [App\Http\Controllers\User\PaymentController::class, 'create'])->name('payment.create');
+
+
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
     Route::get('/index', \App\Http\Controllers\Admin\IndexController::class)->name('admin');
@@ -152,8 +157,49 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function (){
         Route::get('/{user}', [App\Http\Controllers\Admin\ProfileController::class, 'index'])->name('admin.profile');
         Route::patch('/update/{user}', [App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('admin.profile.update');
     });
+
+    Route::group(['prefix' => 'payment'], function (){
+        Route::get('/index', [App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('admin.payment.index');
+        Route::post('/create', [App\Http\Controllers\Admin\PaymentController::class, 'create'])->name('admin.payment.create');
+    });
 });
 
+Route::group(['prefix'=>'employee'], function (){
+    Route::get('/index/{user}', App\Http\Controllers\Employee\IndexController::class)->name('employee');
+
+    Route::group(['prefix'=>'profile'], function (){
+        Route::get('/index/{user}', [App\Http\Controllers\Employee\ProfileController::class, 'index'])->name('employee.profile');
+        Route::patch('/update/{user}', [App\Http\Controllers\Employee\ProfileController::class, 'update'])->name('employee.profile.update');
+    });
+
+    Route::group(['prefix'=>'group'], function (){
+        Route::get('/', [App\Http\Controllers\Employee\GroupController::class, 'index'])->name('employee.group.index');
+        Route::get('/show/{child}', [App\Http\Controllers\Employee\GroupController::class, 'show'])->name('employee.group.show');
+        Route::get('/edit/{child}', [App\Http\Controllers\Employee\GroupController::class, 'edit'])->name('employee.group.edit');
+        Route::patch('/update/{child}', [App\Http\Controllers\Employee\GroupController::class, 'update'])->name('employee.group.update');
+        Route::delete('/{child}', [App\Http\Controllers\Employee\GroupController::class, 'delete'])->name('employee.group.delete');
+    });
+
+    Route::group(['prefix'=>'attendance'], function (){
+        Route::get('/', [App\Http\Controllers\Employee\AttendanceController::class, 'index'])->name('employee.attendance.index');
+        Route::post('/create', [App\Http\Controllers\Employee\AttendanceController::class, 'create'])->name('employee.attendance.create');
+        Route::post('/archive', [App\Http\Controllers\Employee\AttendanceController::class, 'showArchive'])->name('employee.attendance.archive');
+        Route::post('/archive/edit', [App\Http\Controllers\Employee\AttendanceController::class, 'editArchive'])->name('employee.attendance.archiveEdit');
+        Route::post('/archive/update/{attendance}', [App\Http\Controllers\Employee\AttendanceController::class, 'updateArchive'])->name('employee.attendance.archiveUpdate');
+    });
+
+    Route::group(['prefix'=>'gallery'], function (){
+       Route::get('/', [App\Http\Controllers\Employee\GalleryController::class, 'index'])->name('employee.gallery.index');
+       Route::post('/create/{group}', [App\Http\Controllers\Employee\GalleryController::class, 'create'])->name('employee.gallery.create');
+       Route::delete('/{date}', [App\Http\Controllers\Employee\GalleryController::class, 'delete'])->name('employee.gallery.delete');
+
+    });
+
+    Route::group(['prefix' => 'payment'], function (){
+        Route::get('/index', [App\Http\Controllers\Employee\PaymentController::class, 'index'])->name('employee.payment.index');
+        Route::post('/create', [App\Http\Controllers\Employee\PaymentController::class, 'create'])->name('employee.payment.create');
+    });
+});
 
 //Route::auth();
 

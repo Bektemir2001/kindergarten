@@ -137,7 +137,7 @@
                                 <div class="modal-footer">
                                     <div class="col-12 text-right">
                                         <button id="cancelBtn" class="btn btn-gradient-primary my-1" data-dismiss="modal">@lang('lang.close_btn')</button>
-                                        <button type="submit" class="btn btn-gradient-secondary my-1 ">@lang('lang.add_btn')</button>
+                                        <button type="submit" class="btn btn-gradient-secondary my-1 ">@lang('lang.saveBtn')</button>
                                     </div>
                                 </div>
                             </form>
@@ -181,7 +181,7 @@
                         <th class=""><input class="form-control form-control-sm" value="" oninput="searchByParent(this.value)"></th>
                     </tr>
                     </thead>
-                    <tbody id="groupTableId">
+                    <tbody id="TableId">
                     @foreach($children as $child)
                         <tr class="">
                             <td class="">{{$child->name}} {{$child->surname}}</td>

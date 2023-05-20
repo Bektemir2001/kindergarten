@@ -31,8 +31,7 @@ class ChildrenController extends Controller
             'photo' => '',
             'birth_certificate' => '',
             'med_certificate' => '',
-            'med_disability' => '',
-            'payment' => 'required'
+            'med_disability' => ''
         ]);
 
         $photo = Storage::disk('public')->put('childImages/photos', $data['photo']);
@@ -54,8 +53,7 @@ class ChildrenController extends Controller
             'photo' => $photo,
             'birth_certificate' => $birth_cert,
             'med_certificate' => $med_cert,
-            'med_disability' => $med_disability,
-            'payment' => $data['payment']
+            'med_disability' => $med_disability
         ]);
         $child->group_id = Group::where('id', $child->group_id)->pluck('name');
         return response($child);
@@ -104,8 +102,7 @@ class ChildrenController extends Controller
             'photo' => $photo,
             'birth_certificate' => $birth_certificate,
             'med_certificate' => $med_certificate,
-            'med_disability' => $med_disability,
-            'payment' => $data['payment']
+            'med_disability' => $med_disability
         ]);
         DB::commit();
         return redirect()->route('admin.children.index')->with('status','Child data is Updated');

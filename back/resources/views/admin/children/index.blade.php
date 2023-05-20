@@ -2,11 +2,12 @@
 @section('content')
     <div class="content-wrapper">
         <div class="container" style="margin-top: 10px;">
-            <button type="button" class="btn btn-primary" style="margin-right:85%;" id="addChildBtnId" onclick="showForm()">Add Child</button>
+            <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addChildBtnId" onclick="showForm()">@lang('lang.add_child')</button>
             <div class="d-none" id="addChildId">
                 <form id="form" method="POST" action="{{route('admin.children.create')}}" enctype="multipart/form-data">
+                    @csrf
                     <div class="row mb-3">
-                        <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end">@lang('lang.child_name')</label>
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                             @error('name')
@@ -18,7 +19,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="surname" class="col-md-4 col-form-label text-md-end">{{ __('Surname') }}</label>
+                        <label for="surname" class="col-md-4 col-form-label text-md-end">@lang('lang.child_surname')</label>
                         <div class="col-md-6">
                             <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
                             @error('surname')
@@ -30,7 +31,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="birth_date" class="col-md-4 col-form-label text-md-end">{{ __('Birth Date') }}</label>
+                        <label for="birth_date" class="col-md-4 col-form-label text-md-end">@lang('lang.child_birth_date')</label>
                         <div class="col-md-6">
                             <input id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" value="{{ old('birth_date') }}" required autocomplete="birth_date">
                             @error('birth_date')
@@ -42,33 +43,26 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
-                        <div class="col-md-6">
-                            <div>
-                                <input id="male" type="radio" name="gender" value="Male">
-                                <label for="male">Male</label>
+                        <label for="gender" class="col-md-4 col-form-label text-md-end">@lang('lang.child_gender')</label>
+                        <div class="col-lg-6">
+                            <div class="radioDiv">
+                                <input type="radio" name="gender" id="option-1" value="Male">
+                                <input type="radio" name="gender" id="option-2" value="Female">
+                                <label for="option-1" class="option option-1">
+                                    <div class="dot"></div>
+                                    <span>@lang('lang.gender_male')</span>
+                                </label>
+                                <label for="option-2" class="option option-2">
+                                    <div class="dot"></div>
+                                    <span>@lang('lang.gender_female')</span>
+                                </label>
                             </div>
-                            <div>
-                                <input id="female" type="radio" name="gender" value="Female">
-                                <label for="female">Female</label>
-                            </div>
-                            @error('gender')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <label for="parent_id" class="col-md-4 col-form-label text-md-end">{{ __('Parent') }}</label>
+                        <label for="parent_id" class="col-md-4 col-form-label text-md-end">@lang('lang.child_parent')</label>
                         <div class="col-md-6">
-{{--                            <input id="parent_id" type="number" class="form-control @error('parent_id') is-invalid @enderror" name="parent_id" value="{{ old('parent_id') }}" required autocomplete="parent_id" autofocus>--}}
-{{--                            @error('parent_id')--}}
-{{--                            <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                            @enderror--}}
                             <select class="form-control col-md-12" name="parent_id" id="parent_id" @error('parent_id') is-invalid @enderror required autocomplete="parent_id">
                                 <option></option>
                                 @foreach($parents as $parent)
@@ -79,14 +73,8 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="group_id" class="col-md-4 col-form-label text-md-end">{{ __('Group') }}</label>
+                        <label for="group_id" class="col-md-4 col-form-label text-md-end">@lang('lang.child_group')</label>
                         <div class="col-md-6">
-{{--                            <input id="group_id" type="number" class="form-control @error('group_id') is-invalid @enderror" name="group_id" value="{{ old('group_id') }}" required autocomplete="group_id">--}}
-{{--                            @error('group_id')--}}
-{{--                            <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                            @enderror--}}
                             <select class="form-control col-md-12" name="group_id" id="group_id" @error('group_id') is-invalid @enderror required autocomplete="group_id">
                                 <option></option>
                                 @foreach($groups as $group)
@@ -97,8 +85,8 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="photo" class="col-md-4 col-form-label text-md-end">{{ __("Child's Photo") }}</label>
-                        <div class="col-md-6">
+                        <label for="photo" class="col-md-3 col-form-label text-md-end">@lang('lang.child_photo')</label>
+                        <div class="col-md-4">
                             <input id="photo" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}">
                             @error('photo')
                             <span class="invalid-feedback" role="alert">
@@ -109,8 +97,8 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="birth_certificate" class="col-md-4 col-form-label text-md-end">{{ __("Birth Certificate") }}</label>
-                        <div class="col-md-6">
+                        <label for="birth_certificate" class="col-md-5 col-form-label text-md-end">@lang('lang.child_birth_cert')</label>
+                        <div class="col-md-4">
                             <input id="birth_certificate" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('birth_certificate') is-invalid @enderror" name="birth_certificate" value="{{ old('birth_certificate') }}">
                             @error('birth_certificate')
                             <span class="invalid-feedback" role="alert">
@@ -120,9 +108,9 @@
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="med_certificate" class="col-md-4 col-form-label text-md-end">{{ __("Medical Certificate") }}</label>
-                        <div class="col-md-6">
+                    <div class="row mb-lg-1">
+                        <label for="med_certificate" class="col-md-5 col-form-label text-md-end">@lang('lang.child_med_cert')</label>
+                        <div class="col-md-4">
                             <input id="med_certificate" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('med_certificate') is-invalid @enderror" name="med_certificate" value="{{ old('med_certificate') }}">
                             @error('med_certificate')
                             <span class="invalid-feedback" role="alert">
@@ -133,8 +121,8 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="med_disability" class="col-md-4 col-form-label text-md-end">{{ __("Medical Disability Certificate") }}</label>
-                        <div class="col-md-6">
+                        <label for="med_disability" class="col-md-8 col-form-label text-md-end">@lang('lang.child_med_dis')</label>
+                        <div class="col-md-4">
                             <input id="med_disability" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('med_disability') is-invalid @enderror" name="med_disability" value="{{ old('med_disability') }}">
                             @error('med_disability')
                             <span class="invalid-feedback" role="alert">
@@ -144,52 +132,49 @@
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="payment" class="col-md-4 col-form-label text-md-end">{{ __("Payment") }}</label>
-                        <div class="col-md-6">
-                            <input id="payment" type="number" class="form-control @error('payment') is-invalid @enderror" name="payment" value="{{ old('payment') }}">
-                            @error('payment')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
+                    <div class="col-12 text-right">
+                        <button type="submit" class="btn btn-gradient-primary my-1" onclick="cancelForm()">@lang('lang.cancel')</button>
+                        <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.saveBtn')</button>
                     </div>
-
-                    <button type="submit" class="btn btn-secondary" style="margin-left: 65%;" onclick="cancelForm()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
+        <br>
         <div class="demo-html" style="width: 70%;display: block; margin-left: auto; margin-right: auto;">
             <div class="card-header text-center" >
-                <h3>Children Table</h3>
+                <h3>@lang('lang.children_list')</h3>
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
                 @endif
             </div>
-            <div id="example_wrapper" class="">
-                <table id="example" class="table table-bordered border-primary" aria-describedby="example_info">
+            <div class="position-relative table-responsive">
+                <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 10%;">
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:5%">
                             id
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Name
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:20%">
+                            @lang('lang.child_name')
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Surname
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:20%">
+                            @lang('lang.child_surname')
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Group
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:20%">
+                            @lang('lang.child_group')
                         </th>
-                        <th class="sorting text-center" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 25%;">
-                            Action
+                        <th class="position-relative pr-4" style="text-align: center;vertical-align:middle;overflow:hidden;cursor:pointer;width:30%">
+                            @lang('lang.action')
                         </th>
                         {{-- <th width="2px"></th> --}}
+                    </tr>
+                    <tr class="table-sm">
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchById(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchByName(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchBySurname(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchByGroupName(this.value)"></th>
                     </tr>
                     </thead>
                     <tbody id="childTable">
@@ -216,7 +201,7 @@
                                     <form action="{{route('admin.children.delete', $child->id)}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button title="delete" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this user?')">
+                                        <button title="delete" class="border-0 bg-transparent" onclick="return confirm('@lang('lang.delete_question_child')')">
                                             <i title="delete" class="fas fa-trash text-danger" role="button"></i>
                                         </button>
                                     </form>
@@ -235,9 +220,61 @@
         </div>
 
         <script>
+            function searchById(value){
+                let table = document.getElementById('childTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[0].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByName(value){
+                let table = document.getElementById('childTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[1].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchBySurname(value){
+                let table = document.getElementById('childTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[2].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByGroupName(value){
+                let table = document.getElementById('childTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[3].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
             function showForm(){
                 document.getElementById("addChildBtnId").className = "d-none";
-                document.getElementById("addChildId").className = "col-6";
+                document.getElementById("addChildId").className = "col-8";
             }
             function cancelForm(){
                 document.getElementById("addChildBtnId").className = "btn btn-primary";
@@ -256,7 +293,6 @@
                 let birth_certificate = document.getElementById("birth_certificate").files[0];
                 let med_certificate = document.getElementById("med_certificate").files[0];
                 let med_disability = document.getElementById("med_disability").files[0];
-                let payment = document.getElementById("payment").value;
                 let data = new FormData();
                 data.append("name", name);
                 data.append("surname", surname);
@@ -268,7 +304,6 @@
                 data.append("birth_certificate", birth_certificate);
                 data.append("med_certificate", med_certificate);
                 data.append("med_disability", med_disability);
-                data.append("payment", payment);
                 fetch(url, {
                     method: 'POST',
                     body: data

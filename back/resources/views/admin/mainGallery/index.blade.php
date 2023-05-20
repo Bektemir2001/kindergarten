@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{asset('style/group_gallery_style.css')}}">
 
     <div class="content-wrapper">
-        <div class="card-header text-center" ><h3>Main gallery</h3>
+        <div class="card-header text-center" ><h3>@lang('lang.main_gallery')</h3>
             @if (session('status'))
                 <div class="alert alert-success " role="alert">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -15,13 +15,13 @@
             <form action="{{route('admin.mainGallery.create')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="files" class="col-md-4 col-form-label text-md-end">Add image to gallery:</label>
+                    <label for="files" class="col-md-4 col-form-label text-md-end">@lang('lang.add_image'):</label>
                     <div class="col-md-6">
                         <input id="image" type="file" class="form-control" accept="image/*" name="images[]"multiple>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Add video to gallery:</label>
+                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">@lang('lang.add_video'):</label>
                     <div class="col-md-6">
                         <input id="video" type="file" class="form-control" accept="video/*" name="videos[]" multiple>
 
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.saveBtn')</button>
                 </div>
             </form>
 
@@ -62,7 +62,7 @@
                     @endphp
                     @foreach($galleries as $gallery)
                         <div class="mySlides">
-                            <form onclick="return confirm('Do you really want to delete?')" action="{{route('admin.mainGallery.delete', $gallery->id)}}" method="POST">
+                            <form onclick="return confirm('@lang('lang.delete_question')')" action="{{route('admin.mainGallery.delete', $gallery->id)}}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <button title="submit" class="border-0 bg-transparent">

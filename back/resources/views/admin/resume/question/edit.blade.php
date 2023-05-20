@@ -1,13 +1,13 @@
 @extends('layouts.admin_layout')
 @section('content')
     <div class="content-wrapper">
-        <div class="card-header text-center" ><h3>Edit page</h3></div>
+        <div class="card-header text-center" ><h3>@lang('lang.edit_btn')</h3></div>
         <div class="container">
             <form action="{{route('admin.resume.question.update', $question->id)}}" method="POST">
                 @method('patch')
                 @csrf
                 <div class="form-group">
-                    <label for="exampleInput" class="col-md-4 col-form-label text-md-end">Question:</label>
+                    <label for="exampleInput" class="col-md-4 col-form-label text-md-end">@lang('lang.question'):</label>
                     <textarea
                         id="question"
                         name="question"
@@ -21,8 +21,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <a href="{{route('admin.resume.question.index')}}" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="{{route('admin.resume.question.index')}}" class="btn btn-gradient-primary my-1">@lang('lang.cancel')</a>
+                    <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.save_btn')</button>
                 </div>
             </form>
         </div>

@@ -87,7 +87,7 @@
                                             </fieldset>
                                         </div>
                                         <div class="col-12 text-right">
-                                            <button type="submit" class="btn-gradient-primary my-1" data-bs-toggle="modal" data-bs-target="#modalUpdate">@lang('lang.save_btn')</button>
+                                            <button type="submit" class="btn-gradient-secondary my-1" data-bs-toggle="modal" data-bs-target="#modalUpdate">@lang('lang.save_btn')</button>
                                         </div>
                                     </div>
                                 </div>

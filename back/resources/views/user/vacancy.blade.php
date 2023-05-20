@@ -11,12 +11,12 @@
                                 <div class="col-sm-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control border-0" id="full_name" name="full_name" placeholder="Your Name">
-                                        <label for="full_name">Ф.И.О</label>
+                                        <label for="full_name">@lang('lang.full_name')</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="phone_numberId" name="phone_number" placeholder="Your Email">
+                                        <input type="number" class="form-control border-0" id="phone_numberId" name="phone_number" placeholder="Your Email">
                                         <label for="phone_number">@lang('lang.phone_number')</label>
                                     </div>
                                 </div>

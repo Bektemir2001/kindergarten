@@ -173,11 +173,11 @@
                         <br>
                     @endforeach
                 @elseif($attendance === null)
-                    <alert>Выбранном вами месяце нету данных, пожалуйста выберите другую дату</alert>
+                    <alert>@lang('lang.no_data_for_month')</alert>
                 @endif
         </div>
-        <div class="modal-footer">
-            <a href="{{route('admin.attendance.index')}}" class="btn btn-secondary">Back</a>
+        <div style="text-align: right">
+            <a href="{{route('admin.attendance.index')}}" class="btn btn-gradient-primary" >@lang('lang.back_btn')</a>
         </div>
 
 

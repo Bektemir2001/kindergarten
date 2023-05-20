@@ -12,37 +12,37 @@
         @endif
     </div>
     <div class="content-wrapper">
-        <div class="card-header text-center" ><h3>Gallery of the group "{{$group->name}}"</h3></div>
+        <div class="card-header text-center" ><h3>@lang('lang.gallery_of_group')</h3><strong>"{{$group->name}}"</strong></div>
         <div class="container">
             <form action="{{route('admin.gallery.create', $group->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="files" class="col-md-4 col-form-label text-md-end">Add image to gallery:</label>
+                    <label for="files" class="col-md-4 col-form-label text-md-end">@lang('lang.add_image'):</label>
                     <div class="col-md-6">
                         <input id="image" type="file" class="form-control" accept="image/*" name="images[]"multiple>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Add video to gallery:</label>
+                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">@lang('lang.add_video'):</label>
                     <div class="col-md-6">
                         <input id="video" type="file" class="form-control" accept="video/*" name="videos[]" multiple>
 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">Add news to gallery:</label>
+                    <label for="exampleInputFile" class="col-md-4 col-form-label text-md-end">@lang('lang.add_info'):</label>
                     <div class="col-md-6">
                         <textarea
                             id="info"
                             name="info"
                             rows="5"
                             cols="58"
-                            placeholder="Write a new information..."></textarea>
+                            placeholder="@lang('lang.add_info_plh')"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="{{route('admin.group.index')}}" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="{{route('admin.group.index')}}" class="btn btn-gradient-primary my-1">@lang('lang.cancel')</a>
+                    <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.saveBtn')</button>
                 </div>
             </form>
 

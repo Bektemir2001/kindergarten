@@ -29,7 +29,7 @@
   margin: 0.8rem; }
   .vertical-compact-menu .main-menu .navigation-brand {
     display: inline-block;
-    padding: 2.15rem; }
+    padding: 3.5rem; }
     .vertical-compact-menu .main-menu .navigation-brand img {
       width: 70px; }
   .vertical-compact-menu .main-menu .main-menu-header .user-content .media-left {
@@ -235,7 +235,7 @@
 
 @media (min-width: 992px) {
   body.vertical-compact-menu .main-menu, body.vertical-compact-menu .vertical-overlay-menu.menu-hide .main-menu, .vertical-overlay-menu.menu-hide body.vertical-compact-menu .main-menu {
-    width: 130px; }
+    width: 170px; }
   body.vertical-compact-menu .navbar .navbar-header {
     width: 130px; }
   body.vertical-compact-menu .content, body.vertical-compact-menu .footer, body.vertical-compact-menu .header-navbar {

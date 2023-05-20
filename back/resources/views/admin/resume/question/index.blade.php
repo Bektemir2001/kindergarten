@@ -2,7 +2,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="container" style="margin-top: 10px;">
-            <button type="button" class="btn btn-primary" style="margin-right:85%;" id="addQuestionBtnId" onclick="showForm()">Add Question</button>
+            <button type="button" class="btn btn-gradient-primary"  style="margin-right:85%;" id="addQuestionBtnId" onclick="showForm()">Add Question</button>
             <div class="d-none" id="addQuestionId">
                 <form id="form">
                     <div class="row mb-3">
@@ -14,47 +14,40 @@
                             cols="50"
                             placeholder="Write a new question..."></textarea>
                     </div>
-{{--                    <div class="row mb-3">--}}
-{{--                        <label for="question" class="col-md-4 col-form-label text-md-end">{{ __('Question') }}</label>--}}
-
-{{--                        <div class="col-md-6">--}}
-{{--                            <input id="question" type="text" class="form-control @error('question') is-invalid @enderror" name="question" required autocomplete="question" autofocus>--}}
-
-{{--                            @error('question')--}}
-{{--                            <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                            @enderror--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-                    <button type="reset" class="btn btn-secondary" style="margin-left: 65%;" onclick="cancelForm()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="col-12 text-right">
+                        <button type="button" class="btn btn-gradient-primary my-1" onclick="cancelForm()">@lang('lang.cancel')</button>
+                        <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.saveBtn')</button>
+                    </div>
                 </form>
             </div>
         </div>
+        <br>
         <div class="demo-html" style="width: 70%;display: block; margin-left: auto; margin-right: auto;">
             <div class="card-header text-center" >
-                <h3>Questions Table</h3>
+                <h3>@lang('lang.question_list')</h3>
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
                 @endif
             </div>
-            <div id="example_wrapper" class="">
-                <table id="example" class="table table-bordered border-primary" aria-describedby="example_info">
+            <div class="position-relative table-responsive">
+                <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 10%;">
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:5%">
                             id
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 40%;">
-                            Question
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:50%">
+                            @lang('lang.question')
                         </th>
-                        <th class="sorting text-center" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 25%;">
-                            Action
+                        <th class="position-relative pr-4" style="text-align: center;vertical-align:middle;overflow:hidden;cursor:pointer;width:30%">
+                            @lang('lang.action')
                         </th>
-                        {{-- <th width="2px"></th> --}}
+                    </tr>
+                    <tr class="table-sm">
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchById(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchByQuestion(this.value)"></th>
                     </tr>
                     </thead>
                     <tbody id="questionTable">
@@ -93,12 +86,38 @@
             </div>
         </div>
         <script>
+            function searchById(value){
+                let table = document.getElementById('questionTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[0].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByQuestion(value){
+                let table = document.getElementById('questionTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[1].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
             function showForm(){
                 document.getElementById("addQuestionBtnId").className = "d-none";
                 document.getElementById("addQuestionId").className = "col-6";
             }
             function cancelForm(){
-                document.getElementById("addQuestionBtnId").className = "btn btn-primary";
+                document.getElementById("addQuestionBtnId").className = "btn btn-gradient-primary";
                 document.getElementById("addQuestionId").className = "d-none";
                 //document.getElementById("question").reset();
             }

@@ -23,6 +23,7 @@ class SetLocale
             $langPrefix = explode('/', $langPrefix);
             $d = strval(array_search('ru', $langPrefix, true));
 
+
             if($d != ''){
                 App::setLocale("ru");
             }

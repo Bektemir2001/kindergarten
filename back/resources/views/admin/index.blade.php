@@ -3,7 +3,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="container">
-            <h1>Admin Page</h1>
+            <h1>@lang('lang.welcome_admin')</h1>
         </div>
     </div>
 

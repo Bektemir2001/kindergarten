@@ -32,7 +32,6 @@ class UpdateChildrenRequest extends FormRequest
             'birth_certificate' => '',
             'med_certificate' => '',
             'med_disability' => '',
-            'payment' => '',
         ];
     }
 }

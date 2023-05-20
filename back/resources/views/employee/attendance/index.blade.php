@@ -139,7 +139,7 @@
             </div>
             <div style="text-align: right">
                 <button type="button" class="btn btn-gradient-primary" onclick="cancelForm()">@lang('lang.cancel')</button>
-                <button type="button" class="btn btn-gradient-primary" onclick="sendData()">@lang('lang.saveBtn')</button>
+                <button type="button" class="btn btn-gradient-secondary" onclick="sendData()">@lang('lang.saveBtn')</button>
             </div>
         </div>
         <br>

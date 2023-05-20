@@ -3,36 +3,41 @@
     <div class="content-wrapper">
         <div class="demo-html" style="width: 70%;display: block; margin-left: auto; margin-right: auto;">
             <div class="card-header text-center" >
-                <h3>Enroll Table</h3>
+                <h3>@lang('lang.queue_list')</h3>
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
                 @endif
             </div>
-            <div id="example_wrapper" class="">
-                <table id="example" class="table table-bordered border-primary" aria-describedby="example_info">
+            <div class="position-relative table-responsive">
+                <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 10%;">
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:5%">
                             id
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Name
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:20%">
+                            @lang('lang.name')
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Surname
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:20%">
+                            @lang('lang.surname')
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Parent's Name
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:30%">
+                            @lang('lang.child_parent')
                         </th>
-                        <th class="sorting text-center" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 25%;">
-                            Action
+                        <th class="position-relative pr-4" style="text-align: center;vertical-align:middle;overflow:hidden;cursor:pointer;width:30%">
+                            @lang('lang.action')
                         </th>
-                        {{-- <th width="2px"></th> --}}
+                    </tr>
+                    <tr class="table-sm">
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchById(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchByName(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchBySurname(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchByParent(this.value)"></th>
                     </tr>
                     </thead>
-                    <tbody id="childTable">
+                    <tbody id="enrollTable">
                     @foreach ($enrolls as $enroll)
                         <tr class="odd">
                             <td class="sorting_1">{{$enroll->id}}</td>
@@ -51,7 +56,7 @@
                                     <form action="{{route('admin.enroll.delete', $enroll)}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button title="delete" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this user?')">
+                                        <button title="delete" class="border-0 bg-transparent" onclick="return confirm('@lang('lang.delete_question_queue')')">
                                             <i title="delete" class="fas fa-trash text-danger" role="button"></i>
                                         </button>
                                     </form>
@@ -67,63 +72,59 @@
                 </table>
             </div>
         </div>
-
-{{--        <script>--}}
-{{--            function showForm(){--}}
-{{--                document.getElementById("addChildBtnId").className = "d-none";--}}
-{{--                document.getElementById("addChildId").className = "col-6";--}}
-{{--            }--}}
-{{--            function cancelForm(){--}}
-{{--                document.getElementById("addChildBtnId").className = "btn btn-primary";--}}
-{{--                document.getElementById("addChildId").className = "d-none";--}}
-{{--            }--}}
-{{--            document.getElementById('form').addEventListener("submit", function (event) {--}}
-{{--                event.preventDefault()--}}
-{{--                let url = "{{route('admin.children.create')}}";--}}
-{{--                let name = document.getElementById("name").value;--}}
-{{--                let surname = document.getElementById("surname").value;--}}
-{{--                let birth_date = document.getElementById("birth_date").value;--}}
-{{--                let parent_id = document.getElementById("parent_id").value;--}}
-{{--                let group_id = document.getElementById("group_id").value;--}}
-{{--                let photo = document.getElementById("photo").files[0];--}}
-{{--                let birth_certificate = document.getElementById("birth_certificate").files[0];--}}
-{{--                let med_certificate = document.getElementById("med_certificate").files[0];--}}
-{{--                let payment = document.getElementById("payment").value;--}}
-{{--                let data = new FormData();--}}
-{{--                data.append("name", name);--}}
-{{--                data.append("surname", surname);--}}
-{{--                data.append("birth_date", birth_date);--}}
-{{--                data.append("parent_id", parent_id);--}}
-{{--                data.append("group_id", group_id);--}}
-{{--                data.append("photo", photo);--}}
-{{--                data.append("birth_certificate", birth_certificate);--}}
-{{--                data.append("med_certificate", med_certificate);--}}
-{{--                data.append("payment", payment);--}}
-{{--                fetch(url, {--}}
-{{--                    method: 'POST',--}}
-{{--                    body: data--}}
-{{--                })--}}
-{{--                    .then(res => res.json())--}}
-{{--                    .then(data => {--}}
-{{--                        cancelForm();--}}
-{{--                        let table = document.getElementById('childTable');--}}
-{{--                        let i = table.rows.length;--}}
-{{--                        let row = table.insertRow(i);--}}
-{{--                        row.insertCell(0).innerHTML = data.id;--}}
-{{--                        row.insertCell(1).innerHTML = data.name;--}}
-{{--                        row.insertCell(2).innerHTML = data.surname;--}}
-{{--                        row.insertCell(3).innerHTML = data.group_id;--}}
-{{--                        row.insertCell(4).innerHTML = `<div style="float: left; display: block; width: 30%;" class="text-center">` +--}}
-{{--                            `<a href="`+ "children/show/" + data.id + `"><i class="fas fa-eye"></i></a> </div>` +--}}
-{{--                            `<div style="float: left; display: block; width: 30%;" class="text-center">` +--}}
-{{--                            `<a href="`+ "admin/children/edit/" + data.id + `" class="text-success"><i class="fas fa-pen"></i></a> </div>` +--}}
-{{--                            `<div style="float: left; display: block; width: 30%;" class="text-center">` +--}}
-{{--                            `<form action="`+ "admin/children/delete/" + data.id + `" method="POST"> @method("DELETE") @csrf` +--}}
-{{--                            `<button title="delete" class="border-0 bg-transparent">`+--}}
-{{--                            `<i title="delete" class="fas fa-trash text-danger" role="button"></i> </button> </form> </div>`;--}}
-{{--                    })--}}
-{{--                    .catch(error => console.log(error))--}}
-{{--            })--}}
-{{--        </script>--}}
+        <script>
+            function searchById(value){
+                let table = document.getElementById('enrollTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[0].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByName(value){
+                let table = document.getElementById('enrollTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[1].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchBySurname(value){
+                let table = document.getElementById('enrollTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[2].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByParent(value){
+                let table = document.getElementById('enrollTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[3].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+        </script>
     </div>
 @endsection

@@ -18,19 +18,18 @@ class UserService
         $passport_front = null;
         $passport_back = null;
         $profile_photo = null;
-        if($request->hasFile('passport_front')){
-            $passport_front = Storage::disk('public')->put('passports', $data['passport_front']);
-            $passport_front = "storage/".$passport_front;
+        if(array_key_exists('passport_front', $data)){
+            $image = Storage::disk('public')->put('passports', $data['passport_front']);
+            $passport_front = "storage/".$image;
         }
-        if(array_key_exists('passport_back',$data)){
-            $passport_back = Storage::disk('public')->put('passports',$data['passport_back']);
-            $passport_back = "storage/".$passport_back;
+        if(array_key_exists('passport_back', $data)){
+            $image = Storage::disk('public')->put('passports', $data['passport_back']);
+            $passport_back = "storage/".$image;
         }
         if(array_key_exists('profile_photo', $data)){
             $profile_photo = Storage::disk('public')->put('profilePhotos', $data['profile_photo']);
             $profile_photo = "storage/".$profile_photo;
         }
-
         $data['password'] = Hash::make($data['password']);
 
         $user = User::create([

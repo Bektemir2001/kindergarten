@@ -39,10 +39,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-gradient-primary ms-auto float-end mx-3 rounded-pill"
+                    <button type="button" class="btn btn-gradient-primary m-3"
                             onclick="hideChildInfo()">@lang('lang.close_btn')
                     </button>
-                    <button type="submit" class="btn btn-gradient-primary m-3">@lang('lang.saveBtn')</button>
+                    <button type="submit" class="btn btn-gradient-secondary m-3">@lang('lang.saveBtn')</button>
                 </div>
             </form>
         </div>

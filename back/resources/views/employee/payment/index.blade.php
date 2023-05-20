@@ -103,9 +103,11 @@
 
 
 
+                    <div class="col-12 text-right">
+                        <button type="button" class="btn-gradient-primary my-1" onclick="cancelForm()">@lang('lang.cancel')</button>
+                        <button type="submit" class="btn-gradient-secondary my-1">@lang('lang.saveBtn')</button>
+                    </div>
 
-                    <button type="submit" class="btn btn-secondary" style="margin-left: 65%;" onclick="cancelForm()">@lang('lang.cancel')</button>
-                    <button type="submit" class="btn btn-primary">@lang('lang.save_btn')</button>
                 </form>
             </div>
             <br><br><br>
@@ -181,7 +183,7 @@
                 document.getElementById("addPaymentId").className = "col-6";
             }
             function cancelForm(){
-                document.getElementById("addPaymentBtnId").className = "btn btn-primary";
+                document.getElementById("addPaymentBtnId").className = "btn btn-gradient-primary";
                 document.getElementById("addPaymentId").className = "d-none";
             }
             let acc = document.getElementsByClassName("accordion");

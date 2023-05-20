@@ -8,11 +8,11 @@
             </div>
         @endif
         <div class="container" style="margin-top: 10px;">
-            <button type="button" class="btn btn-primary" style="margin-right:85%;" id="addGroupBtnId" onclick="showForm()">Add Group</button>
+            <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addGroupBtnId" onclick="showForm()">@lang('lang.add_group')</button>
             <div class="d-none" id="addGroupId">
                 <form id="form" enctype="multipart/form-data">
                     <div class="row mb-3">
-                        <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end">@lang('lang.emp_group_name')</label>
 
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="teacher" class="col-md-4 col-form-label text-md-end">{{ __('Teacher') }}</label>
+                        <label for="teacher" class="col-md-4 col-form-label text-md-end">@lang('lang.teacher')</label>
 
                         <div class="col-md-6">
                             <select class="form-control col-md-12" name="teacher_id" id="teacher_id" @error('teacher_id') is-invalid @enderror required autocomplete="teacher_id">
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="limit" class="col-md-4 col-form-label text-md-end">{{ __('Limit') }}</label>
+                        <label for="limit" class="col-md-4 col-form-label text-md-end">@lang('lang.limit')</label>
 
                         <div class="col-md-6">
                             <input id="limit" type="number" class="form-control @error('limit') is-invalid @enderror" name="limit" value="{{ old('limit') }}" required autocomplete="limit" autofocus>
@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
+                        <label for="description" class="col-md-4 col-form-label text-md-end">@lang('lang.description')</label>
 
                         <div class="col-md-6">
                             <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description">
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Group Image') }}</label>
+                        <label for="image" class="col-md-4 col-form-label text-md-end">@lang('lang.group_image')</label>
 
                         <div class="col-md-6">
                             <input id="image" type="file" accept="image/png, image/gif, image/jpeg" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required>
@@ -80,46 +80,53 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-secondary" style="margin-left: 65%;" onclick="cancelForm()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="col-12 text-right">
+                        <button type="submit" class="btn btn-gradient-primary my-1" onclick="cancelForm()">@lang('lang.cancel')</button>
+                        <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.saveBtn')</button>
+                    </div>
                 </form>
             </div>
         </div>
+            <br>
         <div class="demo-html" style="width: 70%;display: block; margin-left: auto; margin-right: auto;">
             <div class="card-header text-center" >
-                <h3>Groups Table</h3>
+                <h3>@lang('lang.group_list')</h3>
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
                 @endif
             </div>
-            <div id="example_wrapper" class="">
-                <table id="example" class="table table-bordered border-primary" aria-describedby="example_info">
+            <div class="position-relative table-responsive">
+                <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 10%;">
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:5%">
                             id
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Name
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:30%">
+                            @lang('lang.emp_group_name')
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                            Limit
+                        <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:5%">
+                            @lang('lang.limit')
                         </th>
-                        <th class="sorting text-center" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 25%;">
-                            Action
+                        <th class="position-relative pr-4" style="text-align:center; vertical-align:middle;overflow:hidden;cursor:pointer;width:45%">
+                            @lang('lang.action')
                         </th>
-                        {{-- <th width="2px"></th> --}}
+                    </tr>
+                    <tr class="table-sm">
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchById(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchByName(this.value)"></th>
+                        <th class=""><input class="form-control form-control-sm" value="" oninput="searchByLimit(this.value)"></th>
                     </tr>
                     </thead>
                     <tbody id="groupTable">
                     @foreach ($groups as $group)
-                        <tr class="odd">
-                            <td class="sorting_1">{{$group->id}}</td>
+                        <tr class="">
+                            <td class="">{{$group->id}}</td>
                             <td>{{$group->name}}</td>
                             <td>{{$group->limit}}</td>
-                            <td class="d-flex">
+                            <td>
                                 <div style="float: left;
                                 display: block;
                                 width: 25%;" class="text-center">
@@ -133,7 +140,7 @@
                                 <div style="float: left;
                                 display: block;
                                 width: 25%;" class="text-center">
-                                    <form onclick="return confirm('Do you really want to delete this group?')" action="{{route('admin.group.delete', $group->id)}}" method="POST">
+                                    <form onclick="return confirm('@lang('lang.delete_question_group')')" action="{{route('admin.group.delete', $group->id)}}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button title="submit" class="border-0 bg-transparent">
@@ -155,6 +162,45 @@
             </div>
         </div>
         <script>
+            function searchById(value){
+                let table = document.getElementById('groupTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[0].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByName(value){
+                let table = document.getElementById('groupTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[1].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByLimit(value){
+                let table = document.getElementById('groupTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[2].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
             function showForm(){
                 document.getElementById("addGroupBtnId").className = "d-none";
                 document.getElementById("addGroupId").className = "col-6";

@@ -2,12 +2,13 @@
 @section('content')
     <div class="content-wrapper">
         <div class="container" style="margin-top: 10px;">
-        <button type="button" class="btn btn-primary" style="margin-right:85%;" id="addUserBtnId" onclick="showForm()">Add User</button>
+        <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addUserBtnId" onclick="showForm()">@lang('lang.add_user')</button>
         <div class="d-none" id="addUserId">
             <form id="form" method="POST" action="{{route('admin.user.create')}}" enctype="multipart/form-data">
-                <div class="row mb-3">
-                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="name" class="col-md-4 col-form-label text-md-end">@lang('lang.name'):</label>
+                    </div>
                     <div class="col-md-6">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -18,9 +19,11 @@
                         @enderror
                     </div>
                 </div>
-
-                <div class="row mb-3">
-                    <label for="surname" class="col-md-4 col-form-label text-md-end">{{ __('Surname') }}</label>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="surname" class="col-md-4 col-form-label text-md-end">@lang('lang.surname'):</label>
+                    </div>
 
                     <div class="col-md-6">
                         <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
@@ -32,9 +35,11 @@
                         @enderror
                     </div>
                 </div>
-
-                <div class="row mb-3">
-                    <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Home Address') }}</label>
+                <br>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="address" class="col-md-10 col-form-label text-md-end">@lang('lang.address'):</label>
+                    </div>
 
                     <div class="col-md-6">
                         <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address">
@@ -46,10 +51,11 @@
                         @enderror
                     </div>
                 </div>
-
-                <div class="row mb-3">
-                    <label for="phone_number" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
-
+                <br>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="phone_number" class="col-md-10 col-form-label text-md-end">@lang('lang.phone_number'):</label>
+                    </div>
                     <div class="col-md-6">
                         <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
 
@@ -60,10 +66,11 @@
                         @enderror
                     </div>
                 </div>
-
-                <div class="row mb-3">
-                    <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="email" class="col-md-10 col-form-label text-md-end">@lang('lang.email'):</label>
+                    </div>
                     <div class="col-md-6">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -74,9 +81,11 @@
                         @enderror
                     </div>
                 </div>
-
-                <div class="row mb-3">
-                    <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="password" class="col-md-10 col-form-label text-md-end">@lang('lang.password'):</label>
+                    </div>
 
                     <div class="col-md-6">
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -88,23 +97,46 @@
                         @enderror
                     </div>
                 </div>
-
-                <div class="row mb-3">
-                    <label for="role" class="col-md-4 col-form-label text-md-end">Role:</label>
-                    <select style="width: 49% !important;" name="role" id="role">
-                        <option value="ROLE_ADMIN">Admin</option>
-                        <option value="ROLE_TEACHER">Employee</option>
-                        <option value="ROLE_PARENT">Parent</option>
-                    </select>
-                    @error('role')
-                    <p class="text-danger">{{$message}}</p>
-                    @enderror
-                </div>
-
-                <div class="row mb-3">
-                    <label for="passport_front" class="col-md-4 col-form-label text-md-end">{{ __('Passport Front') }}</label>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="role" class="col-md-4 col-form-label text-md-end">@lang('lang.role'):</label>
+                    </div>
 
                     <div class="col-md-6">
+                        <select style="width: 50% !important;" name="role" id="role">
+                            <option value="ROLE_ADMIN">Админ</option>
+                            <option value="ROLE_TEACHER">@lang('lang.employee')</option>
+                            <option value="ROLE_PARENT">@lang('lang.parent')</option>
+                        </select>
+                        @error('role')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
+                    </div>
+
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="profile_photo" class="col-md-10 col-form-label text-md-end">@lang('lang.profile_photo'):</label>
+                    </div>
+
+                    <div class="col-md-6">
+                        <input id="profile_photo" type="file" class="form-control @error('profile_photo') is-invalid @enderror" name="profile_photo" value="{{ old('profile_photo') }}">
+
+                        @error('profile_photo')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-7">
+                        <label for="passport_front" class="col-md-12 col-form-label text-md-end">@lang('lang.passport_front'):</label>
+                    </div>
+                    <div class="col-md-5">
                         <input id="passport_front" type="file" class="form-control @error('passport_front') is-invalid @enderror" name="passport_front" value="{{ old('passport_front') }}">
 
                         @error('passport_front')
@@ -114,11 +146,13 @@
                         @enderror
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-7">
+                        <label for="passport_back" class="col-md-12 col-form-label text-md-end">@lang('lang.passport_back'):</label>
+                    </div>
 
-                <div class="row mb-3">
-                    <label for="passport_back" class="col-md-4 col-form-label text-md-end">{{ __('Passport Back') }}</label>
-
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <input id="passport_back" type="file" class="form-control @error('passport_back') is-invalid @enderror" name="passport_back" value="{{ old('passport_back') }}">
 
                         @error('passport_back')
@@ -128,100 +162,158 @@
                         @enderror
                     </div>
                 </div>
-                <button type="submit" class="btn btn-secondary" style="margin-left: 65%;" onclick="cancelForm()">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+                <div class="col-12 text-right">
+                    <button type="submit" class="btn btn-gradient-primary my-1" onclick="cancelForm()">@lang('lang.cancel')</button>
+                    <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.saveBtn')</button>
+                </div>
             </form>
         </div>
         </div>
+        <br>
         <div class="demo-html" style="width: 70%;display: block; margin-left: auto; margin-right: auto;">
+            @if (session('status'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="card-header text-center" >
-                <h3>Users Table</h3>
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
+                <h3>@lang('lang.users_list')</h3>
             </div>
-            <div id="example_wrapper" class="">
-                <table id="example" class="table table-bordered border-primary" aria-describedby="example_info">
+            <div class="position-relative table-responsive">
+                <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 10%;">
+                            <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:2%">
                                 id
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                                Name
+                            <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:25%">
+                                @lang('lang.name')
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                                Surname
+                            <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:30%">
+                                @lang('lang.surname')
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                                Role
+                            <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:10%">
+                                @lang('lang.role')
                             </th>
-                            <th class="sorting text-center" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 25%;">
-                                Action
+                            <th class="position-relative pr-4" style="text-align: center;vertical-align:middle;overflow:hidden;cursor:pointer;width:30%">
+                                @lang('lang.action')
                             </th>
                             {{-- <th width="2px"></th> --}}
+                        </tr>
+                        <tr class="table-sm">
+                            <th class=""><input class="form-control form-control-sm" value="" oninput="searchById(this.value)"></th>
+                            <th class=""><input class="form-control form-control-sm" value="" oninput="searchByName(this.value)"></th>
+                            <th class=""><input class="form-control form-control-sm" value="" oninput="searchBySurname(this.value)"></th>
+                            <th class=""><input class="form-control form-control-sm" value="" oninput="searchByRole(this.value)"></th>
                         </tr>
                         </thead>
                         <tbody id="userTable">
                         @foreach ($users as $user)
-                            <tr class="odd">
-                                <td class="sorting_1">{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->surname}}</td>
-                                <td>
+                            <tr class=>
+                                <td class="">{{$user->id}}</td>
+                                <td class="">{{$user->name}}</td>
+                                <td class="">{{$user->surname}}</td>
+                                <td class="">
                                     @if($user->role == 'ROLE_ADMIN')
-                                        Admin
+                                        Админ
                                     @elseif($user->role == 'ROLE_TEACHER')
-                                        Employee
+                                        @lang('lang.employee')
                                     @elseif($user->role == 'ROLE_PARENT')
-                                        Parent
+                                        @lang('lang.parent')
                                     @else
-                                        User
+                                        @lang('lang.user')
                                     @endif
                                 </td>
                                 <td>
                                     <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
+                                width: 33%;" class="text-center">
                                         <a href="{{route('admin.user.show', $user)}}"><i class="fas fa-eye"></i></a>
                                     </div>
                                     <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
+                                width: 33%;" class="text-center">
                                         <a href="{{route('admin.user.edit', $user)}}" class="text-success"><i class="fas fa-pen"></i></a>
                                     </div>
                                     <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
+                                width: 33%;" class="text-center">
                                         <form action="{{route('admin.user.delete', $user->id)}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button title="delete" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this user?')">
+                                            <button title="delete" class="border-0 bg-transparent" onclick="return confirm('@lang('lang.delete_question_user')')">
                                                 <i title="delete" class="fas fa-trash text-danger" role="button"></i>
                                             </button>
                                         </form>
                                     </div>
-
-
                                 </td>
-                                {{-- td>rfed</td> --}}
                             </tr>
                         @endforeach
-
                         </tbody>
                     </table>
             </div>
     </div>
         <script>
+            function searchById(value){
+                let table = document.getElementById('userTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[0].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByName(value){
+                let table = document.getElementById('userTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[1].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchBySurname(value){
+                let table = document.getElementById('userTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[2].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByRole(value){
+                let table = document.getElementById('userTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[3].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
             function showForm(){
                 document.getElementById("addUserBtnId").className = "d-none";
-                document.getElementById("addUserId").className = "col-6";
+                document.getElementById("addUserId").className = "col-12";
             }
             function cancelForm(){
                 document.getElementById("addUserId").className = "d-none";
-                document.getElementById("addUserBtnId").className = "btn btn-primary";
+                document.getElementById("addUserBtnId").className = "btn btn-gradient-primary";
             }
             document.getElementById('form').addEventListener("submit", function (event) {
                 event.preventDefault()

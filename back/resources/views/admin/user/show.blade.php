@@ -13,45 +13,31 @@
 
                     <h3 class="profile-username text-center">{{$user->name}} {{$user->surname}}</h3>
 
-{{--                    <p class="text-muted text-center">{{$student->type->name}}</p>--}}
-
                     <ul class="list-group list-group-unbordered mb-3">
-{{--                        <li class="list-group-item">--}}
-{{--                            <div><b>Курс</b></div>--}}
-{{--                            <div style="float:left; display: block; width: 10%;" id="studentLevel">{{$student->level}}</div>--}}
-{{--                            <div style="float:left; display: block; width:50%;">--}}
-{{--                                @if($student->level < 4)--}}
-{{--                                    <button class="btn btn-primary btn-sm" onclick="upLevel()">поднять</button>--}}
-{{--                                @endif--}}
-{{--                                @if($student->level > 1)--}}
-{{--                                    <button class="btn btn-danger btn-sm" onclick="downLevel()">понизить</button>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </li>--}}
                         <li class="list-group-item">
-                            <b>Address</b>
+                            <b>@lang('lang.address')</b>
                             <div class="">{{$user->address}}</div>
                         </li>
                         <li class="list-group-item">
-                            <b>Phone number</b>
+                            <b>@lang('lang.phone_number')</b>
                             <div class="">{{$user->phone_number}}</div>
                         </li>
                         <li class="list-group-item">
-                            <b>Email</b>
+                            <b>@lang('lang.email')</b>
                             <div class="">{{$user->email}}</div>
                         </li>
                         <li class="list-group-item">
-                            <b>Role</b>
+                            <b>@lang('lang.role')</b>
                             <div class="">{{$user->role}}</div>
                         </li>
                         <li class="list-group-item">
-                            <b>Passport front</b>
+                            <b>@lang('lang.passport_front')</b>
                             <div class="">
                                 <img class="img-fluid" src="{{asset($user->passport_front)}}" alt="User passport front" style="width:70%;">
                             </div>
                         </li>
                         <li class="list-group-item">
-                            <b>Passport back</b>
+                            <b>@lang('lang.passport_back')</b>
                             <div class="">
                                 <img class="img-fluid" src="{{asset($user->passport_back)}}" alt="User passport back" style="width:70%;">
                             </div>
@@ -59,7 +45,7 @@
                     </ul>
 
                     <div class="modal-footer">
-                        <a href="{{route('admin.user.index')}}" class="btn btn-secondary">Back</a>
+                        <a href="{{route('admin.user.index')}}" class="btn btn-gradient-primary my-1">@lang('lang.back_btn')</a>
                     </div>
                 </div>
                 <!-- /.card-body -->

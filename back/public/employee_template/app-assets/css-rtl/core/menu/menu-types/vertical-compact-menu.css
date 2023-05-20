@@ -34,7 +34,6 @@
 }
 .vertical-compact-menu .main-menu .navigation-brand {
   display : inline-block;
-  padding : 2.15rem;
 }
 .vertical-compact-menu .main-menu .navigation-brand img {
   width : 70px;
@@ -143,7 +142,7 @@
   font-size : 0.8rem;
   font-weight : 500;
   letter-spacing : 1px;
-  visibility : hidden; 
+  visibility : hidden;
       display: table !important;
     margin-bottom: .75rem;
 }
@@ -312,8 +311,8 @@
 
 /*=========================================================================================
 	File Name: vertical-overlay-menu.scss
-	Description: A overlay style vertical menu with show and hide support. It support 
-	light & dark version, filpped layout, right side icons, native scroll and borders menu 
+	Description: A overlay style vertical menu with show and hide support. It support
+	light & dark version, filpped layout, right side icons, native scroll and borders menu
 	item seperation.
 	----------------------------------------------------------------------------------------
 	Item Name: CryptoDash - Free Cryptocurrency Dashboard Template

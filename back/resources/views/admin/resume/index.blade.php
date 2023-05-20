@@ -4,51 +4,56 @@
         <div class="container" style="margin-top: 10px;">
             <div class="demo-html" style="width: 70%;display: block; margin-left: auto; margin-right: auto;">
                 <div class="card-header text-center" >
-                    <h3>Resumes Table</h3>
+                    <h3>@lang('lang.comp_resume_list')</h3>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
                 </div>
-                <div id="example_wrapper" class="">
-                    <table id="example" class="table table-bordered border-primary" aria-describedby="example_info">
+                <div class="position-relative table-responsive">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 10%;">
+                            <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:5%">
                                 id
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                                Full Name
+                            <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
+                                @lang('lang.full_name')
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">
-                                Phone Number
+                            <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:20%">
+                                @lang('lang.date_of_comp')
                             </th>
-                            <th class="sorting text-center" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 25%;">
-                                Action
+                            <th class="position-relative pr-4" style="text-align: center;vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
+                                @lang('lang.action')
                             </th>
-                            {{-- <th width="2px"></th> --}}
+                        </tr>
+                        <tr class="table-sm">
+                            <th class=""><input class="form-control form-control-sm" value="" oninput="searchById(this.value)"></th>
+                            <th class=""><input class="form-control form-control-sm" value="" oninput="searchByFullName(this.value)"></th>
+                            <th class=""><input class="form-control form-control-sm" value="" oninput="searchByDate(this.value)"></th>
                         </tr>
                         </thead>
-                        <tbody id="userTable">
+                        <tbody id="resumeTable">
                         @foreach ($resumes as $resume)
                             <tr class="odd">
                                 <td class="sorting_1">{{$resume->id}}</td>
                                 <td>{{$resume->full_name}}</td>
-                                <td>{{$resume->phone_number}}</td>
+                                @php $created_at = \Carbon\Carbon::parse($resume->created_at)->format('Y-m-d '); @endphp
+                                <td>{{$created_at}}</td>
                                 <td>
                                     <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
+                                width: 50%;" class="text-center">
                                         <a href="{{route('admin.resume.show', $resume->id)}}"><i class="fas fa-eye"></i></a>
                                     </div>
                                     <div style="float: left;
                                 display: block;
-                                width: 30%;" class="text-center">
+                                width: 50%;" class="text-center">
                                         <form action="{{route('admin.resume.delete', $resume->id)}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button title="delete" class="border-0 bg-transparent" onclick="return confirm('Do you really want to delete this resume?')">
+                                            <button title="delete" class="border-0 bg-transparent" onclick="return confirm('@lang('lang.delete_question_resume')?')">
                                                 <i title="delete" class="fas fa-trash text-danger" role="button"></i>
                                             </button>
                                         </form>
@@ -65,5 +70,46 @@
                 </div>
             </div>
         </div>
+        <script>
+            function searchById(value){
+                let table = document.getElementById('resumeTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[0].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByFullName(value){
+                let table = document.getElementById('resumeTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[1].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+            function searchByDate(value){
+                let table = document.getElementById('resumeTable');
+                let rows = table.rows;
+                let n = rows.length;
+                for(let i = 0; i < n; i++){
+                    if(rows[i].cells[2].innerHTML.indexOf(value) === -1){
+                        rows[i].className = 'd-none';
+                    }
+                    else{
+                        rows[i].className = '';
+                    }
+                }
+            }
+        </script>
     </div>
 @endsection

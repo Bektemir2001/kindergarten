@@ -145,7 +145,7 @@
                 <div style="text-align: right">
                     <button type="submit" class="btn btn-gradient-primary" >@lang('lang.back_btn')</button>
 
-                    <button type="button" class="btn btn-gradient-primary" onclick="sendData()">@lang('lang.saveBtn')</button>
+                    <button type="button" class="btn btn-gradient-secondary" onclick="sendData()">@lang('lang.save_btn')</button>
                 </div>
             </form>
         </div>

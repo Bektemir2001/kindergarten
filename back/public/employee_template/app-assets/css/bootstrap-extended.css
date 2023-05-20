@@ -181,7 +181,7 @@ pre {
   border-bottom: 2px solid #e3ebf3;
   border-top: 1px solid #e3ebf3;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 1.4rem;
   letter-spacing: 0.6px; }
 
 .table-bordered th, .table-bordered td {
@@ -953,7 +953,7 @@ select.form-control {
         font-weight: 500;
         vertical-align: middle; }
   .header-navbar .navbar-container {
-    padding: 0rem 18px;
+    padding: 0rem 50px;
     height: 5rem;
     -webkit-transition: 300ms ease all;
     -o-transition: 300ms ease all;

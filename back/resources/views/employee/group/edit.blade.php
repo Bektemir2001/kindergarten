@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="col-12 text-right">
                                     <a href="{{route('employee.group.index')}}" class="btn btn-gradient-primary my-1">@lang('lang.back_btn')</a>
-                                    <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.saveBtn')</button>
+                                    <button type="submit" class="btn btn-gradient-secondary my-1">@lang('lang.save_btn')</button>
                                 </div>
                             </div>
                         </div>

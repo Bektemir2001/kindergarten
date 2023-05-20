@@ -2,7 +2,7 @@
 @section('content')
     <style>
         .accordion {
-            background-color: #4da3ff;
+            background-color: #ac8af4;
             color: white;
             cursor: pointer;
             padding: 18px;
@@ -17,7 +17,7 @@
         }
 
         .active, .accordion:hover {
-            background-color: #007bff;
+            background-color: #5f1dea;
         }
 
         .accordion:after {
@@ -34,7 +34,7 @@
 
         .panel {
             padding: 0 18px;
-            background-color: #e6f2ff;
+            background-color: #eee8fd;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.2s ease-out;
@@ -49,7 +49,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-                <button type="button" class="btn btn-primary" style="margin-right:85%;" id="addPaymentBtnId" onclick="showForm()">Add payment</button>
+                <button type="button" class="btn btn-gradient-primary" style="margin-right:85%;" id="addPaymentBtnId" onclick="showForm()">@lang('lang.add_payment')</button>
                 <div class="d-none" id="addPaymentId">
                     <form method="POST" action="{{route('admin.payment.create')}}">
                         @csrf
@@ -124,10 +124,10 @@
                                 <thead>
                                 <tr>
                                     <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
-                                        <div class="d-inline" style="font-size: 15px">Full name</div>
+                                        <div class="d-inline" style="font-size: 15px">@lang('lang.full_name')</div>
                                     </th>
                                     <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer;width:40%">
-                                        <div class="d-inline" style="font-size: 15px">Group name</div>
+                                        <div class="d-inline" style="font-size: 15px">@lang('lang.emp_group_name')</div>
                                     </th>
                                     @for($i = 1; $i <= $range; $i++)
                                         <th class="position-relative pr-4" style="vertical-align:middle;overflow:hidden;cursor:pointer">
